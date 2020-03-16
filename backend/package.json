@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Site para publicar as pesquisas feitas no laboratório LAMIA.",
   "main": "index.js",
-  "author": ["Jecé Xavier <jece@alunos.utfpr.edu.br"],
+  "author": ["Jecé Xavier <jece@alunos.utfpr.edu.br>", "Rafael Lechensque <rafaelaaquino@alunos.utfpr.edu.br>"],
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
