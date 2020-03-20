@@ -2,7 +2,9 @@ import Sequelize from 'sequelize';
 
 import databaseConfig from '../config/database';
 
-const models = [];
+import TypeMember from '../app/models/TypeMember';
+
+const models = [TypeMember];
 
 class Database {
     constructor() {
