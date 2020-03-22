@@ -20,6 +20,12 @@ class Picture extends Model {
                         notEmpty: false,
                     },
                 },
+                url: {
+                    type: Sequelize.VIRTUAL,
+                    get() {
+                        return `http://localhost:3333/files/${this.path}`;
+                    },
+                },
             },
             {
                 sequelize,
