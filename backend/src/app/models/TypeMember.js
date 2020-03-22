@@ -25,6 +25,8 @@ class TypeMember extends Model {
                 sequelize,
             }
         );
+
+        return this;
     }
 }
 

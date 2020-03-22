@@ -25,6 +25,8 @@ class Picture extends Model {
                 sequelize,
             }
         );
+
+        return this;
     }
 }
 
