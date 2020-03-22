@@ -28,6 +28,13 @@ class TypeMember extends Model {
 
         return this;
     }
+
+    static associate(models) {
+        this.hasMany(models.Member, {
+            foreignKey: 'office_id',
+            as: 'members',
+        });
+    }
 }
 
 export default TypeMember;
