@@ -5,8 +5,20 @@ import databaseConfig from '../config/database';
 import TypeMember from '../app/models/TypeMember';
 import Picture from '../app/models/Picture';
 import Member from '../app/models/Member';
+import AreaExpertise from '../app/models/AreaExpertise';
+import CategoryWork from '../app/models/CategoryWork';
+import TypeWork from '../app/models/TypeWork';
+import Partner from '../app/models/Partner';
 
-const models = [TypeMember, Picture, Member];
+const models = [
+    TypeMember,
+    Picture,
+    Member,
+    AreaExpertise,
+    CategoryWork,
+    TypeWork,
+    Partner,
+];
 
 class Database {
     constructor() {
