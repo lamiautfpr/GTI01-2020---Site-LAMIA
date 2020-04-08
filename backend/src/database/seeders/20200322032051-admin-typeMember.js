@@ -10,6 +10,21 @@ module.exports = {
                     created_at: new Date(),
                     updated_at: new Date(),
                 },
+                {
+                    name: 'Orientador',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    name: 'Membro',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    name: 'Novato',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
             ],
             {}
         );
