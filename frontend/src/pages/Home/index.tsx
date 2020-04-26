@@ -4,7 +4,14 @@ import ReactDOM from 'react-dom';
 import imgLogo from '../../assets/logo.svg';
 import imgTeste from '../../assets/Teste.jpg';
 
-import { Header, Main, SectionNew, SectionLatestPublications } from './style';
+import logoLar from '../../assets/logo_lar.png';
+import logoStark from '../../assets/logo_stark.jpg';
+import logoXavier from '../../assets/logo_xavier.jpg';
+import logoRock from '../../assets/logo_rockStar.png';
+import logoCyber from '../../assets/logo_cyber.jpg';
+import logoLex from '../../assets/logo_lex.png';
+
+import { Header, Main, SectionLine, SectionColumn, SectionVip } from './style';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
 
@@ -25,7 +32,7 @@ const Home: React.FC = () => {
       <NavBar />
 
       <Main>
-        <SectionNew id="News">
+        <SectionLine id="News">
           <header>
             <h2>Notícias</h2>
           </header>
@@ -75,9 +82,9 @@ const Home: React.FC = () => {
 
             <img src={imgTeste} alt="Teste" />
           </div>
-        </SectionNew>
+        </SectionLine>
         <hr />
-        <SectionLatestPublications id="LatestPublications">
+        <SectionColumn id="LatestPublications">
           <header>
             <h2>Ultimas Publicações</h2>
           </header>
@@ -119,7 +126,114 @@ const Home: React.FC = () => {
               </p>
             </div>
           </div>
-        </SectionLatestPublications>
+        </SectionColumn>
+        <hr />
+        <SectionLine id="News">
+          <header>
+            <h2>História</h2>
+          </header>
+          <div>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
+                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
+                debitis necessitatibus molestiae nesciunt nemo.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                veniam nihil libero placeat! Sunt amet earum veritatis expedita
+                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
+                sapiente molestias odit provident?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
+                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
+                debitis necessitatibus molestiae nesciunt nemo.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                veniam nihil libero placeat! Sunt amet earum veritatis expedita
+                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
+                sapiente molestias odit provident?
+              </p>
+            </div>
+            <img src={imgTeste} alt="Teste" />
+          </div>
+        </SectionLine>
+        <hr />
+        <SectionColumn id="LatestPublications">
+          <header>
+            <h2>Área de Atuação</h2>
+          </header>
+          <div>
+            <div>
+              <img src={imgTeste} alt="Teste" />
+              <header>
+                <h2>Ciências de Dados</h2>
+              </header>
+              <p>
+                Sed lorem ipsum dolor sit amet nullam consequat feugiat
+                consequat magna adipiscing magna etiam amet veroeros...
+              </p>
+            </div>
+            <div>
+              <img src={imgTeste} alt="Teste" />
+              <header>
+                <h2>Visão Computacional</h2>
+              </header>
+              <p>
+                Sed lorem ipsum dolor sit amet nullam consequat feugiat
+                consequat magna adipiscing magna etiam amet veroeros...
+              </p>
+            </div>
+            <div>
+              <img src={imgTeste} alt="Teste" />
+              <header>
+                <h2>Games</h2>
+              </header>
+              <p>
+                Sed lorem ipsum dolor sit amet nullam consequat feugiat
+                consequat magna adipiscing magna etiam amet veroeros...
+              </p>
+            </div>
+          </div>
+        </SectionColumn>
+        <hr />
+        <SectionVip id="">
+          <header>
+            <h2>Parceiros</h2>
+          </header>
+          <div>
+            <ul>
+              <li>
+                <img src={logoLar} alt="Coperativa LAR" />
+                <h2>Coperativa LAR</h2>
+              </li>
+              <li>
+                <img src={logoStark} alt="Indústrias stark" />
+                <h2>Indústrias stark</h2>
+              </li>
+              <li>
+                <img src={logoXavier} alt="Instituto Xavier" />
+                <h2>Instituto Xavier</h2>
+              </li>
+              <li>
+                <img src={logoRock} alt="Rock Star Games" />
+                <h2>Rock Star Games</h2>
+              </li>
+              <li>
+                <img src={logoLex} alt="Lex Corporation" />
+                <h2>Lex Corporation</h2>
+              </li>
+              <li>
+                <img src={logoCyber} alt="Cyber Punk 2077" />
+                <h2>Cyber Punk 2077</h2>
+              </li>
+            </ul>
+          </div>
+        </SectionVip>
       </Main>
     </>
   );

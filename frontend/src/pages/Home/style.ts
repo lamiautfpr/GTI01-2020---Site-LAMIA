@@ -6,6 +6,7 @@ import {
   titleColor,
   primaryColor,
   secondaryColor,
+  featuredColor,
 } from '../../styles/paletsColores';
 
 export const Header = styled.header`
@@ -47,9 +48,9 @@ export const Main = styled.main`
   margin-bottom: 100px;
 `;
 
-export const SectionNew = styled.section`
+export const SectionLine = styled.section`
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 24px auto;
 
   display: flex;
   flex-direction: column;
@@ -112,7 +113,7 @@ export const SectionNew = styled.section`
   }
 `;
 
-export const SectionLatestPublications = styled.section`
+export const SectionColumn = styled.section`
   max-width: 1200px;
   margin: 24px auto;
   display: flex;
@@ -171,5 +172,78 @@ export const SectionLatestPublications = styled.section`
 
     }
 
+  }
+`;
+
+export const SectionVip = styled.section`
+  max-width: 1200px;
+  margin: 24px auto;
+  background: ${featuredColor};
+  padding: 24px;
+  border-radius: 16px;
+  -webkit-box-shadow: 10px 10px 64px -16px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 64px -16px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 64px -16px rgba(0,0,0,0.75);
+
+  display: flex;
+  flex-direction: column;
+
+
+  & > header {
+    margin: 4px 0 32px 0;
+    /* border-bottom: 1px solid ${titleColor}; */
+
+    font-size: 32px;
+    color: ${secondaryBackground};
+
+    &::after{
+      content: "";
+
+      width: 224px;
+      height: 2px;
+      background-image: -webkit-linear-gradient(180deg, #fff 15%, ${secondaryBackground} 85%);
+
+      position: absolute;
+    }
+
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-grow: 1;
+
+    list-style: none;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      align-items: center;
+
+      margin-top: 24px;
+        margin-left: 24px;
+
+      &:hover{
+        img{
+          filter: none;
+        }
+      }
+
+      img {
+        width: 150px;
+        height: 150px;
+        border-radius: 35px;
+        transition: .3s;
+
+        filter: grayscale(100%);
+      }
+
+      h2 {
+        color: #fff;
+        margin-top: 4px;
+      }
+    }
   }
 `;
