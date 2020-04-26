@@ -22,6 +22,12 @@ export default createGlobalStyle`
     font-family: 'Source Sans Pro', sans-serif;
   }
 
+  p{
+    font-size: 16px;
+    text-indent: 16px;
+    line-height: 26px;
+    text-align: justify;
+  }
 
 
   #root {

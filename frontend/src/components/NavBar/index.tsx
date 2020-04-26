@@ -1,8 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import { Nav } from './style';
 
-const Menu: React.FC = () => {
+const NavBar: React.FC = () => {
   return (
     <Nav>
       <ul>
@@ -120,4 +121,4 @@ const Menu: React.FC = () => {
   );
 };
 
-export default Menu;
+export default NavBar;
