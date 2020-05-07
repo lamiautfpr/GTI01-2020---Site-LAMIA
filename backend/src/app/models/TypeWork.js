@@ -28,6 +28,13 @@ class TypeWork extends Model {
 
         return this;
     }
+
+    static associate(models) {
+        this.belongsTo(models.CategoryWork, {
+            foreignKey: 'category_id',
+            as: 'category',
+        });
+    }
 }
 
 export default TypeWork;

@@ -1,4 +1,5 @@
 import TypeWork from '../models/TypeWork';
+import CategoryWork from '../models/CategoryWork';
 
 class TypeWorkController {
     async store(req, res) {
@@ -24,7 +25,16 @@ class TypeWorkController {
     }
 
     async index(req, res) {
-        const typeWorks = await TypeWork.findAll();
+        const typeWorks = await TypeWork.findAll({
+            include: [
+                {
+                    model: CategoryWork,
+                    as: 'category',
+                    attributes: ['name'],
+                },
+            ],
+            order: ['name'],
+        });
         return res.json({ typeWorks });
     }
 
