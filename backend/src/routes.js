@@ -36,17 +36,17 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddlewares);
 
 routes.post('/type-members', TypeMemberController.store);
-routes.post('/area-expertise', AreaExpertiseController.store);
+routes.post('/area-expertises', AreaExpertiseController.store);
 routes.post('/category-work', CategoryWorkController.store);
 routes.post('/type-work', TypeWorkController.store);
 
 routes.put('/type-members', TypeMemberController.update);
-routes.put('/area-expertise', AreaExpertiseController.update);
+routes.put('/area-expertises', AreaExpertiseController.update);
 routes.put('/category-work', CategoryWorkController.update);
 routes.put('/type-work', TypeWorkController.update);
 
 routes.delete('/type-members', TypeMemberController.delete);
-routes.delete('/area-expertise', AreaExpertiseController.delete);
+routes.delete('/area-expertises', AreaExpertiseController.delete);
 routes.delete('/category-work', CategoryWorkController.delete);
 routes.delete('/type-work', TypeWorkController.delete);
 
