@@ -27,7 +27,7 @@ module.exports = {
                 type: Sequelize.DATE,
                 allowNull: false,
             },
-            date_End: {
+            date_end: {
                 type: Sequelize.DATE,
                 allowNull: true,
             },
