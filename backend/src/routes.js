@@ -42,6 +42,7 @@ routes.post('/type-members', TypeMemberController.store);
 routes.post('/area-expertises', AreaExpertiseController.store);
 routes.post('/category-work', CategoryWorkController.store);
 routes.post('/type-work', TypeWorkController.store);
+routes.post('/works', WorkController.store);
 
 routes.put('/type-members', TypeMemberController.update);
 routes.put('/area-expertises', AreaExpertiseController.update);
