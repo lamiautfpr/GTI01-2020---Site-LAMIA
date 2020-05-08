@@ -70,6 +70,23 @@ class Work extends Model {
             foreignKey: 'partner_id',
             as: 'partner',
         });
+
+        this.belongsToMany(models.CategoryWork, {
+            foreignKey: 'work_id',
+            as: 'categories',
+            through: 'categoryWorks_works',
+        });
+
+        this.belongsToMany(models.TypeWork, {
+            foreignKey: 'work_id',
+            as: 'types',
+            through: 'typeWorks_works',
+        });
+        this.belongsToMany(models.AreaExpertise, {
+            foreignKey: 'work_id',
+            as: 'areaExpertise',
+            through: 'areaExpertise_works',
+        });
     }
 }
 

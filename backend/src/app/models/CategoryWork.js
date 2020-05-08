@@ -28,6 +28,14 @@ class CategoryWork extends Model {
 
         return this;
     }
+
+    static associate(models) {
+        this.belongsToMany(models.Work, {
+            foreignKey: 'category_work_id',
+            as: 'works',
+            through: 'categoryWorks_works',
+        });
+    }
 }
 
 export default CategoryWork;

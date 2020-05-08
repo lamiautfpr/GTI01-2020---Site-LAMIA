@@ -34,6 +34,12 @@ class TypeWork extends Model {
             foreignKey: 'category_id',
             as: 'category',
         });
+
+        this.belongsToMany(models.Work, {
+            foreignKey: 'type_work_id',
+            as: 'Works',
+            through: 'typeWorks_works',
+        });
     }
 }
 

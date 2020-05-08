@@ -28,6 +28,14 @@ class AreaExpertise extends Model {
 
         return this;
     }
+
+    static associate(models) {
+        this.belongsToMany(models.Work, {
+            foreignKey: 'area_expertise_id',
+            as: 'works',
+            through: 'areaExpertise_works',
+        });
+    }
 }
 
 export default AreaExpertise;
