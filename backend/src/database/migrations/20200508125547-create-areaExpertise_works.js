@@ -7,14 +7,14 @@ module.exports = {
                 primaryKey: true,
                 autoIncrement: true,
             },
-            area_expertises_id: {
+            area_expertise_id: {
                 type: Sequelize.INTEGER,
                 references: { model: 'area_expertises', key: 'id' },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
                 allowNull: true,
             },
-            works_id: {
+            work_id: {
                 type: Sequelize.INTEGER,
                 references: { model: 'works', key: 'id' },
                 onUpdate: 'CASCADE',

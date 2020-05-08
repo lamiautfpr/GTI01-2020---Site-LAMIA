@@ -7,14 +7,14 @@ module.exports = {
                 primaryKey: true,
                 autoIncrement: true,
             },
-            category_works_id: {
+            category_work_id: {
                 type: Sequelize.INTEGER,
                 references: { model: 'category_works', key: 'id' },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
                 allowNull: true,
             },
-            works_id: {
+            work_id: {
                 type: Sequelize.INTEGER,
                 references: { model: 'works', key: 'id' },
                 onUpdate: 'CASCADE',

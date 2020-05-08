@@ -1,7 +1,7 @@
 module.exports = {
     up: QueryInterface => {
         return QueryInterface.bulkInsert(
-            'type-works',
+            'type_works',
             [
                 {
                     name: 'Pesquisa',
