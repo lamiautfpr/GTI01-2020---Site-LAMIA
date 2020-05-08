@@ -14,6 +14,7 @@ import CategoryWorkController from './app/controllers/CategoryWorkController';
 import TypeWorkController from './app/controllers/TypeWorkController';
 
 import PartnerController from './app/controllers/PartnerController';
+import WorkController from './app/controllers/WorkController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -29,6 +30,8 @@ routes.get('/area-expertises', AreaExpertiseController.index);
 routes.get('/category-works', CategoryWorkController.index);
 routes.get('/type-works', TypeWorkController.index);
 routes.get('/partiners', PartnerController.index);
+routes.get('/works', WorkController.index);
+
 routes.get('/partiners', PartnerController.show);
 
 routes.post('/sessions', SessionController.store);
