@@ -34,6 +34,14 @@ class Picture extends Model {
 
         return this;
     }
+
+    static associate(models) {
+        this.belongsToMany(models.Work, {
+            foreignKey: 'picture_id	',
+            as: 'works',
+            through: 'pictures_works',
+        });
+    }
 }
 
 export default Picture;

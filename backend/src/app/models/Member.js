@@ -92,6 +92,11 @@ class Member extends Model {
             foreignKey: 'office_id',
             as: 'office',
         });
+
+        this.hasMany(models.MemberWork, {
+            foreignKey: 'member_id',
+            as: 'membersWork',
+        });
     }
 
     checkPassword(password) {

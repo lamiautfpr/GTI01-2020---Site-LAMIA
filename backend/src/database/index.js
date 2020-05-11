@@ -10,6 +10,7 @@ import CategoryWork from '../app/models/CategoryWork';
 import TypeWork from '../app/models/TypeWork';
 import Partner from '../app/models/Partner';
 import Work from '../app/models/Work';
+import MemberWork from '../app/models/MemberWork';
 
 const models = [
     TypeMember,
@@ -20,6 +21,7 @@ const models = [
     TypeWork,
     Partner,
     Work,
+    MemberWork,
 ];
 
 class Database {

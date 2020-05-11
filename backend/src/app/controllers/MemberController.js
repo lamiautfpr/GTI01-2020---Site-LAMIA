@@ -2,6 +2,9 @@ import * as Yup from 'yup';
 import Member from '../models/Member';
 import TypeMember from '../models/TypeMember';
 import Picture from '../models/Picture';
+import MemberWork from '../models/MemberWork';
+import Work from '../models/Work';
+import AreaExpertise from '../models/AreaExpertise';
 
 class MemberController {
     async store(req, res) {
@@ -72,6 +75,26 @@ class MemberController {
                     model: Picture,
                     as: 'avatar',
                     attributes: ['name', 'path', 'url'],
+                },
+                {
+                    model: MemberWork,
+                    as: 'membersWork',
+                    attributes: ['scholarship'],
+                    include: [
+                        {
+                            model: Work,
+                            as: 'work',
+                            attributes: ['title', 'objective'],
+                            include: [
+                                {
+                                    model: AreaExpertise,
+                                    as: 'areaExpertise',
+                                    attributes: ['name'],
+                                    through: { attributes: [] },
+                                },
+                            ],
+                        },
+                    ],
                 },
             ],
         });

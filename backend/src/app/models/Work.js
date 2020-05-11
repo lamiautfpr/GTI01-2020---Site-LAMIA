@@ -87,6 +87,16 @@ class Work extends Model {
             as: 'areaExpertise',
             through: 'areaExpertise_works',
         });
+        this.belongsToMany(models.Picture, {
+            foreignKey: 'work_id',
+            as: 'picture',
+            through: 'pictures_works',
+        });
+
+        this.hasMany(models.MemberWork, {
+            foreignKey: 'work_id',
+            as: 'worksMember',
+        });
     }
 }
 
