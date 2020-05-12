@@ -1,16 +1,16 @@
 module.exports = {
-    dialect: 'postgres',
-    host: process.env.DB_HOST,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    define: {
-        timestamps: true,
-        underscored: true,
-        underscoredAll: true,
-        charset: 'utf8',
-        dialectOptions: {
-            collate: 'utf8_general_ci',
-        },
+  dialect: 'postgres',
+  host: 'localhost',
+  username: 'rafaeldev',
+  password: 'devroot',
+  database: 'lamia',
+  define: {
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true,
+    charset: 'utf8',
+    dialectOptions: {
+      collate: 'utf8_general_ci',
     },
+  },
 };

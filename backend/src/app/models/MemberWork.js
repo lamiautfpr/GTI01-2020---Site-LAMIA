@@ -1,33 +1,33 @@
 import Sequelize, { Model } from 'sequelize';
 
 class MemberWork extends Model {
-    static init(sequelize) {
-        super.init(
-            {
-                member_id: Sequelize.INTEGER,
-                work_id: Sequelize.INTEGER,
-                scholarship: Sequelize.BOOLEAN,
-            },
-            {
-                sequelize,
-                tableName: 'members_works',
-            }
-        );
+  static init(sequelize) {
+    super.init(
+      {
+        member_id: Sequelize.INTEGER,
+        work_id: Sequelize.INTEGER,
+        scholarship: Sequelize.BOOLEAN,
+      },
+      {
+        sequelize,
+        tableName: 'members_works',
+      }
+    );
 
-        return this;
-    }
+    return this;
+  }
 
-    static associate(models) {
-        this.belongsTo(models.Member, {
-            foreignKey: 'member_id',
-            as: 'member',
-        });
+  static associate(models) {
+    this.belongsTo(models.Member, {
+      foreignKey: 'member_id',
+      as: 'member',
+    });
 
-        this.belongsTo(models.Work, {
-            foreignKey: 'work_id',
-            as: 'work',
-        });
-    }
+    this.belongsTo(models.Work, {
+      foreignKey: 'work_id',
+      as: 'work',
+    });
+  }
 }
 
 export default MemberWork;
