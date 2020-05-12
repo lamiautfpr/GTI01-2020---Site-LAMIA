@@ -1,8 +1,18 @@
+import * as Yup from 'yup';
 import TypeWork from '../models/TypeWork';
 import CategoryWork from '../models/CategoryWork';
 
 class TypeWorkController {
   async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      description: Yup.string(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
     const { name, description } = req.body;
 
     if (description === '')
