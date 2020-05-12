@@ -154,50 +154,82 @@ class WorkController {
     /**
      * Verificando se não existe categorias invalidos seleconados
      */
-    for (let i = 0; i < categories_id.length; i++) {
-      const category = await CategoryWork.findByPk(categories_id[i]);
+    // for (let i = 0; i < categories_id.length; i++) {
+    //   const category = await CategoryWork.findByPk(categories_id[i]);
 
+    //   if (!category) {
+    //     return res.status(400).json({ error: 'Category selected invalid' });
+    //   }
+    // }
+
+    const promisesCheckCategories = categories_id.map(async category_id => {
+      const category = await CategoryWork.findByPk(category_id);
       if (!category) {
         return res.status(400).json({ error: 'Category selected invalid' });
       }
-    }
+    });
 
     /**
      * Verificando se não existe tipos invalidos seleconados
      */
-    for (let i = 0; i < typesWork_id.length; i++) {
-      const type = await TypeWork.findByPk(typesWork_id[i]);
+    // for (let i = 0; i < typesWork_id.length; i++) {
+    //   const type = await TypeWork.findByPk(typesWork_id[i]);
 
+    //   if (!type) {
+    //     return res.status(400).json({ error: 'Type selected invalid' });
+    //   }
+    // }
+
+    const promisesCheckTypes = typesWork_id.map(async typeWork_id => {
+      const type = await TypeWork.findByPk(typeWork_id);
       if (!type) {
         return res.status(400).json({ error: 'Type selected invalid' });
       }
-    }
+    });
 
     /**
      * Verificando se não existe area atuação invalidos seleconados
      */
-    for (let i = 0; i < area_expertises_id.length; i++) {
-      const areaExpertisepe = await AreaExpertise.findByPk(
-        area_expertises_id[i]
-      );
+    // for (let i = 0; i < area_expertises_id.length; i++) {
+    //   const areaExpertisepe = await AreaExpertise.findByPk(
+    //     area_expertises_id[i]
+    //   );
 
-      if (!areaExpertisepe) {
-        return res
-          .status(400)
-          .json({ error: 'AreaExpertisepe selected invalid' });
+    //   if (!areaExpertisepe) {
+    //     return res
+    //       .status(400)
+    //       .json({ error: 'AreaExpertisepe selected invalid' });
+    //   }
+    // }
+
+    const promisesCheckAreas = area_expertises_id.map(
+      async areaExpertise_id => {
+        const areaExpertisepe = await AreaExpertise.findByPk(areaExpertise_id);
+        if (!areaExpertisepe) {
+          return res
+            .status(400)
+            .json({ error: 'AreaExpertisepe selected invalid' });
+        }
       }
-    }
+    );
 
     /**
      * Verificando se não existe membros invalidos seleconados
      */
-    for (let i = 0; i < members_id.length; i++) {
-      const member = await Member.findByPk(members_id[i]);
+    // for (let i = 0; i < members_id.length; i++) {
+    //   const member = await Member.findByPk(members_id[i]);
 
+    //   if (!member) {
+    //     return res.status(400).json({ error: 'Member selected invalid' });
+    //   }
+    // }
+
+    const promisesCheckMembes = members_id.map(async member_id => {
+      const member = await Member.findByPk(member_id);
       if (!member) {
         return res.status(400).json({ error: 'Member selected invalid' });
       }
-    }
+    });
 
     const work = await Work.create({
       title,
@@ -206,34 +238,68 @@ class WorkController {
       date_begin,
     });
 
-    for (let i = 0; i < categories_id.length; i++) {
-      const category = await CategoryWork.findByPk(categories_id[i]);
+    // for (let i = 0; i < categories_id.length; i++) {
+    //   const category = await CategoryWork.findByPk(categories_id[i]);
 
+    //   await work.addCategory(category);
+    // }
+
+    const promisesAddCategories = categories_id.map(async category_id => {
+      const category = await CategoryWork.findByPk(category_id);
       await work.addCategory(category);
-    }
+    });
 
-    for (let i = 0; i < typesWork_id.length; i++) {
-      const type = await TypeWork.findByPk(typesWork_id[i]);
+    // for (let i = 0; i < typesWork_id.length; i++) {
+    //   const type = await TypeWork.findByPk(typesWork_id[i]);
 
+    //   await work.addType(type);
+    // }
+
+    const promisesAddTypes = typesWork_id.map(async typeWork_id => {
+      const type = await TypeWork.findByPk(typeWork_id);
       await work.addType(type);
-    }
+    });
 
-    for (let i = 0; i < area_expertises_id.length; i++) {
-      const areaExpertise = await AreaExpertise.findByPk(area_expertises_id[i]);
+    // for (let i = 0; i < area_expertises_id.length; i++) {
+    //   const areaExpertise = await AreaExpertise.findByPk(area_expertises_id[i]);
 
+    //   await work.addAreaExpertise(areaExpertise);
+    // }
+
+    const promisesAddAreas = area_expertises_id.map(async areaExpertise_id => {
+      const areaExpertise = await AreaExpertise.findByPk(areaExpertise_id);
       await work.addAreaExpertise(areaExpertise);
-    }
+    });
 
     /**
      * Add membros no Trabalho
      */
-    for (let i = 0; i < members_id.length; i++) {
+    // for (let i = 0; i < members_id.length; i++) {
+    //   await MemberWork.create({
+    //     member_id: members_id[i],
+    //     work_id: work.id,
+    //     scholarship: false,
+    //   });
+    // }
+
+    const promisesAddMembes = members_id.map(async member_id => {
       await MemberWork.create({
-        member_id: members_id[i],
+        member_id,
         work_id: work.id,
         scholarship: false,
       });
-    }
+    });
+
+    await Promise.all(
+      promisesCheckCategories,
+      promisesCheckTypes,
+      promisesCheckAreas,
+      promisesCheckMembes,
+      promisesAddCategories,
+      promisesAddTypes,
+      promisesAddAreas,
+      promisesAddMembes
+    );
 
     /**
      * Add member responsavel no trabalho com bolsista ou não
