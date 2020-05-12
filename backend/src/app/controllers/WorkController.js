@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+
 import Partner from '../models/Partner';
 import Work from '../models/Work';
 import CategoryWork from '../models/CategoryWork';
@@ -90,6 +92,51 @@ class WorkController {
 
     if (memberResponsible.office_id > 5 || memberResponsible.office_id === 4) {
       return res.status(401).json({ error: 'You not permission' });
+    }
+
+    const schema = Yup.object().shape({
+      title: Yup.string().required(),
+      objective: Yup.string().required(),
+      abstract: Yup.string().required(),
+
+      date_begin: Yup.date().required(),
+      categories_id: Yup.array()
+        .min(1)
+        .of(
+          Yup.number()
+            .positive()
+            .integer()
+        )
+        .required(),
+      typesWork_id: Yup.array()
+        .min(1)
+        .of(
+          Yup.number()
+            .positive()
+            .integer()
+        )
+        .required(),
+      area_expertises_id: Yup.array()
+        .min(1)
+        .of(
+          Yup.number()
+            .positive()
+            .integer()
+        )
+        .required(),
+
+      members_id: Yup.array()
+        .min(1)
+        .of(
+          Yup.number()
+            .positive()
+            .integer()
+        ),
+      scholarship: Yup.boolean().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
     }
 
     const {
