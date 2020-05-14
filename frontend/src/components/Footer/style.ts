@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { transparentize } from 'polished';
-import {
-  primaryColor,
-  secondaryColor,
-  secondaryBackground,
-} from '../../styles/paletsColores';
+import { secondaryBackground } from '../../styles/paletsColores';
 
 export const Contact = styled.footer`
   max-width: 1200px;
@@ -13,6 +9,17 @@ export const Contact = styled.footer`
   padding: 24px;
   background: ${transparentize(0.95, '#fff')};
   border-radius: 24px;
+  transition: 0.2s all;
+
+  &:hover {
+    background: ${transparentize(0.9, '#fff')};
+
+    -webkit-box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+
+    transform: translateY(-10px);
+  }
 
   display: flex;
   flex-direction: column;
@@ -75,6 +82,10 @@ export const Contact = styled.footer`
           a {
             text-decoration: none;
             color: #fff;
+
+            &:hover {
+              color: ${transparentize(0.24, '#fff')};
+            }
           }
         }
       }
@@ -85,8 +96,14 @@ export const Contact = styled.footer`
     display: flex;
     align-items: center;
 
+    transition: transform 0.2s;
+
     svg {
       margin-right: 8px;
+    }
+
+    &:hover {
+      transform: translateX(10px);
     }
 
     color: #fff;
