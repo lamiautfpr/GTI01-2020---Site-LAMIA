@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
       </div>
       <p>
         <FaCopyright size={20} />
-        by Professor Xavier & L
+        by Professor Xavier & Detective L
       </p>
     </Contact>
   );
