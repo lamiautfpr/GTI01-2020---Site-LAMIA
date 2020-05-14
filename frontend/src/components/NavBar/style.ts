@@ -41,7 +41,7 @@ export const Nav = styled.nav`
       border-radius: 8px;
 
       &:hover {
-        background-color: rgba(222, 222, 222, 0.75);
+        background-color: rgba(255, 255, 255, 0.95);
 
         ul {
           display: block;
