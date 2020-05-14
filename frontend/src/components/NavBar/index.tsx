@@ -10,7 +10,7 @@ const NavBar: React.FC = () => {
     <Nav>
       <ul>
         <li>
-          <a href="#intro">Home</a>
+          <Link to="/">Home</Link>
           <ul>
             <li>
               <HashLink smooth to="#News">
@@ -45,7 +45,7 @@ const NavBar: React.FC = () => {
           </ul>
         </li>
         <li>
-          <a href="#first">Projetos</a>
+          <Link to="projects">Projetos</Link>
           <ul>
             <li>
               <a href="#">Pesquisa</a>
