@@ -3,10 +3,26 @@ import styled from 'styled-components';
 import { secondaryBackground } from '../../styles/paletsColores';
 
 export const Nav = styled.nav`
-  background-color: ${secondaryBackground};
+  background-color: #fff;
   padding: 12px;
   margin-top: 16px;
   border-radius: 24px 24px 0 0;
+
+  -webkit-box-shadow: 0px 10px 14px -15px rgba(138,138,138,1);
+  -moz-box-shadow: 0px 10px 14px -15px rgba(138,138,138,1);
+  box-shadow: 0px 10px 14px -15px rgba(138,138,138,1);
+
+
+  /* Deixa nav fixa no top durante o scroll */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1; /* Para deixar nav por cima de tudo */
+
+  &:after{
+    content:'';
+    border-radius: 0;
+  }
 
   font-size: 18px;
 
