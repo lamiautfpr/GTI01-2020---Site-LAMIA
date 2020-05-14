@@ -228,6 +228,7 @@ export const SectionVip = styled.section`
       &:hover{
         img{
           filter: none;
+          transform: translateY(5px);
         }
       }
 
