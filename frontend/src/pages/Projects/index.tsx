@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { Link } from 'react-router-dom';
+import {
+  FaChevronRight,
+  FaUserNinja,
+  FaRegClipboard,
+  FaListUl,
+} from 'react-icons/fa';
 import imgLogo from '../../assets/logo.svg';
 import imgTeste from '../../assets/Teste.jpg';
 
-import logoLar from '../../assets/logo_lar.png';
-import logoStark from '../../assets/logo_stark.jpg';
-import logoXavier from '../../assets/logo_xavier.jpg';
-import logoRock from '../../assets/logo_rockStar.png';
-import logoCyber from '../../assets/logo_cyber.jpg';
-import logoLex from '../../assets/logo_lex.png';
-
-import { Header, Main, SectionLine, SectionColumn, SectionVip } from './style';
+import { Header, Main, Projects } from './style';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
@@ -42,7 +42,171 @@ const Home: React.FC = () => {
           </select>
         </section>
         <Separator />
-        <section>Listagem</section>
+
+        <Projects>
+          <Link to="teste">
+            <img src={imgTeste} alt="Teste" />
+
+            <strong>
+              Title Project
+              <span>
+                <FaUserNinja size={14} />
+                Jecé Xavier - Rafael Lechesque
+              </span>
+              <span>
+                <FaRegClipboard size={14} />
+                Pesquisa & Pos-Graduação
+              </span>
+              <span>
+                <FaListUl size={14} />
+                Games
+              </span>
+            </strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Blanditiis a natus labore suscipit, ad ratione quod praesentium
+              architecto et minima hic accusantium provident quia sequi dolorum
+              dicta officiis doloribus perspiciatis.
+            </p>
+
+            <FaChevronRight size={20} />
+          </Link>
+          <Link to="teste">
+            <img src={imgTeste} alt="Teste" />
+
+            <strong>
+              Title Project
+              <span>
+                <FaUserNinja size={14} />
+                Jecé Xavier - Rafael Lechesque
+              </span>
+              <span>
+                <FaRegClipboard size={14} />
+                Pesquisa & Pos-Graduação
+              </span>
+              <span>
+                <FaListUl size={14} />
+                Games
+              </span>
+            </strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Blanditiis a natus labore suscipit, ad ratione quod praesentium
+              architecto et minima hic accusantium provident quia sequi dolorum
+              dicta officiis doloribus perspiciatis.
+            </p>
+
+            <FaChevronRight size={20} />
+          </Link>
+          <Link to="teste">
+            <img src={imgTeste} alt="Teste" />
+
+            <strong>
+              Title Project
+              <span>
+                <FaUserNinja size={14} />
+                Jecé Xavier - Rafael Lechesque
+              </span>
+              <span>
+                <FaRegClipboard size={14} />
+                Pesquisa & Pos-Graduação
+              </span>
+              <span>
+                <FaListUl size={14} />
+                Games
+              </span>
+            </strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Blanditiis a natus labore suscipit, ad ratione quod praesentium
+              architecto et minima hic accusantium provident quia sequi dolorum
+              dicta officiis doloribus perspiciatis.
+            </p>
+
+            <FaChevronRight size={20} />
+          </Link>
+          <Link to="teste">
+            <img src={imgTeste} alt="Teste" />
+
+            <strong>
+              Title Project
+              <span>
+                <FaUserNinja size={14} />
+                Jecé Xavier - Rafael Lechesque
+              </span>
+              <span>
+                <FaRegClipboard size={14} />
+                Pesquisa & Pos-Graduação
+              </span>
+              <span>
+                <FaListUl size={14} />
+                Games
+              </span>
+            </strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Blanditiis a natus labore suscipit, ad ratione quod praesentium
+              architecto et minima hic accusantium provident quia sequi dolorum
+              dicta officiis doloribus perspiciatis.
+            </p>
+
+            <FaChevronRight size={20} />
+          </Link>
+          <Link to="teste">
+            <img src={imgTeste} alt="Teste" />
+
+            <strong>
+              Title Project
+              <span>
+                <FaUserNinja size={14} />
+                Jecé Xavier - Rafael Lechesque
+              </span>
+              <span>
+                <FaRegClipboard size={14} />
+                Pesquisa & Pos-Graduação
+              </span>
+              <span>
+                <FaListUl size={14} />
+                Games
+              </span>
+            </strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Blanditiis a natus labore suscipit, ad ratione quod praesentium
+              architecto et minima hic accusantium provident quia sequi dolorum
+              dicta officiis doloribus perspiciatis.
+            </p>
+
+            <FaChevronRight size={20} />
+          </Link>
+          <Link to="teste">
+            <img src={imgTeste} alt="Teste" />
+
+            <strong>
+              Title Project
+              <span>
+                <FaUserNinja size={14} />
+                Jecé Xavier - Rafael Lechesque
+              </span>
+              <span>
+                <FaRegClipboard size={14} />
+                Pesquisa & Pos-Graduação
+              </span>
+              <span>
+                <FaListUl size={14} />
+                Games
+              </span>
+            </strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Blanditiis a natus labore suscipit, ad ratione quod praesentium
+              architecto et minima hic accusantium provident quia sequi dolorum
+              dicta officiis doloribus perspiciatis.
+            </p>
+
+            <FaChevronRight size={20} />
+          </Link>
+        </Projects>
       </Main>
 
       <Footer />
