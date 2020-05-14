@@ -14,6 +14,7 @@ import logoLex from '../../assets/logo_lex.png';
 import { Header, Main, SectionLine, SectionColumn, SectionVip } from './style';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
+import Footer from '../../components/Footer';
 
 const Home: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const Home: React.FC = () => {
       <NavBar />
 
       <Main>
-        <SectionLine id="News">
+        <SectionLine title="News" id="News">
           <header>
             <h2>Notícias</h2>
           </header>
@@ -84,7 +85,7 @@ const Home: React.FC = () => {
           </div>
         </SectionLine>
         <hr />
-        <SectionColumn id="LatestPublications">
+        <SectionColumn title="LatestPublications" id="LatestPublications">
           <header>
             <h2>Ultimas Publicações</h2>
           </header>
@@ -128,7 +129,7 @@ const Home: React.FC = () => {
           </div>
         </SectionColumn>
         <hr />
-        <SectionLine id="News">
+        <SectionLine id="Histoty">
           <header>
             <h2>História</h2>
           </header>
@@ -163,7 +164,7 @@ const Home: React.FC = () => {
           </div>
         </SectionLine>
         <hr />
-        <SectionColumn id="LatestPublications">
+        <SectionColumn id="AreasExpertise">
           <header>
             <h2>Área de Atuação</h2>
           </header>
@@ -201,7 +202,7 @@ const Home: React.FC = () => {
           </div>
         </SectionColumn>
         <hr />
-        <SectionVip id="">
+        <SectionVip id="Partners">
           <header>
             <h2>Parceiros</h2>
           </header>
@@ -234,7 +235,47 @@ const Home: React.FC = () => {
             </ul>
           </div>
         </SectionVip>
+        <hr />
+        <SectionColumn id="Advisors">
+          <header>
+            <h2>Orientadores</h2>
+          </header>
+          <div>
+            <div>
+              <img src={imgTeste} alt="Teste" />
+              <header>
+                <h2>Anderson Brilhador</h2>
+              </header>
+              <p>
+                Sed lorem ipsum dolor sit amet nullam consequat feugiat
+                consequat magna adipiscing magna etiam amet veroeros...
+              </p>
+            </div>
+            <div>
+              <img src={imgTeste} alt="Teste" />
+              <header>
+                <h2>Arlete ?</h2>
+              </header>
+              <p>
+                Sed lorem ipsum dolor sit amet nullam consequat feugiat
+                consequat magna adipiscing magna etiam amet veroeros...
+              </p>
+            </div>
+            <div>
+              <img src={imgTeste} alt="Teste" />
+              <header>
+                <h2>Thiago Naves</h2>
+              </header>
+              <p>
+                Sed lorem ipsum dolor sit amet nullam consequat feugiat
+                consequat magna adipiscing magna etiam amet veroeros...
+              </p>
+            </div>
+          </div>
+        </SectionColumn>
       </Main>
+
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
+import { Link } from 'react-router-dom';
+
+import { HashLink } from 'react-router-hash-link';
 import { Nav } from './style';
 
 const NavBar: React.FC = () => {
@@ -11,22 +13,34 @@ const NavBar: React.FC = () => {
           <a href="#intro">Home</a>
           <ul>
             <li>
-              <a href="#Noticias">Noticias</a>
+              <HashLink smooth to="#News">
+                Noticias
+              </HashLink>
             </li>
             <li>
-              <a href="#UltimasPlublicações">Ultimas publicações </a>
+              <HashLink smooth to="/#LatestPublications">
+                Ultimas publicações
+              </HashLink>
             </li>
             <li>
-              <a href="#Historia">Historia </a>
+              <HashLink smooth to="/#Histoty">
+                História
+              </HashLink>
             </li>
             <li>
-              <a href="#Atuacao">Áreas de Atuação</a>
+              <HashLink smooth to="/#AreasExpertise">
+                Áreas de Atuação
+              </HashLink>
             </li>
             <li>
-              <a href="#Orientadores">Orientadores </a>
+              <HashLink smooth to="/#Partners">
+                Parceiros
+              </HashLink>
             </li>
             <li>
-              <a href="#Parceiros">Parceiros</a>
+              <HashLink smooth to="/#Advisors">
+                Orientadores
+              </HashLink>
             </li>
           </ul>
         </li>

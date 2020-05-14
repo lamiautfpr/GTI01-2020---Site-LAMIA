@@ -28,7 +28,7 @@ export const Nav = styled.nav`
         background-color: rgba(222, 222, 222, 0.75);
 
         ul {
-          /* display: block; */
+          display: block;
         }
       }
 
