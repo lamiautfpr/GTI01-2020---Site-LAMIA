@@ -1,7 +1,6 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-import githubBackgroud from '../assets/githutb-background.svg';
-
+import { shade, transparentize } from 'polished';
 import { primaryColor, secondaryColor } from './paletsColores';
 
 export default createGlobalStyle`
@@ -37,6 +36,28 @@ export default createGlobalStyle`
 
   button{
     cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${shade(0.2, primaryColor)};
+    border-radius: 16px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${shade(0.1, primaryColor)};
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 16px;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
   }
 
 `;
