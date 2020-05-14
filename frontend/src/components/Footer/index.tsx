@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://github.com/lamia-utfpr" target="blank">
                 <FaGithubAlt size={32} />
               </a>
             </li>
