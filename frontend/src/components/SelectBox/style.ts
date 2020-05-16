@@ -1,11 +1,24 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Select from 'react-select';
 
 import { secondaryColor } from '../../styles/paletsColores';
 
-export const Container = styled(Select)`
-  min-width: 250px;
+interface ContainerProps {
+  width?: number;
+}
+
+export const Container = styled(Select)<ContainerProps>`
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: bold;
+
+  width: 100%;
+  ${(props) =>
+    css`
+      max-width: ${props.width}px;
+    `}
+  min-width:150px;
   margin-top: 0px;
 
   > div {

@@ -20,6 +20,16 @@ export const Main = styled.main`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    .areaExpensive {
+      width: 250px;
+    }
+    .typeWorks {
+      width: 550px;
+    }
+    .order {
+      width: 150px;
+    }
   }
 `;
 

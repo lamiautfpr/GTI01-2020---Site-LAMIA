@@ -8,6 +8,7 @@ import {
   FaUserNinja,
   FaRegClipboard,
   FaListUl,
+  FaSortAlphaDownAlt,
 } from 'react-icons/fa';
 import imgTeste from '../../assets/Teste.jpg';
 
@@ -19,10 +20,29 @@ import Footer from '../../components/Footer';
 import SelectBox from '../../components/SelectBox';
 
 const areaExpensive = [
-  { value: '0', label: 'Todas' },
-  { value: '1', label: 'Ciência de Dados' },
-  { value: '2', label: 'Visão Computacional' },
-  { value: '3', label: 'Games' },
+  { value: '0', icon: <FaSortAlphaDownAlt />, label: 'Todas' },
+  { value: '1', icon: <FaSortAlphaDownAlt />, label: 'Ciência de Dados' },
+  { value: '2', icon: <FaSortAlphaDownAlt />, label: 'Visão Computacional' },
+  { value: '3', icon: <FaSortAlphaDownAlt />, label: 'Games' },
+];
+
+const order = [
+  { value: '0', label: 'A-Z' },
+  { value: '1', label: 'Z-A' },
+  { value: '2', label: ' + Antigas' },
+  { value: '3', label: '+ Recentes' },
+];
+
+const typeWorks = [
+  { value: '0', label: 'Todos' },
+  { value: '1', label: 'TCC' },
+  { value: '2', label: 'IC' },
+  {
+    value: '3',
+    label: 'Partes de Livros e Livros',
+  },
+  { value: '4', label: 'Patentes' },
+  { value: '5', label: 'Pesquisa' },
 ];
 
 const Home: React.FC = () => {
@@ -34,15 +54,31 @@ const Home: React.FC = () => {
 
       <Main>
         <section>
-          <div>
-            {/* // eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <div className="areaExpensive">
             <SelectBox
               label="Áreas de Pesquisa"
               options={areaExpensive}
               placeholder="Selecione..."
+              width={250}
             />
           </div>
-          <div>Type</div>
+          <div className="typeWorks">
+            <SelectBox
+              label="Tipo de Trabalho"
+              options={typeWorks}
+              placeholder="Selecione..."
+              width={550}
+              isMulti
+            />
+          </div>
+          <div className="order">
+            {/* // eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <SelectBox
+              label="Ordenação"
+              options={order}
+              placeholder="Selecione..."
+            />
+          </div>
         </section>
 
         <Separator />
