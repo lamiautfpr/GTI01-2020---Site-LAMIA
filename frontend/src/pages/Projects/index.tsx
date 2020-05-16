@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
@@ -13,6 +14,7 @@ import {
 import imgTeste from '../../assets/Teste.jpg';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { TypeWork } from '../../../myTypes/TypeWork';
+import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
 
 import { Main, Projects } from './style';
 import Header from '../../components/Header';
@@ -63,11 +65,11 @@ const areaExpensives = [
   { value: '3', label: 'Games' },
 ];
 
-const order = [
+const listOrder = [
   { value: '0', label: 'A-Z' },
   { value: '1', label: 'Z-A' },
-  { value: '2', label: ' + Antigas' },
-  { value: '3', label: '+ Recentes' },
+  // { value: '2', label: ' + Antigas' },
+  // { value: '3', label: '+ Recentes' },
 ];
 
 const typeWorks = [
@@ -84,18 +86,32 @@ const typeWorks = [
 
 const Home: React.FC = () => {
   const [works, setWorks] = useState<TypeWork[]>(listWorks);
+  // const [listWorks, setListWorks] = useState<TypeWork[]>(listWorks);
+  const [order, setOrder] = useState<number>(0);
 
   const setAreaExpensive = ({ value }: SelectItem): void => {
-    alert(`AreaExpensive selected is ${value}`);
-
     if (value === '0') {
-      setWorks(listWorks);
+      if (order === 0) {
+        setWorks(listWorks.sort(compareTitleASC));
+      } else if (order === 1) {
+        setWorks(listWorks.sort(compareTitleDESC));
+      }
     } else {
-      setWorks(
-        listWorks.filter(function (work) {
-          return work.areaExpensive.includes(parseInt(value));
-        }),
-      );
+      if (order === 0) {
+        setWorks(
+          listWorks.sort(compareTitleASC).filter(function (work) {
+            return work.areaExpensive.includes(parseInt(value));
+          }),
+        );
+      } else if (order === 1) {
+        setWorks(
+          listWorks.sort(compareTitleDESC).filter(function (work) {
+            return work.areaExpensive.includes(parseInt(value));
+          }),
+        );
+      }
+
+      // setWorks(listWorks);
     }
   };
 
@@ -107,8 +123,16 @@ const Home: React.FC = () => {
     alert(`AreaExpensive selected is ${types}`);
   };
 
-  const setOrder = ({ value }: SelectItem): void => {
-    alert(`Order selected is ${value}`);
+  const checkOrder = ({ value }: SelectItem): void => {
+    // alert(`Order selected is ${value}`);
+
+    setOrder(parseInt(value));
+
+    if (value === '0') {
+      setWorks(works.sort(compareTitleASC));
+    } else if (value === '1') {
+      setWorks(works.sort(compareTitleDESC));
+    }
   };
 
   return (
@@ -142,9 +166,9 @@ const Home: React.FC = () => {
             {/* // eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <SelectBox
               label="Ordenação"
-              options={order}
+              options={listOrder}
               placeholder="Selecione..."
-              onChange={setOrder}
+              onChange={checkOrder}
             />
           </div>
         </section>
