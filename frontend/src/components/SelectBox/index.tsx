@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Theme } from 'react-select';
@@ -7,10 +7,7 @@ import { transparentize } from 'polished';
 import { primaryColor, secondaryColor } from '../../styles/paletsColores';
 import { Container, Label } from './style';
 
-interface SelectItem {
-  value: string;
-  label: string;
-}
+import { SelectItem } from '../../../myTypes/SelectItem';
 
 interface SelectBoxProps {
   options: SelectItem[];
@@ -18,6 +15,7 @@ interface SelectBoxProps {
   label: string;
   isMulti?: boolean;
   width?: number;
+  onChange?: any;
 }
 
 const SelectBox: React.FC<SelectBoxProps> = ({
@@ -26,6 +24,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   label,
   isMulti = false,
   width = 150,
+  onChange,
 }) => {
   const animatedComponents = makeAnimated();
 
@@ -62,6 +61,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
         defaultValue={options[0]}
         isMulti={isMulti}
         width={width}
+        onChange={onChange}
       />
     </>
   );
