@@ -16,12 +16,12 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  body, input, button, label {
     font-size: 16px;
     font-family: 'Source Sans Pro', sans-serif;
   }
 
-  p{
+  p, label{
     font-size: 16px;
     text-indent: 16px;
     line-height: 26px;

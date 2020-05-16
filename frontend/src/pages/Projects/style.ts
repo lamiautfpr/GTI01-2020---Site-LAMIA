@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 
 import { transparentize } from 'polished';
-import { secondaryBackground, primaryColor } from '../../styles/paletsColores';
+import {
+  secondaryBackground,
+  primaryColor,
+  secondaryColor,
+} from '../../styles/paletsColores';
 
 export const Main = styled.main`
   background: #fff;
   padding: 12px;
   border-radius: 0 0 24px 24px;
   margin-bottom: 100px;
+
+  section {
+    max-width: 1200px;
+    margin: 40px auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 export const Projects = styled.div`
