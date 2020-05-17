@@ -38,6 +38,10 @@ export const Projects = styled.div`
   max-width: 1200px;
   margin: 24px auto;
 
+  div + div {
+    margin-top: 16px;
+  }
+
   a {
     background: ${secondaryBackground};
 
@@ -50,10 +54,6 @@ export const Projects = styled.div`
     display: flex;
     align-items: center;
     transition: all 0.2s;
-
-    & + a {
-      margin-top: 16px;
-    }
 
     &:hover {
       background: ${transparentize(0.00001, secondaryBackground)};

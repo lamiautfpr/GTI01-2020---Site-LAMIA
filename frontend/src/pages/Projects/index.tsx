@@ -1,15 +1,12 @@
-/* eslint-disable no-lonely-if */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import { useTransition, animated } from 'react-spring';
 import {
   FaChevronRight,
   FaUserNinja,
   FaRegClipboard,
   FaListUl,
-  FaSortAlphaDownAlt,
 } from 'react-icons/fa';
 import imgTeste from '../../assets/Teste.jpg';
 import { SelectItem } from '../../../myTypes/SelectItem';
@@ -135,6 +132,12 @@ const Home: React.FC = () => {
     }
   };
 
+  const workWithTrasitions = useTransition(works, (work) => work.id, {
+    from: { opacity: '0', transform: 'translate3d(0,-40px,0)' },
+    enter: { opacity: '1', transform: 'translate3d(0,0px,0)' },
+    leave: { opacity: '0', transform: 'translate3d(0,-40px,0)' },
+  });
+
   return (
     <>
       <Header title="LAMIA - Projetos" />
@@ -176,30 +179,32 @@ const Home: React.FC = () => {
         <Separator />
 
         <Projects>
-          {works.map((work) => (
-            <Link key={work.id} to="teste">
-              <img src={imgTeste} alt="Teste" />
+          {workWithTrasitions.map(({ item, key, props }) => (
+            <animated.div key={item.id} style={props}>
+              <Link to={`/projects/${item.id}`}>
+                <img src={imgTeste} alt="Teste" />
 
-              <strong>
-                {work.title}
-                <span>
-                  <FaUserNinja size={14} />
-                  Jecé Xavier - Rafael Lechesque
-                </span>
-                <span>
-                  <FaRegClipboard size={14} />
-                  {/* Pesquisa & Pos-Graduação */}
-                  {work.typeWorks}
-                </span>
-                <span>
-                  <FaListUl size={14} />
-                  {work.areaExpensive}
-                </span>
-              </strong>
-              <p>{work.objective}</p>
+                <strong>
+                  {item.title}
+                  <span>
+                    <FaUserNinja size={14} />
+                    Jecé Xavier - Rafael Lechesque
+                  </span>
+                  <span>
+                    <FaRegClipboard size={14} />
+                    {/* Pesquisa & Pos-Graduação */}
+                    {item.typeWorks}
+                  </span>
+                  <span>
+                    <FaListUl size={14} />
+                    {item.areaExpensive}
+                  </span>
+                </strong>
+                <p>{item.objective}</p>
 
-              <FaChevronRight size={20} />
-            </Link>
+                <FaChevronRight size={20} />
+              </Link>
+            </animated.div>
           ))}
         </Projects>
       </Main>
