@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 // import Dashboard from '../pages/Dashboard';
 // import Repository from '../pages/Repository';
 import Home from '../pages/Home';
-import Projects from '../pages/Projects';
+import Projects from '../pages/ProjectsTest';
 
 // Switch é para apresentar uma rota de cada vez
 
