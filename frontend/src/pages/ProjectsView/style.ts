@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-import { transparentize } from 'polished';
+import { transparentize, shade } from 'polished';
 import {
   secondaryBackground,
   primaryColor,
   secondaryColor,
   featuredColor,
+  titleColor,
 } from '../../styles/paletsColores';
 
 export const Main = styled.main`
@@ -13,31 +14,7 @@ export const Main = styled.main`
   padding: 12px;
   border-radius: 0 0 24px 24px;
   margin-bottom: 100px;
-
-  section {
-    max-width: 1200px;
-    margin: 40px auto;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .infomation {
-      color: ${primaryColor};
-      display: flex;
-      flex-direction: column;
-    }
-
-    .areaExpensive {
-      width: 250px;
-    }
-    .typeWorks {
-      width: 550px;
-    }
-    .order {
-      width: 150px;
-    }
-  }
+  /* border: 1px solid red; */
 `;
 
 export const Projects = styled.div`
@@ -121,42 +98,146 @@ export const Projects = styled.div`
   }
 `;
 
-export const Title = styled.div`
+export const Headline = styled.div`
+
+  /* border: 1px solid green; */
+
   display: flex;
   flex-direction: column;
   /* flex-flow: row wrap; */
   /* justify-content: flex-start; */
   align-items: center;
 
-  .title {
-    background-color: ${featuredColor};
-    margin-left: 160px;
-    height: 120px;
-    width: 1024px;
-    border-radius: 24px;
+  max-width: 1200px;
+  height: auto;
+  margin: 24px auto;
+  margin-top: 64px;
 
+  .basicInfo {
+    background: ${featuredColor};
+    height: 120px;
+    width: 100%;
+    border-radius: 24px;
+    display:flex;
+    justify-content: space-between;
+    /* flex: 3 2 300px; */
+    
     h1 {
+      
       text-align: start;
       padding-top: 20px;
       padding-left: 42px;
+      /* border: 1px solid blue; */
 
-      color: ${primaryColor};
+      color: white;
       font-size: 64px;
+            
     }
+    div{
+      /* border: 1px solid red; */
+
+      max-width: 500px;
+      padding-right: 42px;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      flex-basis: 100%;
+      
+
+
+      h1{
+        font-size: 32px;
+
+      }
+    }
+    
   }
 
   .imgBorde {
-    background-color: ${featuredColor};
-    margin-top: -150px;
+    background: white;
+    /* border: 4px solid ${featuredColor}; */
+    margin-top: -160px;
     height: 200px;
     width: 200px;
-    border-radius: 50%;
-    padding: 12px;
+    border-radius: 50% 12px;
+    transform: rotate(45deg);
+    /* padding: 6px; */
+    transition: 0.2s all;
+
+    &:hover {
+      -webkit-box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+      box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+
+      transform: translateY(-10px) rotate(45deg);
+    }
+
+    div {
+      /* border: 1px solid red; */
+      border-radius: 50% 12px;
+      padding: 12px;
+      height: 100%;
+
+      /* -webkit-box-shadow: inset 0px 0px 71px -23px rgba(0, 0, 0, 1);
+      -moz-box-shadow: inset 0px 0px 71px -23px rgba(0, 0, 0, 1);
+      box-shadow: inset 0px 0px 71px -23px rgba(0, 0, 0, 1); */
+    }
 
     img {
+      transform: rotate(-45deg);
       height: 176px;
       width: 176px;
       border-radius: 50%;
     }
   }
+`;
+
+export const Title = styled.div`
+  max-width: 1200px;
+  height: auto;
+  margin: 24px auto;
+  margin-top: 64px;
+
+  header {
+    margin: 4px 0 8px 0;
+
+    font-size: 24px;
+    color: ${titleColor};
+
+    &::after {
+      content: '';
+
+      width: 224px;
+      height: 2px;
+      background-image: -webkit-linear-gradient(
+        180deg,
+        ${primaryColor} 15%,
+        ${secondaryColor} 85%
+      );
+
+      position: absolute;
+    }
+  }
+`;
+
+export const Shelf = styled.div`
+  max-width: 1200px;
+  height: auto;
+  margin: 24px auto;
+  /* margin-top: 64px; */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  border: 1px solid red;
+`;
+
+export const Booklet = styled.div`
+  background-color: ${secondaryBackground};
+  height: 200px;
+  width: 120px;
+
+  border-radius: 16px;
 `;

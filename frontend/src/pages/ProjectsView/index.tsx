@@ -13,7 +13,7 @@ import { SelectItem } from '../../../myTypes/SelectItem';
 import { TypeWork } from '../../../myTypes/TypeWork';
 import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
 
-import { Main, Projects, Title } from './style';
+import { Main, Projects, Headline, Title, Shelf, Booklet } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
@@ -185,14 +185,33 @@ const Home: React.FC = () => {
           ))} */}
         </Projects>
 
-        <Title>
-          <div className="title">
-            <h1>Teste 1</h1>
+        <Headline>
+          <div className="basicInfo">
+            <h1>Alunos</h1>
+            <div>
+              <h1>Rafael Lechensque</h1>
+              <h1> Jece Xavier</h1>
+            </div>
           </div>
           <div className="imgBorde">
-            <img src={imgTeste} alt="Teste" />
+            <div>
+              <img src={imgTeste} alt="Teste" />
+            </div>
           </div>
+        </Headline>
+
+        <Title>
+          <header>
+            <h2>Projetos Participado</h2>
+          </header>
         </Title>
+        <Shelf>
+          <Booklet>sei la1</Booklet>
+          <Booklet>sei la2</Booklet>
+          <Booklet>sei la3</Booklet>
+          <Booklet>sei la4</Booklet>
+          <Booklet>sei la5</Booklet>
+        </Shelf>
       </Main>
 
       <Footer />
