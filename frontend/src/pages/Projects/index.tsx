@@ -56,105 +56,100 @@ const listWorks = [
 ];
 
 const areaExpensives = [
-  { value: '0', label: 'Todas' },
-  { value: '1', label: 'Ciência de Dados' },
-  { value: '2', label: 'Visão Computacional' },
-  { value: '3', label: 'Games' },
+  { value: 0, label: 'Todas' },
+  { value: 1, label: 'Ciência de Dados' },
+  { value: 2, label: 'Visão Computacional' },
+  { value: 3, label: 'Games' },
 ];
 
 const listOrder = [
-  { value: '0', label: 'A-Z' },
-  { value: '1', label: 'Z-A' },
+  { value: 0, label: 'A-Z' },
+  { value: 1, label: 'Z-A' },
   // { value: '2', label: ' + Antigas' },
   // { value: '3', label: '+ Recentes' },
 ];
 
 const typeWorks = [
-  { value: '1', label: 'TCC' },
-  { value: '2', label: 'IC' },
+  { value: 1, label: 'TCC' },
+  { value: 2, label: 'IC' },
   {
-    value: '3',
+    value: 3,
     label: 'Partes de Livros e Livros',
   },
-  { value: '4', label: 'Patentes' },
-  { value: '5', label: 'Pesquisa' },
+  { value: 4, label: 'Patentes' },
+  { value: 5, label: 'Pesquisa' },
 ];
 
 const Home: React.FC = () => {
   const [works, setWorks] = useState<TypeWork[]>(listWorks);
   // const [listWorks, setListWorks] = useState<TypeWork[]>(listWorks);
   const [order, setOrder] = useState<number>(0);
+  const [areaSelected, setAreaSelected] = useState<number>(0);
+  const [typeSelected, setTypeSelected] = useState<number[] | null>(null);
 
   const setAreaExpensive = ({ value }: SelectItem): void => {
-    if (value === '0') {
+    if (value === 0) {
       if (order === 0) {
         setWorks(listWorks.sort(compareTitleASC));
       } else if (order === 1) {
         setWorks(listWorks.sort(compareTitleDESC));
       }
-    } else {
-      if (order === 0) {
-        setWorks(
-          listWorks.sort(compareTitleASC).filter(function (work) {
-            return work.areaExpensive.includes(parseInt(value));
-          }),
-        );
-      } else if (order === 1) {
-        setWorks(
-          listWorks.sort(compareTitleDESC).filter(function (work) {
-            return work.areaExpensive.includes(parseInt(value));
-          }),
-        );
-      }
-
-      // setWorks(listWorks);
+    } else if (order === 0) {
+      setWorks(
+        listWorks.sort(compareTitleASC).filter(function (work) {
+          return work.areaExpensive.includes(value);
+        }),
+      );
+    } else if (order === 1) {
+      setWorks(
+        listWorks.sort(compareTitleDESC).filter(function (work) {
+          return work.areaExpensive.includes(value);
+        }),
+      );
     }
+    setAreaSelected(value);
   };
 
   const setTypeWorks = (typeWotks: SelectItem[]): void => {
+    alert(`AreaExpensive selected is ${areaSelected}`);
+
     if (typeWotks) {
-      const types: string[] = [];
+      const types: number[] = [];
       typeWotks.forEach((type) => {
         types.push(type.value);
       });
       if (order === 0) {
         setWorks(
           listWorks.sort(compareTitleASC).filter(function (work) {
-            return work.typeWorks.some((value) =>
-              types.includes(value.toString()),
-            );
+            return work.typeWorks.some((value) => types.includes(value));
           }),
         );
       } else if (order === 1) {
         setWorks(
           listWorks.sort(compareTitleDESC).filter(function (work) {
-            return work.typeWorks.some((value) =>
-              types.includes(value.toString()),
-            );
+            return work.typeWorks.some((value) => types.includes(value));
           }),
         );
       }
-
-      alert(`AreaExpensive selected is ${types}`);
     }
   };
 
   const checkOrder = ({ value }: SelectItem): void => {
     // alert(`Order selected is ${value}`);
 
-    setOrder(parseInt(value));
+    setOrder(value);
 
-    if (value === '0') {
+    if (value === 0) {
       setWorks(works.sort(compareTitleASC));
-    } else if (value === '1') {
+    } else if (value === 1) {
       setWorks(works.sort(compareTitleDESC));
     }
   };
 
   const workWithTrasitions = useTransition(works, (work) => work.id, {
-    from: { opacity: '0', transform: 'translate3d(0,-40px,0)' },
-    enter: { opacity: '1', transform: 'translate3d(0,0px,0)' },
-    leave: { opacity: '0', transform: 'translate3d(0,-40px,0)' },
+    from: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
+    enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
+    leave: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
   });
 
   return (

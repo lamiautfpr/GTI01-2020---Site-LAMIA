@@ -58,7 +58,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
         options={options}
         placeholder={placeholder}
         isSearchable
-        defaultValue={options[0]}
+        defaultValue={!isMulti ? options[0] : null}
         isMulti={isMulti}
         width={width}
         onChange={onChange}
