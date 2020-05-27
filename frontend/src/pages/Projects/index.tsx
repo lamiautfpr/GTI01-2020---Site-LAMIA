@@ -80,7 +80,7 @@ const typeWorks = [
   { value: 5, label: 'Pesquisa' },
 ];
 
-const Home: React.FC = () => {
+const ListProjects: React.FC = () => {
   const [works, setWorks] = useState<TypeWork[]>(listWorks);
   const [allWorks, setAllWorks] = useState<TypeWork[]>(listWorks);
   const [orderSelected, setOrderSelected] = useState<number>(0);
@@ -271,4 +271,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default ListProjects;
