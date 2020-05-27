@@ -82,67 +82,110 @@ const typeWorks = [
 
 const Home: React.FC = () => {
   const [works, setWorks] = useState<TypeWork[]>(listWorks);
-  // const [listWorks, setListWorks] = useState<TypeWork[]>(listWorks);
-  const [order, setOrder] = useState<number>(0);
+  const [allWorks, setAllWorks] = useState<TypeWork[]>(listWorks);
+  const [orderSelected, setOrderSelected] = useState<number>(0);
   const [areaSelected, setAreaSelected] = useState<number>(0);
   const [typeSelected, setTypeSelected] = useState<number[] | null>(null);
 
   const setAreaExpensive = ({ value }: SelectItem): void => {
     if (value === 0) {
-      if (order === 0) {
-        setWorks(listWorks.sort(compareTitleASC));
-      } else if (order === 1) {
-        setWorks(listWorks.sort(compareTitleDESC));
+      if (!typeSelected) {
+        setWorks(allWorks);
+      } else {
+        setWorks(
+          allWorks.filter(function (work) {
+            // Filtro dos TypesWorks
+            return work.typeWorks.some((t) => typeSelected.includes(t));
+          }),
+        );
       }
-    } else if (order === 0) {
+    } else if (!typeSelected) {
       setWorks(
-        listWorks.sort(compareTitleASC).filter(function (work) {
+        allWorks.filter(function (work) {
           return work.areaExpensive.includes(value);
         }),
       );
-    } else if (order === 1) {
+    } else {
       setWorks(
-        listWorks.sort(compareTitleDESC).filter(function (work) {
-          return work.areaExpensive.includes(value);
-        }),
+        allWorks
+          .filter(function (work) {
+            // Filtro das Area
+            return work.areaExpensive.includes(value);
+          })
+          .filter(function (work) {
+            // Filtro dos TypesWorks
+            return work.typeWorks.some((t) => typeSelected.includes(t));
+          }),
       );
     }
     setAreaSelected(value);
   };
 
   const setTypeWorks = (typeWotks: SelectItem[]): void => {
-    alert(`AreaExpensive selected is ${areaSelected}`);
-
+    // Verificando se tem algum typeWord filtrado
     if (typeWotks) {
-      const types: number[] = [];
-      typeWotks.forEach((type) => {
-        types.push(type.value);
-      });
-      if (order === 0) {
-        setWorks(
-          listWorks.sort(compareTitleASC).filter(function (work) {
-            return work.typeWorks.some((value) => types.includes(value));
-          }),
-        );
-      } else if (order === 1) {
-        setWorks(
-          listWorks.sort(compareTitleDESC).filter(function (work) {
-            return work.typeWorks.some((value) => types.includes(value));
-          }),
-        );
+      if (typeWotks.length === 0) {
+        if (areaSelected === 0) {
+          setWorks(allWorks);
+        } else {
+          setWorks(
+            allWorks.filter(function (work) {
+              return work.areaExpensive.includes(areaSelected);
+            }),
+          );
+        }
+        setTypeSelected(null);
+      } else {
+        const types: number[] = [];
+        typeWotks.forEach((type) => {
+          types.push(type.value);
+        });
+
+        if (areaSelected === 0) {
+          setWorks(
+            allWorks.filter(function (work) {
+              return work.typeWorks.some((value) => types.includes(value));
+            }),
+          );
+        } else {
+          setWorks(
+            allWorks
+              .filter(function (work) {
+                // Filtro dos TypesWorks
+                return work.typeWorks.some((value) => types.includes(value));
+              })
+              .filter(function (work) {
+                // Filtro das Area
+                return work.areaExpensive.includes(areaSelected);
+              }),
+          );
+        }
+        setTypeSelected(types);
       }
+    } else if (areaSelected === 0) {
+      setWorks(allWorks);
+      setTypeSelected(null);
+    } else {
+      setWorks(
+        allWorks.filter(function (work) {
+          return work.areaExpensive.includes(areaSelected);
+        }),
+      );
+      setTypeSelected(null);
     }
   };
 
   const checkOrder = ({ value }: SelectItem): void => {
     // alert(`Order selected is ${value}`);
 
-    setOrder(value);
+    setOrderSelected(value);
 
     if (value === 0) {
       setWorks(works.sort(compareTitleASC));
+      setAllWorks(allWorks.sort(compareTitleASC));
     } else if (value === 1) {
       setWorks(works.sort(compareTitleDESC));
+      setAllWorks(allWorks.sort(compareTitleDESC));
     }
   };
 
