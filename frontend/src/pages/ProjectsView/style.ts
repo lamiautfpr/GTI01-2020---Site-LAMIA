@@ -228,16 +228,146 @@ export const Shelf = styled.div`
   /* margin-top: 64px; */
 
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  /* flex-direction: row; */
   justify-content: space-around;
 
   border: 1px solid red;
 `;
 
-export const Booklet = styled.div`
-  background-color: ${secondaryBackground};
-  height: 200px;
-  width: 120px;
-
+export const Card = styled.div`
+  height: 400px;
+  width: 200px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
   border-radius: 16px;
+
+  margin: 16px;
+  margin-bottom: 30px;
+
+  position: relative;
+  display: flex;
+  flex: 0 0 200px;
+  flex-direction: column;
+
+  background-position: center center;
+  background-size: cover;
+
+  overflow: hidden; /* pesquisa para saber */
+
+  background-color: ${secondaryBackground};
+
+  text-align: center;
+  color: #0a4870;
+
+  transition: 0.3s;
+
+  img {
+    width: 200px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(10, 72, 112, 0);
+
+    transition: 0.3s;
+  }
+
+  .bookContainer {
+    height: 16px;
+
+    .content {
+      position: relative;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+
+      transform: translateY(-200px);
+
+      transition: 0.3s;
+
+      button {
+        border: 3px solid white;
+        padding: 10px 15px;
+        border-radius: 16px;
+
+        background: none;
+
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+
+        &:hover {
+          background: white;
+
+          border: 0px solid white;
+
+          color: pink;
+        }
+      }
+    }
+  }
+
+  .informationsContainer {
+    flex: 1 0 auto;
+    padding: 16px;
+    background: #f0f0f0;
+    transform: translateY(-12px);
+    transition: 0.3s;
+    height: 500px;
+
+    .title {
+      position: relative;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 24px;
+
+      &::after {
+        /* linha de baixo do titulo */
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        width: 50px;
+        margin: auto;
+        background: #0a7820;
+      }
+    }
+
+    .moreInfomation {
+      opacity: 0;
+      transition: 0.3s;
+    }
+  }
+  &:hover::before {
+    background: rgba(10, 72, 112, 0.6);
+  }
+
+  &:hover .bookContainer .content {
+    opacity: 1;
+    transform: translateY(-132px);
+  }
+  &:hover .informationsContainer {
+    transform: translateY(-88px);
+  }
+  &:hover .informationsContainer .moreInfomation {
+    opacity: 1;
+  }
 `;
