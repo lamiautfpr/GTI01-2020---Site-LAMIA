@@ -70,7 +70,6 @@ const listOrder = [
 ];
 
 const typeWorks = [
-  { value: '0', label: 'Todos' },
   { value: '1', label: 'TCC' },
   { value: '2', label: 'IC' },
   {
@@ -113,11 +112,31 @@ const Home: React.FC = () => {
   };
 
   const setTypeWorks = (typeWotks: SelectItem[]): void => {
-    const types: string[] = [];
-    typeWotks.forEach((type) => {
-      types.push(type.value);
-    });
-    alert(`AreaExpensive selected is ${types}`);
+    if (typeWotks) {
+      const types: string[] = [];
+      typeWotks.forEach((type) => {
+        types.push(type.value);
+      });
+      if (order === 0) {
+        setWorks(
+          listWorks.sort(compareTitleASC).filter(function (work) {
+            return work.typeWorks.some((value) =>
+              types.includes(value.toString()),
+            );
+          }),
+        );
+      } else if (order === 1) {
+        setWorks(
+          listWorks.sort(compareTitleDESC).filter(function (work) {
+            return work.typeWorks.some((value) =>
+              types.includes(value.toString()),
+            );
+          }),
+        );
+      }
+
+      alert(`AreaExpensive selected is ${types}`);
+    }
   };
 
   const checkOrder = ({ value }: SelectItem): void => {
