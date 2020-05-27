@@ -159,7 +159,14 @@ const Home: React.FC = () => {
             </div>
             <div className="informationsContainer">
               <h2 className="title"> Não sei</h2>
-              <p className="subTitle"> tanto faz so tem q preenche o vazio</p>
+              <p className="subTitle">
+                tanto faz so tem q preenche o vazio com qual que coisa
+              </p>
+              <div className="moreInformation">
+                a parte que vai subir buitinho Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Beatae accusantium repellat neque
+                optio, necessitatibus mollitia architecto deserunt
+              </div>
             </div>
           </Card>
           <Card>sei la2</Card>
