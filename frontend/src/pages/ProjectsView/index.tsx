@@ -13,7 +13,7 @@ import { SelectItem } from '../../../myTypes/SelectItem';
 import { TypeWork } from '../../../myTypes/TypeWork';
 import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
 
-import { Main, Projects, Headline, Title, Shelf, Booklet } from './style';
+import { Main, Projects, Headline, Title, Shelf, Card } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
@@ -82,62 +82,6 @@ const typeWorks = [
 ];
 
 const Home: React.FC = () => {
-  const [works, setWorks] = useState<TypeWork[]>(listWorks);
-  // const [listWorks, setListWorks] = useState<TypeWork[]>(listWorks);
-  const [order, setOrder] = useState<number>(0);
-
-  const setAreaExpensive = ({ value }: SelectItem): void => {
-    if (value === '0') {
-      if (order === 0) {
-        setWorks(listWorks.sort(compareTitleASC));
-      } else if (order === 1) {
-        setWorks(listWorks.sort(compareTitleDESC));
-      }
-    } else {
-      if (order === 0) {
-        setWorks(
-          listWorks.sort(compareTitleASC).filter(function (work) {
-            return work.areaExpensive.includes(parseInt(value));
-          }),
-        );
-      } else if (order === 1) {
-        setWorks(
-          listWorks.sort(compareTitleDESC).filter(function (work) {
-            return work.areaExpensive.includes(parseInt(value));
-          }),
-        );
-      }
-
-      // setWorks(listWorks);
-    }
-  };
-
-  const setTypeWorks = (typeWotks: SelectItem[]): void => {
-    const types: string[] = [];
-    typeWotks.forEach((type) => {
-      types.push(type.value);
-    });
-    alert(`AreaExpensive selected is ${types}`);
-  };
-
-  const checkOrder = ({ value }: SelectItem): void => {
-    // alert(`Order selected is ${value}`);
-
-    setOrder(parseInt(value));
-
-    if (value === '0') {
-      setWorks(works.sort(compareTitleASC));
-    } else if (value === '1') {
-      setWorks(works.sort(compareTitleDESC));
-    }
-  };
-
-  const workWithTrasitions = useTransition(works, (work) => work.id, {
-    from: { opacity: '0', transform: 'translate3d(0,-40px,0)' },
-    enter: { opacity: '1', transform: 'translate3d(0,0px,0)' },
-    leave: { opacity: '0', transform: 'translate3d(0,-40px,0)' },
-  });
-
   return (
     <>
       <Header title="LAMIA - Teste 1" />
@@ -206,11 +150,22 @@ const Home: React.FC = () => {
           </header>
         </Title>
         <Shelf>
-          <Booklet>sei la1</Booklet>
-          <Booklet>sei la2</Booklet>
-          <Booklet>sei la3</Booklet>
-          <Booklet>sei la4</Booklet>
-          <Booklet>sei la5</Booklet>
+          <Card>
+            <img src={imgTeste} alt="Teste" />
+            <div className="bookContainer">
+              <div className="content">
+                <button> Saiba menos </button>
+              </div>
+            </div>
+            <div className="informationsContainer">
+              <h2 className="title"> Não sei</h2>
+              <p className="subTitle"> tanto faz so tem q preenche o vazio</p>
+            </div>
+          </Card>
+          <Card>sei la2</Card>
+          <Card>sei la3</Card>
+          <Card>sei la4</Card>
+          <Card>sei la5</Card>
         </Shelf>
       </Main>
 
