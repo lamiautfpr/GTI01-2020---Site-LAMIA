@@ -85,94 +85,59 @@ const ListProjects: React.FC = () => {
   const [allWorks, setAllWorks] = useState<TypeWork[]>(listWorks);
   const [orderSelected, setOrderSelected] = useState<number>(0);
   const [areaSelected, setAreaSelected] = useState<number>(0);
-  const [typeSelected, setTypeSelected] = useState<number[] | null>(null);
+  const [typeSelected, setTypeSelected] = useState<number[]>([]);
 
-  const setAreaExpensive = ({ value }: SelectItem): void => {
-    if (value === 0) {
-      if (!typeSelected) {
-        setWorks(allWorks);
-      } else {
-        setWorks(
-          allWorks.filter(function (work) {
-            // Filtro dos TypesWorks
-            return work.typeWorks.some((t) => typeSelected.includes(t));
-          }),
-        );
-      }
-    } else if (!typeSelected) {
+  const changeWorkList = (area: number, types: number[]): void => {
+    if (area === 0 && types.length < 1) {
+      // there is no filter
+      setWorks(allWorks);
+    } else if (area === 0 && types) {
+      // only type filter exists
       setWorks(
         allWorks.filter(function (work) {
-          return work.areaExpensive.includes(value);
+          return work.typeWorks.some((t) => types.includes(t));
+        }),
+      );
+    } else if (area !== 0 && types.length < 1) {
+      // only area filter exists
+      setWorks(
+        allWorks.filter(function (work) {
+          return work.areaExpensive.includes(area);
         }),
       );
     } else {
+      // All filter exists
       setWorks(
         allWorks
           .filter(function (work) {
             // Filtro das Area
-            return work.areaExpensive.includes(value);
+            return work.areaExpensive.includes(area);
           })
           .filter(function (work) {
             // Filtro dos TypesWorks
-            return work.typeWorks.some((t) => typeSelected.includes(t));
+            return work.typeWorks.some((t) => types.includes(t));
           }),
       );
     }
-    setAreaSelected(value);
   };
 
-  const setTypeWorks = (typeWotks: SelectItem[]): void => {
-    // Verificando se tem algum typeWord filtrado
-    if (typeWotks) {
-      if (typeWotks.length === 0) {
-        if (areaSelected === 0) {
-          setWorks(allWorks);
-        } else {
-          setWorks(
-            allWorks.filter(function (work) {
-              return work.areaExpensive.includes(areaSelected);
-            }),
-          );
-        }
-        setTypeSelected(null);
-      } else {
-        const types: number[] = [];
-        typeWotks.forEach((type) => {
-          types.push(type.value);
-        });
-
-        if (areaSelected === 0) {
-          setWorks(
-            allWorks.filter(function (work) {
-              return work.typeWorks.some((value) => types.includes(value));
-            }),
-          );
-        } else {
-          setWorks(
-            allWorks
-              .filter(function (work) {
-                // Filtro dos TypesWorks
-                return work.typeWorks.some((value) => types.includes(value));
-              })
-              .filter(function (work) {
-                // Filtro das Area
-                return work.areaExpensive.includes(areaSelected);
-              }),
-          );
-        }
-        setTypeSelected(types);
-      }
-    } else if (areaSelected === 0) {
-      setWorks(allWorks);
-      setTypeSelected(null);
+  const setTypeWorks = (itemsSelected: SelectItem[]): void => {
+    if (!itemsSelected || itemsSelected.length < 1) {
+      setTypeSelected([]);
+      changeWorkList(areaSelected, []);
     } else {
-      setWorks(
-        allWorks.filter(function (work) {
-          return work.areaExpensive.includes(areaSelected);
-        }),
-      );
-      setTypeSelected(null);
+      const types: number[] = [];
+      itemsSelected.forEach((item) => {
+        types.push(item.value);
+      });
+      setTypeSelected([]);
+      changeWorkList(areaSelected, types);
     }
+  };
+
+  const setAreaExpensive = ({ value }: SelectItem): void => {
+    setAreaSelected(value);
+    changeWorkList(value, typeSelected);
   };
 
   const checkOrder = ({ value }: SelectItem): void => {
