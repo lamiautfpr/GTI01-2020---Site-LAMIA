@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-import imgLogo from '../../assets/logo.svg';
+import { GoStar, GoRepo, GoGitCommit, GoGitBranch } from 'react-icons/go';
 import imgTeste from '../../assets/Teste.jpg';
 
 import logoLar from '../../assets/logo_lar.png';
@@ -11,7 +9,13 @@ import logoRock from '../../assets/logo_rockStar.png';
 import logoCyber from '../../assets/logo_cyber.jpg';
 import logoLex from '../../assets/logo_lex.png';
 
-import { Main, SectionLine, SectionColumn, SectionVip } from './style';
+import {
+  Main,
+  SectionLine,
+  SectionColumn,
+  SectionVip,
+  SectionCards,
+} from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
@@ -77,6 +81,42 @@ const Home: React.FC = () => {
           </div>
         </SectionLine>
         <hr />
+        <SectionLine id="Histoty">
+          <header>
+            <h2>História</h2>
+          </header>
+          <div>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
+                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
+                debitis necessitatibus molestiae nesciunt nemo.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                veniam nihil libero placeat! Sunt amet earum veritatis expedita
+                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
+                sapiente molestias odit provident?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
+                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
+                debitis necessitatibus molestiae nesciunt nemo.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
+                veniam nihil libero placeat! Sunt amet earum veritatis expedita
+                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
+                sapiente molestias odit provident?
+              </p>
+            </div>
+            <img src={imgTeste} alt="Teste" />
+          </div>
+        </SectionLine>
+        <hr />
+
         <SectionColumn title="LatestPublications" id="LatestPublications">
           <header>
             <h2>Ultimas Publicações</h2>
@@ -121,40 +161,68 @@ const Home: React.FC = () => {
           </div>
         </SectionColumn>
         <hr />
-        <SectionLine id="Histoty">
-          <header>
-            <h2>História</h2>
-          </header>
-          <div>
-            <div>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
-                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
-                debitis necessitatibus molestiae nesciunt nemo.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                veniam nihil libero placeat! Sunt amet earum veritatis expedita
-                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
-                sapiente molestias odit provident?
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
-                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
-                debitis necessitatibus molestiae nesciunt nemo.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                veniam nihil libero placeat! Sunt amet earum veritatis expedita
-                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
-                sapiente molestias odit provident?
-              </p>
+        <SectionCards title="GitHub Data" id="GitHub Data">
+          <div className="card">
+            <div className="face face1">
+              <div className="content">
+                <div className="icon">
+                  <GoRepo />
+                </div>
+              </div>
             </div>
-            <img src={imgTeste} alt="Teste" />
+            <div className="face face2">
+              <div className="content">
+                <h3>Repositórios</h3>
+                <p>5</p>
+              </div>
+            </div>
           </div>
-        </SectionLine>
+          <div className="card">
+            <div className="face face1">
+              <div className="content">
+                <div className="icon">
+                  <GoGitCommit />
+                </div>
+              </div>
+            </div>
+            <div className="face face2">
+              <div className="content">
+                <h3>Commits</h3>
+                <p>6996</p>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="face face1">
+              <div className="content">
+                <div className="icon">
+                  <GoGitBranch />
+                </div>
+              </div>
+            </div>
+            <div className="face face2">
+              <div className="content">
+                <h3>Branches</h3>
+                <p>7</p>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="face face1">
+              <div className="content">
+                <div className="icon">
+                  <GoStar />
+                </div>
+              </div>
+            </div>
+            <div className="face face2">
+              <div className="content">
+                <h3> Star</h3>
+                <p>33</p>
+              </div>
+            </div>
+          </div>
+        </SectionCards>
         <hr />
         <SectionColumn id="AreasExpertise">
           <header>

@@ -216,3 +216,121 @@ export const SectionVip = styled.section`
     }
   }
 `;
+
+export const SectionCards = styled.section`
+  max-width: 1200px;
+  min-height: 350px;
+  margin: 24px auto;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+
+  .card {
+    /* border: 1px solid red; */
+    /* top: -100px; */
+  }
+
+  .card .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: ${primaryColor};
+    transition: 0.7s;
+    z-index: 1;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      transition: 0.7s;
+      color: #fff;
+    }
+  }
+
+  .card .icon .fa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    transition: 0.7s;
+    color: #fff;
+  }
+
+  .card .face {
+    width: 300px;
+    height: 150px;
+    transition: 0.5s;
+  }
+
+  .card .face.face1 {
+    position: relative;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transform: translateY(100px);
+  }
+
+  .card:hover .face.face1 {
+    background: ${secondaryBackground};
+    transform: translateY(0px);
+  }
+
+  .card .face.face1 .content {
+    opacity: 1;
+    transition: 0.5s;
+  }
+
+  .card:hover .face.face1 .content {
+    opacity: 1;
+  }
+
+  .card .face.face2 {
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transform: translateY(-50px);
+
+    /* box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); */
+
+    -webkit-box-shadow: 0px 20px 32px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 20px 32px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 20px 32px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  .card:hover .face.face2 {
+    transform: translateY(0);
+  }
+
+  .card .face.face2 .content h3 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    color: #414141;
+    font-family: 'Dosis';
+    font-weight: 200;
+  }
+
+  .card .face.face2 .content p {
+    margin: 0;
+    margin-top: 24px;
+    padding: 0;
+    text-align: center;
+    color: #414141;
+    font-size: 64px;
+    font-family: 'Dosis';
+    font-weight: 200;
+  }
+`;
