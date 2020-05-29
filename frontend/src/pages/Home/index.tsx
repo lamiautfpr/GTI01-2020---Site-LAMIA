@@ -166,7 +166,7 @@ const Home: React.FC = () => {
         <hr />
         <SectionCards title="GitHub Data" id="GitHub Data">
           <HeaderSection>
-            <h2>Git & GitHub</h2>
+            <h2>Linhas de Códigos Produzidas</h2>
           </HeaderSection>
           <div>
             <div>

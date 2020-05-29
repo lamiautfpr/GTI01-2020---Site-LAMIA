@@ -242,13 +242,13 @@ export const SectionCards = styled.section`
 
       background: ${primaryColor};
       width: 300px;
-      height: 150px;
+      height: 250px;
 
       color: #fff;
       font-family: 'Dosis';
 
       h3 {
-        font-size: 32px;
+        font-size: 40px;
         margin-bottom: 12px;
         /* font-weight:200; */
       }
@@ -258,7 +258,7 @@ export const SectionCards = styled.section`
         margin: 0px;
         height: 50px;
 
-        font-size: 40px;
+        font-size: 56px;
 
         display: flex;
         flex-direction: row;
@@ -269,7 +269,7 @@ export const SectionCards = styled.section`
 
         span {
           font-weight: 200;
-          font-size: 40px;
+          /* font-size: 40px; */
         }
       }
     }
