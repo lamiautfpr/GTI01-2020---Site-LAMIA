@@ -9,23 +9,8 @@ import {
   featuredColor,
 } from '../../styles/paletsColores';
 
-export const Main = styled.main`
-  background: #fff;
-  padding: 12px;
-  border-radius: 0 0 24px 24px;
-  margin-bottom: 100px;
-`;
+export const HeaderSection = styled.header`
 
-export const SectionLine = styled.section`
-  max-width: 1200px;
-  margin: 24px auto;
-
-  display: flex;
-  flex-direction: column;
-
-  /* border-bottom: 2px solid ${shade(0.2, secondaryBackground)}; */
-
-  & > header {
     margin: 4px 0 8px 0;
     /* border-bottom: 1px solid ${titleColor}; */
 
@@ -42,7 +27,23 @@ export const SectionLine = styled.section`
       position: absolute;
     }
 
-  }
+`;
+
+export const Main = styled.main`
+  background: #fff;
+  padding: 12px;
+  border-radius: 0 0 24px 24px;
+  margin-bottom: 100px;
+`;
+
+export const SectionLine = styled.section`
+  max-width: 1200px;
+  margin: 24px auto;
+
+  display: flex;
+  flex-direction: column;
+
+  /* border-bottom: 2px solid ${shade(0.2, secondaryBackground)}; */
 
   div {
     display: flex;
@@ -87,30 +88,15 @@ export const SectionColumn = styled.section`
   display: flex;
   flex-direction: column;
 
-  & > header {
-    margin: 4px 0 32px 0;
-    /* border-bottom: 1px solid ${titleColor}; */
-
-    font-size: 32px;
-    color: ${titleColor};
-
-    &::after{
-      content: "";
-
-      width: 224px;
-      height: 2px;
-      background-image: -webkit-linear-gradient(180deg, ${primaryColor} 15%, ${secondaryColor} 85%);
-
-      position: absolute;
-    }
-
+  > div {
+    margin-top: 32px;
   }
 
   div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    div{
+    div {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -127,9 +113,9 @@ export const SectionColumn = styled.section`
         height: 200px;
         width: 200px;
         border-radius: 50%;
-        -webkit-box-shadow: 0px 0px 48px -24px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 48px -24px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 48px -24px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 0px 48px -24px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 48px -24px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 48px -24px rgba(0, 0, 0, 0.75);
 
         margin-bottom: 16px;
       }
@@ -137,9 +123,7 @@ export const SectionColumn = styled.section`
       h2 {
         margin-bottom: 4px;
       }
-
     }
-
   }
 `;
 
@@ -223,25 +207,7 @@ export const SectionCards = styled.section`
   margin: 24px auto;
 
   display: flex;
-  flex-direction:column;
-
-  & > header {
-    margin: 4px 0 8px 0;
-    /* border-bottom: 1px solid ${titleColor}; */
-
-    font-size: 32px;
-    color: ${titleColor};
-
-    &::after{
-      content: "";
-
-      width: 224px;
-      height: 2px;
-      background-image: -webkit-linear-gradient(180deg, ${primaryColor} 15%, ${secondaryColor} 85%);
-
-      position: absolute;
-    }
-  }
+  flex-direction: column;
 
   div {
     display: flex;
@@ -249,7 +215,7 @@ export const SectionCards = styled.section`
 
     margin: 32px 0px;
 
-    div{
+    div {
       /* border: 1px solid red; */
 
       display: flex;
@@ -264,35 +230,31 @@ export const SectionCards = styled.section`
       color: #fff;
       font-family: 'Dosis';
 
-      h3{
-        font-size:32px;
+      h3 {
+        font-size: 32px;
         margin-bottom: 12px;
         /* font-weight:200; */
       }
 
       div {
         /* border: 1px solid red; */
-        margin:0px;
+        margin: 0px;
         height: 50px;
 
-        font-size:40px;
-
+        font-size: 40px;
 
         display: flex;
         flex-direction: row;
 
-        svg{
+        svg {
           margin-right: 8px;
         }
 
-        span{
-          font-weight:200;
-          font-size:40px;
+        span {
+          font-weight: 200;
+          font-size: 40px;
         }
       }
-
     }
-
   }
-
 `;

@@ -17,6 +17,7 @@ import {
   SectionColumn,
   SectionVip,
   SectionCards,
+  HeaderSection,
 } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
@@ -32,9 +33,9 @@ const Home: React.FC = () => {
 
       <Main>
         <SectionLine title="News" id="News">
-          <header>
+          <HeaderSection>
             <h2>Notícias</h2>
-          </header>
+          </HeaderSection>
           <div>
             <div>
               <header>
@@ -84,9 +85,9 @@ const Home: React.FC = () => {
         </SectionLine>
         <hr />
         <SectionLine id="Histoty">
-          <header>
+          <HeaderSection>
             <h2>História</h2>
-          </header>
+          </HeaderSection>
           <div>
             <div>
               <p>
@@ -120,9 +121,9 @@ const Home: React.FC = () => {
         <hr />
 
         <SectionColumn title="LatestPublications" id="LatestPublications">
-          <header>
+          <HeaderSection>
             <h2>Ultimas Publicações</h2>
-          </header>
+          </HeaderSection>
           <div>
             <div>
               <img src={imgTeste} alt="Teste" />
@@ -164,9 +165,9 @@ const Home: React.FC = () => {
         </SectionColumn>
         <hr />
         <SectionCards title="GitHub Data" id="GitHub Data">
-          <header>
-            <h1>Git & GitHub</h1>
-          </header>
+          <HeaderSection>
+            <h2>Git & GitHub</h2>
+          </HeaderSection>
           <div>
             <div>
               <h3>Repositórios</h3>
@@ -224,9 +225,9 @@ const Home: React.FC = () => {
         </SectionCards>
         <hr />
         <SectionColumn id="AreasExpertise">
-          <header>
+          <HeaderSection>
             <h2>Área de Atuação</h2>
-          </header>
+          </HeaderSection>
           <div>
             <div>
               <img src={imgTeste} alt="Teste" />
@@ -296,9 +297,9 @@ const Home: React.FC = () => {
         </SectionVip>
         <hr />
         <SectionColumn id="Advisors">
-          <header>
+          <HeaderSection>
             <h2>Orientadores</h2>
-          </header>
+          </HeaderSection>
           <div>
             <div>
               <img src={imgTeste} alt="Teste" />
