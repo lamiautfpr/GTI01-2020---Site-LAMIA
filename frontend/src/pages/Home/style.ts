@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { shade } from 'polished';
+import { shade, transparentize } from 'polished';
 import {
   secondaryBackground,
   titleColor,
@@ -209,11 +209,28 @@ export const SectionCards = styled.section`
   display: flex;
   flex-direction: column;
 
+  > div {
+    transition: 0.3s;
+    margin: 32px 0px;
+
+    -webkit-box-shadow: 0px 8px 12px 2px rgba(161, 159, 161, 1);
+    -moz-box-shadow: 0px 8px 12px 2px rgba(161, 159, 161, 1);
+    box-shadow: 0px 8px 12px 2px rgba(161, 159, 161, 1);
+  }
+
+  > div:hover {
+    background: ${transparentize(0.00001, secondaryBackground)};
+
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+
+    transform: translateY(8px);
+  }
+
   div {
     display: flex;
     justify-content: space-between;
-
-    margin: 32px 0px;
 
     div {
       /* border: 1px solid red; */
