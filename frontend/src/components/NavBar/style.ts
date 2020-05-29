@@ -17,7 +17,7 @@ export const Nav = styled.nav`
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 1; /* Para deixar nav por cima de tudo */
+  z-index: 10; /* Para deixar nav por cima de tudo */
 
   &:after{
     content:'';
