@@ -231,8 +231,6 @@ export const Shelf = styled.div`
   flex-wrap: wrap;
   /* flex-direction: row; */
   justify-content: space-around;
-
-  border: 1px solid red;
 `;
 
 export const Card = styled.div`
@@ -252,6 +250,10 @@ export const Card = styled.div`
 
   background-position: center center;
   background-size: cover;
+
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
 
   overflow: hidden; /* pesquisa para saber */
 
@@ -317,7 +319,7 @@ export const Card = styled.div`
 
           border: 0px solid white;
 
-          color: pink;
+          color: ${transparentize(0, primaryColor)};
         }
       }
     }
@@ -376,8 +378,75 @@ export const Card = styled.div`
     }
 
     .moreInfomation {
-      opacity: 0;
+      opacity: 1;
       transition: 0.3s;
+      width: 200px;
+
+      .infoDateContainer {
+        display: flex;
+        /* border: 1px solid red; */
+
+        a.box {
+          cursor: pointer;
+        }
+
+        .box {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          flex: 1 0;
+          height: 72px;
+          width: 96px;
+
+          /* padding: 2px; */
+          /* margin: 2px; */
+          margin-left: 8px;
+
+          -webkit-border-radius: 16px;
+          -moz-border-radius: 16px;
+          border-radius: 16px;
+
+          background: white;
+
+          font-weight: bold;
+          font-size: 2px;
+          text-decoration: none;
+
+          svg {
+            margin: 0;
+            padding: 0;
+            margin-top: 8px;
+            color: ${titleColor};
+          }
+
+          p {
+            margin-right: 8px;
+            font-size: 12px;
+            color: ${titleColor};
+            /* text-align: center; */
+          }
+        }
+      }
+
+      .box:first-child {
+        margin-left: 8px;
+      }
+
+      .box:last-child {
+        margin-right: 8px;
+      }
+
+      .objective {
+        margin: 8px;
+
+        p {
+          font-size: 16px;
+          text-align: left;
+          color: #7d7d7d;
+        }
+      }
     }
   }
   &:hover::before {
@@ -393,5 +462,14 @@ export const Card = styled.div`
   }
   &:hover .informationsContainer .moreInfomation {
     opacity: 1;
+  }
+  &:hover {
+    background: ${transparentize(0.00001, secondaryBackground)};
+
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+
+    transform: translateY(8px);
   }
 `;
