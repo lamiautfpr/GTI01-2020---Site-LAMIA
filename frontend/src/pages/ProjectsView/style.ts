@@ -260,10 +260,11 @@ export const Card = styled.div`
   text-align: center;
   color: #0a4870;
 
+  align-items: center;
   transition: 0.3s;
 
   img {
-    width: 200px;
+    width: 400px;
   }
 
   &::before {
@@ -291,7 +292,7 @@ export const Card = styled.div`
       height: 100%;
       width: 100%;
 
-      transform: translateY(-200px);
+      transform: translateY(-328px);
 
       transition: 0.3s;
 
@@ -326,9 +327,9 @@ export const Card = styled.div`
     flex: 1 0 auto;
     padding: 16px;
     background: #f0f0f0;
-    transform: translateY(-12px);
+    transform: translateY(-72px);
     transition: 0.3s;
-    height: 500px;
+    height: 400px;
 
     .title {
       position: relative;
@@ -347,7 +348,30 @@ export const Card = styled.div`
         height: 4px;
         width: 50px;
         margin: auto;
-        background: #0a7820;
+        background: ${transparentize(0, primaryColor)};
+      }
+    }
+
+    .primaryInformations {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 0 0 10px 0;
+
+      span {
+        display: flex;
+        /* flex-direction: row; */
+        margin-top: 4px;
+
+        font-size: 16px;
+        color: ${transparentize(0.35, primaryColor)};
+
+        svg {
+          margin-right: 4px;
+          color: ${transparentize(0.35, primaryColor)};
+        }
       }
     }
 
@@ -362,10 +386,10 @@ export const Card = styled.div`
 
   &:hover .bookContainer .content {
     opacity: 1;
-    transform: translateY(-132px);
+    transform: translateY(-304px);
   }
   &:hover .informationsContainer {
-    transform: translateY(-88px);
+    transform: translateY(-280px);
   }
   &:hover .informationsContainer .moreInfomation {
     opacity: 1;

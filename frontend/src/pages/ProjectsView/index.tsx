@@ -158,10 +158,18 @@ const Home: React.FC = () => {
               </div>
             </div>
             <div className="informationsContainer">
-              <h2 className="title"> Não sei</h2>
-              <p className="subTitle">
-                tanto faz so tem q preenche o vazio com qual que coisa
-              </p>
+              <h2 className="title"> Teste 1</h2>
+              <div className="primaryInformations">
+                <span>
+                  <FaListUl size={16} />
+                  Visão computacional
+                </span>
+                <span>
+                  <FaRegClipboard size={16} />
+                  TCC
+                </span>
+              </div>
+
               <div className="moreInformation">
                 a parte que vai subir buitinho Lorem ipsum dolor sit amet,
                 consectetur adipisicing elit. Beatae accusantium repellat neque
