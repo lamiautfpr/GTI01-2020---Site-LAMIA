@@ -1,7 +1,9 @@
 import React from 'react';
 import { GoStar, GoRepo, GoGitCommit, GoGitBranch } from 'react-icons/go';
-import imgTeste from '../../assets/Teste.jpg';
+import CountUp from 'react-countup';
+import VisibilitySensor from 'react-visibility-sensor';
 
+import imgTeste from '../../assets/Teste.jpg';
 import logoLar from '../../assets/logo_lar.png';
 import logoStark from '../../assets/logo_stark.jpg';
 import logoXavier from '../../assets/logo_xavier.jpg';
@@ -162,63 +164,60 @@ const Home: React.FC = () => {
         </SectionColumn>
         <hr />
         <SectionCards title="GitHub Data" id="GitHub Data">
-          <div className="card">
-            <div className="face face1">
-              <div className="content">
-                <div className="icon">
-                  <GoRepo />
-                </div>
+          <header>
+            <h1>Git & GitHub</h1>
+          </header>
+          <div>
+            <div>
+              <h3>Repositórios</h3>
+              <div>
+                <GoRepo />
+                <CountUp end={5} duration={2.5} delay={0} redraw>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
               </div>
             </div>
-            <div className="face face2">
-              <div className="content">
-                <h3>Repositórios</h3>
-                <p>5</p>
+            <div>
+              <h3>Commits</h3>
+              <div>
+                <GoGitCommit />
+                <CountUp end={6996} duration={2.5} delay={1} redraw>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
               </div>
             </div>
-          </div>
-          <div className="card">
-            <div className="face face1">
-              <div className="content">
-                <div className="icon">
-                  <GoGitCommit />
-                </div>
+            <div>
+              <h3>Branches</h3>
+              <div>
+                <GoGitBranch />
+                <CountUp end={7} duration={2.5} delay={2} redraw>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
               </div>
             </div>
-            <div className="face face2">
-              <div className="content">
-                <h3>Commits</h3>
-                <p>6996</p>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div className="face face1">
-              <div className="content">
-                <div className="icon">
-                  <GoGitBranch />
-                </div>
-              </div>
-            </div>
-            <div className="face face2">
-              <div className="content">
-                <h3>Branches</h3>
-                <p>7</p>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div className="face face1">
-              <div className="content">
-                <div className="icon">
-                  <GoStar />
-                </div>
-              </div>
-            </div>
-            <div className="face face2">
-              <div className="content">
-                <h3> Star</h3>
-                <p>33</p>
+            <div>
+              <h3>Star</h3>
+              <div>
+                <GoStar />
+                <CountUp end={33} duration={2.5} delay={2.5} redraw>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
               </div>
             </div>
           </div>
