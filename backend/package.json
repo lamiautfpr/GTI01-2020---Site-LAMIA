@@ -13,6 +13,7 @@
     "dev:debug": "nodemon --inspect src/server.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "date-fns": "^2.13.0",
     "dotenv": "^8.2.0",
