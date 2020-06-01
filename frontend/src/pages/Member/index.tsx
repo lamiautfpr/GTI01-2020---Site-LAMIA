@@ -83,7 +83,7 @@ const typeWorks = [
   { value: '5', label: 'Pesquisa' },
 ];
 
-const Home: React.FC = () => {
+const Member: React.FC = () => {
   return (
     <>
       <Header title="LAMIA - Teste 1" />
@@ -152,95 +152,6 @@ const Home: React.FC = () => {
           </header>
         </Title>
         <Shelf>
-          <Card>
-            <img src={imgTeste} alt="Teste" />
-            <div className="bookContainer">
-              <div className="content">
-                <button> Saiba mais </button>
-              </div>
-            </div>
-            <div className="informationsContainer">
-              <h2 className="title"> Teste 1</h2>
-              <div className="primaryInformations">
-                <span>
-                  <FaListUl size={16} />
-                  Visão computacional
-                </span>
-                <span>
-                  <FaRegClipboard size={16} />
-                  TCC
-                </span>
-              </div>
-
-              <div className="moreInfomation">
-                <div className="infoDateContainer">
-                  <a
-                    href="https://github.com/lamia-utfpr"
-                    target="bank"
-                    className="box git"
-                  >
-                    <FaGithub size={32} />
-                    <p>repositorio</p>
-                  </a>
-                  <div className="box Date">
-                    <FaRegCalendarAlt size={32} />
-                    <p>28/05/2020</p>
-                  </div>
-                </div>
-                <div className="objective">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Quasi eveniet perferendis oie ...
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Card>
-          <Card>
-            <img src={imgTeste} alt="Teste" />
-            <div className="bookContainer">
-              <div className="content">
-                <button> Saiba mais </button>
-              </div>
-            </div>
-            <div className="informationsContainer">
-              <h2 className="title"> Teste 1</h2>
-              <div className="primaryInformations">
-                <span>
-                  <FaListUl size={16} />
-                  Visão computacional
-                </span>
-                <span>
-                  <FaRegClipboard size={16} />
-                  TCC
-                </span>
-              </div>
-
-              <div className="moreInfomation">
-                <div className="infoDateContainer">
-                  <a
-                    href="https://github.com/lamia-utfpr"
-                    target="bank"
-                    className="box git"
-                  >
-                    <FaGithub size={32} />
-                    <p>repositorio</p>
-                  </a>
-                  <div className="box Date">
-                    <FaRegCalendarAlt size={32} />
-                    <p>28/05/2020</p>
-                  </div>
-                </div>
-                <div className="objective">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Quasi eveniet perferendis oie ...
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Card>
-
           <Card>
             <img src={imgTeste} alt="Teste" />
             <div className="bookContainer">
@@ -473,4 +384,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Member;
