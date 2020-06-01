@@ -3,14 +3,21 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
 import {
-  FaChevronRight,
-  FaUserNinja,
+  FaLinkedinIn,
+  FaEnvelope,
+  FaPhoneAlt,
+  FaClipboard,
+  FaGithubSquare,
   FaRegCalendarAlt,
   FaGithub,
   FaRegClipboard,
   FaListUl,
+  FaMedal,
 } from 'react-icons/fa';
 import imgTeste from '../../assets/Teste.jpg';
+
+import iconLattes from '../../assets/icon_lattes.svg';
+
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { TypeWork } from '../../../myTypes/TypeWork';
 import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
@@ -91,54 +98,55 @@ const Member: React.FC = () => {
       <NavBar />
 
       <Main>
-        <section>
-          {/* <h1>Teste 1</h1>
-          <div className="infomation">
-            <FaUserNinja />
-            <span>Jecé Xavier - Rafael Lechesque</span>
-            <span>Visão Computacional</span>
-            <span>TCC</span>
-          </div> */}
-        </section>
-
-        <Projects>
-          {/* {workWithTrasitions.map(({ item, key, props }) => (
-            <animated.div key={item.id} style={props}>
-              <Link to={`/projects/${item.id}`}>
-                <img src={imgTeste} alt="Teste" />
-
-                <strong>
-                  {item.title}
-                  <span>
-                    <FaUserNinja size={14} />
-                    Jecé Xavier - Rafael Lechesque
-                  </span>
-                  <span>
-                    <FaRegClipboard size={14} /> */}
-          {/* Pesquisa & Pos-Graduação */}
-          {/* {item.typeWorks}
-                  </span>
-                  <span>
-                    <FaListUl size={14} />
-                    {item.areaExpensive}
-                  </span>
-                </strong>
-                <p>{item.objective}</p>
-
-                <FaChevronRight size={20} />
-              </Link>
-            </animated.div>
-          ))} */}
-        </Projects>
-
         <Headline>
           <div className="basicInfo">
-            <h1>Alunos</h1>
-            <div>
-              <h1>Rafael Lechensque</h1>
-              <h1> Jece Xavier</h1>
+            <div className="leftInfo">
+              <div className="name">
+                <h1>Rafael Lechensque</h1>
+                {/* <h2>Lechensque</h2> */}
+              </div>
+              <div className="icons">
+                <a
+                  href="https://github.com/RafaelLechensqueDeAquino"
+                  target="bank"
+                >
+                  <FaGithubSquare size={24} />
+                </a>
+                <a
+                  href="https://br.linkedin.com/in/rafael-lechensque-de-aquino-ba602a122"
+                  target="bank"
+                >
+                  <FaLinkedinIn size={24} />
+                </a>
+                <a
+                  href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K2045004P0&tokenCaptchar=03AGdBq26Xy5vU7oZXdRd1zbGczYMW3vAWABWPHchfkYvL-hD5FaC_CJijFbdiKieCmq4H0PxJeOMgq3zA0annEyvH6v7g-xOwOQW00ja_DTDt-TUgmxg-wZ_ZyngcoH3V-RrAb4xLbPUL8QUZMGOeT4yEp6QG7NLlOfXJtox44RP9FgjEN83KJYi5iiUw_zATfO1_tufijSWOu_VXEEXBbawk0z3VJuSpSKjoBre83kIj1kUDR1uGleQR1EsghDKBAT-v9C4V3Oyx5eh_iKHNx5csYNhOawaT1kenwtyioiyOPTOf8phFD4L1f5pIkfxR1aMn4gqa_1FY7LpcRKCjjgQcstViloqX-VC3nisTXAgvI8HXil1_cUv6xAC2wdbijc3hjLJQcQp54ciY9qijpXlAr_TBFhmrMg"
+                  target="bank"
+                >
+                  <img src={iconLattes} alt="Lattes" />
+                </a>
+              </div>
+              <div className="office">
+                <FaMedal size={21} />
+                <span>Veterano</span>
+              </div>
+            </div>
+            <div className="leftInfo">
+              <div className="description">
+                <span>Descrição: </span>
+                Eu sou Rafael Uchiha. Eu odeio um monte de coisas, e eu
+                particularmente não gosto de nada. Vou restaurar meu clã, e
+                matar um certo alguém.
+              </div>
+              <div className="contact">
+                <FaEnvelope />
+                rafelaquino@alunso.utfpr.edu.br
+                <p> </p>
+                <FaPhoneAlt />
+                (61) 98287-3563
+              </div>
             </div>
           </div>
+
           <div className="imgBorde">
             <div>
               <img src={imgTeste} alt="Teste" />
