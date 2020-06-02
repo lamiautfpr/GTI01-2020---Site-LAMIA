@@ -160,7 +160,7 @@ export const Headline = styled.div`
 
        display: flex;
        flex-direction: row;
-       /* justify-content: space-between; */
+       justify-content: flex-end;
         
        
        a{
@@ -179,8 +179,9 @@ export const Headline = styled.div`
        align-items: flex-start;
 
        position: relative;
-       top: 12px;
-       left:64px;
+       
+       
+       margin:8px;
        
 
        
@@ -194,6 +195,7 @@ export const Headline = styled.div`
        color: white;
 
        span{
+        font-family: dosis;
         font-size: 21px;
         margin-top: -3px;
 }

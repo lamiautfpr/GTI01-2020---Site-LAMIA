@@ -57,6 +57,10 @@ const Member: React.FC = () => {
                 <h1>Rafael Lechensque</h1>
                 {/* <h2>Lechensque</h2> */}
               </div>
+              <div className="office">
+                <FaMedal size={21} />
+                <span>Veterano</span>
+              </div>
               <div className="icons">
                 <a
                   href="https://github.com/RafaelLechensqueDeAquino"
@@ -76,10 +80,6 @@ const Member: React.FC = () => {
                 >
                   <img src={iconLattes} alt="Lattes" />
                 </a>
-              </div>
-              <div className="office">
-                <FaMedal size={21} />
-                <span>Veterano</span>
               </div>
             </div>
             <div className="leftInfo">
