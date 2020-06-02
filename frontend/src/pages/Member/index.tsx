@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-
+import React, { useState, useCallback } from 'react';
+import Gallery from 'react-photo-gallery';
+import Carousel, { Modal, ModalGateway } from 'react-images';
 import { Link } from 'react-router-dom';
-import { useTransition, animated } from 'react-spring';
+
 import {
   FaLinkedinIn,
   FaEnvelope,
@@ -14,83 +15,34 @@ import {
   FaListUl,
   FaMedal,
 } from 'react-icons/fa';
-import imgTeste from '../../assets/Teste.jpg';
-
 import iconLattes from '../../assets/icon_lattes.svg';
+import imgTeste from '../../assets/Teste.jpg';
+import { photos } from '../../assets/photoGalleryTeste/photos';
 
-import { SelectItem } from '../../../myTypes/SelectItem';
-import { TypeWork } from '../../../myTypes/TypeWork';
-import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
-
-import { Main, Projects, Headline, Title, Shelf, Card } from './style';
+import { Main, Headline, Title, Shelf, Card, ShelfGallery } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
-import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
-import SelectBox from '../../components/SelectBox';
 
-const listWorks = [
-  {
-    id: 1,
-    title: 'Teste 1',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [1, 2, 3],
-    areaExpensive: [1],
-  },
-  {
-    id: 2,
-    title: 'Teste 2',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [4],
-    areaExpensive: [1],
-  },
-  {
-    id: 3,
-    title: 'Teste 3',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [3, 4],
-    areaExpensive: [2],
-  },
-  {
-    id: 4,
-    title: 'Teste 4',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [5],
-    areaExpensive: [2, 1],
-  },
-];
-
-const areaExpensives = [
-  { value: '0', label: 'Todas' },
-  { value: '1', label: 'Ciência de Dados' },
-  { value: '2', label: 'Visão Computacional' },
-  { value: '3', label: 'Games' },
-];
-
-const listOrder = [
-  { value: '0', label: 'A-Z' },
-  { value: '1', label: 'Z-A' },
-  // { value: '2', label: ' + Antigas' },
-  // { value: '3', label: '+ Recentes' },
-];
-
-const typeWorks = [
-  { value: '0', label: 'Todos' },
-  { value: '1', label: 'TCC' },
-  { value: '2', label: 'IC' },
-  {
-    value: '3',
-    label: 'Partes de Livros e Livros',
-  },
-  { value: '4', label: 'Patentes' },
-  { value: '5', label: 'Pesquisa' },
+const images = [
+  { source: 'path/to/image-1.jpg' },
+  { source: 'path/to/image-2.jpg' },
 ];
 
 const Member: React.FC = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+  const openLightbox = useCallback((event, { photo, index }) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  }, []);
+
+  const closeLightbox = (): void => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
+
   return (
     <>
       <Header title="LAMIA - Teste 1" />
@@ -385,6 +337,27 @@ const Member: React.FC = () => {
             </div>
           </Card>
         </Shelf>
+        <Title>
+          <header>
+            <h2>Galeria</h2>
+          </header>
+        </Title>
+        <ShelfGallery>
+          <Gallery photos={photos} onClick={openLightbox} />
+          <ModalGateway>
+            {viewerIsOpen ? (
+              <Modal onClose={closeLightbox}>
+                <Carousel
+                  views={photos.map((x) => ({
+                    ...x,
+                    srcset: x.src,
+                    caption: x.title,
+                  }))}
+                />
+              </Modal>
+            ) : null}
+          </ModalGateway>
+        </ShelfGallery>
       </Main>
 
       <Footer />

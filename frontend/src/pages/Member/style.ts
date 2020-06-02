@@ -329,6 +329,11 @@ export const Shelf = styled.div`
   margin: 24px auto;
   /* margin-top: 64px; */
 
+  img {
+    /* min-height: 400px;
+    min-width: 400px; */
+  }
+
   display: flex;
   flex-wrap: wrap;
   /* flex-direction: row; */
@@ -574,4 +579,9 @@ export const Card = styled.div`
 
     transform: translateY(8px);
   }
+`;
+
+export const ShelfGallery = styled.div`
+  max-width: 1200px;
+  margin: 12px auto;
 `;
