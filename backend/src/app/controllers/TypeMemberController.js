@@ -1,57 +1,61 @@
+import * as Yup from 'yup';
 import TypeMember from '../models/TypeMember';
 
 class TypeMemberController {
-    // Função para cadastro!!!
-    async store(req, res) {
-        const { name, description } = req.body;
+  // Função para cadastro!!!
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      description: Yup.string(),
+    });
 
-        if (description === '')
-            return res
-                .status(400)
-                .json({ error: 'Description cannot be empty :/' });
-
-        const typeMemberExists = await TypeMember.findOne({ where: { name } });
-
-        if (typeMemberExists)
-            return res
-                .status(400)
-                .json({ error: 'Type Member already exists :/' });
-
-        const typeMember = await TypeMember.create({ name, description });
-
-        return res.json({ typeMember });
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
     }
 
-    async index(req, res) {
-        const typeMembers = await TypeMember.findAll();
-        return res.json({ typeMembers });
-    }
+    const { name, description } = req.body;
 
-    async update(req, res) {
-        const { name, description } = req.body;
+    if (description === '')
+      return res.status(400).json({ error: 'Description cannot be empty :/' });
 
-        if (description === '')
-            return res
-                .status(400)
-                .json({ error: 'Description cannot be empty :/' });
+    const typeMemberExists = await TypeMember.findOne({ where: { name } });
 
-        const typeMember = await TypeMember.findOne({ where: { name } });
+    if (typeMemberExists)
+      return res.status(400).json({ error: 'Type Member already exists :/' });
 
-        if (!typeMember)
-            return res.status(400).json({ error: 'Type Member not exists :/' });
+    const typeMember = await TypeMember.create({ name, description });
 
-        await typeMember.update({ name, description });
+    return res.json({ typeMember });
+  }
 
-        return res.json({ typeMember });
-    }
+  async index(req, res) {
+    const typeMembers = await TypeMember.findAll();
+    return res.json({ typeMembers });
+  }
 
-    async delete(req, res) {
-        const { name } = req.body;
+  async update(req, res) {
+    const { name, description } = req.body;
 
-        await TypeMember.destroy({ where: { name } });
+    if (description === '')
+      return res.status(400).json({ error: 'Description cannot be empty :/' });
 
-        return res.json({ ok: true });
-    }
+    const typeMember = await TypeMember.findOne({ where: { name } });
+
+    if (!typeMember)
+      return res.status(400).json({ error: 'Type Member not exists :/' });
+
+    await typeMember.update({ name, description });
+
+    return res.json({ typeMember });
+  }
+
+  async delete(req, res) {
+    const { name } = req.body;
+
+    await TypeMember.destroy({ where: { name } });
+
+    return res.json({ ok: true });
+  }
 }
 
 export default new TypeMemberController();

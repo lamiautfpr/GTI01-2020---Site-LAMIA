@@ -1,68 +1,72 @@
+import * as Yup from 'yup';
 import TypeWork from '../models/TypeWork';
 import CategoryWork from '../models/CategoryWork';
 
 class TypeWorkController {
-    async store(req, res) {
-        const { name, description } = req.body;
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      description: Yup.string(),
+    });
 
-        if (description === '')
-            return res
-                .status(400)
-                .json({ error: 'Description cannot be empty :/' });
-
-        const typeWorkExists = await TypeWork.findOne({
-            where: { name },
-        });
-
-        if (typeWorkExists)
-            return res
-                .status(400)
-                .json({ error: 'Type Work already exists :/' });
-
-        const typeWork = await TypeWork.create({ name, description });
-
-        return res.json({ typeWork });
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
     }
 
-    async index(req, res) {
-        const typeWorks = await TypeWork.findAll({
-            include: [
-                {
-                    model: CategoryWork,
-                    as: 'category',
-                    attributes: ['name'],
-                },
-            ],
-            order: ['name'],
-        });
-        return res.json({ typeWorks });
-    }
+    const { name, description } = req.body;
 
-    async update(req, res) {
-        const { name, description } = req.body;
+    if (description === '')
+      return res.status(400).json({ error: 'Description cannot be empty :/' });
 
-        if (description === '')
-            return res
-                .status(400)
-                .json({ error: 'Description cannot be empty :/' });
+    const typeWorkExists = await TypeWork.findOne({
+      where: { name },
+    });
 
-        const typeWork = await TypeWork.findOne({ where: { name } });
+    if (typeWorkExists)
+      return res.status(400).json({ error: 'Type Work already exists :/' });
 
-        if (!typeWork)
-            return res.status(400).json({ error: 'Type Work not exists :/' });
+    const typeWork = await TypeWork.create({ name, description });
 
-        await typeWork.update({ name, description });
+    return res.json({ typeWork });
+  }
 
-        return res.json({ typeWork });
-    }
+  async index(req, res) {
+    const typeWorks = await TypeWork.findAll({
+      include: [
+        {
+          model: CategoryWork,
+          as: 'category',
+          attributes: ['name'],
+        },
+      ],
+      order: ['name'],
+    });
+    return res.json({ typeWorks });
+  }
 
-    async delete(req, res) {
-        const { name } = req.body;
+  async update(req, res) {
+    const { name, description } = req.body;
 
-        await TypeWork.destroy({ where: { name } });
+    if (description === '')
+      return res.status(400).json({ error: 'Description cannot be empty :/' });
 
-        return res.json({ ok: true });
-    }
+    const typeWork = await TypeWork.findOne({ where: { name } });
+
+    if (!typeWork)
+      return res.status(400).json({ error: 'Type Work not exists :/' });
+
+    await typeWork.update({ name, description });
+
+    return res.json({ typeWork });
+  }
+
+  async delete(req, res) {
+    const { name } = req.body;
+
+    await TypeWork.destroy({ where: { name } });
+
+    return res.json({ ok: true });
+  }
 }
 
 export default new TypeWorkController();

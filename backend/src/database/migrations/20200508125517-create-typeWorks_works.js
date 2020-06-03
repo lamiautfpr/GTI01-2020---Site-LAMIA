@@ -1,18 +1,24 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('area_expertises', {
+        return queryInterface.createTable('typeWorks_works', {
             id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            name: {
-                type: Sequelize.STRING,
-                allowNull: false,
+            type_work_id: {
+                type: Sequelize.INTEGER,
+                references: { model: 'type_works', key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+                allowNull: true,
             },
-            description: {
-                type: Sequelize.TEXT,
+            work_id: {
+                type: Sequelize.INTEGER,
+                references: { model: 'works', key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
                 allowNull: true,
             },
             created_at: {
@@ -27,6 +33,6 @@ module.exports = {
     },
 
     down: queryInterface => {
-        return queryInterface.dropTable('area_expertises');
+        return queryInterface.dropTable('typeWorks_works');
     },
 };

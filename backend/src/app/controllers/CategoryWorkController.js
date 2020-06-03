@@ -1,60 +1,61 @@
+import * as Yup from 'yup';
 import CategoryWork from '../models/CategoryWork';
 
 class CategoryWorkController {
-    async store(req, res) {
-        const { name, description } = req.body;
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      description: Yup.string(),
+    });
 
-        if (description === '')
-            return res
-                .status(400)
-                .json({ error: 'Description cannot be empty :/' });
-
-        const categoryWorkExists = await CategoryWork.findOne({
-            where: { name },
-        });
-
-        if (categoryWorkExists)
-            return res
-                .status(400)
-                .json({ error: 'Category Work already exists :/' });
-
-        const categoryWork = await CategoryWork.create({ name, description });
-
-        return res.json({ categoryWork });
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
     }
+    const { name, description } = req.body;
 
-    async index(req, res) {
-        const categoryWorks = await CategoryWork.findAll();
-        return res.json({ categoryWorks });
-    }
+    if (description === '')
+      return res.status(400).json({ error: 'Description cannot be empty :/' });
 
-    async update(req, res) {
-        const { name, description } = req.body;
+    const categoryWorkExists = await CategoryWork.findOne({
+      where: { name },
+    });
 
-        if (description === '')
-            return res
-                .status(400)
-                .json({ error: 'Description cannot be empty :/' });
+    if (categoryWorkExists)
+      return res.status(400).json({ error: 'Category Work already exists :/' });
 
-        const categoryWork = await CategoryWork.findOne({ where: { name } });
+    const categoryWork = await CategoryWork.create({ name, description });
 
-        if (!categoryWork)
-            return res
-                .status(400)
-                .json({ error: 'Category Work not exists :/' });
+    return res.json({ categoryWork });
+  }
 
-        await categoryWork.update({ name, description });
+  async index(req, res) {
+    const categoryWorks = await CategoryWork.findAll();
+    return res.json({ categoryWorks });
+  }
 
-        return res.json({ categoryWork });
-    }
+  async update(req, res) {
+    const { name, description } = req.body;
 
-    async delete(req, res) {
-        const { name } = req.body;
+    if (description === '')
+      return res.status(400).json({ error: 'Description cannot be empty :/' });
 
-        await CategoryWork.destroy({ where: { name } });
+    const categoryWork = await CategoryWork.findOne({ where: { name } });
 
-        return res.json({ ok: true });
-    }
+    if (!categoryWork)
+      return res.status(400).json({ error: 'Category Work not exists :/' });
+
+    await categoryWork.update({ name, description });
+
+    return res.json({ categoryWork });
+  }
+
+  async delete(req, res) {
+    const { name } = req.body;
+
+    await CategoryWork.destroy({ where: { name } });
+
+    return res.json({ ok: true });
+  }
 }
 
 export default new CategoryWorkController();

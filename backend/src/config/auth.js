@@ -1,5 +1,5 @@
 export default {
-    // phrase: ?
-    secret: process.env.APP_SECRET,
-    expiresIn: '7d',
+  // phrase: ?
+  secret: process.env.APP_SECRET,
+  expiresIn: '7d',
 };
