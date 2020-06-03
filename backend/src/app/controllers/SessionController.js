@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import authConfig from '../../config/auth';
 import Member from '../models/Member';
@@ -9,9 +10,10 @@ import TypeMember from '../models/TypeMember';
 class SessionController {
   async store(req, res) {
     const schema = Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required(),
+      email: Yup.string().email(),
+      login: Yup.string().when('email', (email, field) =>
+        email ? field : field.required()
+      ),
       password: Yup.string().required(),
     });
 
@@ -19,10 +21,10 @@ class SessionController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { email, password } = req.body;
+    const { email = '', password, login = '' } = req.body;
 
     const member = await Member.findOne({
-      where: { email },
+      where: { [Op.or]: [{ email }, { login }] },
       include: [
         {
           model: TypeMember,
