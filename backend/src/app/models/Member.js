@@ -22,6 +22,15 @@ class Member extends Model {
             notEmpty: true,
           },
         },
+        login: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: false,
+          validate: {
+            notNull: true,
+            notEmpty: true,
+          },
+        },
         password_hash: Sequelize.STRING,
         password: {
           type: Sequelize.VIRTUAL,

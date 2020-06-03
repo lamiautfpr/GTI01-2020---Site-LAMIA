@@ -34,8 +34,9 @@ routes.get('/type-works', TypeWorkController.index);
 routes.get('/partiners', PartnerController.index);
 routes.get('/works', WorkController.index);
 routes.get('/statistics', StatisticController.index);
-
 routes.get('/partiners', PartnerController.show);
+
+routes.get('/:login', MemberController.show);
 
 routes.post('/sessions', SessionController.store);
 
@@ -46,20 +47,18 @@ routes.post('/area-expertises', AreaExpertiseController.store);
 routes.post('/category-work', CategoryWorkController.store);
 routes.post('/type-work', TypeWorkController.store);
 routes.post('/works', WorkController.store);
+routes.post('/files', upload.single('file'), FileController.store);
+routes.post('/members', MemberController.store);
 
 routes.put('/type-members', TypeMemberController.update);
 routes.put('/area-expertises', AreaExpertiseController.update);
 routes.put('/category-work', CategoryWorkController.update);
 routes.put('/type-work', TypeWorkController.update);
+routes.put('/members', MemberController.update);
 
 routes.delete('/type-members', TypeMemberController.delete);
 routes.delete('/area-expertises', AreaExpertiseController.delete);
 routes.delete('/category-work', CategoryWorkController.delete);
 routes.delete('/type-work', TypeWorkController.delete);
-
-routes.post('/files', upload.single('file'), FileController.store);
-
-routes.post('/members', MemberController.store);
-routes.put('/members', MemberController.update);
 
 export default routes;

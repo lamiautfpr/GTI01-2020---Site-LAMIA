@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Member from '../models/Member';
 import TypeMember from '../models/TypeMember';
 import Picture from '../models/Picture';
@@ -12,6 +13,7 @@ class MemberController {
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
+      login: Yup.string().required(),
       email: Yup.string()
         .email()
         .required(),
@@ -30,11 +32,15 @@ class MemberController {
     }
 
     const memberExists = await Member.findOne({
-      where: { email: req.body.email },
+      where: {
+        [Op.or]: [{ email: req.body.email }, { login: req.body.login }],
+      },
     });
 
     if (memberExists) {
-      return res.status(400).json({ error: 'Member already exists :/' });
+      return res.status(400).json({
+        error: 'Member already exists :/ <br/>Tente outro login ou email ;)',
+      });
     }
 
     const { id, name, email, office_id } = await Member.create(req.body, {
@@ -57,6 +63,49 @@ class MemberController {
 
   async index(req, res) {
     const members = await Member.findAll({
+      attributes: ['name', 'email', 'phone', 'likendin', 'git_hub', 'lattes'],
+      include: [
+        {
+          model: TypeMember,
+          as: 'office',
+          attributes: ['name'],
+        },
+        {
+          model: Picture,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+        {
+          model: MemberWork,
+          as: 'membersWork',
+          attributes: ['scholarship'],
+          include: [
+            {
+              model: Work,
+              as: 'work',
+              attributes: ['title', 'objective'],
+              include: [
+                {
+                  model: AreaExpertise,
+                  as: 'areaExpertise',
+                  attributes: ['name'],
+                  through: { attributes: [] },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json({ members });
+  }
+
+  async show(req, res) {
+    const members = await Member.findOne({
+      where: {
+        login: req.params.login,
+      },
       attributes: ['name', 'email', 'phone', 'likendin', 'git_hub', 'lattes'],
       include: [
         {
