@@ -348,9 +348,10 @@ const Member: React.FC = () => {
             {viewerIsOpen ? (
               <Modal onClose={closeLightbox}>
                 <Carousel
+                  currentIndex={currentImage}
                   views={photos.map((x) => ({
                     ...x,
-                    srcset: x.src,
+                    srcset: x.source,
                     caption: x.title,
                   }))}
                 />
