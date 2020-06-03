@@ -105,7 +105,7 @@ export const Headline = styled.div`
   display: flex;
   flex-direction: column;
   /* flex-flow: row wrap; */
-  /* justify-content: flex-start; */
+  /* justify-content: space-between; */
   align-items: center;
 
   max-width: 1200px;
@@ -121,36 +121,140 @@ export const Headline = styled.div`
     display:flex;
     justify-content: space-between;
     /* flex: 3 2 300px; */
+
     
-    h1 {
+    .leftInfo{
+      /* border: 1px solid green; */
+
+      display:flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+
+      width: calc((100% - 283px)/2);
+
+      padding: 8px;
+
+
+      .name{
+        /* border: 1px solid red; */
+
+        height: 40px;
+        /* width: 100%; */
+
+        padding: 0;
+        margin: 8px;
+
+        color: white;
+        h1 {
+          font-size: 40px;
+        }
+      }
+
+      .icons{
+       /* border: 1px solid red; */
+
+       margin: 8px;
+
+       width: 200px;
+
+       display: flex;
+       flex-direction: row;
+       justify-content: flex-end;
+        
+       
+       a{
+       color: ${primaryColor};
+       margin-right: 8px;
+        
+        img{
+          width: 22px;
+        }
+       }
+      }
+
+      .office{
+       /* border: 1px solid green; */
+       display: flex;
+       align-items: flex-start;
+
+       position: relative;
+       
+       
+       margin:8px;
+       
+
+       
+
+       svg{
+       color: ${primaryColor};
+       margin-right: 4px;
+         
+       }
+       
+       color: white;
+
+       span{
+        font-family: dosis;
+        font-size: 21px;
+        margin-top: -3px;
+}
+       }
+
+       
+                 
+      }
+
+      .description{
+       /* border: 1px solid red; */
+       width:100%;
+       height: auto;
+      
+       color: #f0f0f0;
+
+       font-size: 16px;
+
+       span{
+         font-weight:bold;
+         color: ${primaryColor};
+       }
+
+      }
+
+      .contact{
+       /* border: 1px solid red; */
+
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+
+       padding: 4px;
+       width:400px;
+
+       color: #f0f0f0;
+
+       svg{
+         color: ${primaryColor};
+         margin-right: 2px;
+       }
+
+      }
+      
+    }
+
+
+    
+    /* h1 {
       
       text-align: start;
       padding-top: 20px;
       padding-left: 42px;
-      /* border: 1px solid blue; */
+      border: 1px solid blue;
 
       color: white;
       font-size: 64px;
             
-    }
-    div{
-      /* border: 1px solid red; */
-
-      max-width: 500px;
-      padding-right: 42px;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      flex-basis: 100%;
-      
-
-
-      h1{
-        font-size: 32px;
-
-      }
-    }
+    } */
     
   }
 
@@ -226,6 +330,11 @@ export const Shelf = styled.div`
   height: auto;
   margin: 24px auto;
   /* margin-top: 64px; */
+
+  img {
+    /* min-height: 400px;
+    min-width: 400px; */
+  }
 
   display: flex;
   flex-wrap: wrap;
@@ -472,4 +581,9 @@ export const Card = styled.div`
 
     transform: translateY(8px);
   }
+`;
+
+export const ShelfGallery = styled.div`
+  max-width: 1200px;
+  margin: 12px auto;
 `;
