@@ -37,8 +37,10 @@ class CategoryWorkController {
           model: TypeWork,
           as: 'types',
           attributes: ['name', 'description'],
+          order: ['name'],
         },
       ],
+      order: ['name'],
     });
     return res.json(categoryWorks);
   }

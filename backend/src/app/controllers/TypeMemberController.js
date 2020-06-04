@@ -29,8 +29,15 @@ class TypeMemberController {
   }
 
   async index(req, res) {
-    const typeMembers = await TypeMember.findAll();
-    return res.json({ typeMembers });
+    const typeMembers = await TypeMember.findAll({
+      attributes: ['name', 'description'],
+      order: ['name'],
+    });
+    return res.json({
+      name: 'Integrantes',
+      description: null,
+      types: typeMembers,
+    });
   }
 
   async update(req, res) {

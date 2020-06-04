@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
-
 import { HashLink } from 'react-router-hash-link';
+
+import api from '../../services/api';
 import { Nav } from './style';
 
+interface NavItemProps {
+  name: string;
+  description: string | null;
+}
+
+interface MenuNavProps {
+  name: string;
+  description: string | null;
+  types: NavItemProps[];
+}
+
 const NavBar: React.FC = () => {
+  const [categoryWorks, setCategoryWorks] = useState<MenuNavProps[]>([]);
+  const [members, setMembers] = useState<MenuNavProps | null>(null);
+  // const [categoryWorks, setCategoryWorks] = useState<CategoryWorkProps[]>([]);
+
+  useEffect(() => {
+    api.get(`category-works`).then((response) => {
+      setCategoryWorks(response.data);
+    });
+    api.get(`type-members`).then((response) => {
+      setMembers(response.data);
+    });
+  }, []);
+
   return (
     <Nav>
       <ul>
@@ -49,90 +74,26 @@ const NavBar: React.FC = () => {
             </li>
           </ul>
         </li>
+        {categoryWorks.map((category) => (
+          <li>
+            <Link to={category.name}>{category.name}</Link>
+            <ul>
+              {category.types.map((type) => (
+                <li>
+                  <a href={type.name}>{type.name}</a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
         <li>
-          <Link to="projects">Projetos</Link>
+          <Link to="Integrantes">{members?.name}</Link>
           <ul>
-            <li>
-              <a href="#">Pesquisa</a>
-            </li>
-            <li>
-              <a href="#">Pós Graduação</a>
-            </li>
-            <li>
-              <a href="#">Iniciação</a>
-            </li>
-            <li>
-              <a href="#">Extensão</a>
-            </li>
-            <li>
-              <a href="#">TCC</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#second">Publicações</a>
-          <ul>
-            <li>
-              <a href="#">Livros e Parte de Livros</a>
-            </li>
-            <li>
-              <a href="#">Periódicos</a>
-            </li>
-            <li>
-              <a href="#">Conferencias</a>
-            </li>
-            <li>
-              <a href="#">Congresso</a>
-            </li>
-            <li>
-              <a href="#">Relatório</a>
-            </li>
-            <li>
-              <a href="#">TCC</a>
-            </li>
-            <li>
-              <a href="#">Tese</a>
-            </li>
-            <li>
-              <a href="#">Dissertação</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#cta">Produtos</a>
-          <ul>
-            <li>
-              <a href="#">Patentes</a>
-            </li>
-            <li>
-              <a href="#">Softwares</a>
-            </li>
-            <li>
-              <a href="#">Consultoria</a>
-            </li>
-            <li>
-              <a href="#">Materiais</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#cta">Integrantes</a>
-          <ul>
-            <li>
-              <a href="#">Todos</a>
-            </li>
-            <li>
-              <a href="#">Orientador</a>
-            </li>
-            <li>
-              <a href="#">Colaborador</a>
-            </li>
-            <li>
-              <a href="#">Visitante</a>
-            </li>
-            <li>
-              <a href="#">Ex-aluno</a>
-            </li>
+            {members?.types.map((type) => (
+              <li>
+                <a href={type.name}>{type.name}</a>
+              </li>
+            ))}
           </ul>
         </li>
       </ul>
