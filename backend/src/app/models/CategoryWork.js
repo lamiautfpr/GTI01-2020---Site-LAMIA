@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-import pluralize from 'pluralize';
 
 class CategoryWork extends Model {
   static init(sequelize) {
@@ -16,15 +15,6 @@ class CategoryWork extends Model {
         router: {
           type: Sequelize.VIRTUAL,
           get() {
-            if (this.name === 'Produto') {
-              return pluralize('Product'.toLocaleLowerCase());
-            }
-            if (this.name === 'Projeto') {
-              return pluralize('Project'.toLocaleLowerCase());
-            }
-            if (this.name === 'Publicação') {
-              return pluralize('Publication'.toLocaleLowerCase());
-            }
             return this.name.toLocaleLowerCase();
           },
         },

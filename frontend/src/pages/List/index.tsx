@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
 import {
   FaChevronRight,
@@ -8,17 +8,21 @@ import {
   FaRegClipboard,
   FaListUl,
 } from 'react-icons/fa';
+
+import api from '../../services/api';
+
 import imgTeste from '../../assets/Teste.jpg';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { TypeWork } from '../../../myTypes/TypeWork';
 import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
 
-import { Main, Projects } from './style';
+import { Main, Projects, SectionFilters } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 import SelectBox from '../../components/SelectBox';
+import Member from '../Member';
 
 const listWorks = [
   {
@@ -55,38 +59,39 @@ const listWorks = [
   },
 ];
 
-const areaExpensives = [
-  { value: 0, label: 'Todas' },
-  { value: 1, label: 'Ciência de Dados' },
-  { value: 2, label: 'Visão Computacional' },
-  { value: 3, label: 'Games' },
-];
-
 const listOrder = [
-  { value: 0, label: 'A-Z' },
-  { value: 1, label: 'Z-A' },
-  // { value: '2', label: ' + Antigas' },
-  // { value: '3', label: '+ Recentes' },
+  { value: 0, description: null, label: 'A-Z' },
+  { value: 1, description: null, label: 'Z-A' },
+  // { value: description: null, '2', label: ' + Antigas' },
+  // { value: description: null, '3', label: '+ Recentes' },
 ];
 
-const typeWorks = [
-  { value: 1, label: 'TCC' },
-  { value: 2, label: 'IC' },
-  {
-    value: 3,
-    label: 'Partes de Livros e Livros',
-  },
-  { value: 4, label: 'Patentes' },
-  { value: 5, label: 'Pesquisa' },
-];
+interface CategoryParams {
+  category: string;
+}
+
+interface CategoryProps {
+  name: string;
+  description: string | null;
+  types: SelectItem[];
+}
 
 const ListProjects: React.FC = () => {
-  const [works, setWorks] = useState<TypeWork[]>(listWorks);
-  const [allWorks, setAllWorks] = useState<TypeWork[]>(listWorks);
+  const { params } = useRouteMatch<CategoryParams>();
+
+  // datas data base
+  const [allWorks, setAllWorks] = useState<TypeWork[]>([]);
+  const [works, setWorks] = useState<TypeWork[]>([]);
+
+  const [category, setCategory] = useState<CategoryProps>({} as CategoryProps);
+  const [areas, setAreas] = useState<SelectItem[]>([]);
+
+  // filters
   const [orderSelected, setOrderSelected] = useState<number>(0);
   const [areaSelected, setAreaSelected] = useState<number>(0);
   const [typeSelected, setTypeSelected] = useState<number[]>([]);
 
+  // Functions for list works
   const changeWorkList = (area: number, types: number[]): void => {
     if (area === 0 && types.length < 1) {
       // there is no filter
@@ -154,6 +159,19 @@ const ListProjects: React.FC = () => {
     }
   };
 
+  // Functions for get list works
+  useEffect(() => {
+    api.get(`category-works/${params.category}`).then((response) => {
+      setCategory(response.data);
+    });
+
+    if (params.category !== 'members') {
+      api.get(`area-expertises`).then((response) => {
+        setAreas(response.data);
+      });
+    }
+  }, [params.category]);
+
   const workWithTrasitions = useTransition(works, (work) => work.id, {
     from: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
     enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
@@ -167,11 +185,11 @@ const ListProjects: React.FC = () => {
       <NavBar />
 
       <Main>
-        <section>
+        <SectionFilters isMembers={params.category === 'members'}>
           <div className="areaExpensive">
             <SelectBox
               label="Áreas de Pesquisa"
-              options={areaExpensives}
+              options={areas}
               placeholder="Selecione..."
               width={250}
               onChange={setAreaExpensive}
@@ -179,12 +197,15 @@ const ListProjects: React.FC = () => {
           </div>
           <div className="typeWorks">
             <SelectBox
-              label="Tipo de Trabalho"
-              options={typeWorks}
+              label={`${params.category
+                .charAt(0)
+                .toUpperCase()}${params.category.slice(1)}`}
+              options={category.types}
               placeholder="Selecione..."
               width={550}
               isMulti
               onChange={setTypeWorks}
+              // value={null}
             />
           </div>
           <div className="order">
@@ -196,7 +217,7 @@ const ListProjects: React.FC = () => {
               onChange={checkOrder}
             />
           </div>
-        </section>
+        </SectionFilters>
 
         <Separator />
 

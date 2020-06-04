@@ -16,6 +16,7 @@ interface SelectBoxProps {
   isMulti?: boolean;
   width?: number;
   onChange?: any;
+  value?: any;
 }
 
 const SelectBox: React.FC<SelectBoxProps> = ({
@@ -25,6 +26,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   isMulti = false,
   width = 150,
   onChange,
+  value,
 }) => {
   const animatedComponents = makeAnimated();
 

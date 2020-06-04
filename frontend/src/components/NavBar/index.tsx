@@ -77,25 +77,25 @@ const NavBar: React.FC = () => {
         </li>
         {categoryWorks.map((category) => (
           <li>
-            <Link to={`/list/${category.router}`}>{category.name}</Link>
-            <ul className="DropDraw">
+            <a href={`/list/${category.router}`}>{category.name}</a>
+            {/* <ul className="DropDraw">
               {category.types.map((type) => (
                 <li>
                   <a href={type.name}>{type.name}</a>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </li>
         ))}
         <li>
-          <Link to="/list/members">{members?.name}</Link>
-          <ul className="lastDropDraw">
+          <a href="/list/members">{members?.name}</a>
+          {/* <ul className="lastDropDraw">
             {members?.types.map((type) => (
               <li>
                 <a href={type.name}>{type.name}</a>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </li>
       </ul>
     </Nav>

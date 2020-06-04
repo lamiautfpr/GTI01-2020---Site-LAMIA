@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 // import Dashboard from '../pages/Dashboard';
 // import Repository from '../pages/Repository';
 import Home from '../pages/Home';
-import Projects from '../pages/Projects';
+import List from '../pages/List';
 import Member from '../pages/Member';
 
 // Switch é para apresentar uma rota de cada vez
@@ -12,7 +12,7 @@ import Member from '../pages/Member';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Home} />
-    <Route path="/list/:category" exact component={Projects} />
+    <Route path="/list/:category" exact component={List} />
     <Route path="/member" exact component={Member} />
     {/* <Route path="/repositories/:repository+" exact component={} /> */}
   </Switch>

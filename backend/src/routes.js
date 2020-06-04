@@ -17,6 +17,7 @@ import PartnerController from './app/controllers/PartnerController';
 import WorkController from './app/controllers/WorkController';
 
 import StatisticController from './app/controllers/StatisticController';
+import ListController from './app/controllers/ListController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -34,8 +35,9 @@ routes.get('/type-works', TypeWorkController.index);
 routes.get('/partiners', PartnerController.index);
 routes.get('/works', WorkController.index);
 routes.get('/statistics', StatisticController.index);
-routes.get('/partiners', PartnerController.show);
 
+routes.get('/partiners', PartnerController.show);
+routes.get('/category-works/:category', ListController.show);
 routes.get('/:login', MemberController.show);
 
 routes.post('/sessions', SessionController.store);

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { transparentize } from 'polished';
 import {
@@ -7,29 +7,39 @@ import {
   secondaryColor,
 } from '../../styles/paletsColores';
 
+interface FilterPros {
+  isMembers: boolean;
+}
+
 export const Main = styled.main`
   background: #fff;
   padding: 12px;
   border-radius: 0 0 24px 24px;
   margin-bottom: 100px;
+`;
 
-  section {
-    max-width: 1200px;
-    margin: 40px auto;
+export const SectionFilters = styled.section<FilterPros>`
+  max-width: 1200px;
+  margin: 40px auto;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
-    .areaExpensive {
-      width: 250px;
-    }
-    .typeWorks {
-      width: 550px;
-    }
-    .order {
-      width: 150px;
-    }
+  .areaExpensive {
+    width: 250px;
+
+    ${(props) =>
+      props.isMembers &&
+      css`
+        display: none;
+      `}
+  }
+  .typeWorks {
+    width: 550px;
+  }
+  .order {
+    width: 150px;
   }
 `;
 

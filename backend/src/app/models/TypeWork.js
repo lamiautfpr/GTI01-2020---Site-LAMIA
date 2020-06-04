@@ -20,6 +20,18 @@ class TypeWork extends Model {
             notEmpty: true,
           },
         },
+        value: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return this.id;
+          },
+        },
+        label: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return this.name;
+          },
+        },
       },
       {
         sequelize,
