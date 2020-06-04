@@ -13,6 +13,12 @@ class StatisticController {
           [Op.between]: [startOfDay(today), endOfDay(today)],
         },
       },
+      attributes: [
+        'countRepositories',
+        'countCommits',
+        'countBranches',
+        'countStars',
+      ],
     });
 
     if (!statistic) {

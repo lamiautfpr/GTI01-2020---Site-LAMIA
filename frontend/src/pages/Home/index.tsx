@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoStar, GoRepo, GoGitCommit, GoGitBranch } from 'react-icons/go';
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
+
+import api from '../../services/api';
 
 import imgTeste from '../../assets/Teste.jpg';
 import logoLar from '../../assets/logo_lar.png';
@@ -24,7 +26,29 @@ import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 
+interface StatisticsProps {
+  countRepositories: number;
+  countCommits: number;
+  countBranches: number;
+  countStars: number;
+}
+
 const Home: React.FC = () => {
+  const [statistics, setStatistics] = useState<StatisticsProps>({
+    countRepositories: 5,
+    countCommits: 300,
+    countBranches: 20,
+    countStars: 10,
+  } as StatisticsProps);
+
+  useEffect(() => {
+    // setStatistics(await getData());
+    // console.log(`s2 ${statistics.count_commits}`);
+    api.get<StatisticsProps>(`statistics`).then((response) => {
+      setStatistics(response.data);
+    });
+  }, []);
+
   return (
     <>
       <Header />
@@ -119,7 +143,6 @@ const Home: React.FC = () => {
           </div>
         </SectionLine>
         <hr />
-
         <SectionColumn title="LatestPublications" id="LatestPublications">
           <HeaderSection>
             <h2>Ultimas Publicações</h2>
@@ -173,7 +196,12 @@ const Home: React.FC = () => {
               <h3>Repositórios</h3>
               <div>
                 <GoRepo />
-                <CountUp end={5} duration={2.5} delay={0} redraw>
+                <CountUp
+                  end={statistics.countRepositories}
+                  duration={2.5}
+                  delay={0}
+                  redraw
+                >
                   {({ countUpRef, start }) => (
                     <VisibilitySensor onChange={start} delayedCall>
                       <span ref={countUpRef} />
@@ -186,7 +214,7 @@ const Home: React.FC = () => {
               <h3>Commits</h3>
               <div>
                 <GoGitCommit />
-                <CountUp end={6996} duration={2.5} delay={1} redraw>
+                <CountUp end={statistics.countCommits} duration={2.5} delay={2}>
                   {({ countUpRef, start }) => (
                     <VisibilitySensor onChange={start} delayedCall>
                       <span ref={countUpRef} />
@@ -199,7 +227,12 @@ const Home: React.FC = () => {
               <h3>Branches</h3>
               <div>
                 <GoGitBranch />
-                <CountUp end={7} duration={2.5} delay={2} redraw>
+                <CountUp
+                  end={statistics.countBranches}
+                  duration={2.5}
+                  delay={2}
+                  redraw
+                >
                   {({ countUpRef, start }) => (
                     <VisibilitySensor onChange={start} delayedCall>
                       <span ref={countUpRef} />
@@ -212,7 +245,12 @@ const Home: React.FC = () => {
               <h3>Star</h3>
               <div>
                 <GoStar />
-                <CountUp end={33} duration={2.5} delay={2.5} redraw>
+                <CountUp
+                  end={statistics.countStars}
+                  duration={2.5}
+                  delay={2.5}
+                  redraw
+                >
                   {({ countUpRef, start }) => (
                     <VisibilitySensor onChange={start} delayedCall>
                       <span ref={countUpRef} />
