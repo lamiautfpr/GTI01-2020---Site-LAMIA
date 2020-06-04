@@ -35,6 +35,11 @@ class CategoryWork extends Model {
       as: 'works',
       through: 'categoryWorks_works',
     });
+
+    this.hasMany(models.TypeWork, {
+      foreignKey: 'category_id',
+      as: 'types',
+    });
   }
 }
 
