@@ -12,6 +12,7 @@ interface NavItemProps {
 }
 
 interface MenuNavProps {
+  router: string;
   name: string;
   description: string | null;
   types: NavItemProps[];
@@ -76,7 +77,7 @@ const NavBar: React.FC = () => {
         </li>
         {categoryWorks.map((category) => (
           <li>
-            <Link to={category.name}>{category.name}</Link>
+            <Link to={`/list/${category.router}`}>{category.name}</Link>
             <ul className="DropDraw">
               {category.types.map((type) => (
                 <li>
@@ -87,7 +88,7 @@ const NavBar: React.FC = () => {
           </li>
         ))}
         <li>
-          <Link to="Integrantes">{members?.name}</Link>
+          <Link to="/list/members">{members?.name}</Link>
           <ul className="lastDropDraw">
             {members?.types.map((type) => (
               <li>

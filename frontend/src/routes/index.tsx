@@ -12,7 +12,7 @@ import Member from '../pages/Member';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Home} />
-    <Route path="/projects" exact component={Projects} />
+    <Route path="/list/:category" exact component={Projects} />
     <Route path="/member" exact component={Member} />
     {/* <Route path="/repositories/:repository+" exact component={} /> */}
   </Switch>

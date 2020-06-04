@@ -31,7 +31,7 @@ class CategoryWorkController {
 
   async index(req, res) {
     const categoryWorks = await CategoryWork.findAll({
-      attributes: ['name', 'description'],
+      attributes: ['name', 'description', 'router'],
       include: [
         {
           model: TypeWork,

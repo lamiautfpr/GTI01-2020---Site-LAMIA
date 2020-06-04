@@ -35,6 +35,7 @@ class TypeMemberController {
     });
     return res.json({
       name: 'Integrantes',
+      router: 'members',
       description: null,
       types: typeMembers,
     });
