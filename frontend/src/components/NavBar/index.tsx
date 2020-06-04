@@ -18,13 +18,18 @@ const NavBar: React.FC = () => {
               </HashLink>
             </li>
             <li>
+              <HashLink smooth to="/#Histoty">
+                Missão
+              </HashLink>
+            </li>
+            <li>
               <HashLink smooth to="/#LatestPublications">
                 Ultimas publicações
               </HashLink>
             </li>
             <li>
-              <HashLink smooth to="/#Histoty">
-                História
+              <HashLink smooth to="/#Statistics">
+                Linhas de Códigos Produzidas
               </HashLink>
             </li>
             <li>

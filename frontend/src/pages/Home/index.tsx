@@ -6,6 +6,8 @@ import VisibilitySensor from 'react-visibility-sensor';
 import api from '../../services/api';
 
 import imgTeste from '../../assets/Teste.jpg';
+import logoDemo from '../../assets/logo_demo.jpg';
+
 import logoLar from '../../assets/logo_lar.png';
 import logoStark from '../../assets/logo_stark.jpg';
 import logoXavier from '../../assets/logo_xavier.jpg';
@@ -110,36 +112,20 @@ const Home: React.FC = () => {
         <hr />
         <SectionLine id="Histoty">
           <HeaderSection>
-            <h2>História</h2>
+            <h2>Missão</h2>
           </HeaderSection>
           <div>
             <div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
-                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
-                debitis necessitatibus molestiae nesciunt nemo.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                veniam nihil libero placeat! Sunt amet earum veritatis expedita
-                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
-                sapiente molestias odit provident?
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus, cupiditate reprehenderit. Qui deserunt in pariatur.
-                Saepe sunt dolor qui aliquam, quisquam quia quidem commodi odit
-                debitis necessitatibus molestiae nesciunt nemo.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                veniam nihil libero placeat! Sunt amet earum veritatis expedita
-                laboriosam? Voluptas consequatur, soluta neque sit omnis facere
-                sapiente molestias odit provident?
+                A missão do LAMIA é produzir conhecimento acadêmico e soluções
+                para a indústria através de pesquisas direcionadas na integração
+                destas duas vertentes. As abordagens propostas utilizam de
+                Ciência de Dados e Visão Computacional na criação de aplicações
+                voltadas para as cadeias produtivas do oeste do Paraná e do
+                restante do Brasil.
               </p>
             </div>
-            <img src={imgTeste} alt="Teste" />
+            <img src={logoDemo} alt="Teste" />
           </div>
         </SectionLine>
         <hr />
@@ -187,7 +173,7 @@ const Home: React.FC = () => {
           </div>
         </SectionColumn>
         <hr />
-        <SectionCards title="GitHub Data" id="GitHub Data">
+        <SectionCards title="Statistics" id="Statistics">
           <HeaderSection>
             <h2>Linhas de Códigos Produzidas</h2>
           </HeaderSection>
@@ -199,7 +185,7 @@ const Home: React.FC = () => {
                 <CountUp
                   end={statistics.countRepositories}
                   duration={2.5}
-                  delay={0}
+                  delay={0.5}
                   redraw
                 >
                   {({ countUpRef, start }) => (
