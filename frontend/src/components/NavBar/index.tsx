@@ -36,7 +36,7 @@ const NavBar: React.FC = () => {
       <ul>
         <li>
           <Link to="/">Home</Link>
-          <ul>
+          <ul className="DropDraw">
             <li>
               <HashLink smooth to="#News">
                 Noticias
@@ -77,7 +77,7 @@ const NavBar: React.FC = () => {
         {categoryWorks.map((category) => (
           <li>
             <Link to={category.name}>{category.name}</Link>
-            <ul>
+            <ul className="DropDraw">
               {category.types.map((type) => (
                 <li>
                   <a href={type.name}>{type.name}</a>
@@ -88,7 +88,7 @@ const NavBar: React.FC = () => {
         ))}
         <li>
           <Link to="Integrantes">{members?.name}</Link>
-          <ul>
+          <ul className="lastDropDraw">
             {members?.types.map((type) => (
               <li>
                 <a href={type.name}>{type.name}</a>
