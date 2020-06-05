@@ -13,6 +13,30 @@ class Member extends Model {
             notEmpty: true,
           },
         },
+        nameABNT: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            const names = this.name.split(' ');
+
+            if (names.length >= 3) {
+              const lastName = names[names.length - 1];
+              const nameABNT = `${lastName.toUpperCase()}, ${names[0]
+                .charAt(0)
+                .toUpperCase()}. ${names[1].charAt(0).toUpperCase()}.`;
+
+              return nameABNT;
+            }
+            if (names.length === 2) {
+              const lastName = names[names.length - 1];
+              const nameABNT = `${lastName.toUpperCase()}, ${names[0]
+                .charAt(0)
+                .toUpperCase()}.`;
+
+              return nameABNT;
+            }
+            return this.name.toUpperCase();
+          },
+        },
         email: {
           type: Sequelize.STRING,
           allowNull: false,

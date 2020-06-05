@@ -1,6 +1,9 @@
-import { TypeWork } from '../../myTypes/TypeWork';
+import { WorkListProps } from '../../myTypes/WorkListProps';
 
-export const compareTitleASC = (work1: TypeWork, work2: TypeWork): number => {
+export const compareTitleASC = (
+  work1: WorkListProps,
+  work2: WorkListProps,
+): number => {
   // a should come before b in the sorted order
   if (work1.title < work2.title) {
     return -1;
@@ -13,7 +16,10 @@ export const compareTitleASC = (work1: TypeWork, work2: TypeWork): number => {
   return 0;
 };
 
-export const compareTitleDESC = (work1: TypeWork, work2: TypeWork): number => {
+export const compareTitleDESC = (
+  work1: WorkListProps,
+  work2: WorkListProps,
+): number => {
   // a should come before b in the sorted order
   if (work1.title > work2.title) {
     return -1;

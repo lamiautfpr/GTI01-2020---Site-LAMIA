@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
@@ -13,7 +13,7 @@ import api from '../../services/api';
 
 import imgTeste from '../../assets/Teste.jpg';
 import { SelectItem } from '../../../myTypes/SelectItem';
-import { TypeWork } from '../../../myTypes/TypeWork';
+import { WorkListProps, AttributesProps } from '../../../myTypes/WorkListProps';
 import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
 
 import { Main, Projects, SectionFilters } from './style';
@@ -22,42 +22,6 @@ import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 import SelectBox from '../../components/SelectBox';
-import Member from '../Member';
-
-const listWorks = [
-  {
-    id: 1,
-    title: 'Teste 1',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [1, 2, 3],
-    areaExpensive: [1],
-  },
-  {
-    id: 2,
-    title: 'Teste 2',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [4],
-    areaExpensive: [1],
-  },
-  {
-    id: 3,
-    title: 'Teste 3',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [3, 4],
-    areaExpensive: [2],
-  },
-  {
-    id: 4,
-    title: 'Teste 4',
-    objective:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit.Blanditiis a natus labore suscipit, ad ratione quod praesentiumarchitecto et minima hic accusantium provident quia sequi dolorum dicta officiis doloribus perspiciatis.',
-    typeWorks: [5],
-    areaExpensive: [2, 1],
-  },
-];
 
 const listOrder = [
   { value: 0, description: null, label: 'A-Z' },
@@ -80,8 +44,8 @@ const ListProjects: React.FC = () => {
   const { params } = useRouteMatch<CategoryParams>();
 
   // datas data base
-  const [allWorks, setAllWorks] = useState<TypeWork[]>([]);
-  const [works, setWorks] = useState<TypeWork[]>([]);
+  const [allWorks, setAllWorks] = useState<WorkListProps[]>([]);
+  const [works, setWorks] = useState<WorkListProps[]>([]);
 
   const [category, setCategory] = useState<CategoryProps>({} as CategoryProps);
   const [areas, setAreas] = useState<SelectItem[]>([]);
@@ -92,57 +56,25 @@ const ListProjects: React.FC = () => {
   const [typeSelected, setTypeSelected] = useState<number[]>([]);
 
   // Functions for list works
-  const changeWorkList = (area: number, types: number[]): void => {
-    if (area === 0 && types.length < 1) {
-      // there is no filter
-      setWorks(allWorks);
-    } else if (area === 0 && types) {
-      // only type filter exists
-      setWorks(
-        allWorks.filter(function (work) {
-          return work.typeWorks.some((t) => types.includes(t));
-        }),
-      );
-    } else if (area !== 0 && types.length < 1) {
-      // only area filter exists
-      setWorks(
-        allWorks.filter(function (work) {
-          return work.areaExpensive.includes(area);
-        }),
-      );
-    } else {
-      // All filter exists
-      setWorks(
-        allWorks
-          .filter(function (work) {
-            // Filtro das Area
-            return work.areaExpensive.includes(area);
-          })
-          .filter(function (work) {
-            // Filtro dos TypesWorks
-            return work.typeWorks.some((t) => types.includes(t));
-          }),
-      );
-    }
-  };
+  const changeWorkList = (area: number, types: AttributesProps[]): void => {};
 
   const setTypeWorks = (itemsSelected: SelectItem[]): void => {
     if (!itemsSelected || itemsSelected.length < 1) {
       setTypeSelected([]);
-      changeWorkList(areaSelected, []);
+      // changeWorkList(areaSelected, []);
     } else {
       const types: number[] = [];
       itemsSelected.forEach((item) => {
         types.push(item.value);
       });
       setTypeSelected([]);
-      changeWorkList(areaSelected, types);
+      // changeWorkList(areaSelected, types);
     }
   };
 
   const setAreaExpensive = ({ value }: SelectItem): void => {
     setAreaSelected(value);
-    changeWorkList(value, typeSelected);
+    // changeWorkList(value, typeSelected);
   };
 
   const checkOrder = ({ value }: SelectItem): void => {
@@ -163,6 +95,8 @@ const ListProjects: React.FC = () => {
   useEffect(() => {
     api.get(`category-works/${params.category}`).then((response) => {
       setCategory(response.data);
+      setAllWorks(response.data.works);
+      setWorks(response.data.works);
     });
 
     if (params.category !== 'members') {
@@ -224,23 +158,28 @@ const ListProjects: React.FC = () => {
         <Projects>
           {workWithTrasitions.map(({ item, key, props }) => (
             <animated.div key={item.id} style={props}>
-              <Link to={`/projects/${item.id}`}>
+              <Link to={`/work/${item.id}`}>
                 <img src={imgTeste} alt="Teste" />
 
                 <strong>
                   {item.title}
                   <span>
                     <FaUserNinja size={14} />
-                    Jecé Xavier - Rafael Lechesque
+                    {item.worksMember.map((m) => (
+                      <span key={m.id}>{`${m.member.nameABNT}; `}</span>
+                    ))}
                   </span>
                   <span>
                     <FaRegClipboard size={14} />
-                    {/* Pesquisa & Pos-Graduação */}
-                    {item.typeWorks}
+                    {item.types.map((type) => (
+                      <span key={type.id}>{`${type.name}; `}</span>
+                    ))}
                   </span>
                   <span>
                     <FaListUl size={14} />
-                    {item.areaExpensive}
+                    {item.areaExpertise.map((ae) => (
+                      <span key={ae.id}>{`${ae.name}; `}</span>
+                    ))}
                   </span>
                 </strong>
                 <p>{item.objective}</p>
@@ -249,6 +188,34 @@ const ListProjects: React.FC = () => {
               </Link>
             </animated.div>
           ))}
+
+          <br />
+          <br />
+          <br />
+          <br />
+          <Link to="/projects/item.id">
+            <img src={imgTeste} alt="Teste" />
+
+            <strong>
+              item.title
+              <span>
+                <FaUserNinja size={14} />
+                Jecé Xavier - Rafael Lechesque
+              </span>
+              <span>
+                <FaRegClipboard size={14} />
+                {/* Pesquisa & Pos-Graduação */}
+                item.typeWorks
+              </span>
+              <span>
+                <FaListUl size={14} />
+                item.areaExpensive
+              </span>
+            </strong>
+            <p>item.objective</p>
+
+            <FaChevronRight size={20} />
+          </Link>
         </Projects>
       </Main>
 

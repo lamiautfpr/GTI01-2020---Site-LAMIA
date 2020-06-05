@@ -38,6 +38,7 @@ routes.get('/statistics', StatisticController.index);
 
 routes.get('/partiners', PartnerController.show);
 routes.get('/category-works/:category', ListController.show);
+routes.get('/works/:category', ListController.index);
 routes.get('/:login', MemberController.show);
 
 routes.post('/sessions', SessionController.store);
