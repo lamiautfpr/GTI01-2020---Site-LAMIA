@@ -129,10 +129,14 @@ const ListProjects: React.FC = () => {
   const checkOrder = (order: SelectItem): void => {
     // alert(`Order selected is ${value}`);
     if (order.value === 0) {
-      setWorks(allWorks.sort(compareTitleASC));
+      const sorted = [...works].sort(compareTitleASC);
+      setWorks(sorted);
+
       setAllWorks(allWorks.sort(compareTitleASC));
     } else if (order.value === 1) {
-      setWorks(allWorks.sort(compareTitleDESC));
+      const sorted = [...works].sort(compareTitleDESC);
+      setWorks(sorted);
+
       setAllWorks(allWorks.sort(compareTitleDESC));
     }
   };
@@ -233,8 +237,10 @@ const ListProjects: React.FC = () => {
                   </span>
                 </strong>
                 <p>{item.objective}</p>
-
-                <FaChevronRight size={20} />
+                <div>
+                  <span>{item.dateBegin}</span>
+                  <FaChevronRight size={20} />
+                </div>
               </Link>
             </animated.div>
           ))}

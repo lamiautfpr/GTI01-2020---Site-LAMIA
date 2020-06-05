@@ -16,4 +16,5 @@ export interface WorkListProps {
   types: SelectItem[];
   areaExpertise: SelectItem[];
   worksMember: WorksMemberProps[];
+  dateBegin: Date;
 }

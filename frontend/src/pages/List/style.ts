@@ -88,8 +88,9 @@ export const Projects = styled.div`
     strong {
       min-width: 210px;
       margin: 0 16px;
-      flex: 1;
+      min-height: 88px;
 
+      flex: 1;
       display: flex;
       flex-direction: column;
 
@@ -113,13 +114,33 @@ export const Projects = styled.div`
 
     p {
       margin-right: 16px;
+      width: 100%;
+
       font-size: 18px;
       color: #a8a8b3;
     }
 
-    svg {
-      margin-left: auto;
-      color: #cbcbd6;
+    div {
+      min-height: 88px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      span {
+        margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+        color: ${primaryColor};
+        font-family: 'Dosis';
+        font-weight: 200;
+      }
+
+      svg {
+        margin-left: auto;
+        color: #cbcbd6;
+      }
     }
   }
 `;
