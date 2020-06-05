@@ -24,7 +24,6 @@ class StatisticController {
     if (!statistic) {
       try {
         const data = await getDataGit();
-        console.log(data);
 
         const newStatistic = await Statistic.create({
           countRepositories: data.countRepositories,

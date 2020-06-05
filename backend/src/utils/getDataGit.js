@@ -2,7 +2,6 @@ import axios from 'axios';
 
 async function requestPageGit(url, pageLimit = 5, page = 0) {
   const apiCommits = await axios.get(`${url}?page=${page + 1}`);
-  console.log(`url + ${url}?page=${page + 1} + qtd = ${apiCommits.data.length}`);
   if (apiCommits.data.length !== 30 || page >= pageLimit) {
     return apiCommits.data.length + page * 30;
   }
@@ -23,13 +22,15 @@ async function getDataGit() {
 
     const promiseGetData = data.map(async repo => {
       countStars += repo.stargazers_count;
-      countCommits += await requestPageGit(
+
+      const commits = await requestPageGit(
         `${repo.url}/commits`,
-        100 / (2 * countRepositories) - 1,
+        100 / (2 * countRepositories) - 1
       );
-      countBranches += await requestPageGit(
-        `${repo.url}/branches`,0
-      );
+      countCommits += commits;
+
+      const braches = await requestPageGit(`${repo.url}/branches`, 0);
+      countBranches += braches;
     });
 
     await Promise.all(promiseGetData);
