@@ -2,7 +2,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn('members', 'login', {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: false,
       unique: true,
     });
   },
