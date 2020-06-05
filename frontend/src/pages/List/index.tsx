@@ -14,7 +14,12 @@ import api from '../../services/api';
 import imgTeste from '../../assets/Teste.jpg';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { WorkListProps } from '../../../myTypes/WorkListProps';
-import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
+import {
+  compareTitleASC,
+  compareTitleDESC,
+  compareDateASC,
+  compareDateDESC,
+} from '../../utils/orderArray';
 
 import { Main, Projects, SectionFilters } from './style';
 import Header from '../../components/Header';
@@ -26,8 +31,8 @@ import SelectBox from '../../components/SelectBox';
 const listOrder = [
   { value: 0, description: null, label: 'A-Z' },
   { value: 1, description: null, label: 'Z-A' },
-  // { value: description: null, '2', label: ' + Antigas' },
-  // { value: description: null, '3', label: '+ Recentes' },
+  { value: 2, description: null, label: ' - Jovens' },
+  { value: 3, description: null, label: '+ Jovens' },
 ];
 
 interface CategoryParams {
@@ -138,6 +143,16 @@ const ListProjects: React.FC = () => {
       setWorks(sorted);
 
       setAllWorks(allWorks.sort(compareTitleDESC));
+    } else if (order.value === 2) {
+      const sorted = [...works].sort(compareDateDESC);
+      setWorks(sorted);
+
+      setAllWorks(allWorks.sort(compareDateDESC));
+    } else {
+      const sorted = [...works].sort(compareDateASC);
+      setWorks(sorted);
+
+      setAllWorks(allWorks.sort(compareDateASC));
     }
   };
 

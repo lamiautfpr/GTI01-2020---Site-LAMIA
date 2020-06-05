@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import { format } from 'date-fns';
 
 class Work extends Model {
   static init(sequelize) {
@@ -41,6 +42,14 @@ class Work extends Model {
           validate: {
             notNull: true,
             notEmpty: true,
+          },
+        },
+        dateBegin: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            const dateFormated = format(this.date_begin, 'MM/dd/yyyy');
+            console.log(`df ${dateFormated}`);
+            return dateFormated;
           },
         },
         date_end: {
