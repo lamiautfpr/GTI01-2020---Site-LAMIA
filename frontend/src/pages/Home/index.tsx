@@ -28,6 +28,8 @@ import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 
+import { WorkListProps } from '../../../myTypes/WorkListProps';
+
 interface StatisticsProps {
   countRepositories: number;
   countCommits: number;
@@ -62,6 +64,8 @@ const Home: React.FC = () => {
 
   const [partner, setPartner] = useState<PartnerProps[]>([]);
 
+  const [lastWork, setLastWork] = useState<WorkListProps[]>([]);
+
   useEffect(() => {
     api.get<StatisticsProps>(`statistics`).then((response) => {
       setStatistics(response.data);
@@ -77,6 +81,12 @@ const Home: React.FC = () => {
   useEffect(() => {
     api.get<PartnerProps[]>(`partiners`).then((response) => {
       setPartner(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    api.get<WorkListProps[]>(`last-work?limit=3`).then((response) => {
+      setLastWork(response.data);
     });
   }, []);
 
@@ -162,44 +172,43 @@ const Home: React.FC = () => {
           <HeaderSection>
             <h2>Ultimas Publicações</h2>
           </HeaderSection>
-          <div>
+          {lastWork.length > 0 ? (
             <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Publicação 1</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros. Lorem
-                ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum
-                dolor sit amet aliquam.
-              </p>
+              {lastWork.map((work) => (
+                <div key={work.id}>
+                  <img
+                    src={
+                      work.pictures?.length > 0
+                        ? work.pictures[0].src
+                        : imgTeste
+                    }
+                    alt={
+                      work.pictures.length > 0 ? work.pictures[0].name : 'teste'
+                    }
+                  />
+                  <header>
+                    <h2>{work.title}</h2>
+                  </header>
+                  <p>{work.objective.slice(0, 130)}</p>
+                </div>
+              ))}
+
+              {/* <div>
+                <img src={imgTeste} alt="Teste" />
+                <header>
+                  <h2>Publicação 3</h2>
+                </header>
+                <p>
+                  Sed lorem ipsum dolor sit amet nullam consequat feugiat
+                  consequat magna adipiscing magna etiam amet veroeros. Lorem
+                  ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem
+                  ipsum dolor sit amet aliquam.
+                </p>
+              </div> */}
             </div>
-            <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Publicação 2</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros. Lorem
-                ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum
-                dolor sit amet aliquam.
-              </p>
-            </div>
-            <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Publicação 3</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros. Lorem
-                ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum
-                dolor sit amet aliquam.
-              </p>
-            </div>
-          </div>
+          ) : (
+            <h2>Alguem tem que arrumar ne...</h2>
+          )}
         </SectionColumn>
         <hr />
         <SectionCards title="Statistics" id="Statistics">
