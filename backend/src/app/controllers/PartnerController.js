@@ -1,17 +1,14 @@
-import { Op } from 'sequelize';
 import * as Yup from 'yup';
 import Partner from '../models/Partner';
 
 class PartnerController {
   async index(req, res) {
-    const { name } = req.query;
-
     const partner = await Partner.findAll({
-      where: { name: { [Op.like]: `%${name.toUpperCase()}%` } },
+      attributes: ['id', 'name', 'logo', 'linkPage'],
       order: [['name', 'ASC']],
     });
 
-    return res.json({ partner });
+    return res.json(partner);
   }
 
   async show(req, res) {
