@@ -14,7 +14,7 @@ import api from '../../services/api';
 import imgLogo from '../../assets/logo.svg';
 import emojiSad from '../../assets/emojiSad.png';
 import { SelectItem } from '../../../myTypes/SelectItem';
-import { WorkListProps } from '../../../myTypes/WorkListProps';
+import { ImageProps } from '../../../myTypes/Images';
 import {
   compareTitleASC,
   compareTitleDESC,
@@ -36,138 +36,67 @@ const listOrder = [
   { value: 3, description: null, label: '+ Jovens' },
 ];
 
-interface MembersListProps {}
+interface MembersListProps {
+  id: number;
+  login: string;
+  name: string;
+  email: string;
+  description: string;
+  office: SelectItem;
+  avatar: ImageProps;
+}
 
 const ListProjects: React.FC = () => {
   // datas data base
-  const [allMembers, setAllMembers] = useState<WorkListProps[]>([]);
-  const [works, setWorks] = useState<WorkListProps[]>([]);
-
-  const [category, setCategory] = useState<CategoryProps>({} as CategoryProps);
-  const [areas, setAreas] = useState<SelectItem[]>([
-    {
-      value: 0,
-      label: 'Todas',
-      description: null,
-    },
-  ]);
+  const [allMembers, setAllMembers] = useState<MembersListProps[]>([]);
+  const [members, setMembers] = useState<MembersListProps[]>([]);
+  const [offices, setOffices] = useState<SelectItem[]>([]);
 
   // filters
-  const [areaSelected, setAreaSelected] = useState<SelectItem>(
-    {} as SelectItem,
-  );
-  const [typeSelected, setTypeSelected] = useState<SelectItem[]>([]);
+  const [officesSelected, setOfficesSelected] = useState<SelectItem[]>([]);
 
   // Functions for list works
-  const changeWorkList = (area: SelectItem, types: SelectItem[]): void => {
-    if (!area.value) {
-      const dafaulArea: SelectItem = {
-        value: 0,
-        label: 'Todas',
-        description: null,
-      };
-      // eslint-disable-next-line no-param-reassign
-      area = dafaulArea;
-      setAreaSelected(area);
-    }
-
-    if (area.value === 0 && types.length < 1) {
-      // there is no filter
-      setWorks(allWorks);
-    } else if (area.value === 0 && types) {
-      // only type filter exists
-      setWorks(
-        allWorks.filter((work) => {
-          return work.types.some((t) =>
-            types.some((tSelected) => tSelected.value === t.value),
-          );
-        }),
-      );
-    } else if (area.value !== 0 && types.length < 1) {
-      // only area filter exists
-      setWorks(
-        allWorks.filter((work) => {
-          return work.areaExpertise.some((a) => a.value === area.value);
-        }),
-      );
-    } else {
-      // All filter exists
-      setWorks(
-        allWorks
-          .filter((work) => {
-            // Filtro das Area
-            return work.areaExpertise.some((a) => a.value === area.value);
-          })
-          .filter((work) => {
-            // Filtro dos TypesWorks
-            return work.types.some((t) =>
-              types.some((tSelected) => tSelected.value === t.value),
-            );
-          }),
-      );
-    }
-  };
-
-  const setTypeWorks = (itemsSelected: SelectItem[]): void => {
-    if (!itemsSelected || itemsSelected.length < 1) {
-      setTypeSelected([]);
-      changeWorkList(areaSelected, []);
-    } else {
-      setTypeSelected(itemsSelected);
-      changeWorkList(areaSelected, itemsSelected);
-    }
-  };
-
-  const setAreaExpensive = (item: SelectItem): void => {
-    setAreaSelected(item);
-    changeWorkList(item, typeSelected);
+  const changeWorkList = (itemsSelected: SelectItem[]): void => {
+    alert(itemsSelected);
   };
 
   const checkOrder = (order: SelectItem): void => {
     // alert(`Order selected is ${value}`);
     if (order.value === 0) {
-      const sorted = [...works].sort(compareTitleASC);
-      setWorks(sorted);
+      const sorted = [...members].sort();
+      setMembers(sorted);
 
-      setAllWorks(allWorks.sort(compareTitleASC));
+      setAllMembers(allMembers.sort());
     } else if (order.value === 1) {
-      const sorted = [...works].sort(compareTitleDESC);
-      setWorks(sorted);
+      const sorted = [...members].sort();
+      setMembers(sorted);
 
-      setAllWorks(allWorks.sort(compareTitleDESC));
+      setAllMembers(allMembers.sort());
     } else if (order.value === 2) {
-      const sorted = [...works].sort(compareDateDESC);
-      setWorks(sorted);
+      const sorted = [...members].sort();
+      setMembers(sorted);
 
-      setAllWorks(allWorks.sort(compareDateDESC));
+      setAllMembers(allMembers.sort());
     } else {
-      const sorted = [...works].sort(compareDateASC);
-      setWorks(sorted);
+      const sorted = [...members].sort();
+      setMembers(sorted);
 
-      setAllWorks(allWorks.sort(compareDateASC));
+      setAllMembers(allMembers.sort());
     }
   };
 
   // Functions for get list works
   useEffect(() => {
-    api.get(`category-works/${params.category}`).then((response) => {
-      setCategory(response.data);
-      setAllWorks(response.data.works.sort(compareTitleASC));
-      setWorks(response.data.works.sort(compareTitleASC));
+    api.get(`members/`).then((response) => {
+      setMembers(response.data);
     });
 
-    api.get(`area-expertises`).then((response) => {
-      const dafaulArea: SelectItem = {
-        value: 0,
-        label: 'Todas',
-        description: null,
-      };
-
-      setAreas([...response.data.concat(dafaulArea)]);
+    api.get(`type-members`).then((response) => {
+      // setOffices([...response.data]);
     });
-  }, [params.category]);
+  }, []);
 
-  const workWithTrasitions = useTransition(works, (work) => work.id, {
+  const workWithTrasitions = useTransition(members, (member) => member.id, {
     from: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
     enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
     leave: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
@@ -184,11 +113,11 @@ const ListProjects: React.FC = () => {
           <div className="typeWorks">
             <SelectBox
               label="Integrantes"
-              options={category.types}
+              options={offices}
               placeholder="Selecione..."
               width={550}
               isMulti
-              onChange={setTypeWorks}
+              onChange={changeWorkList}
               // value={null}
             />
           </div>
@@ -206,37 +135,24 @@ const ListProjects: React.FC = () => {
         <Separator />
 
         <Projects>
-          {works.length > 0 ? (
+          {members.length > 0 ? (
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             workWithTrasitions.map(({ item, key, props }) => (
               <animated.div key={item.id} style={props}>
-                <Link to={`/work/${item.id}`}>
-                  <img src={imgLogo} alt={item.title} />
+                <Link to={`/${item.login}`}>
+                  <img src={imgLogo} alt="TESTE" />
 
                   <strong>
-                    {item.title}
+                    {item.name}
                     <span>
                       <FaUserNinja size={14} />
-                      {item.worksMember.map((m) => (
-                        <span key={m.id}>{`${m.member.nameABNT}; `}</span>
-                      ))}
                     </span>
                     <span>
                       <FaRegClipboard size={14} />
-                      {item.types.map((type) => (
-                        <span key={type.value}>{`${type.label}; `}</span>
-                      ))}
-                    </span>
-                    <span>
-                      <FaListUl size={14} />
-                      {item.areaExpertise.map((ae) => (
-                        <span key={ae.value}>{`${ae.label}; `}</span>
-                      ))}
                     </span>
                   </strong>
-                  <p>{item.objective}</p>
+                  <p>{item.description}</p>
                   <div>
-                    <span>{item.dateBegin}</span>
                     <FaChevronRight size={20} />
                   </div>
                 </Link>

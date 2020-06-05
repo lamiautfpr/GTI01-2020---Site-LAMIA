@@ -63,22 +63,22 @@ class MemberController {
 
   async index(req, res) {
     const members = await Member.findAll({
-      attributes: ['id', 'name', 'email', 'description'],
+      attributes: ['id', 'name', 'email', 'description', 'login'],
       include: [
         {
           model: TypeMember,
           as: 'office',
-          attributes: ['id', 'name', 'description'],
+          attributes: ['id', 'value', 'name', 'label', 'description'],
         },
         {
           model: Picture,
           as: 'avatar',
-          attributes: ['name', 'path', 'url'],
+          attributes: ['name', 'path', 'src'],
         },
       ],
     });
 
-    return res.json({ members });
+    return res.json(members);
   }
 
   async show(req, res) {

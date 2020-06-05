@@ -14,7 +14,7 @@ export interface TypeGallery {
   title: string;
 }
 
-export interface ImagenProps {
+export interface ImageProps {
   id: number;
   src: string;
   source: string;

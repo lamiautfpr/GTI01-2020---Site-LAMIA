@@ -30,7 +30,7 @@ class TypeMemberController {
 
   async index(req, res) {
     const typeMembers = await TypeMember.findAll({
-      attributes: ['name', 'description'],
+      attributes: ['id', 'value', 'name', 'label', 'description'],
       order: ['name'],
     });
     return res.json({
