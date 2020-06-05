@@ -63,37 +63,17 @@ class MemberController {
 
   async index(req, res) {
     const members = await Member.findAll({
-      attributes: ['name', 'email', 'phone', 'likendin', 'git_hub', 'lattes'],
+      attributes: ['id', 'name', 'email', 'description'],
       include: [
         {
           model: TypeMember,
           as: 'office',
-          attributes: ['name'],
+          attributes: ['id', 'name', 'description'],
         },
         {
           model: Picture,
           as: 'avatar',
           attributes: ['name', 'path', 'url'],
-        },
-        {
-          model: MemberWork,
-          as: 'membersWork',
-          attributes: ['scholarship'],
-          include: [
-            {
-              model: Work,
-              as: 'work',
-              attributes: ['title', 'objective'],
-              include: [
-                {
-                  model: AreaExpertise,
-                  as: 'areaExpertise',
-                  attributes: ['name'],
-                  through: { attributes: [] },
-                },
-              ],
-            },
-          ],
         },
       ],
     });
