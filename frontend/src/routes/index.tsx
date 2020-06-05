@@ -13,13 +13,9 @@ import ProjectView from '../pages/ProjectView';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Home} />
-<<<<<<< HEAD
     <Route path="/list/:category" exact component={List} />
-=======
-    <Route path="/projects" exact component={Projects} />
-    <Route path="/projectview" exact component={ProjectView} />
->>>>>>> master
-    <Route path="/member" exact component={Member} />
+    <Route path="/work/id" exact component={ProjectView} />
+    <Route path="/:login" exact component={Member} />
     {/* <Route path="/repositories/:repository+" exact component={} /> */}
   </Switch>
 );
