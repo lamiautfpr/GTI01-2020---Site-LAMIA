@@ -1,4 +1,5 @@
 import { SelectItem } from './SelectItem';
+import { ImageProps } from './Images';
 
 interface MemberProps {
   nameABNT: string;
@@ -17,4 +18,5 @@ export interface WorkListProps {
   areaExpertise: SelectItem[];
   worksMember: WorksMemberProps[];
   dateBegin: Date;
+  pictures: ImageProps[];
 }
