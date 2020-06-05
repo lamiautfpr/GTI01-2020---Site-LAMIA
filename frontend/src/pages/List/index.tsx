@@ -12,6 +12,7 @@ import {
 import api from '../../services/api';
 
 import imgTeste from '../../assets/Teste.jpg';
+import emojiSad from '../../assets/emojiSad.png';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { WorkListProps } from '../../../myTypes/WorkListProps';
 import {
@@ -21,7 +22,7 @@ import {
   compareDateDESC,
 } from '../../utils/orderArray';
 
-import { Main, Projects, SectionFilters } from './style';
+import { Main, Projects, SectionFilters, CardWarning } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Separator from '../../components/Separator';
@@ -225,68 +226,51 @@ const ListProjects: React.FC = () => {
         <Separator />
 
         <Projects>
-          {workWithTrasitions.map(({ item, key, props }) => (
-            <animated.div key={item.id} style={props}>
-              <Link to={`/work/${item.id}`}>
-                <img src={imgTeste} alt="Teste" />
+          {works.length > 0 ? (
+            workWithTrasitions.map(({ item, key, props }) => (
+              <animated.div key={item.id} style={props}>
+                <Link to={`/work/${item.id}`}>
+                  <img src={imgTeste} alt="Teste" />
 
-                <strong>
-                  {item.title}
-                  <span>
-                    <FaUserNinja size={14} />
-                    {item.worksMember.map((m) => (
-                      <span key={m.id}>{`${m.member.nameABNT}; `}</span>
-                    ))}
-                  </span>
-                  <span>
-                    <FaRegClipboard size={14} />
-                    {item.types.map((type) => (
-                      <span key={type.value}>{`${type.label}; `}</span>
-                    ))}
-                  </span>
-                  <span>
-                    <FaListUl size={14} />
-                    {item.areaExpertise.map((ae) => (
-                      <span key={ae.value}>{`${ae.label}; `}</span>
-                    ))}
-                  </span>
-                </strong>
-                <p>{item.objective}</p>
-                <div>
-                  <span>{item.dateBegin}</span>
-                  <FaChevronRight size={20} />
-                </div>
-              </Link>
-            </animated.div>
-          ))}
-
-          <br />
-          <br />
-          <br />
-          <br />
-          <Link to="/projects/item.id">
-            <img src={imgTeste} alt="Teste" />
-
-            <strong>
-              item.title
-              <span>
-                <FaUserNinja size={14} />
-                Jecé Xavier - Rafael Lechesque
-              </span>
-              <span>
-                <FaRegClipboard size={14} />
-                {/* Pesquisa & Pos-Graduação */}
-                item.typeWorks
-              </span>
-              <span>
-                <FaListUl size={14} />
-                item.areaExpensive
-              </span>
-            </strong>
-            <p>item.objective</p>
-
-            <FaChevronRight size={20} />
-          </Link>
+                  <strong>
+                    {item.title}
+                    <span>
+                      <FaUserNinja size={14} />
+                      {item.worksMember.map((m) => (
+                        <span key={m.id}>{`${m.member.nameABNT}; `}</span>
+                      ))}
+                    </span>
+                    <span>
+                      <FaRegClipboard size={14} />
+                      {item.types.map((type) => (
+                        <span key={type.value}>{`${type.label}; `}</span>
+                      ))}
+                    </span>
+                    <span>
+                      <FaListUl size={14} />
+                      {item.areaExpertise.map((ae) => (
+                        <span key={ae.value}>{`${ae.label}; `}</span>
+                      ))}
+                    </span>
+                  </strong>
+                  <p>{item.objective}</p>
+                  <div>
+                    <span>{item.dateBegin}</span>
+                    <FaChevronRight size={20} />
+                  </div>
+                </Link>
+              </animated.div>
+            ))
+          ) : (
+            <CardWarning>
+              <h2>
+                <strong>POXA !!!</strong>
+                <br />
+                Ainda não temos o que você procura...
+              </h2>
+              <img src={emojiSad} />
+            </CardWarning>
+          )}
         </Projects>
       </Main>
 

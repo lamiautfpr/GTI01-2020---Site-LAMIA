@@ -5,6 +5,7 @@ import {
   secondaryBackground,
   primaryColor,
   secondaryColor,
+  featuredColor,
 } from '../../styles/paletsColores';
 
 interface FilterPros {
@@ -142,5 +143,26 @@ export const Projects = styled.div`
         color: #cbcbd6;
       }
     }
+  }
+`;
+
+export const CardWarning = styled.div`
+  max-width: 1200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    font-size: 40px;
+    font-family: 'Dosis';
+    color: ${secondaryColor};
+    /* text-transform: uppercase; */
+  }
+
+  img {
+    border-radius: 50%;
+    width: 120px;
+    margin-left: 40px;
   }
 `;
