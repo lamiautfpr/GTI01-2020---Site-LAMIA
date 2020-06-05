@@ -1,11 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { transparentize } from 'polished';
 import {
   secondaryBackground,
   primaryColor,
   secondaryColor,
-  featuredColor,
 } from '../../styles/paletsColores';
 
 export const Main = styled.main`
@@ -120,8 +119,8 @@ export const Projects = styled.div`
 
       span {
         margin-top: -20px;
-    margin-bottom: 20px;
-}
+        margin-bottom: 20px;
+      }
 
         color: ${primaryColor};
         font-family: 'Dosis';
@@ -144,6 +143,9 @@ export const CardWarning = styled.div`
   justify-content: center;
 
   h2 {
+    display: flex;
+    flex-direction: column;
+
     font-size: 40px;
     font-family: 'Dosis';
     color: ${secondaryColor};

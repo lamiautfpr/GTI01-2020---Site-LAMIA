@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
-import { FaMedal, FaChevronRight } from 'react-icons/fa';
+import { FaMedal, FaChevronRight, FaMailBulk } from 'react-icons/fa';
 
 import api from '../../services/api';
 
-import imgLogo from '../../assets/logo.svg';
+import userPadrao from '../../assets/userPadrao.png';
 import emojiSad from '../../assets/emojiSad.png';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { ImageProps } from '../../../myTypes/Images';
-import {
-  compareTitleASC,
-  compareTitleDESC,
-  compareDateASC,
-  compareDateDESC,
-} from '../../utils/orderArray';
+import {} from '../../utils/orderArray';
 
 import { Main, Projects, SectionFilters, CardWarning } from './style';
 import Header from '../../components/Header';
@@ -27,8 +22,6 @@ import SelectBox from '../../components/SelectBox';
 const listOrder = [
   { value: 0, description: null, label: 'A-Z' },
   { value: 1, description: null, label: 'Z-A' },
-  { value: 2, description: null, label: ' - Jovens' },
-  { value: 3, description: null, label: '+ Jovens' },
 ];
 
 interface MembersListProps {
@@ -38,7 +31,7 @@ interface MembersListProps {
   email: string;
   description: string;
   office: SelectItem;
-  avatar: ImageProps;
+  avatar?: ImageProps;
 }
 
 const ListProjects: React.FC = () => {
@@ -46,9 +39,6 @@ const ListProjects: React.FC = () => {
   const [allMembers, setAllMembers] = useState<MembersListProps[]>([]);
   const [members, setMembers] = useState<MembersListProps[]>([]);
   const [offices, setOffices] = useState<SelectItem[]>([]);
-
-  // filters
-  const [officesSelected, setOfficesSelected] = useState<SelectItem[]>([]);
 
   // Functions for list works
   const changeWorkList = (itemsSelected: SelectItem[]): void => {
@@ -66,17 +56,48 @@ const ListProjects: React.FC = () => {
   };
 
   const checkOrder = (order: SelectItem): void => {
-    // alert(`Order selected is ${value}`);
+    const compareNameASC = (
+      member1: MembersListProps,
+      member2: MembersListProps,
+    ): number => {
+      // a should come before b in the sorted order
+      if (member1.name < member2.name) {
+        return -1;
+        // a should come after b in the sorted order
+      }
+      if (member1.name > member2.name) {
+        return 1;
+        // a and b are the same
+      }
+      return 0;
+    };
+
+    const compareNameDESC = (
+      member1: MembersListProps,
+      member2: MembersListProps,
+    ): number => {
+      // a should come before b in the sorted order
+      if (member1.name > member2.name) {
+        return -1;
+        // a should come after b in the sorted order
+      }
+      if (member1.name < member2.name) {
+        return 1;
+        // a and b are the same
+      }
+      return 0;
+    };
+
     if (order.value === 0) {
-      const sorted = [...members].sort();
+      const sorted = [...members].sort(compareNameASC);
       setMembers(sorted);
 
-      setAllMembers(allMembers.sort());
+      setAllMembers(allMembers.sort(compareNameASC));
     } else if (order.value === 1) {
-      const sorted = [...members].sort();
+      const sorted = [...members].sort(compareNameDESC);
       setMembers(sorted);
 
-      setAllMembers(allMembers.sort());
+      setAllMembers(allMembers.sort(compareNameDESC));
     } else if (order.value === 2) {
       const sorted = [...members].sort();
       setMembers(sorted);
@@ -93,9 +114,25 @@ const ListProjects: React.FC = () => {
   // Functions for get list works
   useEffect(() => {
     api.get(`members/`).then((response) => {
+      const compareNameASC = (
+        member1: MembersListProps,
+        member2: MembersListProps,
+      ): number => {
+        // a should come before b in the sorted order
+        if (member1.name < member2.name) {
+          return -1;
+          // a should come after b in the sorted order
+        }
+        if (member1.name > member2.name) {
+          return 1;
+          // a and b are the same
+        }
+        return 0;
+      };
+
       setOffices(response.data.officesMembers);
-      setMembers(response.data.members);
-      setAllMembers(response.data.members);
+      setMembers(response.data.members.sort(compareNameASC));
+      setAllMembers(response.data.members.sort(compareNameASC));
     });
   }, []);
 
@@ -143,7 +180,10 @@ const ListProjects: React.FC = () => {
             workWithTrasitions.map(({ item, key, props }) => (
               <animated.div key={item.id} style={props}>
                 <Link to={`/${item.login}`}>
-                  <img src={imgLogo} alt="TESTE" />
+                  <img
+                    src={item.avatar ? item.avatar.src : userPadrao}
+                    alt={item.avatar ? item.avatar.name : 'Member'}
+                  />
 
                   <strong>
                     {item.name}
@@ -151,7 +191,10 @@ const ListProjects: React.FC = () => {
                       <FaMedal size={14} />
                       {item.office.label}
                     </span>
-                    <span>{/* <FaRegClipboard size={14} /> */}</span>
+                    <span>
+                      <FaMailBulk size={14} />
+                      {item.email}
+                    </span>
                   </strong>
                   <p>{item.description}</p>
                   <div>
@@ -163,9 +206,9 @@ const ListProjects: React.FC = () => {
           ) : (
             <CardWarning>
               <h2>
-                <strong>POXA !!!</strong>
-                <br />
-                Ainda não temos o que você procura...
+                <span>- Alguém devia estar aparecendo</span>
+                <span>- Alguém neh</span>
+                <span>- Alguém ...</span>
               </h2>
               <img src={emojiSad} alt="Triste" />
             </CardWarning>
