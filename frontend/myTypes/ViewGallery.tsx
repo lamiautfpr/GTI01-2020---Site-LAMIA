@@ -13,3 +13,11 @@ export interface TypeGallery {
   height: number;
   title: string;
 }
+
+export interface ImagenProps {
+  id: number;
+  src: string;
+  source: string;
+  name: string;
+  path: string;
+}

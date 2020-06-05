@@ -20,9 +20,27 @@ class Picture extends Model {
             notEmpty: false,
           },
         },
-        url: {
+        src: {
           type: Sequelize.VIRTUAL,
           get() {
+            if (
+              this.path.includes('https://') ||
+              this.path.includes('http://')
+            ) {
+              return this.path;
+            }
+            return `${process.env.APP_URL}/files/${this.path}`;
+          },
+        },
+        source: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            if (
+              this.path.includes('https://') ||
+              this.path.includes('http://')
+            ) {
+              return this.path;
+            }
             return `${process.env.APP_URL}/files/${this.path}`;
           },
         },
@@ -37,7 +55,7 @@ class Picture extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Work, {
-      foreignKey: 'picture_id	',
+      foreignKey: 'picture_id',
       as: 'works',
       through: 'pictures_works',
     });
