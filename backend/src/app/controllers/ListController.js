@@ -42,7 +42,7 @@ class ListController {
             {
               model: TypeWork,
               as: 'types',
-              attributes: ['id', 'name'],
+              attributes: ['id', 'name', 'value', 'label'],
               through: {
                 attributes: [],
               },
@@ -50,7 +50,7 @@ class ListController {
             {
               model: AreaExpertise,
               as: 'areaExpertise',
-              attributes: ['id', 'name'],
+              attributes: ['id', 'name', 'value', 'label'],
               through: {
                 attributes: [],
               },

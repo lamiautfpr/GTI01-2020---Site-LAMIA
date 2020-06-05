@@ -1,7 +1,4 @@
-export interface AttributesProps {
-  id: number;
-  name: string;
-}
+import { SelectItem } from './SelectItem';
 
 interface MemberProps {
   nameABNT: string;
@@ -16,7 +13,7 @@ export interface WorkListProps {
   id: number;
   title: string;
   objective: string;
-  types: AttributesProps[];
-  areaExpertise: AttributesProps[];
+  types: SelectItem[];
+  areaExpertise: SelectItem[];
   worksMember: WorksMemberProps[];
 }

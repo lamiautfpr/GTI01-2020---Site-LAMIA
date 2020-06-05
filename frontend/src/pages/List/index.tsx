@@ -13,7 +13,7 @@ import api from '../../services/api';
 
 import imgTeste from '../../assets/Teste.jpg';
 import { SelectItem } from '../../../myTypes/SelectItem';
-import { WorkListProps, AttributesProps } from '../../../myTypes/WorkListProps';
+import { WorkListProps } from '../../../myTypes/WorkListProps';
 import { compareTitleASC, compareTitleDESC } from '../../utils/orderArray';
 
 import { Main, Projects, SectionFilters } from './style';
@@ -48,45 +48,91 @@ const ListProjects: React.FC = () => {
   const [works, setWorks] = useState<WorkListProps[]>([]);
 
   const [category, setCategory] = useState<CategoryProps>({} as CategoryProps);
-  const [areas, setAreas] = useState<SelectItem[]>([]);
+  const [areas, setAreas] = useState<SelectItem[]>([
+    {
+      value: 0,
+      label: 'Todas',
+      description: null,
+    },
+  ]);
 
   // filters
-  const [orderSelected, setOrderSelected] = useState<number>(0);
-  const [areaSelected, setAreaSelected] = useState<number>(0);
-  const [typeSelected, setTypeSelected] = useState<number[]>([]);
+  const [areaSelected, setAreaSelected] = useState<SelectItem>(
+    {} as SelectItem,
+  );
+  const [typeSelected, setTypeSelected] = useState<SelectItem[]>([]);
 
   // Functions for list works
-  const changeWorkList = (area: number, types: AttributesProps[]): void => {};
+  const changeWorkList = (area: SelectItem, types: SelectItem[]): void => {
+    if (!area.value) {
+      const dafaulArea: SelectItem = {
+        value: 0,
+        label: 'Todas',
+        description: null,
+      };
+      area = dafaulArea;
+      setAreaSelected(area);
+    }
+
+    if (area.value === 0 && types.length < 1) {
+      // there is no filter
+      setWorks(allWorks);
+    } else if (area.value === 0 && types) {
+      // only type filter exists
+      setWorks(
+        allWorks.filter((work) => {
+          return work.types.some((t) =>
+            types.some((tSelected) => tSelected.value === t.value),
+          );
+        }),
+      );
+    } else if (area.value !== 0 && types.length < 1) {
+      // only area filter exists
+      setWorks(
+        allWorks.filter((work) => {
+          return work.areaExpertise.some((a) => a.value === area.value);
+        }),
+      );
+    } else {
+      // All filter exists
+      setWorks(
+        allWorks
+          .filter((work) => {
+            // Filtro das Area
+            return work.areaExpertise.some((a) => a.value === area.value);
+          })
+          .filter((work) => {
+            // Filtro dos TypesWorks
+            return work.types.some((t) =>
+              types.some((tSelected) => tSelected.value === t.value),
+            );
+          }),
+      );
+    }
+  };
 
   const setTypeWorks = (itemsSelected: SelectItem[]): void => {
     if (!itemsSelected || itemsSelected.length < 1) {
       setTypeSelected([]);
-      // changeWorkList(areaSelected, []);
+      changeWorkList(areaSelected, []);
     } else {
-      const types: number[] = [];
-      itemsSelected.forEach((item) => {
-        types.push(item.value);
-      });
-      setTypeSelected([]);
-      // changeWorkList(areaSelected, types);
+      setTypeSelected(itemsSelected);
+      changeWorkList(areaSelected, itemsSelected);
     }
   };
 
-  const setAreaExpensive = ({ value }: SelectItem): void => {
-    setAreaSelected(value);
-    // changeWorkList(value, typeSelected);
+  const setAreaExpensive = (item: SelectItem): void => {
+    setAreaSelected(item);
+    changeWorkList(item, typeSelected);
   };
 
-  const checkOrder = ({ value }: SelectItem): void => {
+  const checkOrder = (order: SelectItem): void => {
     // alert(`Order selected is ${value}`);
-
-    setOrderSelected(value);
-
-    if (value === 0) {
-      setWorks(works.sort(compareTitleASC));
+    if (order.value === 0) {
+      setWorks(allWorks.sort(compareTitleASC));
       setAllWorks(allWorks.sort(compareTitleASC));
-    } else if (value === 1) {
-      setWorks(works.sort(compareTitleDESC));
+    } else if (order.value === 1) {
+      setWorks(allWorks.sort(compareTitleDESC));
       setAllWorks(allWorks.sort(compareTitleDESC));
     }
   };
@@ -95,15 +141,19 @@ const ListProjects: React.FC = () => {
   useEffect(() => {
     api.get(`category-works/${params.category}`).then((response) => {
       setCategory(response.data);
-      setAllWorks(response.data.works);
-      setWorks(response.data.works);
+      setAllWorks(response.data.works.sort(compareTitleASC));
+      setWorks(response.data.works.sort(compareTitleASC));
     });
 
-    if (params.category !== 'members') {
-      api.get(`area-expertises`).then((response) => {
-        setAreas(response.data);
-      });
-    }
+    api.get(`area-expertises`).then((response) => {
+      const dafaulArea: SelectItem = {
+        value: 0,
+        label: 'Todas',
+        description: null,
+      };
+
+      setAreas([...response.data.concat(dafaulArea)]);
+    });
   }, [params.category]);
 
   const workWithTrasitions = useTransition(works, (work) => work.id, {
@@ -172,13 +222,13 @@ const ListProjects: React.FC = () => {
                   <span>
                     <FaRegClipboard size={14} />
                     {item.types.map((type) => (
-                      <span key={type.id}>{`${type.name}; `}</span>
+                      <span key={type.value}>{`${type.label}; `}</span>
                     ))}
                   </span>
                   <span>
                     <FaListUl size={14} />
                     {item.areaExpertise.map((ae) => (
-                      <span key={ae.id}>{`${ae.name}; `}</span>
+                      <span key={ae.value}>{`${ae.label}; `}</span>
                     ))}
                   </span>
                 </strong>
