@@ -41,6 +41,13 @@ interface AreasExpertiseProps {
   description?: string | null;
 }
 
+interface PartnerProps {
+  id: number;
+  name: string;
+  logo?: string | null;
+  linkPage?: string | null;
+}
+
 const Home: React.FC = () => {
   const [statistics, setStatistics] = useState<StatisticsProps>({
     countRepositories: 5,
@@ -53,6 +60,8 @@ const Home: React.FC = () => {
     [],
   );
 
+  const [partner, setPartner] = useState<PartnerProps[]>([]);
+
   useEffect(() => {
     api.get<StatisticsProps>(`statistics`).then((response) => {
       setStatistics(response.data);
@@ -62,6 +71,12 @@ const Home: React.FC = () => {
   useEffect(() => {
     api.get<AreasExpertiseProps[]>(`area-expertises`).then((response) => {
       setAreaExpertises(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    api.get<PartnerProps[]>(`partiners`).then((response) => {
+      setPartner(response.data);
     });
   }, []);
 
@@ -286,34 +301,29 @@ const Home: React.FC = () => {
         <SectionVip id="Partners">
           <header>
             <h2>Parceiros</h2>
+            <button>seja um parceiro</button>
           </header>
           <div>
-            <ul>
-              <li>
-                <img src={logoLar} alt="Coperativa LAR" />
-                <h2>Coperativa LAR</h2>
-              </li>
-              <li>
-                <img src={logoStark} alt="Indústrias stark" />
-                <h2>Indústrias stark</h2>
-              </li>
-              <li>
-                <img src={logoXavier} alt="Instituto Xavier" />
-                <h2>Instituto Xavier</h2>
-              </li>
-              <li>
-                <img src={logoRock} alt="Rock Star Games" />
-                <h2>Rock Star Games</h2>
-              </li>
-              <li>
-                <img src={logoLex} alt="Lex Corporation" />
-                <h2>Lex Corporation</h2>
-              </li>
-              <li>
-                <img src={logoCyber} alt="Cyber Punk 2077" />
-                <h2>Cyber Punk 2077</h2>
-              </li>
-            </ul>
+            {partner.length > 0 ? (
+              <ul>
+                {partner.map((partne) => (
+                  <li key={partne.id}>
+                    <img
+                      src={partne.logo ? `${partne.logo}` : logoStark}
+                      alt="Coperativa LAR"
+                    />
+                    <h2>{partne.name}</h2>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <ul>
+                <li>
+                  <img src={logoStark} alt="Coperativa LAR" />
+                  <h2>Podia ser sua empresa</h2>
+                </li>
+              </ul>
+            )}
           </div>
         </SectionVip>
         <hr />
