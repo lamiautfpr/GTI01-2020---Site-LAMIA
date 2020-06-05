@@ -11,7 +11,7 @@ import {
 
 import api from '../../services/api';
 
-import imgTeste from '../../assets/Teste.jpg';
+import imgLogo from '../../assets/logo.svg';
 import emojiSad from '../../assets/emojiSad.png';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { WorkListProps } from '../../../myTypes/WorkListProps';
@@ -230,7 +230,7 @@ const ListProjects: React.FC = () => {
             workWithTrasitions.map(({ item, key, props }) => (
               <animated.div key={item.id} style={props}>
                 <Link to={`/work/${item.id}`}>
-                  <img src={imgTeste} alt="Teste" />
+                  <img src={imgLogo} alt={item.title} />
 
                   <strong>
                     {item.title}
@@ -268,7 +268,7 @@ const ListProjects: React.FC = () => {
                 <br />
                 Ainda não temos o que você procura...
               </h2>
-              <img src={emojiSad} />
+              <img src={emojiSad} alt="Triste" />
             </CardWarning>
           )}
         </Projects>
