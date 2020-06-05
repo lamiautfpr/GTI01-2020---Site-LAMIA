@@ -35,6 +35,12 @@ interface StatisticsProps {
   countStars: number;
 }
 
+interface AreasExpertiseProps {
+  id: number;
+  name: string;
+  description?: string | null;
+}
+
 const Home: React.FC = () => {
   const [statistics, setStatistics] = useState<StatisticsProps>({
     countRepositories: 5,
@@ -43,11 +49,19 @@ const Home: React.FC = () => {
     countStars: 10,
   } as StatisticsProps);
 
+  const [areaExpertises, setAreaExpertises] = useState<AreasExpertiseProps[]>(
+    [],
+  );
+
   useEffect(() => {
-    // setStatistics(await getData());
-    // console.log(`s2 ${statistics.count_commits}`);
     api.get<StatisticsProps>(`statistics`).then((response) => {
       setStatistics(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    api.get<AreasExpertiseProps[]>(`area-expertises`).then((response) => {
+      setAreaExpertises(response.data);
     });
   }, []);
 
@@ -253,36 +267,19 @@ const Home: React.FC = () => {
             <h2>Área de Atuação</h2>
           </HeaderSection>
           <div>
-            <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Ciências de Dados</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros...
-              </p>
-            </div>
-            <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Visão Computacional</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros...
-              </p>
-            </div>
-            <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Games</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros...
-              </p>
-            </div>
+            {areaExpertises.map((area) => (
+              <div key={area.id}>
+                <img src={imgTeste} alt="Teste" />
+                <header>
+                  <h2>{area.name}</h2>
+                </header>
+                <p>
+                  {area.description
+                    ? `${area.description.slice(0, 130)} ...`
+                    : 'Lendo alguns artigos para devinição perfeita da aplicação científica e industrial. Isso pode demorar um pouco...'}
+                </p>
+              </div>
+            ))}
           </div>
         </SectionColumn>
         <hr />
