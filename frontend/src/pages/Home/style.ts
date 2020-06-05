@@ -133,31 +133,65 @@ export const SectionVip = styled.section`
   background: ${featuredColor};
   padding: 24px;
   border-radius: 16px;
-  -webkit-box-shadow: 10px 10px 64px -16px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 64px -16px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 64px -16px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 64px -16px rgba(0, 0, 0, 0.75);
 
   display: flex;
   flex-direction: column;
-
 
   & > header {
     margin: 4px 0 32px 0;
     /* border-bottom: 1px solid ${titleColor}; */
 
+    display: flex;
+    flex-wrap: wrap-reverse;
+
     font-size: 32px;
     color: ${secondaryBackground};
 
-    &::after{
-      content: "";
+    button{
+      margin-left:64px;
+
+      border: 3px solid white;
+      padding: 10px 15px;
+      border-radius: 24px;
+
+      background: none;
+
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 16px;
+      color: white;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+
+      &:hover {
+        background: white;
+
+        border: 0px solid white;
+
+        transform: translateX(2px);
+
+        color: ${transparentize(0, primaryColor)};
+      }
+    }
+
+    &::after {
+      content: '';
 
       width: 224px;
       height: 2px;
-      background-image: -webkit-linear-gradient(180deg, #fff 15%, ${secondaryBackground} 85%);
+      background-image: -webkit-linear-gradient(
+        180deg,
+        #fff 15%,
+        ${secondaryBackground} 85%
+      );
 
       position: absolute;
     }
-
   }
 
   ul {
@@ -175,10 +209,10 @@ export const SectionVip = styled.section`
       align-items: center;
 
       margin-top: 24px;
-        margin-left: 24px;
+      margin-left: 24px;
 
-      &:hover{
-        img{
+      &:hover {
+        img {
           filter: none;
           transform: translateY(5px);
         }
@@ -188,7 +222,7 @@ export const SectionVip = styled.section`
         width: 150px;
         height: 150px;
         border-radius: 35px;
-        transition: .3s;
+        transition: 0.3s;
 
         filter: grayscale(100%);
       }
