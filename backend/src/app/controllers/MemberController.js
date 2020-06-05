@@ -78,7 +78,12 @@ class MemberController {
       ],
     });
 
-    return res.json(members);
+    const officesMembers = await TypeMember.findAll({
+      attributes: ['id', 'value', 'name', 'label', 'description'],
+      order: ['name'],
+    });
+
+    return res.json({ members, officesMembers });
   }
 
   async show(req, res) {

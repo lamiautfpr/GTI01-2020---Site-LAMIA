@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
-import {
-  FaChevronRight,
-  FaUserNinja,
-  FaRegClipboard,
-  FaListUl,
-} from 'react-icons/fa';
+import { FaMedal, FaChevronRight } from 'react-icons/fa';
 
 import api from '../../services/api';
 
@@ -57,7 +52,17 @@ const ListProjects: React.FC = () => {
 
   // Functions for list works
   const changeWorkList = (itemsSelected: SelectItem[]): void => {
-    alert(itemsSelected);
+    if (!itemsSelected || itemsSelected.length < 1) {
+      setMembers(allMembers);
+    } else {
+      setMembers(
+        allMembers.filter((member) => {
+          return itemsSelected.some((item) => {
+            return item.value === member.office.value;
+          });
+        }),
+      );
+    }
   };
 
   const checkOrder = (order: SelectItem): void => {
@@ -88,11 +93,9 @@ const ListProjects: React.FC = () => {
   // Functions for get list works
   useEffect(() => {
     api.get(`members/`).then((response) => {
-      setMembers(response.data);
-    });
-
-    api.get(`type-members`).then((response) => {
-      // setOffices([...response.data]);
+      setOffices(response.data.officesMembers);
+      setMembers(response.data.members);
+      setAllMembers(response.data.members);
     });
   }, []);
 
@@ -145,11 +148,10 @@ const ListProjects: React.FC = () => {
                   <strong>
                     {item.name}
                     <span>
-                      <FaUserNinja size={14} />
+                      <FaMedal size={14} />
+                      {item.office.label}
                     </span>
-                    <span>
-                      <FaRegClipboard size={14} />
-                    </span>
+                    <span>{/* <FaRegClipboard size={14} /> */}</span>
                   </strong>
                   <p>{item.description}</p>
                   <div>
