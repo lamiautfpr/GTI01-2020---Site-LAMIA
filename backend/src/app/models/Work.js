@@ -96,9 +96,10 @@ class Work extends Model {
       as: 'areaExpertise',
       through: 'areaExpertise_works',
     });
+
     this.belongsToMany(models.Picture, {
       foreignKey: 'work_id',
-      as: 'picture',
+      as: 'pictures',
       through: 'pictures_works',
     });
 
