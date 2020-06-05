@@ -122,7 +122,7 @@ export const Headline = styled.div`
     justify-content: space-between;
     /* flex: 3 2 300px; */
 
-    
+
     .leftInfo{
       /* border: 1px solid green; */
 
@@ -161,12 +161,12 @@ export const Headline = styled.div`
        display: flex;
        flex-direction: row;
        justify-content: flex-end;
-        
-       
+
+
        a{
        color: ${primaryColor};
        margin-right: 8px;
-        
+
         img{
           width: 22px;
         }
@@ -179,19 +179,19 @@ export const Headline = styled.div`
        align-items: flex-start;
 
        position: relative;
-       
-       
-       margin:8px;
-       
 
-       
+
+       margin:8px;
+
+
+
 
        svg{
        color: ${primaryColor};
        margin-right: 4px;
-         
+
        }
-       
+
        color: white;
 
        span{
@@ -201,15 +201,15 @@ export const Headline = styled.div`
 }
        }
 
-       
-                 
+
+
       }
 
       .description{
        /* border: 1px solid red; */
        width:100%;
        height: auto;
-      
+
        color: #f0f0f0;
 
        font-size: 16px;
@@ -233,19 +233,22 @@ export const Headline = styled.div`
 
        color: #f0f0f0;
 
-       svg{
+       span {
+         margin-top: 8px;
+        svg{
          color: ${primaryColor};
-         margin-right: 2px;
+         margin-right: 8px;
+       }
        }
 
       }
-      
+
     }
 
 
-    
+
     /* h1 {
-      
+
       text-align: start;
       padding-top: 20px;
       padding-left: 42px;
@@ -253,9 +256,9 @@ export const Headline = styled.div`
 
       color: white;
       font-size: 64px;
-            
+
     } */
-    
+
   }
 
   .imgBorde {

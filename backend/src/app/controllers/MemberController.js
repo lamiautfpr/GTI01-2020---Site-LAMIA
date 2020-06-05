@@ -87,36 +87,48 @@ class MemberController {
   }
 
   async show(req, res) {
-    const members = await Member.findOne({
+    const member = await Member.findOne({
       where: {
         login: req.params.login,
       },
-      attributes: ['name', 'email', 'phone', 'likendin', 'git_hub', 'lattes'],
+      attributes: [
+        'name',
+        'nameABNT',
+        'email',
+        'phone',
+        'likendin',
+        'urlLikendin',
+        'git_hub',
+        'urlGithub',
+        'lattes',
+        'urlLattes',
+        'description',
+      ],
       include: [
         {
           model: TypeMember,
           as: 'office',
-          attributes: ['name'],
+          attributes: ['id', 'value', 'name', 'label', 'description'],
         },
         {
           model: Picture,
           as: 'avatar',
-          attributes: ['name', 'path', 'url'],
+          attributes: ['name', 'path', 'src', 'source'],
         },
         {
           model: MemberWork,
-          as: 'membersWork',
+          as: 'works',
           attributes: ['scholarship'],
           include: [
             {
               model: Work,
               as: 'work',
-              attributes: ['title', 'objective'],
+              attributes: ['id', 'title', 'objective'],
               include: [
                 {
                   model: AreaExpertise,
                   as: 'areaExpertise',
-                  attributes: ['name'],
+                  attributes: ['name', 'id', 'description'],
                   through: { attributes: [] },
                 },
               ],
@@ -125,8 +137,7 @@ class MemberController {
         },
       ],
     });
-
-    return res.json({ members });
+    return res.json(member);
   }
 
   async update(req, res) {

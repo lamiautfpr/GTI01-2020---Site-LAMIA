@@ -83,6 +83,14 @@ class Member extends Model {
             notEmpty: false,
           },
         },
+        urlLikendin: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return this.likendin
+              ? `https://www.linkedin.com/in/${this.likendin}`
+              : null;
+          },
+        },
         git_hub: {
           type: Sequelize.STRING,
           allowNull: true,
@@ -92,6 +100,12 @@ class Member extends Model {
             notEmpty: false,
           },
         },
+        urlGithub: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return this.git_hub ? `https://github.com/${this.git_hub}` : null;
+          },
+        },
         lattes: {
           type: Sequelize.STRING,
           allowNull: true,
@@ -99,6 +113,12 @@ class Member extends Model {
           validate: {
             notNull: false,
             notEmpty: false,
+          },
+        },
+        urlLattes: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return this.lattes ? `http://lattes.cnpq.br/${this.lattes}` : null;
           },
         },
       },
@@ -128,7 +148,7 @@ class Member extends Model {
 
     this.hasMany(models.MemberWork, {
       foreignKey: 'member_id',
-      as: 'membersWork',
+      as: 'works',
     });
   }
 
