@@ -358,8 +358,15 @@ export const Card = styled.div`
   transition: 0.3s;
 
   img {
-    width: 400px;
+    min-width: 200px;
+    max-height: 300px;
   }
+
+  /* .imgCase {
+    background-color: red;
+    width: 200px;
+    height: 300px;
+  } */
 
   &::before {
     content: '';
@@ -421,7 +428,7 @@ export const Card = styled.div`
     flex: 1 0 auto;
     padding: 16px;
     background: #f0f0f0;
-    transform: translateY(-72px);
+    transform: translateY(-64px);
     transition: 0.3s;
     height: 400px;
 
@@ -547,10 +554,10 @@ export const Card = styled.div`
 
   &:hover .bookContainer .content {
     opacity: 1;
-    transform: translateY(-304px);
+    transform: translateY(-272px);
   }
   &:hover .informationsContainer {
-    transform: translateY(-280px);
+    transform: translateY(-244px);
   }
   &:hover .informationsContainer .moreInfomation {
     opacity: 1;
