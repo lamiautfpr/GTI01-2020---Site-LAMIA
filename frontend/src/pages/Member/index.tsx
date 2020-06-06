@@ -21,6 +21,7 @@ import api from '../../services/api';
 import iconLattes from '../../assets/icon_lattes.svg';
 import userPadrao from '../../assets/userPadrao.png';
 import workPadrao from '../../assets/logo.svg';
+import imgWorkDefault from '../../assets/imgWorkDefault.png';
 
 import { Main, Headline, Title, Shelf, Card, ShelfGallery } from './style';
 import Header from '../../components/Header';
@@ -157,15 +158,16 @@ const Member: React.FC = () => {
           {member.works.length > 0 ? (
             <Shelf>
               {member.works.map(({ workData }) => (
-                <Card>
+                <Card key={member.id}>
                   <img
                     src={
                       workData.pictures.length > 0
                         ? workData.pictures[0].src
-                        : workPadrao
+                        : imgWorkDefault
                     }
                     alt="Projeto"
                   />
+                  {/* <div className="imgCase" /> */}
                   <div className="bookContainer">
                     <div className="content">
                       <button> Saiba mais </button>
