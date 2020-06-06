@@ -5,40 +5,36 @@ import Picture from '../models/Picture';
 class OfficeController {
   async index(req, res) {
     const { office } = req.params;
+    const name = office
+      .substring(0, 1)
+      .toUpperCase()
+      .concat(office.substring(1));
 
-    const members = await TypeMember.findAll({
-      where: {
-        name: office
-          .substring(0, 1)
-          .toUpperCase()
-          .concat(office.substring(1))
-          .substring(0, office.length - 1),
-      },
+    const members = await Member.findAll({
+      // where: { name },
       attributes: ['id', 'name', 'description'],
       include: [
         {
-          model: Member,
-          as: 'members',
-          attributes: [
-            'name',
-            'email',
-            'phone',
-            'likendin',
-            'git_hub',
-            'lattes',
-          ],
-          include: [
-            {
-              model: Picture,
-              as: 'avatar',
-              attributes: ['name', 'path', 'url'],
-            },
-          ],
+          model: TypeMember,
+          as: 'office',
+          attributes: [],
+          where: {
+            name,
+          },
+        },
+        {
+          model: Picture,
+          as: 'avatar',
+          attributes: ['id', 'name', 'path', 'src', 'source'],
         },
       ],
+      order: [['name', 'ASC']],
     });
 
-    return res.json({ members });
+    if (!members) {
+      return res.json(null);
+    }
+    return res.json(members);
   }
 }
 
