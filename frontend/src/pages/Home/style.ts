@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { shade, transparentize } from 'polished';
 import {
@@ -8,6 +8,10 @@ import {
   secondaryColor,
   featuredColor,
 } from '../../styles/paletsColores';
+
+interface WarningPros {
+  textColor?: string;
+}
 
 export const HeaderSection = styled.header`
 
@@ -307,5 +311,36 @@ export const SectionCards = styled.section`
         }
       }
     }
+  }
+`;
+
+export const CardWarning = styled.div<WarningPros>`
+  max-width: 1200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  h2 {
+    display: flex;
+    /* flex-direction: column; */
+
+    font-size: 40px;
+    font-family: 'Dosis';
+    color: ${secondaryColor};
+
+    ${(props) =>
+      props.textColor &&
+      css`
+        color: ${props.textColor};
+      `}
+  }
+
+  img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+
+    margin-left: 40px;
   }
 `;

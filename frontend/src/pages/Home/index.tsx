@@ -6,7 +6,11 @@ import VisibilitySensor from 'react-visibility-sensor';
 import api from '../../services/api';
 
 import imgTeste from '../../assets/Teste.jpg';
+import plusUltra from '../../assets/plus_ultra.gif';
 import logoDemo from '../../assets/logo_demo.jpg';
+import logo from '../../assets/logo.svg';
+import orientador from '../../assets/orientador.jpg';
+import desorientado from '../../assets/desorientado.jpg';
 
 import logoLar from '../../assets/logo_lar.png';
 import logoStark from '../../assets/logo_stark.jpg';
@@ -22,6 +26,7 @@ import {
   SectionVip,
   SectionCards,
   HeaderSection,
+  CardWarning,
 } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
@@ -29,6 +34,7 @@ import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 
 import { WorkListProps } from '../../../myTypes/WorkListProps';
+import { ImageProps } from '../../../myTypes/Images';
 
 interface StatisticsProps {
   countRepositories: number;
@@ -50,6 +56,13 @@ interface PartnerProps {
   linkPage?: string | null;
 }
 
+interface AdvisorsProps {
+  id: number;
+  name: string;
+  description: string;
+  avatar: ImageProps;
+}
+
 const Home: React.FC = () => {
   const [statistics, setStatistics] = useState<StatisticsProps>({
     countRepositories: 5,
@@ -66,27 +79,27 @@ const Home: React.FC = () => {
 
   const [lastWork, setLastWork] = useState<WorkListProps[]>([]);
 
-  useEffect(() => {
-    api.get<StatisticsProps>(`statistics`).then((response) => {
-      setStatistics(response.data);
-    });
-  }, []);
+  const [advisors, setAdvisors] = useState<AdvisorsProps[]>([]);
 
   useEffect(() => {
     api.get<AreasExpertiseProps[]>(`area-expertises`).then((response) => {
       setAreaExpertises(response.data);
     });
-  }, []);
 
-  useEffect(() => {
     api.get<PartnerProps[]>(`partiners`).then((response) => {
       setPartner(response.data);
     });
-  }, []);
 
-  useEffect(() => {
     api.get<WorkListProps[]>(`last-work?limit=3`).then((response) => {
       setLastWork(response.data);
+    });
+
+    api.get<StatisticsProps>(`statistics`).then((response) => {
+      setStatistics(response.data);
+    });
+
+    api.get<AdvisorsProps[]>(`members/Orientador`).then((response) => {
+      setAdvisors(response.data);
     });
   }, []);
 
@@ -97,7 +110,7 @@ const Home: React.FC = () => {
       <NavBar />
 
       <Main>
-        <SectionLine title="News" id="News">
+        {/* <SectionLine title="News" id="News">
           <HeaderSection>
             <h2>Notícias</h2>
           </HeaderSection>
@@ -147,8 +160,8 @@ const Home: React.FC = () => {
 
             <img src={imgTeste} alt="Teste" />
           </div>
-        </SectionLine>
-        <hr />
+        </SectionLine> 
+        <hr /> */}
         <SectionLine id="Histoty">
           <HeaderSection>
             <h2>Missão</h2>
@@ -178,12 +191,12 @@ const Home: React.FC = () => {
                 <div key={work.id}>
                   <img
                     src={
-                      work.pictures?.length > 0
-                        ? work.pictures[0].src
-                        : imgTeste
+                      work.pictures?.length > 0 ? work.pictures[0].src : logo
                     }
                     alt={
-                      work.pictures.length > 0 ? work.pictures[0].name : 'teste'
+                      work.pictures.length > 0
+                        ? work.pictures[0].name
+                        : 'sem imagem'
                     }
                   />
                   <header>
@@ -207,7 +220,10 @@ const Home: React.FC = () => {
               </div> */}
             </div>
           ) : (
-            <h2>Alguem tem que arrumar ne...</h2>
+            <CardWarning>
+              <img src={plusUltra} alt="plusUltra" />
+              <h2>Estamos dando PLUS ULTRA para publiar nosso trabalho</h2>
+            </CardWarning>
           )}
         </SectionColumn>
         <hr />
@@ -318,7 +334,7 @@ const Home: React.FC = () => {
                 {partner.map((partne) => (
                   <li key={partne.id}>
                     <img
-                      src={partne.logo ? `${partne.logo}` : logoStark}
+                      src={partne.logo ? `${partne.logo}` : logoLex}
                       alt="Coperativa LAR"
                     />
                     <h2>{partne.name}</h2>
@@ -326,12 +342,10 @@ const Home: React.FC = () => {
                 ))}
               </ul>
             ) : (
-              <ul>
-                <li>
-                  <img src={logoStark} alt="Coperativa LAR" />
-                  <h2>Podia ser sua empresa</h2>
-                </li>
-              </ul>
+              <CardWarning textColor="#f0f0f0">
+                <img src={logoLex} alt="logoLex" />
+                <h2>Estamos sem uma parceria</h2>
+              </CardWarning>
             )}
           </div>
         </SectionVip>
@@ -340,38 +354,29 @@ const Home: React.FC = () => {
           <HeaderSection>
             <h2>Orientadores</h2>
           </HeaderSection>
-          <div>
+          {advisors.length > 0 ? (
             <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Anderson Brilhador</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros...
-              </p>
+              <>
+                {advisors.map((advisor) => (
+                  <div key={advisor.id}>
+                    <img
+                      src={advisor.avatar ? advisor.avatar.src : orientador}
+                      alt={advisor.avatar ? advisor.avatar.name : 'sem imagem'}
+                    />
+                    <header>
+                      <h2>{advisor.name}</h2>
+                    </header>
+                    <p>{advisor.description}</p>
+                  </div>
+                ))}
+              </>
             </div>
-            <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Arlete ?</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros...
-              </p>
-            </div>
-            <div>
-              <img src={imgTeste} alt="Teste" />
-              <header>
-                <h2>Thiago Naves</h2>
-              </header>
-              <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros...
-              </p>
-            </div>
-          </div>
+          ) : (
+            <CardWarning>
+              <img src={desorientado} alt="sem orientador" />
+              <h2>Estamos desorientados</h2>
+            </CardWarning>
+          )}
         </SectionColumn>
       </Main>
 
