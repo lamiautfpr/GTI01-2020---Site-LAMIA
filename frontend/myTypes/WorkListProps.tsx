@@ -19,4 +19,5 @@ export interface WorkListProps {
   worksMember: WorksMemberProps[];
   dateBegin: Date;
   pictures: ImageProps[];
+  urlGithub?: string;
 }

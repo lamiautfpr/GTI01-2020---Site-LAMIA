@@ -6,6 +6,7 @@ import Picture from '../models/Picture';
 import MemberWork from '../models/MemberWork';
 import Work from '../models/Work';
 import AreaExpertise from '../models/AreaExpertise';
+import TypeWork from '../models/TypeWork';
 
 class MemberController {
   async store(req, res) {
@@ -122,13 +123,33 @@ class MemberController {
           include: [
             {
               model: Work,
-              as: 'work',
-              attributes: ['id', 'title', 'objective'],
+              as: 'workData',
+              attributes: [
+                'id',
+                'title',
+                'objective',
+                'date_begin',
+                'dateBegin',
+                'git_hub',
+                'urlGithub',
+              ],
               include: [
+                {
+                  model: Picture,
+                  as: 'pictures',
+                  attributes: ['id', 'name', 'path', 'src', 'source'],
+                  through: { attributes: [] },
+                },
                 {
                   model: AreaExpertise,
                   as: 'areaExpertise',
-                  attributes: ['name', 'id', 'description'],
+                  attributes: ['label', 'name'],
+                  through: { attributes: [] },
+                },
+                {
+                  model: TypeWork,
+                  as: 'types',
+                  attributes: ['label', 'name'],
                   through: { attributes: [] },
                 },
               ],

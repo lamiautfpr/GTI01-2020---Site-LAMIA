@@ -13,14 +13,14 @@ import {
   FaListUl,
   FaMedal,
 } from 'react-icons/fa';
-import { containerCSS } from 'react-select/src/components/containers';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { ImageProps } from '../../../myTypes/Images';
+import { WorkListProps } from '../../../myTypes/WorkListProps';
 
 import api from '../../services/api';
 import iconLattes from '../../assets/icon_lattes.svg';
 import userPadrao from '../../assets/userPadrao.png';
-import { photos } from '../../assets/photoGalleryTeste/photos';
+import workPadrao from '../../assets/logo.svg';
 
 import { Main, Headline, Title, Shelf, Card, ShelfGallery } from './style';
 import Header from '../../components/Header';
@@ -29,6 +29,11 @@ import Footer from '../../components/Footer';
 
 interface MembersParams {
   login: string;
+}
+
+interface WorkMemberProps {
+  scholarship: boolean;
+  workData: WorkListProps;
 }
 
 interface MembersProps {
@@ -44,6 +49,7 @@ interface MembersProps {
   urlLikendin?: string;
   urlGithub?: string;
   urlLattes?: string;
+  works: WorkMemberProps[];
 }
 
 const Member: React.FC = () => {
@@ -79,36 +85,37 @@ const Member: React.FC = () => {
 
       <NavBar />
 
-      {member && (
+      {member ? (
         <Main>
           <Headline>
             <div className="basicInfo">
               <div className="leftInfo">
-                <div className="name">
-                  <h1>{member.name}</h1>
-                  {/* <h2>Lechensque</h2> */}
-                </div>
-                <div className="office-icons">
-                  <div className="office">
-                    <FaMedal size={21} />
-                    <span>{member.office.label}</span>
+                <div className="column">
+                  <div className="name">
+                    <h1>{member.name}</h1>
                   </div>
-                  <div className="icons">
-                    {member.urlGithub && (
-                      <a href={member.urlGithub} target="bank">
-                        <FaGithubSquare size={24} />
-                      </a>
-                    )}
-                    {member.urlLikendin && (
-                      <a href={member.urlLikendin} target="bank">
-                        <FaLinkedinIn size={24} />
-                      </a>
-                    )}
-                    {member.urlLattes && (
-                      <a href={member.urlLattes} target="bank">
-                        <img src={iconLattes} alt="Lattes" />
-                      </a>
-                    )}
+                  <div className="row">
+                    <div className="office">
+                      <FaMedal size={21} />
+                      <span>{member.office.label}</span>
+                    </div>
+                    <div className="icons">
+                      {member.urlGithub && (
+                        <a href={member.urlGithub} target="bank">
+                          <FaGithubSquare size={24} />
+                        </a>
+                      )}
+                      {member.urlLikendin && (
+                        <a href={member.urlLikendin} target="bank">
+                          <FaLinkedinIn size={24} />
+                        </a>
+                      )}
+                      {member.urlLattes && (
+                        <a href={member.urlLattes} target="bank">
+                          <img src={iconLattes} alt="Lattes" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -147,75 +154,74 @@ const Member: React.FC = () => {
               <h2>Projetos Participado</h2>
             </header>
           </Title>
-          <Shelf>
-            <Card>
-              <img src={userPadrao} alt="Teste" />
-              <div className="bookContainer">
-                <div className="content">
-                  {/* <button> Saiba mais </button> */}
-                </div>
-              </div>
-              <div className="informationsContainer">
-                <h2 className="title"> Teste 1</h2>
-                <div className="primaryInformations">
-                  <span>
-                    <FaListUl size={16} />
-                    Visão computacional
-                  </span>
-                  <span>
-                    <FaRegClipboard size={16} />
-                    TCC
-                  </span>
-                </div>
-
-                <div className="moreInfomation">
-                  <div className="infoDateContainer">
-                    <a
-                      href="https://github.com/lamia-utfpr"
-                      target="bank"
-                      className="box git"
-                    >
-                      <FaGithub size={32} />
-                      <p>repositorio</p>
-                    </a>
-                    <div className="box Date">
-                      <FaRegCalendarAlt size={32} />
-                      <p>28/05/2020</p>
+          {member.works.length > 0 ? (
+            <Shelf>
+              {member.works.map(({ workData }) => (
+                <Card>
+                  <img
+                    src={
+                      workData.pictures.length > 0
+                        ? workData.pictures[0].src
+                        : workPadrao
+                    }
+                    alt="Projeto"
+                  />
+                  <div className="bookContainer">
+                    <div className="content">
+                      <button> Saiba mais </button>
                     </div>
                   </div>
-                  <div className="objective">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Quasi eveniet perferendis oie ...
-                    </p>
+                  <div className="informationsContainer">
+                    <h2 className="title">{workData.title}</h2>
+                    <div className="primaryInformations">
+                      {workData.areaExpertise.length > 0 && (
+                        <span>
+                          <FaListUl size={16} />
+                          {workData.areaExpertise.map(
+                            (area) => `${area.label}; `,
+                          )}
+                        </span>
+                      )}
+                      {workData.types.length > 0 && (
+                        <span>
+                          <FaRegClipboard size={16} />
+                          {workData.types.map((type) => `${type.label}; `)}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="moreInfomation">
+                      <div className="infoDateContainer">
+                        {workData.urlGithub && (
+                          <a
+                            href={workData.urlGithub}
+                            target="bank"
+                            className="box git"
+                          >
+                            <FaGithub size={32} />
+                            <p>Repositório</p>
+                          </a>
+                        )}
+
+                        <div className="box Date">
+                          <FaRegCalendarAlt size={32} />
+                          <p>{workData.dateBegin}</p>
+                        </div>
+                      </div>
+                      <div className="objective">
+                        <p>{workData.objective}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Card>
-          </Shelf>
-          <Title>
-            <header>
-              <h2>Galeria</h2>
-            </header>
-          </Title>
-          <ShelfGallery>
-            <Gallery photos={photos} onClick={openLightbox} />
-            <ModalGateway>
-              {viewerIsOpen ? (
-                <Modal onClose={closeLightbox}>
-                  <Carousel
-                    currentIndex={currentImage}
-                    views={photos.map((x) => ({
-                      ...x,
-                      srcset: x.source,
-                      caption: x.title,
-                    }))}
-                  />
-                </Modal>
-              ) : null}
-            </ModalGateway>
-          </ShelfGallery>
+                </Card>
+              ))}
+            </Shelf>
+          ) : (
+            <h2>Jovem padoã ainda em treinamento</h2>
+          )}
         </Main>
+      ) : (
+        <h2>OI</h2>
       )}
 
       <Footer />

@@ -36,6 +36,12 @@ class Work extends Model {
             notEmpty: false,
           },
         },
+        urlGithub: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return this.git_hub ? `https://github.com/${this.git_hub}` : null;
+          },
+        },
         date_begin: {
           type: Sequelize.DATE,
           allowNull: false,
@@ -48,7 +54,6 @@ class Work extends Model {
           type: Sequelize.VIRTUAL,
           get() {
             const dateFormated = format(this.date_begin, 'MM/dd/yyyy');
-            console.log(`df ${dateFormated}`);
             return dateFormated;
           },
         },

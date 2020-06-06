@@ -25,7 +25,7 @@ class MemberWork extends Model {
 
     this.belongsTo(models.Work, {
       foreignKey: 'work_id',
-      as: 'work',
+      as: 'workData',
     });
   }
 }
