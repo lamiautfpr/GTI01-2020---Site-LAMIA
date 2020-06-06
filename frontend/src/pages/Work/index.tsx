@@ -18,6 +18,7 @@ import logoStark from '../../assets/logo_stark.jpg';
 import logoLex from '../../assets/logo_lex.png';
 import imgTeste from '../../assets/Teste.jpg';
 import { photos } from '../../assets/photoGalleryTeste/photos';
+import PulpFiction from '../../assets/Pulp_fiction.gif';
 
 import { WorkListProps } from '../../../myTypes/WorkListProps';
 
@@ -30,6 +31,7 @@ import {
   Aside,
   ShelfGallery,
   Content,
+  CardWarning,
 } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
@@ -214,7 +216,10 @@ const ProjectView: React.FC = () => {
             )}
           </>
         ) : (
-          'oi'
+          <CardWarning>
+            <img src={PulpFiction} alt="Pulp fiction" />
+            <h2>Esqueçerão de publicar de novo?</h2>
+          </CardWarning>
         )}
       </Main>
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { transparentize, shade } from 'polished';
 import {
@@ -8,6 +8,10 @@ import {
   featuredColor,
   titleColor,
 } from '../../styles/paletsColores';
+
+interface WarningPros {
+  textColor?: string;
+}
 
 export const Main = styled.main`
   background: #fff;
@@ -327,4 +331,37 @@ export const Aside = styled.aside`
 export const ShelfGallery = styled.div`
   max-width: 1200px;
   margin: 12px auto;
+`;
+
+export const CardWarning = styled.div<WarningPros>`
+  max-width: 1200px;
+
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  h2 {
+    display: flex;
+    /* flex-direction: column; */
+
+    font-size: 40px;
+    font-family: 'Dosis';
+    color: ${secondaryColor};
+
+    ${(props) =>
+      props.textColor &&
+      css`
+        color: ${props.textColor};
+      `}
+  }
+
+  img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+
+    margin-left: 40px;
+  }
 `;
