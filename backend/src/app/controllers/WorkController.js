@@ -66,20 +66,69 @@ class WorkController {
       // order: ['id', 'DESC'],
     });
 
-    // const works = await MemberWork.findAll({
-    //     include: [
-    //         {
-    //             model: Work,
-    //             as: 'works',
-    //         },
-    //         {
-    //             model: Member,
-    //             as: 'members',
-    //         },
-    //     ],
-    // });
-
     return res.json(works);
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+    const work = await Work.findByPk(id, {
+      include: [
+        {
+          model: Partner,
+          as: 'partner',
+          // attributes: ['name', 'label'],
+        },
+        {
+          model: CategoryWork,
+          as: 'categories',
+          // attributes: ['name', 'label'],
+          through: { attributes: [] },
+        },
+        {
+          model: TypeWork,
+          as: 'types',
+          attributes: ['name', 'label'],
+          through: { attributes: [] },
+        },
+        {
+          model: AreaExpertise,
+          as: 'areaExpertise',
+          attributes: ['name', 'label'],
+          through: { attributes: [] },
+        },
+        {
+          model: Picture,
+          as: 'pictures',
+          attributes: ['name', 'path', 'src', 'source'],
+        },
+        {
+          model: MemberWork,
+          as: 'worksMember',
+          attributes: ['scholarship'],
+          include: [
+            {
+              model: Member,
+              as: 'member',
+              attributes: ['name'],
+              include: [
+                {
+                  model: TypeMember,
+                  as: 'office',
+                  attributes: ['name'],
+                },
+                {
+                  model: Picture,
+                  as: 'avatar',
+                  attributes: ['name', 'path', 'src', 'source'],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json(work);
   }
 
   async store(req, res) {
