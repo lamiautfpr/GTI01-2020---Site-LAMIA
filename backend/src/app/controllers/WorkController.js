@@ -108,8 +108,8 @@ class WorkController {
           include: [
             {
               model: Member,
-              as: 'member',
-              attributes: ['name'],
+              as: 'memberData',
+              attributes: ['name', 'login', 'nameABNT'],
               include: [
                 {
                   model: TypeMember,
@@ -119,7 +119,7 @@ class WorkController {
                 {
                   model: Picture,
                   as: 'avatar',
-                  attributes: ['name', 'path', 'src', 'source'],
+                  attributes: ['name', 'path', 'src'],
                 },
               ],
             },

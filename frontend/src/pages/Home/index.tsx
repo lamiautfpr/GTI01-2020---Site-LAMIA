@@ -160,7 +160,7 @@ const Home: React.FC = () => {
 
             <img src={imgTeste} alt="Teste" />
           </div>
-        </SectionLine> 
+        </SectionLine>
         <hr /> */}
         <SectionLine id="Histoty">
           <HeaderSection>

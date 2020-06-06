@@ -9,9 +9,11 @@ import {
   FaRegClipboard,
   FaListUl,
 } from 'react-icons/fa';
+import { GiBookshelf } from 'react-icons/gi';
 
 import logoLar from '../../assets/logo_lar.png';
 import imgWorkDefault from '../../assets/imgWorkDefault.png';
+import imgUserDefault from '../../assets/userPadrao.png';
 import logoStark from '../../assets/logo_stark.jpg';
 import logoLex from '../../assets/logo_lex.png';
 import imgTeste from '../../assets/Teste.jpg';
@@ -94,49 +96,11 @@ const ProjectView: React.FC = () => {
               <SectionText>
                 <HeaderSection>Resumo</HeaderSection>
                 <div className="text">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Enim nulla est possimus vel itaque qui quam nesciunt
-                    temporibus! Iusto, voluptatum. Fuga nostrum laborum ducimus
-                    cumque vero ullam ipsa soluta quos.
-                  </p>
-
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Enim nulla est possimus vel itaque qui quam nesciunt
-                    temporibus! Iusto, voluptatum. Fuga nostrum laborum ducimus
-                    cumque vero ullam ipsa soluta quos.
-                  </p>
-
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Enim nulla est possimus vel itaque qui quam nesciunt
-                    temporibus! Iusto, voluptatum. Fuga nostrum laborum ducimus
-                    cumque vero ullam ipsa soluta quos.
-                  </p>
+                  <p>{work.abstract}</p>
                 </div>
                 <HeaderSection>Objetivo</HeaderSection>
                 <div className="text">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Enim nulla est possimus vel itaque qui quam nesciunt
-                    temporibus! Iusto, voluptatum. Fuga nostrum laborum ducimus
-                    cumque vero ullam ipsa soluta quos.
-                  </p>
-
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Enim nulla est possimus vel itaque qui quam nesciunt
-                    temporibus! Iusto, voluptatum. Fuga nostrum laborum ducimus
-                    cumque vero ullam ipsa soluta quos.
-                  </p>
-
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Enim nulla est possimus vel itaque qui quam nesciunt
-                    temporibus! Iusto, voluptatum. Fuga nostrum laborum ducimus
-                    cumque vero ullam ipsa soluta quos.
-                  </p>
+                  <p>{work.objective}</p>
                 </div>
               </SectionText>
 
@@ -145,99 +109,82 @@ const ProjectView: React.FC = () => {
                   <Aside>
                     <h1>Informações</h1>
                     <div>
-                      <span>
-                        <FaListUl />
-                        Visão Computacional
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        <FaRegClipboard />
-                        Consutoria
-                      </span>
+                      {work.categories.length > 0 && (
+                        <span>
+                          <GiBookshelf />
+                          {work.categories.map(
+                            (category) => `${category.name}; `,
+                          )}
+                        </span>
+                      )}
+                      {work.types.length > 0 && (
+                        <span>
+                          <FaRegClipboard />
+                          {work.types.map((type) => `${type.label}; `)}
+                        </span>
+                      )}
+                      {work.areaExpertise.length > 0 && (
+                        <span>
+                          <FaListUl />
+                          {work.areaExpertise.map((area) => `${area.label}; `)}
+                        </span>
+                      )}
                     </div>
                     <section>
-                      <div className="box">
-                        <a
-                          href="https://github.com/lamia-utfpr/MDT01-2019---Reconhecimento-Facial"
-                          target="bank"
-                          className="box git"
-                        >
-                          <FaGithub />
-                          <p>GitHub</p>
-                        </a>
-                      </div>
+                      {work.urlGithub && (
+                        <div className="box">
+                          <a
+                            href={work.urlGithub}
+                            target="bank"
+                            className="box git"
+                          >
+                            <FaGithub />
+                            <p>Repositório</p>
+                          </a>
+                        </div>
+                      )}
                       <div className="box">
                         <FaRegCalendarAlt />
-                        <p>22/04/2020</p>
+                        <p>{work.dateBegin}</p>
                       </div>
                     </section>
                   </Aside>
                   <Aside>
                     <h1>Integrantes</h1>
                     <div>
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
-
-                      <Link to="/member" target="bank">
-                        <img src={imgTeste} alt="Teste" />
-                      </Link>
+                      {work.worksMember.map(({ memberData }) => (
+                        <Link
+                          key={memberData.login}
+                          to={`/${memberData.login}`}
+                        >
+                          <img
+                            src={
+                              memberData.avatar
+                                ? memberData.avatar.src
+                                : imgUserDefault
+                            }
+                            alt={memberData.nameABNT}
+                          />
+                        </Link>
+                      ))}
                     </div>
                   </Aside>
                   <Aside>
                     <h1>Parceiros</h1>
                     <ul>
-                      <li>
-                        <img src={logoLar} alt="LogoLar" />
-                      </li>
-                      <li>
-                        <img src={logoLex} alt="LogoLex" />
-                      </li>
-
-                      <li>
-                        <img src={logoStark} alt="LogoStark" />
-                      </li>
+                      {work.partner && (
+                        <li>
+                          <a href={work.partner.link_page}>
+                            <img
+                              src={work.partner.logo}
+                              alt={work.partner.name}
+                            />
+                          </a>
+                        </li>
+                      )}
+                      <Link to="/" className="BePartner">
+                        seja um Parceiro
+                      </Link>
                     </ul>
                   </Aside>
                 </div>

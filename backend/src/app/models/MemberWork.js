@@ -20,7 +20,7 @@ class MemberWork extends Model {
   static associate(models) {
     this.belongsTo(models.Member, {
       foreignKey: 'member_id',
-      as: 'member',
+      as: 'memberData',
     });
 
     this.belongsTo(models.Work, {

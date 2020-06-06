@@ -236,8 +236,10 @@ const ListProjects: React.FC = () => {
                     {item.title}
                     <span>
                       <FaUserNinja size={14} />
-                      {item.worksMember.map((m) => (
-                        <span key={m.id}>{`${m.member.nameABNT}; `}</span>
+                      {item.worksMember.map(({ memberData }) => (
+                        <span key={memberData.login}>
+                          {`${memberData.nameABNT}; `}
+                        </span>
                       ))}
                     </span>
                     <span>

@@ -62,7 +62,7 @@ class ListController {
               include: [
                 {
                   model: Member,
-                  attributes: ['name', 'nameABNT'],
+                  attributes: ['name', 'nameABNT', 'login'],
                   as: 'member',
                 },
               ],

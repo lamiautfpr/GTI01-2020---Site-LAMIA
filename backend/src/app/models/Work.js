@@ -53,7 +53,7 @@ class Work extends Model {
         dateBegin: {
           type: Sequelize.VIRTUAL,
           get() {
-            const dateFormated = format(this.date_begin, 'MM/dd/yyyy');
+            const dateFormated = format(this.date_begin, 'dd/MM/yyyy');
             return dateFormated;
           },
         },

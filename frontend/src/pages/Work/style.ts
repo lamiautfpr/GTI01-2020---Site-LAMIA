@@ -25,7 +25,7 @@ export const Content = styled.section`
 `;
 
 export const HeadTitle = styled.div`
-  max-width: 924px; 
+  max-width: 924px;
   height: auto;
   margin: 0 24px 4px;
   /* margin-top: 32px; */
@@ -45,7 +45,7 @@ export const HeadTitle = styled.div`
     margin-left: 140px;
     padding:16px;
     padding-left: 84px;
-    
+
 
     background: ${featuredColor};
 
@@ -60,7 +60,7 @@ export const HeadTitle = styled.div`
   }
 
   .imgBorde {
-    
+
     /* background: white; */
     /* border: 4px solid ${featuredColor}; */
     border: 4px solid ${featuredColor};
@@ -75,7 +75,7 @@ export const HeadTitle = styled.div`
     &:hover {
 
       transform: translateX(24px);
-      
+
     }
 
     div {
@@ -84,7 +84,7 @@ export const HeadTitle = styled.div`
       padding: 8px;
       height: 100%;
 
-      
+
 
       -webkit-box-shadow: inset 0px 0px 71px -23px rgba(0, 0, 0, 0.2);
       -moz-box-shadow: inset 0px 0px 71px -23px rgba(0, 0, 0, 0.2);
@@ -156,7 +156,7 @@ export const Aside = styled.aside`
 
   max-width: 220px;
   width: 100%;
-  max-height: 400px;
+  /* max-height: 400px; */
 
   padding: 8px;
   margin: 16px;
@@ -227,7 +227,6 @@ export const Aside = styled.aside`
 
       img {
         width: 80px;
-        height: 80px;
         border-radius: 16px;
 
         margin: 4px;
@@ -242,6 +241,32 @@ export const Aside = styled.aside`
           -moz-box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.56);
           box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.56);
         }
+      }
+    }
+    .BePartner {
+      margin: 8px;
+      margin-top: 24px;
+      border: 2px solid #fff;
+      border-radius: 20px;
+      font-size: 20px;
+      padding: 2px 8px;
+      line-height: 30px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: 'Dosis';
+      background: #fff;
+      font-weight: bold;
+      color: ${featuredColor};
+      transform: 0.4;
+
+      &:hover {
+        /* border: 0px solid white;
+
+        transform: translateX(2px);
+
+        color: ${transparentize(0, primaryColor)}; */
+        background: ${featuredColor};
+        color: white;
       }
     }
   }
