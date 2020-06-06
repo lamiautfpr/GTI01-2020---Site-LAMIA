@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { transparentize, shade } from 'polished';
 import {
@@ -8,6 +8,10 @@ import {
   featuredColor,
   titleColor,
 } from '../../styles/paletsColores';
+
+interface WarningPros {
+  textColor?: string;
+}
 
 export const Main = styled.main`
   background: #fff;
@@ -340,6 +344,8 @@ export const Card = styled.div`
   flex: 0 0 200px;
   flex-direction: column;
 
+  font-family: dosis;
+
   background-position: center center;
   background-size: cover;
 
@@ -402,6 +408,8 @@ export const Card = styled.div`
         padding: 10px 15px;
         border-radius: 16px;
 
+        font-family: dosis;
+
         background: none;
 
         text-transform: uppercase;
@@ -434,6 +442,7 @@ export const Card = styled.div`
 
     .title {
       position: relative;
+      padding: 0 2px 0 2px;
       padding-bottom: 8px;
       margin-bottom: 8px;
       font-weight: bold;
@@ -460,6 +469,8 @@ export const Card = styled.div`
       align-items: center;
 
       padding: 0 0 10px 0;
+
+      font-family: dosis;
 
       span {
         display: flex;
@@ -494,6 +505,8 @@ export const Card = styled.div`
           flex-direction: column;
           justify-content: center;
           align-items: center;
+
+          font-family: dosis;
 
           flex: 1 0;
           height: 72px;
@@ -573,7 +586,35 @@ export const Card = styled.div`
   }
 `;
 
-export const ShelfGallery = styled.div`
+export const CardWarning = styled.div<WarningPros>`
   max-width: 1200px;
-  margin: 12px auto;
+
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  h2 {
+    display: flex;
+    /* flex-direction: column; */
+
+    font-size: 40px;
+    font-family: 'Dosis';
+    color: ${secondaryColor};
+
+    ${(props) =>
+      props.textColor &&
+      css`
+        color: ${props.textColor};
+      `}
+  }
+
+  img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+
+    margin-left: 40px;
+  }
 `;

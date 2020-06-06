@@ -22,8 +22,10 @@ import iconLattes from '../../assets/icon_lattes.svg';
 import userPadrao from '../../assets/userPadrao.png';
 import workPadrao from '../../assets/logo.svg';
 import imgWorkDefault from '../../assets/imgWorkDefault.png';
+import mano from '../../assets/mano.jpg';
+import trainig from '../../assets/Trainig.gif';
 
-import { Main, Headline, Title, Shelf, Card, ShelfGallery } from './style';
+import { Main, Headline, Title, Shelf, Card, CardWarning } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
@@ -170,11 +172,15 @@ const Member: React.FC = () => {
                   {/* <div className="imgCase" /> */}
                   <div className="bookContainer">
                     <div className="content">
-                      <button> Saiba mais </button>
+                      <Link to={`/work/${workData.id}`}>
+                        <button> Saiba mais </button>
+                      </Link>
                     </div>
                   </div>
                   <div className="informationsContainer">
-                    <h2 className="title">{workData.title}</h2>
+                    <h2 className="title">
+                      {`${workData.title.slice(0, 25)}...`}
+                    </h2>
                     <div className="primaryInformations">
                       {workData.areaExpertise.length > 0 && (
                         <span>
@@ -211,7 +217,7 @@ const Member: React.FC = () => {
                         </div>
                       </div>
                       <div className="objective">
-                        <p>{workData.objective}</p>
+                        <p>{`${workData.objective.slice(0, 87)}...`}</p>
                       </div>
                     </div>
                   </div>
@@ -219,11 +225,24 @@ const Member: React.FC = () => {
               ))}
             </Shelf>
           ) : (
-            <h2>Jovem padoã ainda em treinamento</h2>
+            <CardWarning>
+              <img src={trainig} alt="em treinmento" />
+              <h2>Jovem padoã ainda em treinamento</h2>
+            </CardWarning>
           )}
         </Main>
       ) : (
-        <h2>OI</h2>
+        <Main>
+          <CardWarning>
+            <img src={mano} alt="membro errado" />
+            <h2>
+              Membro errado amigo.
+              <br />
+              Estava me testando?
+              <br />( ͡° ͜ʖ ͡°)
+            </h2>
+          </CardWarning>
+        </Main>
       )}
 
       <Footer />
