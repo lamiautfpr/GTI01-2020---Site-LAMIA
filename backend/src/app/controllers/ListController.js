@@ -62,8 +62,8 @@ class ListController {
               include: [
                 {
                   model: Member,
+                  as: 'memberData',
                   attributes: ['name', 'nameABNT', 'login'],
-                  as: 'member',
                 },
               ],
             },

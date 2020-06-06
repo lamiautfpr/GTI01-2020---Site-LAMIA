@@ -44,6 +44,18 @@ class Picture extends Model {
             return `${process.env.APP_URL}/files/${this.path}`;
           },
         },
+        width: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return 1;
+          },
+        },
+        height: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return 1;
+          },
+        },
       },
       {
         sequelize,

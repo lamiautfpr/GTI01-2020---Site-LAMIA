@@ -20,4 +20,6 @@ export interface ImageProps {
   source: string;
   name: string;
   path: string;
+  width: number;
+  height: number;
 }

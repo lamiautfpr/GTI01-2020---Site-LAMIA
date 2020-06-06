@@ -99,7 +99,7 @@ class WorkController {
         {
           model: Picture,
           as: 'pictures',
-          attributes: ['name', 'path', 'src', 'source'],
+          attributes: ['name', 'path', 'src', 'source', 'width', 'height'],
         },
         {
           model: MemberWork,

@@ -190,25 +190,28 @@ const ProjectView: React.FC = () => {
                 </div>
               </SectionColunm>
             </Content>
-
-            <HeaderSection>Galeria</HeaderSection>
-            <ShelfGallery>
-              <Gallery photos={photos} onClick={openLightbox} />
-              <ModalGateway>
-                {viewerIsOpen ? (
-                  <Modal onClose={closeLightbox}>
-                    <Carousel
-                      currentIndex={currentImage}
-                      views={photos.map((x) => ({
-                        ...x,
-                        srcset: x.source,
-                        caption: x.title,
-                      }))}
-                    />
-                  </Modal>
-                ) : null}
-              </ModalGateway>
-            </ShelfGallery>
+            {work.pictures.length > 0 && (
+              <>
+                <HeaderSection>Galeria</HeaderSection>
+                <ShelfGallery>
+                  <Gallery photos={work.pictures} onClick={openLightbox} />
+                  <ModalGateway>
+                    {viewerIsOpen ? (
+                      <Modal onClose={closeLightbox}>
+                        <Carousel
+                          currentIndex={currentImage}
+                          views={work.pictures.map((x) => ({
+                            ...x,
+                            srcset: x.source,
+                            caption: x.name,
+                          }))}
+                        />
+                      </Modal>
+                    ) : null}
+                  </ModalGateway>
+                </ShelfGallery>
+              </>
+            )}
           </>
         ) : (
           'oi'
