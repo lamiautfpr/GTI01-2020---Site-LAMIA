@@ -122,15 +122,14 @@ export const Projects = styled.div`
         margin-bottom: 20px;
       }
 
-        color: ${primaryColor};
-        font-family: 'Dosis';
-        font-weight: 200;
-      }
+      color: ${primaryColor};
+      font-family: 'Dosis';
+      font-weight: 200;
+    }
 
-      svg {
-        margin-left: auto;
-        color: #cbcbd6;
-      }
+    svg {
+      margin-left: auto;
+      color: #cbcbd6;
     }
   }
 `;

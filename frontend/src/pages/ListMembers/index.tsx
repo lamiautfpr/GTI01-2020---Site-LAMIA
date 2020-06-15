@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
@@ -6,7 +6,7 @@ import { FaMedal, FaChevronRight, FaMailBulk } from 'react-icons/fa';
 
 import api from '../../services/api';
 
-import userPadrao from '../../assets/userDefault.png';
+import userDefault from '../../assets/userDefault.png';
 import emojiSad from '../../assets/emojiSad.png';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { ImageProps } from '../../../myTypes/Images';
@@ -35,81 +35,87 @@ interface MembersListProps {
 }
 
 const ListProjects: React.FC = () => {
-  // datas data base
+  // database
   const [allMembers, setAllMembers] = useState<MembersListProps[]>([]);
   const [members, setMembers] = useState<MembersListProps[]>([]);
   const [offices, setOffices] = useState<SelectItem[]>([]);
 
   // Functions for list works
-  const changeWorkList = (itemsSelected: SelectItem[]): void => {
-    if (!itemsSelected || itemsSelected.length < 1) {
-      setMembers(allMembers);
-    } else {
-      setMembers(
-        allMembers.filter((member) => {
-          return itemsSelected.some((item) => {
-            return item.value === member.office.value;
-          });
-        }),
-      );
-    }
-  };
-
-  const checkOrder = (order: SelectItem): void => {
-    const compareNameASC = (
-      member1: MembersListProps,
-      member2: MembersListProps,
-    ): number => {
-      // a should come before b in the sorted order
-      if (member1.name < member2.name) {
-        return -1;
-        // a should come after b in the sorted order
+  const changeWorkList = useCallback(
+    (itemsSelected: SelectItem[]): void => {
+      if (!itemsSelected || itemsSelected.length < 1) {
+        setMembers(allMembers);
+      } else {
+        setMembers(
+          allMembers.filter((member) => {
+            return itemsSelected.some((item) => {
+              return item.value === member.office.value;
+            });
+          }),
+        );
       }
-      if (member1.name > member2.name) {
-        return 1;
-        // a and b are the same
+    },
+    [allMembers],
+  );
+
+  const checkOrder = useCallback(
+    (order: SelectItem): void => {
+      const compareNameASC = (
+        member1: MembersListProps,
+        member2: MembersListProps,
+      ): number => {
+        // a should come before b in the sorted order
+        if (member1.name < member2.name) {
+          return -1;
+          // a should come after b in the sorted order
+        }
+        if (member1.name > member2.name) {
+          return 1;
+          // a and b are the same
+        }
+        return 0;
+      };
+
+      const compareNameDESC = (
+        member1: MembersListProps,
+        member2: MembersListProps,
+      ): number => {
+        // a should come before b in the sorted order
+        if (member1.name > member2.name) {
+          return -1;
+          // a should come after b in the sorted order
+        }
+        if (member1.name < member2.name) {
+          return 1;
+          // a and b are the same
+        }
+        return 0;
+      };
+
+      if (order.value === 0) {
+        const sorted = [...members].sort(compareNameASC);
+        setMembers(sorted);
+
+        setAllMembers(allMembers.sort(compareNameASC));
+      } else if (order.value === 1) {
+        const sorted = [...members].sort(compareNameDESC);
+        setMembers(sorted);
+
+        setAllMembers(allMembers.sort(compareNameDESC));
+      } else if (order.value === 2) {
+        const sorted = [...members].sort();
+        setMembers(sorted);
+
+        setAllMembers(allMembers.sort());
+      } else {
+        const sorted = [...members].sort();
+        setMembers(sorted);
+
+        setAllMembers(allMembers.sort());
       }
-      return 0;
-    };
-
-    const compareNameDESC = (
-      member1: MembersListProps,
-      member2: MembersListProps,
-    ): number => {
-      // a should come before b in the sorted order
-      if (member1.name > member2.name) {
-        return -1;
-        // a should come after b in the sorted order
-      }
-      if (member1.name < member2.name) {
-        return 1;
-        // a and b are the same
-      }
-      return 0;
-    };
-
-    if (order.value === 0) {
-      const sorted = [...members].sort(compareNameASC);
-      setMembers(sorted);
-
-      setAllMembers(allMembers.sort(compareNameASC));
-    } else if (order.value === 1) {
-      const sorted = [...members].sort(compareNameDESC);
-      setMembers(sorted);
-
-      setAllMembers(allMembers.sort(compareNameDESC));
-    } else if (order.value === 2) {
-      const sorted = [...members].sort();
-      setMembers(sorted);
-
-      setAllMembers(allMembers.sort());
-    } else {
-      const sorted = [...members].sort();
-      setMembers(sorted);
-
-      setAllMembers(allMembers.sort());
-    }
-  };
+    },
+    [allMembers, members],
+  );
 
   // Functions for get list works
   useEffect(() => {
@@ -136,7 +142,7 @@ const ListProjects: React.FC = () => {
     });
   }, []);
 
-  const workWithTrasitions = useTransition(members, (member) => member.id, {
+  const workWithTransitions = useTransition(members, (member) => member.id, {
     from: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
     enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
     leave: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
@@ -177,11 +183,11 @@ const ListProjects: React.FC = () => {
         <Projects>
           {members.length > 0 ? (
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            workWithTrasitions.map(({ item, key, props }) => (
+            workWithTransitions.map(({ item, key, props }) => (
               <animated.div key={item.id} style={props}>
                 <Link to={`/${item.login}`}>
                   <img
-                    src={item.avatar ? item.avatar.src : userPadrao}
+                    src={item.avatar ? item.avatar.src : userDefault}
                     alt={item.avatar ? item.avatar.name : 'Member'}
                   />
 
