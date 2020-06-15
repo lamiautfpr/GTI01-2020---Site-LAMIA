@@ -5,18 +5,14 @@ import VisibilitySensor from 'react-visibility-sensor';
 
 import api from '../../services/api';
 
-import imgTeste from '../../assets/Teste.jpg';
+import imgTester from '../../assets/Tester.jpg';
 import plusUltra from '../../assets/plus_ultra.gif';
 import logoDemo from '../../assets/logo_demo.jpg';
 import logo from '../../assets/logo.svg';
-import orientador from '../../assets/orientador.jpg';
-import desorientado from '../../assets/desorientado.jpg';
+import orientation from '../../assets/orientation.jpg';
+import disoriented from '../../assets/disoriented.jpg';
+import { mission } from '../../assets/dataStatistic';
 
-import logoLar from '../../assets/logo_lar.png';
-import logoStark from '../../assets/logo_stark.jpg';
-import logoXavier from '../../assets/logo_xavier.jpg';
-import logoRock from '../../assets/logo_rockStar.png';
-import logoCyber from '../../assets/logo_cyber.jpg';
 import logoLex from '../../assets/logo_lex.png';
 
 import {
@@ -30,7 +26,6 @@ import {
 } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
-import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 
 import { WorkListProps } from '../../../myTypes/WorkListProps';
@@ -75,7 +70,7 @@ const Home: React.FC = () => {
     [],
   );
 
-  const [partner, setPartner] = useState<PartnerProps[]>([]);
+  const [partners, setPartners] = useState<PartnerProps[]>([]);
 
   const [lastWork, setLastWork] = useState<WorkListProps[]>([]);
 
@@ -87,7 +82,7 @@ const Home: React.FC = () => {
     });
 
     api.get<PartnerProps[]>(`partiners`).then((response) => {
-      setPartner(response.data);
+      setPartners(response.data);
     });
 
     api.get<WorkListProps[]>(`last-work?limit=3`).then((response) => {
@@ -120,26 +115,20 @@ const Home: React.FC = () => {
                 <h2>Contrução de Site</h2>
               </header>
               <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros. Lorem
-                ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum
-                dolor sit amet aliquam.
+                Sed lorem ipsum
               </p>
             </div>
-            <img src={imgTeste} alt="Teste" />
+            <img src={imgTester} alt="Tester" />
           </div>
           <Separator />
           <div>
-            <img src={imgTeste} alt="Teste" />
+            <img src={imgTester} alt="Tester" />
             <div>
               <header>
                 <h2>Contrução de Site</h2>
               </header>
               <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros. Lorem
-                ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum
-                dolor sit amet aliquam.
+                Sed lorem ipsum dolor
               </p>
             </div>
           </div>
@@ -151,33 +140,23 @@ const Home: React.FC = () => {
                 <h2>Contrução de Site</h2>
               </header>
               <p>
-                Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                consequat magna adipiscing magna etiam amet veroeros. Lorem
-                ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem ipsum
-                dolor sit amet aliquam.
+                Sed lorem ipsum dolor
               </p>
             </div>
 
-            <img src={imgTeste} alt="Teste" />
+            <img src={imgTester} alt="Tester" />
           </div>
         </SectionLine>
         <hr /> */}
-        <SectionLine id="Histoty">
+        <SectionLine id="Mission">
           <HeaderSection>
             <h2>Missão</h2>
           </HeaderSection>
           <div>
             <div>
-              <p>
-                A missão do LAMIA é produzir conhecimento acadêmico e soluções
-                para a indústria através de pesquisas direcionadas na integração
-                destas duas vertentes. As abordagens propostas utilizam de
-                Ciência de Dados e Visão Computacional na criação de aplicações
-                voltadas para as cadeias produtivas do oeste do Paraná e do
-                restante do Brasil.
-              </p>
+              <p>{mission}</p>
             </div>
-            <img src={logoDemo} alt="Teste" />
+            <img src={logoDemo} alt="Logo LAMIA" />
           </div>
         </SectionLine>
         <hr />
@@ -196,7 +175,7 @@ const Home: React.FC = () => {
                     alt={
                       work.pictures.length > 0
                         ? work.pictures[0].name
-                        : 'sem imagem'
+                        : 'Capa do Projeto'
                     }
                   />
                   <header>
@@ -205,19 +184,6 @@ const Home: React.FC = () => {
                   <p>{work.objective.slice(0, 130)}</p>
                 </div>
               ))}
-
-              {/* <div>
-                <img src={imgTeste} alt="Teste" />
-                <header>
-                  <h2>Publicação 3</h2>
-                </header>
-                <p>
-                  Sed lorem ipsum dolor sit amet nullam consequat feugiat
-                  consequat magna adipiscing magna etiam amet veroeros. Lorem
-                  ipsum dolor tempus sit cursus. Tempus nisl et nullam lorem
-                  ipsum dolor sit amet aliquam.
-                </p>
-              </div> */}
             </div>
           ) : (
             <CardWarning>
@@ -309,14 +275,14 @@ const Home: React.FC = () => {
           <div>
             {areaExpertises.map((area) => (
               <div key={area.id}>
-                <img src={imgTeste} alt="Teste" />
+                <img src={imgTester} alt={area.name} />
                 <header>
                   <h2>{area.name}</h2>
                 </header>
                 <p>
                   {area.description
                     ? `${area.description.slice(0, 130)} ...`
-                    : 'Lendo alguns artigos para devinição perfeita da aplicação científica e industrial. Isso pode demorar um pouco...'}
+                    : 'Lendo alguns artigos para definição perfeita da aplicação científica e industrial. Isso pode demorar um pouco...'}
                 </p>
               </div>
             ))}
@@ -326,18 +292,18 @@ const Home: React.FC = () => {
         <SectionVip id="Partners">
           <header>
             <h2>Parceiros</h2>
-            <button>seja um parceiro</button>
+            <button type="button">seja um parceiro</button>
           </header>
           <div>
-            {partner.length > 0 ? (
+            {partners.length > 0 ? (
               <ul>
-                {partner.map((partne) => (
-                  <li key={partne.id}>
+                {partners.map((partner) => (
+                  <li key={partner.id}>
                     <img
-                      src={partne.logo ? `${partne.logo}` : logoLex}
-                      alt="Coperativa LAR"
+                      src={partner.logo ? `${partner.logo}` : logo}
+                      alt={partner.name}
                     />
-                    <h2>{partne.name}</h2>
+                    <h2>{partner.name}</h2>
                   </li>
                 ))}
               </ul>
@@ -360,7 +326,7 @@ const Home: React.FC = () => {
                 {advisors.map((advisor) => (
                   <div key={advisor.id}>
                     <img
-                      src={advisor.avatar ? advisor.avatar.src : orientador}
+                      src={advisor.avatar ? advisor.avatar.src : orientation}
                       alt={advisor.avatar ? advisor.avatar.name : 'sem imagem'}
                     />
                     <header>
@@ -373,7 +339,7 @@ const Home: React.FC = () => {
             </div>
           ) : (
             <CardWarning>
-              <img src={desorientado} alt="sem orientador" />
+              <img src={disoriented} alt="sem orientador" />
               <h2>Estamos desorientados</h2>
             </CardWarning>
           )}
