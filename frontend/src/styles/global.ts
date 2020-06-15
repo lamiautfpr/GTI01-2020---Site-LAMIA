@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import { shade, transparentize } from 'polished';
-import { primaryColor, secondaryColor } from './paletsColores';
+import { primaryColor, secondaryColor } from './paletsColorers';
 
 export default createGlobalStyle`
   *{

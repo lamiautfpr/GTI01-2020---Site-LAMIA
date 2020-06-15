@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { transparentize } from 'polished';
-import { secondaryBackground } from '../../styles/paletsColores';
+import { secondaryBackground } from '../../styles/paletsColorers';
 
 export const Contact = styled.footer`
   max-width: 1200px;

@@ -5,7 +5,7 @@ import {
   secondaryBackground,
   primaryColor,
   secondaryColor,
-} from '../../styles/paletsColores';
+} from '../../styles/paletsColorers';
 
 export const Main = styled.main`
   background: #fff;

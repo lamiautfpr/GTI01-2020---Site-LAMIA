@@ -1,42 +1,34 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Gallery from 'react-photo-gallery';
-import Carousel, { Modal, ModalGateway } from 'react-images';
-import { Link, useRouteMatch } from 'react-router-dom';
-
+import React, { useCallback, useEffect, useState } from 'react';
 import {
-  FaRegCalendarAlt,
   FaGithub,
-  FaRegClipboard,
   FaListUl,
+  FaRegCalendarAlt,
+  FaRegClipboard,
 } from 'react-icons/fa';
 import { GiBookshelf } from 'react-icons/gi';
-
-import logoLar from '../../assets/logo_lar.png';
-import imgWorkDefault from '../../assets/imgWorkDefault.png';
-import imgUserDefault from '../../assets/userPadrao.png';
-import logoStark from '../../assets/logo_stark.jpg';
-import logoLex from '../../assets/logo_lex.png';
-import imgTeste from '../../assets/Teste.jpg';
-import { photos } from '../../assets/photoGalleryTeste/photos';
-import PulpFiction from '../../assets/Pulp_fiction.gif';
+import Carousel, { Modal, ModalGateway } from 'react-images';
+import Gallery from 'react-photo-gallery';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import { WorkListProps } from '../../../myTypes/WorkListProps';
-
-import {
-  Main,
-  HeadTitle,
-  SectionText,
-  SectionColunm,
-  HeaderSection,
-  Aside,
-  ShelfGallery,
-  Content,
-  CardWarning,
-} from './style';
+import imgWorkDefault from '../../assets/imgWorkDefault.png';
+import PulpFiction from '../../assets/Pulp_fiction.gif';
+import imgUserDefault from '../../assets/userDefault.png';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
 import api from '../../services/api';
+import {
+  Aside,
+  CardWarning,
+  Content,
+  HeaderSection,
+  HeadTitle,
+  Main,
+  SectionColumn,
+  SectionText,
+  ShelfGallery,
+} from './style';
 
 interface WorkParams {
   id: string;
@@ -45,11 +37,11 @@ interface WorkParams {
 const ProjectView: React.FC = () => {
   const { params } = useRouteMatch<WorkParams>();
 
-  // Galeria
+  // Gallery
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
-  // Datas
+  // Data
   const [work, setWork] = useState<WorkListProps | null>(null);
 
   useEffect(() => {
@@ -58,15 +50,16 @@ const ProjectView: React.FC = () => {
     });
   }, [params.id]);
 
-  const openLightbox = useCallback((event, { photo, index }) => {
+  const openLightbox = useCallback((event, { index }) => {
     setCurrentImage(index);
     setViewerIsOpen(true);
   }, []);
 
-  const closeLightbox = (): void => {
+  const closeLightbox = useCallback((): void => {
     setCurrentImage(0);
     setViewerIsOpen(false);
-  };
+  }, []);
+
   return (
     <>
       <Header title={work ? `LAMIA - ${work.title}` : 'LAMIA'} />
@@ -106,7 +99,7 @@ const ProjectView: React.FC = () => {
                 </div>
               </SectionText>
 
-              <SectionColunm>
+              <SectionColumn>
                 <div className="column">
                   <Aside>
                     <h1>Informações</h1>
@@ -190,7 +183,7 @@ const ProjectView: React.FC = () => {
                     </ul>
                   </Aside>
                 </div>
-              </SectionColunm>
+              </SectionColumn>
             </Content>
             {work.pictures.length > 0 && (
               <>
@@ -218,7 +211,7 @@ const ProjectView: React.FC = () => {
         ) : (
           <CardWarning>
             <img src={PulpFiction} alt="Pulp fiction" />
-            <h2>Esqueçerão de publicar de novo?</h2>
+            <h2>Esqueçeram de publicar de novo?</h2>
           </CardWarning>
         )}
       </Main>

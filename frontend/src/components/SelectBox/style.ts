@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import Select from 'react-select';
 
-import { secondaryColor } from '../../styles/paletsColores';
+import { secondaryColor } from '../../styles/paletsColorers';
 
 interface ContainerProps {
   width?: number;

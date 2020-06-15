@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { secondaryBackground } from '../../styles/paletsColores';
+import { secondaryBackground } from '../../styles/paletsColorers';
 
 export const Nav = styled.nav`
   background-color: #fff;

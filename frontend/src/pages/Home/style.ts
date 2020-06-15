@@ -7,7 +7,7 @@ import {
   primaryColor,
   secondaryColor,
   featuredColor,
-} from '../../styles/paletsColores';
+} from '../../styles/paletsColorers';
 
 interface WarningPros {
   textColor?: string;

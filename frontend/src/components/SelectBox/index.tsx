@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Theme } from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { transparentize } from 'polished';
-import { primaryColor, secondaryColor } from '../../styles/paletsColores';
+import { primaryColor, secondaryColor } from '../../styles/paletsColorers';
 import { Container, Label } from './style';
 
 import { SelectItem } from '../../../myTypes/SelectItem';

@@ -6,7 +6,7 @@ import { FaMedal, FaChevronRight, FaMailBulk } from 'react-icons/fa';
 
 import api from '../../services/api';
 
-import userPadrao from '../../assets/userPadrao.png';
+import userPadrao from '../../assets/userDefault.png';
 import emojiSad from '../../assets/emojiSad.png';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { ImageProps } from '../../../myTypes/Images';

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { primaryColor, secondaryColor } from '../../styles/paletsColores';
+import { primaryColor, secondaryColor } from '../../styles/paletsColorers';
 
 interface HrProps {
   width?: number;

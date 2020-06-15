@@ -7,7 +7,7 @@ import {
   secondaryColor,
   featuredColor,
   titleColor,
-} from '../../styles/paletsColores';
+} from '../../styles/paletsColorers';
 
 interface WarningPros {
   textColor?: string;
@@ -120,14 +120,10 @@ export const SectionText = styled.section`
     flex-direction: column;
 
     position: relative;
-
-    /* top: -280px; * tem q arrrumar */
   }
-
-  /* display: block; */
 `;
 
-export const SectionColunm = styled.section`
+export const SectionColumn = styled.section`
   display: flex;
   flex-direction: column;
 
@@ -241,7 +237,7 @@ export const Aside = styled.aside`
           filter: none;
           transform: translateY(8px);
 
-          webkit-box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.56);
+          -webkit-box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.56);
           -moz-box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.56);
           box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.56);
         }
