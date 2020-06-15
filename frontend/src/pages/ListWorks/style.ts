@@ -5,7 +5,6 @@ import {
   secondaryBackground,
   primaryColor,
   secondaryColor,
-  featuredColor,
 } from '../../styles/paletsColorers';
 
 interface FilterPros {
@@ -130,18 +129,17 @@ export const Projects = styled.div`
 
       span {
         margin-top: -20px;
-    margin-bottom: 20px;
-}
-
-        color: ${primaryColor};
-        font-family: 'Dosis';
-        font-weight: 200;
+        margin-bottom: 20px;
       }
 
-      svg {
-        margin-left: auto;
-        color: #cbcbd6;
-      }
+      color: ${primaryColor};
+      font-family: 'Dosis';
+      font-weight: 200;
+    }
+
+    svg {
+      margin-left: auto;
+      color: #cbcbd6;
     }
   }
 `;
