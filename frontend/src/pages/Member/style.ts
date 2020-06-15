@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { transparentize, shade } from 'polished';
+import { transparentize } from 'polished';
 import {
   secondaryBackground,
   primaryColor,
@@ -353,7 +353,7 @@ export const Card = styled.div`
   -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
 
-  overflow: hidden; /* pesquisa para saber */
+  overflow: hidden;
 
   background-color: ${secondaryBackground};
 
@@ -432,7 +432,7 @@ export const Card = styled.div`
     }
   }
 
-  .informationsContainer {
+  .informationContainer {
     flex: 1 0 auto;
     padding: 16px;
     background: #f0f0f0;
@@ -449,7 +449,6 @@ export const Card = styled.div`
       font-size: 24px;
 
       &::after {
-        /* linha de baixo do titulo */
         content: '';
         position: absolute;
         bottom: 0;
@@ -462,7 +461,7 @@ export const Card = styled.div`
       }
     }
 
-    .primaryInformations {
+    .primaryInformation {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -487,7 +486,7 @@ export const Card = styled.div`
       }
     }
 
-    .moreInfomation {
+    .moreInformation {
       opacity: 1;
       transition: 0.3s;
       width: 200px;
@@ -552,6 +551,7 @@ export const Card = styled.div`
 
       .objective {
         margin: 8px;
+        margin-bottom: 10px;
 
         p {
           font-size: 16px;
@@ -569,10 +569,10 @@ export const Card = styled.div`
     opacity: 1;
     transform: translateY(-272px);
   }
-  &:hover .informationsContainer {
+  &:hover .informationContainer {
     transform: translateY(-244px);
   }
-  &:hover .informationsContainer .moreInfomation {
+  &:hover .informationContainer .moreInformation {
     opacity: 1;
   }
   &:hover {

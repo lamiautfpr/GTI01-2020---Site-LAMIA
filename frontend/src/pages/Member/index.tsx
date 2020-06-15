@@ -1,7 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Gallery from 'react-photo-gallery';
-import Carousel, { Modal, ModalGateway } from 'react-images';
-import { Link, useRouteMatch, Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 import {
   FaLinkedinIn,
   FaEnvelope,
@@ -19,11 +17,10 @@ import { WorkListProps } from '../../../myTypes/WorkListProps';
 
 import api from '../../services/api';
 import iconLattes from '../../assets/icon_lattes.svg';
-import userPadrao from '../../assets/userPadrao.png';
-import workPadrao from '../../assets/logo.svg';
+import userDefault from '../../assets/userDefault.png';
 import imgWorkDefault from '../../assets/imgWorkDefault.png';
 import mano from '../../assets/mano.jpg';
-import trainig from '../../assets/Trainig.gif';
+import training from '../../assets/Training.gif';
 
 import { Main, Headline, Title, Shelf, Card, CardWarning } from './style';
 import Header from '../../components/Header';
@@ -60,27 +57,11 @@ const Member: React.FC = () => {
 
   const [member, setMember] = useState<MembersProps | null>(null);
 
-  // Galery
-  const [currentImage, setCurrentImage] = useState(0);
-  const [viewerIsOpen, setViewerIsOpen] = useState(false);
-
   useEffect(() => {
-    console.log('oi');
-
     api.get<MembersProps>(`${params.login}`).then((response) => {
       setMember(response.data);
     });
   }, [params.login]);
-
-  const openLightbox = useCallback((event, { photo, index }) => {
-    setCurrentImage(index);
-    setViewerIsOpen(true);
-  }, []);
-
-  const closeLightbox = (): void => {
-    setCurrentImage(0);
-    setViewerIsOpen(false);
-  };
 
   return (
     <>
@@ -145,8 +126,8 @@ const Member: React.FC = () => {
             <div className="imgBorde">
               <div>
                 <img
-                  src={member.avatar ? member.avatar.src : userPadrao}
-                  alt="Teste"
+                  src={member.avatar ? member.avatar.src : userDefault}
+                  alt={member.name}
                 />
               </div>
             </div>
@@ -154,7 +135,7 @@ const Member: React.FC = () => {
 
           <Title>
             <header>
-              <h2>Projetos Participado</h2>
+              <h2>Projetos</h2>
             </header>
           </Title>
           {member.works.length > 0 ? (
@@ -167,21 +148,21 @@ const Member: React.FC = () => {
                         ? workData.pictures[0].src
                         : imgWorkDefault
                     }
-                    alt="Projeto"
+                    alt="Capa do Projeto"
                   />
                   {/* <div className="imgCase" /> */}
                   <div className="bookContainer">
                     <div className="content">
                       <Link to={`/work/${workData.id}`}>
-                        <button> Saiba mais </button>
+                        <button type="button"> Saiba mais </button>
                       </Link>
                     </div>
                   </div>
-                  <div className="informationsContainer">
+                  <div className="informationContainer">
                     <h2 className="title">
                       {`${workData.title.slice(0, 25)}...`}
                     </h2>
-                    <div className="primaryInformations">
+                    <div className="primaryInformation">
                       {workData.areaExpertise.length > 0 && (
                         <span>
                           <FaListUl size={16} />
@@ -198,7 +179,7 @@ const Member: React.FC = () => {
                       )}
                     </div>
 
-                    <div className="moreInfomation">
+                    <div className="moreInformation">
                       <div className="infoDateContainer">
                         {workData.urlGithub && (
                           <a
@@ -217,7 +198,10 @@ const Member: React.FC = () => {
                         </div>
                       </div>
                       <div className="objective">
-                        <p>{`${workData.objective.slice(0, 87)}...`}</p>
+                        <p>
+                          {`${workData.objective.slice(0, 80)}`}
+                          {workData.objective.length > 80 && '...'}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -226,8 +210,8 @@ const Member: React.FC = () => {
             </Shelf>
           ) : (
             <CardWarning>
-              <img src={trainig} alt="em treinmento" />
-              <h2>Jovem padoã ainda em treinamento</h2>
+              <img src={training} alt="em treinamento" />
+              <h2>Jovem padoã em treinamento</h2>
             </CardWarning>
           )}
         </Main>
@@ -239,7 +223,6 @@ const Member: React.FC = () => {
               Membro errado amigo.
               <br />
               Estava me testando?
-              <br />( ͡° ͜ʖ ͡°)
             </h2>
           </CardWarning>
         </Main>
