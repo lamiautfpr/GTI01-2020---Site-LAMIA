@@ -18,10 +18,15 @@ interface MenuNavProps {
   types: NavItemProps[];
 }
 
+interface ApiResponse {
+  response: {
+    data: MenuNavProps;
+  };
+}
+
 const NavBar: React.FC = () => {
   const [categoryWorks, setCategoryWorks] = useState<MenuNavProps[]>([]);
   const [members, setMembers] = useState<MenuNavProps | null>(null);
-  // const [categoryWorks, setCategoryWorks] = useState<CategoryWorkProps[]>([]);
 
   useEffect(() => {
     api.get(`category-works`).then((response) => {
@@ -44,7 +49,7 @@ const NavBar: React.FC = () => {
               </HashLink>
             </li>
             <li>
-              <HashLink smooth to="/#Histoty">
+              <HashLink smooth to="/#Mission">
                 Missão
               </HashLink>
             </li>
@@ -88,7 +93,7 @@ const NavBar: React.FC = () => {
           </li>
         ))}
         <li>
-          <a href="/members">{members?.name}</a>
+          <Link to="/members">{members?.name}</Link>
           {/* <ul className="lastDropDraw">
             {members?.types.map((type) => (
               <li>
