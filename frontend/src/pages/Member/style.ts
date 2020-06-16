@@ -18,6 +18,8 @@ export const Main = styled.main`
   padding: 12px;
   border-radius: 0 0 24px 24px;
   margin-bottom: 100px;
+
+  min-height: 250px;
   /* border: 1px solid red; */
 `;
 
@@ -589,7 +591,7 @@ export const Card = styled.div`
 export const CardWarning = styled.div<WarningPros>`
   max-width: 1200px;
 
-  margin-bottom: 24px;
+  margin: 24px 0;
 
   display: flex;
   align-items: center;
