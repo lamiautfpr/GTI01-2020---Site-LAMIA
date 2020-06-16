@@ -81,7 +81,7 @@ const NavBar: React.FC = () => {
           </ul>
         </li>
         {categoryWorks.map((category) => (
-          <li>
+          <li key={category.name}>
             <a href={`/works/${category.router}`}>{category.name}</a>
             {/* <ul className="DropDraw">
               {category.types.map((type) => (
