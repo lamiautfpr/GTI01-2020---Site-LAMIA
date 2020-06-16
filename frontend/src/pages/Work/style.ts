@@ -345,7 +345,7 @@ export const ShelfGallery = styled.div`
     height: auto;
 
     border-radius: 8px;
-    translate: 0.2s all;
+    transition: 0.3s;
 
     -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.5);
