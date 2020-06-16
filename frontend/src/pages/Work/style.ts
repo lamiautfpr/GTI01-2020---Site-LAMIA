@@ -263,7 +263,7 @@ export const Aside = styled.aside`
       background: #fff;
       font-weight: bold;
       color: ${featuredColor};
-      transform: 0.4;
+      transition: 0.3s;
 
       &:hover {
         /* border: 0px solid white;
