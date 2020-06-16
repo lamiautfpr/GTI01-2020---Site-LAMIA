@@ -36,6 +36,7 @@ interface WorkParams {
 
 const ProjectView: React.FC = () => {
   const { params } = useRouteMatch<WorkParams>();
+  const [getApi, setGetApi] = useState(false);
 
   // Gallery
   const [currentImage, setCurrentImage] = useState(0);
@@ -47,6 +48,7 @@ const ProjectView: React.FC = () => {
   useEffect(() => {
     api.get(`work/${params.id}`).then((response) => {
       setWork(response.data);
+      setGetApi(true);
     });
   }, [params.id]);
 
@@ -67,153 +69,163 @@ const ProjectView: React.FC = () => {
       <NavBar />
 
       <Main>
-        {work ? (
-          <>
-            <HeadTitle>
-              <div className="info">
-                <h1 className="hoverTitle">{work.title}</h1>
-              </div>
-              <div className="imgBorde hoverTitle">
-                <div>
-                  <img
-                    src={
-                      work.pictures.length > 0
-                        ? work.pictures[0].src
-                        : imgWorkDefault
-                    }
-                    alt={work.title}
-                  />
+        <div>
+          {work ? (
+            <>
+              <HeadTitle>
+                <div className="info">
+                  <h1 className="hoverTitle">{work.title}</h1>
                 </div>
-              </div>
-            </HeadTitle>
+                <div className="imgBorde hoverTitle">
+                  <div>
+                    <img
+                      src={
+                        work.pictures.length > 0
+                          ? work.pictures[0].src
+                          : imgWorkDefault
+                      }
+                      alt={work.title}
+                    />
+                  </div>
+                </div>
+              </HeadTitle>
 
-            <Content>
-              <SectionText>
-                <HeaderSection>Resumo</HeaderSection>
-                <div className="text">
-                  <p>{work.abstract}</p>
-                </div>
-                <HeaderSection>Objetivo</HeaderSection>
-                <div className="text">
-                  <p>{work.objective}</p>
-                </div>
-              </SectionText>
+              <Content>
+                <SectionText>
+                  <HeaderSection>Resumo</HeaderSection>
+                  <div className="text">
+                    <p>{work.abstract}</p>
+                  </div>
+                  <HeaderSection>Objetivo</HeaderSection>
+                  <div className="text">
+                    <p>{work.objective}</p>
+                  </div>
+                </SectionText>
 
-              <SectionColumn>
-                <div className="column">
-                  <Aside>
-                    <h1>Informações</h1>
-                    <div>
-                      {work.categories.length > 0 && (
-                        <span>
-                          <GiBookshelf />
-                          {work.categories.map(
-                            (category) => `${category.name}; `,
-                          )}
-                        </span>
-                      )}
-                      {work.types.length > 0 && (
-                        <span>
-                          <FaRegClipboard />
-                          {work.types.map((type) => `${type.label}; `)}
-                        </span>
-                      )}
-                      {work.areaExpertise.length > 0 && (
-                        <span>
-                          <FaListUl />
-                          {work.areaExpertise.map((area) => `${area.label}; `)}
-                        </span>
-                      )}
-                    </div>
-                    <section>
-                      {work.urlGithub && (
-                        <div className="box">
-                          <a
-                            href={work.urlGithub}
-                            target="bank"
-                            className="box git"
-                          >
-                            <FaGithub />
-                            <p>Repositório</p>
-                          </a>
-                        </div>
-                      )}
-                      <div className="box">
-                        <FaRegCalendarAlt />
-                        <p>{work.dateBegin}</p>
+                <SectionColumn>
+                  <div className="column">
+                    <Aside>
+                      <h1>Informações</h1>
+                      <div>
+                        {work.categories.length > 0 && (
+                          <span>
+                            <GiBookshelf />
+                            {work.categories.map(
+                              (category) => `${category.name}; `,
+                            )}
+                          </span>
+                        )}
+                        {work.types.length > 0 && (
+                          <span>
+                            <FaRegClipboard />
+                            {work.types.map((type) => `${type.label}; `)}
+                          </span>
+                        )}
+                        {work.areaExpertise.length > 0 && (
+                          <span>
+                            <FaListUl />
+                            {work.areaExpertise.map(
+                              (area) => `${area.label}; `,
+                            )}
+                          </span>
+                        )}
                       </div>
-                    </section>
-                  </Aside>
-                  <Aside>
-                    <h1>Integrantes</h1>
-                    <div>
-                      {work.worksMember.map(({ memberData }) => (
-                        <Link
-                          key={memberData.login}
-                          to={`/${memberData.login}`}
-                        >
-                          <img
-                            src={
-                              memberData.avatar
-                                ? memberData.avatar.src
-                                : imgUserDefault
-                            }
-                            alt={memberData.nameABNT}
-                          />
-                        </Link>
-                      ))}
-                    </div>
-                  </Aside>
-                  <Aside>
-                    <h1>Parceiros</h1>
-                    <ul>
-                      {work.partner && (
-                        <li>
-                          <a href={work.partner.link_page}>
+                      <section>
+                        {work.urlGithub && (
+                          <div className="box">
+                            <a
+                              href={work.urlGithub}
+                              target="bank"
+                              className="box git"
+                            >
+                              <FaGithub />
+                              <p>Repositório</p>
+                            </a>
+                          </div>
+                        )}
+                        <div className="box">
+                          <FaRegCalendarAlt />
+                          <p>{work.dateBegin}</p>
+                        </div>
+                      </section>
+                    </Aside>
+                    <Aside>
+                      <h1>Integrantes</h1>
+                      <div>
+                        {work.worksMember.map(({ memberData }) => (
+                          <Link
+                            key={memberData.login}
+                            to={`/${memberData.login}`}
+                          >
                             <img
-                              src={work.partner.logo}
-                              alt={work.partner.name}
+                              src={
+                                memberData.avatar
+                                  ? memberData.avatar.src
+                                  : imgUserDefault
+                              }
+                              alt={memberData.nameABNT}
                             />
-                          </a>
-                        </li>
-                      )}
-                      <Link to="/" className="BePartner">
-                        seja um Parceiro
-                      </Link>
-                    </ul>
-                  </Aside>
-                </div>
-              </SectionColumn>
-            </Content>
-            {work.pictures.length > 0 && (
-              <>
-                <HeaderSection>Galeria</HeaderSection>
-                <ShelfGallery>
-                  <Gallery photos={work.pictures} onClick={openLightbox} />
-                  <ModalGateway>
-                    {viewerIsOpen ? (
-                      <Modal onClose={closeLightbox}>
-                        <Carousel
-                          currentIndex={currentImage}
-                          views={work.pictures.map((x) => ({
-                            ...x,
-                            srcset: x.source,
-                            caption: x.name,
-                          }))}
-                        />
-                      </Modal>
-                    ) : null}
-                  </ModalGateway>
-                </ShelfGallery>
-              </>
-            )}
-          </>
-        ) : (
-          <CardWarning>
-            <img src={PulpFiction} alt="Pulp fiction" />
-            <h2>Esqueçeram de publicar de novo?</h2>
-          </CardWarning>
-        )}
+                          </Link>
+                        ))}
+                      </div>
+                    </Aside>
+                    <Aside>
+                      <h1>Parceiros</h1>
+                      <ul>
+                        {work.partner && (
+                          <li>
+                            <a href={work.partner.link_page}>
+                              <img
+                                src={work.partner.logo}
+                                alt={work.partner.name}
+                              />
+                            </a>
+                          </li>
+                        )}
+                        <Link to="/" className="BePartner">
+                          seja um Parceiro
+                        </Link>
+                      </ul>
+                    </Aside>
+                  </div>
+                </SectionColumn>
+              </Content>
+              {work.pictures.length > 0 && (
+                <>
+                  <HeaderSection>Galeria</HeaderSection>
+                  <ShelfGallery>
+                    <Gallery
+                      margin={8}
+                      photos={work.pictures}
+                      onClick={openLightbox}
+                    />
+                    <ModalGateway>
+                      {viewerIsOpen ? (
+                        <Modal onClose={closeLightbox}>
+                          <Carousel
+                            currentIndex={currentImage}
+                            views={work.pictures.map((x) => ({
+                              ...x,
+                              srcset: x.source,
+                              caption: x.name,
+                            }))}
+                          />
+                        </Modal>
+                      ) : null}
+                    </ModalGateway>
+                  </ShelfGallery>
+                </>
+              )}
+            </>
+          ) : (
+            getApi && (
+              <CardWarning>
+                <img src={PulpFiction} alt="Pulp fiction" />
+                <h2>Esqueçeram de publicar de novo?</h2>
+              </CardWarning>
+            )
+          )}
+        </div>
       </Main>
 
       <Footer />

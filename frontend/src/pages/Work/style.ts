@@ -19,6 +19,12 @@ export const Main = styled.main`
   border-radius: 0 0 24px 24px;
   margin-bottom: 100px;
 
+  > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 250px;
+  }
+
   /* border: 1px solid red; */
 `;
 
@@ -327,12 +333,40 @@ export const Aside = styled.aside`
 export const ShelfGallery = styled.div`
   max-width: 1200px;
   margin: 12px auto;
+
+  .react-photo-gallery--gallery {
+    > div {
+      justify-content: center;
+    }
+  }
+
+  img {
+    max-width: 300px;
+    height: auto;
+
+    border-radius: 8px;
+    translate: 0.2s all;
+
+    -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.5);
+
+    &:hover {
+      background: ${transparentize(0.00001, secondaryBackground)};
+
+      -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.75);
+
+      transform: translateY(8px);
+    }
+  }
 `;
 
 export const CardWarning = styled.div<WarningPros>`
   max-width: 1200px;
 
-  margin-bottom: 24px;
+  margin: 24px 0;
 
   display: flex;
   align-items: center;
