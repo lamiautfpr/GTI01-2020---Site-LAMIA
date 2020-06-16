@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoStar, GoRepo, GoGitCommit, GoGitBranch } from 'react-icons/go';
 import CountUp from 'react-countup';
-import VisibilitySensor from 'react-visibility-sensor';
 
 import api from '../../services/api';
 
@@ -148,6 +147,42 @@ const Home: React.FC = () => {
           </div>
         </SectionLine>
         <hr /> */}
+        <SectionCards title="Statistics" id="Statistics">
+          <HeaderSection>
+            <h2>Linhas de Códigos Produzidas</h2>
+          </HeaderSection>
+          <div>
+            <div>
+              <h3>Repositórios</h3>
+              <div>
+                <GoRepo />
+                <CountUp delay={1} end={statistics.countRepositories} />
+              </div>
+            </div>
+            <div>
+              <h3>Commits</h3>
+              <div>
+                <GoGitCommit />
+                <CountUp delay={1} end={statistics.countCommits} />
+              </div>
+            </div>
+            <div>
+              <h3>Branches</h3>
+              <div>
+                <GoGitBranch />
+                <CountUp delay={1} end={statistics.countBranches} />
+              </div>
+            </div>
+            <div>
+              <h3>Star</h3>
+              <div>
+                <GoStar />
+                <CountUp delay={1} end={statistics.countStars} />
+              </div>
+            </div>
+          </div>
+        </SectionCards>
+        <hr />
         <SectionLine id="Mission">
           <HeaderSection>
             <h2>Missão</h2>
@@ -192,81 +227,6 @@ const Home: React.FC = () => {
             </CardWarning>
           )}
         </SectionColumn>
-        <hr />
-        <SectionCards title="Statistics" id="Statistics">
-          <HeaderSection>
-            <h2>Linhas de Códigos Produzidas</h2>
-          </HeaderSection>
-          <div>
-            <div>
-              <h3>Repositórios</h3>
-              <div>
-                <GoRepo />
-                <CountUp
-                  end={statistics.countRepositories}
-                  duration={2.5}
-                  delay={0.5}
-                  redraw
-                >
-                  {({ countUpRef, start }) => (
-                    <VisibilitySensor onChange={start} delayedCall>
-                      <span ref={countUpRef} />
-                    </VisibilitySensor>
-                  )}
-                </CountUp>
-              </div>
-            </div>
-            <div>
-              <h3>Commits</h3>
-              <div>
-                <GoGitCommit />
-                <CountUp end={statistics.countCommits} duration={2.5} delay={2}>
-                  {({ countUpRef, start }) => (
-                    <VisibilitySensor onChange={start} delayedCall>
-                      <span ref={countUpRef} />
-                    </VisibilitySensor>
-                  )}
-                </CountUp>
-              </div>
-            </div>
-            <div>
-              <h3>Branches</h3>
-              <div>
-                <GoGitBranch />
-                <CountUp
-                  end={statistics.countBranches}
-                  duration={2.5}
-                  delay={2}
-                  redraw
-                >
-                  {({ countUpRef, start }) => (
-                    <VisibilitySensor onChange={start} delayedCall>
-                      <span ref={countUpRef} />
-                    </VisibilitySensor>
-                  )}
-                </CountUp>
-              </div>
-            </div>
-            <div>
-              <h3>Star</h3>
-              <div>
-                <GoStar />
-                <CountUp
-                  end={statistics.countStars}
-                  duration={2.5}
-                  delay={2.5}
-                  redraw
-                >
-                  {({ countUpRef, start }) => (
-                    <VisibilitySensor onChange={start} delayedCall>
-                      <span ref={countUpRef} />
-                    </VisibilitySensor>
-                  )}
-                </CountUp>
-              </div>
-            </div>
-          </div>
-        </SectionCards>
         <hr />
         <SectionColumn id="AreasExpertise">
           <HeaderSection>
