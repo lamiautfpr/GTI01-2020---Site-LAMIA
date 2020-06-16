@@ -7,14 +7,13 @@ interface HeaderProps {
   title?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ title = 'LAMIA' }) => {
-  const [subTitle, setSubTitle] = useState(
-    'LABORATÓRIO DE APRENDIZADO DE MÁQUINA E IMAGENS APLICADOS À INDÚSTRIA',
-  );
+const Header: React.FC<HeaderProps> = ({ title = 'LAMIA' }: HeaderProps) => {
+  const [subTitle, setSubTitle] = useState('');
 
   useEffect(() => {
     function type(): void {
-      const string = subTitle;
+      const string =
+        'LABORATÓRIO DE APRENDIZADO DE MÁQUINA E IMAGENS APLICADOS À INDÚSTRIA';
       let partialSubTitle = '';
       string.split('').forEach((letter, i) => {
         setTimeout(() => {
