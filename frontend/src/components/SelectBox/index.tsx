@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 
 import { Theme } from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -15,8 +14,8 @@ interface SelectBoxProps {
   label: string;
   isMulti?: boolean;
   width?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange?: any;
-  value?: any;
 }
 
 const SelectBox: React.FC<SelectBoxProps> = ({
@@ -26,8 +25,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   isMulti = false,
   width = 150,
   onChange,
-  value,
-}) => {
+}: SelectBoxProps) => {
   const animatedComponents = makeAnimated();
 
   function customTheme(theme: Theme): Theme {
