@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import {
   FaSlack,
@@ -10,6 +9,7 @@ import {
   FaMobileAlt,
   FaMailBulk,
   FaCopyright,
+  FaQuoteLeft,
 } from 'react-icons/fa';
 
 import { Contact } from './style';
@@ -18,14 +18,18 @@ const Footer: React.FC = () => {
   return (
     <Contact>
       <div>
-        <section>
-          <h2>Agradecimentos</h2>
-          <p>Muito obrigado por acessar...</p>
+        <section className="quote">
+          <FaQuoteLeft color="#f8f8ff" size={20} />
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem harum
-            alias eius accusamus voluptatibus dolorum quod, consequuntur labore
-            autem provident! Quos dolores, optio ipsa modi quasi unde iste
-            voluptas ipsum?
+            A imaginação é mais importante que a ciência, porque a ciência é
+            limitada, ao passo que a imaginação abrange o mundo inteiro.
+            <strong>Albert Einstein</strong>
+          </p>
+          <p>
+            Se você não está fazendo da vida de alguém algo melhor, você está
+            desperdiçando o seu tempo. Sua vida será melhor quando você fazer da
+            vida de outras pessoas algo melhor.
+            <strong>Will Smith</strong>
           </p>
         </section>
         <section>
@@ -53,12 +57,12 @@ const Footer: React.FC = () => {
           </span>
           <ul>
             <li>
-              <a href="#">
+              <a href="https://lamia-utfpr.slack.com/" target="blank">
                 <FaSlack size={32} />
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://www.facebook.com/lamia-utfpr" target="blank">
                 <FaFacebook size={32} />
               </a>
             </li>
@@ -71,8 +75,9 @@ const Footer: React.FC = () => {
         </section>
       </div>
       <p>
+        Jecé Xavier & Rafael Lechensque
         <FaCopyright size={20} />
-        by Professor Xavier & Detective L
+        LAMIA 2020
       </p>
     </Contact>
   );

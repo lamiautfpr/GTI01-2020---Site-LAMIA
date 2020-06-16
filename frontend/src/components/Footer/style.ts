@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { transparentize } from 'polished';
 import { secondaryBackground } from '../../styles/paletsColorers';
@@ -39,10 +39,6 @@ export const Contact = styled.footer`
 
       max-width: 50%;
       margin-right: 64px;
-
-      h2 {
-        margin-bottom: 8px;
-      }
 
       span {
         display: flex;
@@ -96,10 +92,12 @@ export const Contact = styled.footer`
     display: flex;
     align-items: center;
 
+    font-weight: lighter;
+    font-size: 20px;
     transition: transform 0.2s;
 
     svg {
-      margin-right: 8px;
+      margin: 0 8px;
     }
 
     &:hover {
@@ -107,5 +105,25 @@ export const Contact = styled.footer`
     }
 
     color: #fff;
+  }
+
+  .quote {
+    p + p {
+      border-top: 1px solid ${transparentize(0.5, '#f8f8ff')};
+      padding-top: 12px;
+    }
+    p {
+      margin: 8px 0;
+      flex-direction: column;
+      align-items: flex-end;
+      font-weight: lighter;
+
+      font-size: 20px;
+      line-height: 30px;
+
+      strong {
+        margin-top: 8px;
+      }
+    }
   }
 `;
