@@ -190,9 +190,9 @@ const ListProjects: React.FC = () => {
   }, [params.category]);
 
   const workWithTransitions = useTransition(works, (work) => work.id, {
-    from: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
+    from: { opacity: 0, transform: 'translate3d(-40px,0,0)' },
     enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
-    leave: { opacity: 0, transform: 'translate3d(0,-40px,0)' },
+    leave: { opacity: 0, transform: 'translate3d(+40px,0,0)' },
   });
 
   return (
