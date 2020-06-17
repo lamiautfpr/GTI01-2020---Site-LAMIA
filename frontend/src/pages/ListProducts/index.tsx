@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
 import {
   FaChevronRight,
@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa';
 
 import api from '../../services/api';
+import { listOrder } from '../ListMembers';
 
 import imgLogo from '../../assets/logo.svg';
 import emojiSad from '../../assets/emojiSad.png';
@@ -29,17 +30,6 @@ import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 import SelectBox from '../../components/SelectBox';
 
-const listOrder = [
-  { value: 0, description: null, label: 'A-Z' },
-  { value: 1, description: null, label: 'Z-A' },
-  { value: 2, description: null, label: ' - Jovem' },
-  { value: 3, description: null, label: '+ Jovem' },
-];
-
-interface CategoryParams {
-  category: string;
-}
-
 interface CategoryProps {
   name: string;
   description: string | null;
@@ -47,8 +37,6 @@ interface CategoryProps {
 }
 
 const ListProjects: React.FC = () => {
-  const { params } = useRouteMatch<CategoryParams>();
-
   // database
   const [allWorks, setAllWorks] = useState<WorkListProps[]>([]);
   const [works, setWorks] = useState<WorkListProps[]>([]);
@@ -172,7 +160,7 @@ const ListProjects: React.FC = () => {
 
   // Functions for get list works
   useEffect(() => {
-    api.get(`category-works/${params.category}`).then((response) => {
+    api.get(`category-works/produtos`).then((response) => {
       setCategory(response.data);
       setAllWorks(response.data.works.sort(compareTitleASC));
       setWorks(response.data.works.sort(compareTitleASC));
@@ -187,7 +175,7 @@ const ListProjects: React.FC = () => {
 
       setAreas([...response.data.concat(defaultArea)]);
     });
-  }, [params.category]);
+  }, []);
 
   const workWithTransitions = useTransition(works, (work) => work.id, {
     from: { opacity: 0, transform: 'translate3d(-40px,0,0)' },
@@ -202,7 +190,7 @@ const ListProjects: React.FC = () => {
       <NavBar />
 
       <Main>
-        <SectionFilters isMembers={params.category === 'members'}>
+        <SectionFilters name="">
           <div className="areaExpensive">
             <SelectBox
               label="Áreas de Pesquisa"
@@ -210,19 +198,18 @@ const ListProjects: React.FC = () => {
               placeholder="Selecione..."
               width={250}
               onChange={setAreaExpensive}
+              defaultValue={areas[0]}
             />
           </div>
           <div className="typeWorks">
             <SelectBox
-              label={`${params.category
-                .charAt(0)
-                .toUpperCase()}${params.category.slice(1)}`}
+              label="Produtos"
               options={category.types}
               placeholder="Selecione..."
               width={550}
               isMulti
               onChange={setTypeWorks}
-              // value={null}
+              defaultValue={null}
             />
           </div>
           <div className="order">
@@ -232,6 +219,7 @@ const ListProjects: React.FC = () => {
               options={listOrder}
               placeholder="Selecione..."
               onChange={checkOrder}
+              defaultValue={listOrder[0]}
             />
           </div>
         </SectionFilters>

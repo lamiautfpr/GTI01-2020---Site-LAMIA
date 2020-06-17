@@ -8,7 +8,7 @@ import {
 } from '../../styles/paletsColorers';
 
 interface FilterPros {
-  isMembers: boolean;
+  name: string;
 }
 
 export const Main = styled.main`
@@ -28,12 +28,6 @@ export const SectionFilters = styled.section<FilterPros>`
 
   .areaExpensive {
     width: 250px;
-
-    ${(props) =>
-      props.isMembers &&
-      css`
-        display: none;
-      `}
   }
   .typeWorks {
     width: 550px;

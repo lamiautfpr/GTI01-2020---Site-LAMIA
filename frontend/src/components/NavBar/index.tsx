@@ -1,42 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-import api from '../../services/api';
 import { Nav } from './style';
 
-interface NavItemProps {
-  name: string;
-  description: string | null;
-}
-
-interface MenuNavProps {
-  router: string;
-  name: string;
-  description: string | null;
-  types: NavItemProps[];
-}
-
-interface ApiResponse {
-  response: {
-    data: MenuNavProps;
-  };
-}
-
 const NavBar: React.FC = () => {
-  const [categoryWorks, setCategoryWorks] = useState<MenuNavProps[]>([]);
-  const [members, setMembers] = useState<MenuNavProps | null>(null);
-
-  useEffect(() => {
-    api.get(`category-works`).then((response) => {
-      setCategoryWorks(response.data);
-    });
-    api.get(`type-members`).then((response) => {
-      setMembers(response.data);
-    });
-  }, []);
-
   return (
     <Nav>
       <ul>
@@ -44,10 +13,15 @@ const NavBar: React.FC = () => {
           <Link to="/">Home</Link>
           <ul className="DropDraw">
             <li>
+              <HashLink smooth to="/#Statistics">
+                Linhas de Códigos Produzidas
+              </HashLink>
+            </li>
+            {/* <li>
               <HashLink smooth to="#News">
                 Noticias
               </HashLink>
-            </li>
+            </li> */}
             <li>
               <HashLink smooth to="/#Mission">
                 Missão
@@ -56,11 +30,6 @@ const NavBar: React.FC = () => {
             <li>
               <HashLink smooth to="/#LatestPublications">
                 Ultimas publicações
-              </HashLink>
-            </li>
-            <li>
-              <HashLink smooth to="/#Statistics">
-                Linhas de Códigos Produzidas
               </HashLink>
             </li>
             <li>
@@ -80,27 +49,17 @@ const NavBar: React.FC = () => {
             </li>
           </ul>
         </li>
-        {categoryWorks.map((category) => (
-          <li key={category.name}>
-            <a href={`/works/${category.router}`}>{category.name}</a>
-            {/* <ul className="DropDraw">
-              {category.types.map((type) => (
-                <li>
-                  <a href={type.name}>{type.name}</a>
-                </li>
-              ))}
-            </ul> */}
-          </li>
-        ))}
         <li>
-          <Link to="/members">{members?.name}</Link>
-          {/* <ul className="lastDropDraw">
-            {members?.types.map((type) => (
-              <li>
-                <a href={type.name}>{type.name}</a>
-              </li>
-            ))}
-          </ul> */}
+          <Link to="/works/products">Produtos</Link>
+        </li>
+        <li>
+          <Link to="/works/projects">Projetos</Link>
+        </li>
+        <li>
+          <Link to="/works/publications">Publicações</Link>
+        </li>
+        <li>
+          <Link to="/members">Integrantes</Link>
         </li>
       </ul>
     </Nav>

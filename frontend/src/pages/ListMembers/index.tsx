@@ -19,7 +19,7 @@ import Separator from '../../components/Separator';
 import Footer from '../../components/Footer';
 import SelectBox from '../../components/SelectBox';
 
-const listOrder = [
+export const listOrder = [
   { value: 0, description: null, label: 'A-Z' },
   { value: 1, description: null, label: 'Z-A' },
 ];

@@ -4,7 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 // import Dashboard from '../pages/Dashboard';
 // import Repository from '../pages/Repository';
 import Home from '../pages/Home';
-import ListWorks from '../pages/ListWorks';
+
+import ListProducts from '../pages/ListProducts';
+import ListProjects from '../pages/ListProjects';
+import ListPublications from '../pages/ListPublications';
+
 import ListMembers from '../pages/ListMembers';
 import Member from '../pages/Member';
 import ProjectView from '../pages/Work';
@@ -15,7 +19,11 @@ const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/members" exact component={ListMembers} />
-    <Route path="/works/:category" exact component={ListWorks} />
+
+    <Route path="/works/products" exact component={ListProducts} />
+    <Route path="/works/projects" exact component={ListProjects} />
+    <Route path="/works/publications" exact component={ListPublications} />
+
     <Route path="/work/:id" exact component={ProjectView} />
     <Route path="/:login" exact component={Member} />
     {/* <Route path="/repositories/:repository+" exact component={} /> */}
