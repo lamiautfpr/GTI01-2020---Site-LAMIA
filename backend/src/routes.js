@@ -37,7 +37,6 @@ routes.get('/partiners', PartnerController.index);
 routes.get('/works', WorkController.index);
 routes.get('/statistics', StatisticController.index);
 routes.get('/last-work', LastWorkController.index);
-routes.get('/works/:category', ListController.index);
 
 routes.get('/category-works/:category', ListController.show);
 routes.get('/:login', MemberController.show);

@@ -36,6 +36,8 @@ interface CategoryProps {
   types: SelectItem[];
 }
 
+const page = 'Produtos';
+
 const ListProjects: React.FC = () => {
   // database
   const [allWorks, setAllWorks] = useState<WorkListProps[]>([]);
@@ -160,7 +162,7 @@ const ListProjects: React.FC = () => {
 
   // Functions for get list works
   useEffect(() => {
-    api.get(`category-works/produtos`).then((response) => {
+    api.get(`category-works/${page}`).then((response) => {
       setCategory(response.data);
       setAllWorks(response.data.works.sort(compareTitleASC));
       setWorks(response.data.works.sort(compareTitleASC));
@@ -203,7 +205,7 @@ const ListProjects: React.FC = () => {
           </div>
           <div className="typeWorks">
             <SelectBox
-              label="Produtos"
+              label={`${page}`}
               options={category.types}
               placeholder="Selecione..."
               width={550}

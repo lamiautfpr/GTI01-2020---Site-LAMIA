@@ -8,9 +8,7 @@ import MemberWork from '../models/MemberWork';
 
 class ListController {
   async show(req, res) {
-    const name =
-      req.params.category.charAt(0).toUpperCase() +
-      req.params.category.slice(1);
+    const name = req.params.category;
 
     if (name === 'Members') {
       const typeMembers = await TypeMember.findAll({
@@ -76,28 +74,6 @@ class ListController {
       order: ['name'],
     });
     return res.json(categoryWorks);
-  }
-
-  async index(req, res) {
-    const name =
-      req.params.category.charAt(0).toUpperCase() +
-      req.params.category.slice(1);
-
-    const category = await CategoryWork.findOne({
-      where: { name },
-    });
-
-    if (!category) {
-      return res.status(401).json({ error: 'Category not found :( Tururu...' });
-    }
-
-    const works = await Work.findAll({
-      where: {
-        category,
-      },
-    });
-
-    return res.json(works);
   }
 }
 
