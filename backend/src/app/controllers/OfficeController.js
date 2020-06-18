@@ -1,3 +1,5 @@
+import { Op } from 'sequelize';
+
 import Member from '../models/Member';
 import TypeMember from '../models/TypeMember';
 import Picture from '../models/Picture';
@@ -11,7 +13,6 @@ class OfficeController {
       .concat(office.substring(1));
 
     const members = await Member.findAll({
-      // where: { name },
       attributes: ['id', 'name', 'description'],
       include: [
         {
@@ -19,7 +20,9 @@ class OfficeController {
           as: 'office',
           attributes: [],
           where: {
-            name,
+            name: {
+              [Op.or]: [name, 'Coordenador'],
+            },
           },
         },
         {
