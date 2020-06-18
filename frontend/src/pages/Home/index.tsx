@@ -4,15 +4,18 @@ import CountUp from 'react-countup';
 
 import api from '../../services/api';
 
-import imgTester from '../../assets/Tester.jpg';
-import plusUltra from '../../assets/plus_ultra.gif';
-import logoDemo from '../../assets/logo_demo.jpg';
-import logo from '../../assets/logo.svg';
-import orientation from '../../assets/orientation.jpg';
-import disoriented from '../../assets/disoriented.jpg';
-import { mission } from '../../assets/dataStatistic';
+import imgLogo from '../../assets/logo.jpg';
+import imgArea from '../../assets/imgDefault/search.jpg';
+import imgPartnerDefault from '../../assets/imgDefault/partner.svg';
+import imgTeacherDefault from '../../assets/imgDefault/teacher.png';
+import imgWorkDefault from '../../assets/imgDefault/work1.png';
 
-import logoLex from '../../assets/logo_lex.png';
+import imgDisoriented from '../../assets/imgWarning/disoriented.jpg';
+import imgFocus from '../../assets/imgWarning/focus.gif';
+import imgDoPartner from '../../assets/imgWarning/partner.jpg';
+//
+
+import { mission } from '../../assets/dataStatistic';
 
 import {
   Main,
@@ -81,7 +84,7 @@ const Home: React.FC = () => {
     });
 
     api.get<PartnerProps[]>(`partiners`).then((response) => {
-      setPartners(response.data);
+      // setPartners(response.data);
     });
 
     api.get<WorkListProps[]>(`last-work?limit=3`).then((response) => {
@@ -191,7 +194,7 @@ const Home: React.FC = () => {
             <div>
               <p>{mission}</p>
             </div>
-            <img src={logoDemo} alt="Logo LAMIA" />
+            <img src={imgLogo} alt="LAMIA" />
           </div>
         </SectionLine>
         <hr />
@@ -205,7 +208,9 @@ const Home: React.FC = () => {
                 <div key={work.id}>
                   <img
                     src={
-                      work.pictures?.length > 0 ? work.pictures[0].src : logo
+                      work.pictures?.length > 0
+                        ? work.pictures[0].src
+                        : imgWorkDefault
                     }
                     alt={
                       work.pictures.length > 0
@@ -222,7 +227,7 @@ const Home: React.FC = () => {
             </div>
           ) : (
             <CardWarning>
-              <img src={plusUltra} alt="plusUltra" />
+              <img src={imgFocus} alt="plusUltra" />
               <h2>Estamos dando PLUS ULTRA para publiar nosso trabalho</h2>
             </CardWarning>
           )}
@@ -235,7 +240,7 @@ const Home: React.FC = () => {
           <div>
             {areaExpertises.map((area) => (
               <div key={area.id}>
-                <img src={imgTester} alt={area.name} />
+                <img src={imgArea} alt={area.name} />
                 <header>
                   <h2>{area.name}</h2>
                 </header>
@@ -252,7 +257,9 @@ const Home: React.FC = () => {
         <SectionVip id="Partners">
           <header>
             <h2>Parceiros</h2>
-            <button type="button">seja um parceiro</button>
+            {partners.length < 0 && (
+              <button type="button">seja um parceiro</button>
+            )}
           </header>
           <div>
             {partners.length > 0 ? (
@@ -260,7 +267,7 @@ const Home: React.FC = () => {
                 {partners.map((partner) => (
                   <li key={partner.id}>
                     <img
-                      src={partner.logo ? `${partner.logo}` : logo}
+                      src={partner.logo ? `${partner.logo}` : imgPartnerDefault}
                       alt={partner.name}
                     />
                     <h2>{partner.name}</h2>
@@ -269,8 +276,8 @@ const Home: React.FC = () => {
               </ul>
             ) : (
               <CardWarning textColor="#f0f0f0">
-                <img src={logoLex} alt="logoLex" />
-                <h2>Estamos sem uma parceria</h2>
+                <img src={imgDoPartner} alt="logoLex" />
+                <button type="button">seja um parceiro</button>
               </CardWarning>
             )}
           </div>
@@ -286,7 +293,9 @@ const Home: React.FC = () => {
                 {advisors.map((advisor) => (
                   <div key={advisor.id}>
                     <img
-                      src={advisor.avatar ? advisor.avatar.src : orientation}
+                      src={
+                        advisor.avatar ? advisor.avatar.src : imgTeacherDefault
+                      }
                       alt={advisor.avatar ? advisor.avatar.name : 'sem imagem'}
                     />
                     <header>
@@ -299,7 +308,7 @@ const Home: React.FC = () => {
             </div>
           ) : (
             <CardWarning>
-              <img src={disoriented} alt="sem orientador" />
+              <img src={imgDisoriented} alt="sem orientador" />
               <h2>Estamos desorientados</h2>
             </CardWarning>
           )}

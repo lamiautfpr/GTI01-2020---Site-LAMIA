@@ -6,8 +6,9 @@ import { FaMedal, FaChevronRight, FaMailBulk } from 'react-icons/fa';
 
 import api from '../../services/api';
 
-import userDefault from '../../assets/userDefault.png';
-import emojiSad from '../../assets/emojiSad.png';
+import imgMemberDefault from '../../assets/imgDefault/member.jpg';
+import imgEmojiSad from '../../assets/imgWarning/emojiSad.png';
+//
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { ImageProps } from '../../../myTypes/Images';
 import {} from '../../utils/orderArray';
@@ -187,7 +188,7 @@ const ListProjects: React.FC = () => {
               <animated.div key={item.id} style={props}>
                 <Link to={`/${item.login}`}>
                   <img
-                    src={item.avatar ? item.avatar.src : userDefault}
+                    src={item.avatar ? item.avatar.src : imgMemberDefault}
                     alt={item.avatar ? item.avatar.name : 'Member'}
                   />
 
@@ -216,7 +217,7 @@ const ListProjects: React.FC = () => {
                 <span>- Alguém neh</span>
                 <span>- Alguém ...</span>
               </h2>
-              <img src={emojiSad} alt="Triste" />
+              <img src={imgEmojiSad} alt="Triste" />
             </CardWarning>
           )}
         </Projects>

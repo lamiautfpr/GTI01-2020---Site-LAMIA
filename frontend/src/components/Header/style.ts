@@ -5,7 +5,15 @@ export const Title = styled.header`
   flex-direction: column;
   align-items: center;
 
-  padding: 80px 80px 16px 80px;
+  padding: 40px 80px 16px 80px;
+
+  img {
+    max-width: 120px;
+    max-height: 120px;
+    min-width: 64px;
+    min-height: 64px;
+    border-radius: 50%;
+  }
 
   h1 {
     margin: 4px 0 8px 0;

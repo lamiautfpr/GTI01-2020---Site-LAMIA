@@ -16,11 +16,13 @@ import { ImageProps } from '../../../myTypes/Images';
 import { WorkListProps } from '../../../myTypes/WorkListProps';
 
 import api from '../../services/api';
-import iconLattes from '../../assets/icon_lattes.svg';
-import userDefault from '../../assets/userDefault.png';
-import imgWorkDefault from '../../assets/imgWorkDefault.png';
-import mano from '../../assets/mano.jpg';
-import training from '../../assets/Training.gif';
+
+import iconLattes from '../../assets/icons/lattes.svg';
+import imgMemberDefault from '../../assets/imgDefault/member.jpg';
+import imgWorkDefault from '../../assets/imgDefault/work1.png';
+
+import imgDoubt from '../../assets/imgWarning/doubt.jpg';
+import imgTraining from '../../assets/imgWarning/training.gif';
 
 import { Main, Headline, Title, Shelf, Card, CardWarning } from './style';
 import Header from '../../components/Header';
@@ -128,7 +130,7 @@ const Member: React.FC = () => {
               <div className="imgBorde">
                 <div>
                   <img
-                    src={member.avatar ? member.avatar.src : userDefault}
+                    src={member.avatar ? member.avatar.src : imgMemberDefault}
                     alt={member.name}
                   />
                 </div>
@@ -195,15 +197,15 @@ const Member: React.FC = () => {
                           )}
 
                           <div className="box Date">
-                              <FaRegCalendarAlt size={32} />
-                              <p>{workData.dateBegin}</p>
-                            </div>
+                            <FaRegCalendarAlt size={32} />
+                            <p>{workData.dateBegin}</p>
+                          </div>
                         </div>
                         <div className="objective">
                           <p>
-                              {`${workData.objective.slice(0, 80)}`}
-                              {workData.objective.length > 80 && '...'}
-                            </p>
+                            {`${workData.objective.slice(0, 80)}`}
+                            {workData.objective.length > 80 && '...'}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -212,7 +214,7 @@ const Member: React.FC = () => {
               </Shelf>
             ) : (
               <CardWarning>
-                <img src={training} alt="em treinamento" />
+                <img src={imgTraining} alt="em treinamento" />
                 <h2>Jovem padoã em treinamento</h2>
               </CardWarning>
             )}
@@ -220,7 +222,7 @@ const Member: React.FC = () => {
         ) : (
           getApi && (
             <CardWarning>
-              <img src={mano} alt="membro errado" />
+              <img src={imgDoubt} alt="membro errado" />
               <h2>
                 Membro errado amigo.
                 <br />

@@ -343,4 +343,31 @@ export const CardWarning = styled.div<WarningPros>`
 
     margin-left: 40px;
   }
+
+  button {
+    border: 2px solid white;
+    padding: 10px 15px;
+    border-radius: 48px;
+
+    background: none;
+
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    &:hover {
+      background: white;
+
+      border: 2px solid white;
+
+      transform: translateX(2px);
+
+      color: ${transparentize(0, featuredColor)};
+    }
+  }
 `;

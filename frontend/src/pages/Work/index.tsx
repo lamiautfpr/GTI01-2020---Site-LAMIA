@@ -11,13 +11,17 @@ import Gallery from 'react-photo-gallery';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 import { WorkListProps } from '../../../myTypes/WorkListProps';
-import imgWorkDefault from '../../assets/imgWorkDefault.png';
-import PulpFiction from '../../assets/Pulp_fiction.gif';
-import imgUserDefault from '../../assets/userDefault.png';
+import api from '../../services/api';
+
+import imgMemberDefault from '../../assets/imgDefault/member.jpg';
+import imgWorkDefault from '../../assets/imgDefault/work1.png';
+
+import imgDemand from '../../assets/imgWarning/demand.gif';
+
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
-import api from '../../services/api';
+
 import {
   Aside,
   CardWarning,
@@ -161,7 +165,7 @@ const ProjectView: React.FC = () => {
                               src={
                                 memberData.avatar
                                   ? memberData.avatar.src
-                                  : imgUserDefault
+                                  : imgMemberDefault
                               }
                               alt={memberData.nameABNT}
                             />
@@ -220,7 +224,7 @@ const ProjectView: React.FC = () => {
           ) : (
             getApi && (
               <CardWarning>
-                <img src={PulpFiction} alt="Pulp fiction" />
+                <img src={imgDemand} alt="Pulp fiction" />
                 <h2>Esqueçeram de publicar de novo?</h2>
               </CardWarning>
             )

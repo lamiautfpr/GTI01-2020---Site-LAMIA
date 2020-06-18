@@ -10,10 +10,9 @@ import {
 } from 'react-icons/fa';
 
 import api from '../../services/api';
-import { listOrder } from '../ListMembers';
 
-import imgLogo from '../../assets/logo.svg';
-import emojiSad from '../../assets/emojiSad.png';
+import imgWorkDefault from '../../assets/imgDefault/work1.png';
+import imgEmojiSad from '../../assets/imgWarning/emojiSad.png';
 import { SelectItem } from '../../../myTypes/SelectItem';
 import { WorkListProps } from '../../../myTypes/WorkListProps';
 import {
@@ -22,6 +21,8 @@ import {
   compareDateASC,
   compareDateDESC,
 } from '../../utils/orderArray';
+
+import { listOrder } from '../ListMembers';
 
 import { Main, Projects, SectionFilters, CardWarning } from './style';
 import Header from '../../components/Header';
@@ -38,7 +39,7 @@ interface CategoryProps {
 
 const page = 'Publicações';
 
-const ListProjects: React.FC = () => {
+const ListPublications: React.FC = () => {
   // database
   const [allWorks, setAllWorks] = useState<WorkListProps[]>([]);
   const [works, setWorks] = useState<WorkListProps[]>([]);
@@ -233,7 +234,18 @@ const ListProjects: React.FC = () => {
             workWithTransitions.map(({ item, key, props }) => (
               <animated.div key={key} style={props}>
                 <Link to={`/work/${item.id}`}>
-                  <img src={imgLogo} alt={item.title} />
+                  <img
+                    src={
+                      item.pictures?.length > 0
+                        ? item.pictures[0].src
+                        : imgWorkDefault
+                    }
+                    alt={
+                      item.pictures?.length > 0
+                        ? item.pictures[0].name
+                        : 'Capa do Projeto'
+                    }
+                  />
 
                   <strong>
                     {item.title}
@@ -273,7 +285,7 @@ const ListProjects: React.FC = () => {
                 <br />
                 Ainda não temos o que você procura...
               </h2>
-              <img src={emojiSad} alt="Triste" />
+              <img src={imgEmojiSad} alt="Triste" />
             </CardWarning>
           )}
         </Projects>
@@ -284,4 +296,4 @@ const ListProjects: React.FC = () => {
   );
 };
 
-export default ListProjects;
+export default ListPublications;
