@@ -154,19 +154,20 @@ export const SectionVip = styled.section`
     font-size: 32px;
     color: ${secondaryBackground};
 
-    button{
+    a{
       margin-left:64px;
 
-      border: 3px solid white;
-      padding: 10px 15px;
-      border-radius: 24px;
+      border: 2px solid white;
+      padding: 12px;
+      border-radius: 32px;
 
       background: none;
 
       text-transform: uppercase;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 20px;
       color: white;
+      text-decoration: none;
 
       cursor: pointer;
 
@@ -175,11 +176,11 @@ export const SectionVip = styled.section`
       &:hover {
         background: white;
 
-        border: 0px solid white;
+        border: 2px solid white;
 
         transform: translateX(2px);
 
-        color: ${transparentize(0, primaryColor)};
+        color: ${transparentize(0, featuredColor)};
       }
     }
 
@@ -344,7 +345,7 @@ export const CardWarning = styled.div<WarningPros>`
     margin-left: 40px;
   }
 
-  button {
+  a {
     border: 2px solid white;
     padding: 10px 15px;
     border-radius: 48px;
@@ -355,6 +356,7 @@ export const CardWarning = styled.div<WarningPros>`
     font-weight: bold;
     font-size: 40px;
     color: white;
+    text-decoration: none;
 
     cursor: pointer;
 

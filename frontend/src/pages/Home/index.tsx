@@ -84,12 +84,18 @@ const Home: React.FC = () => {
     });
 
     api.get<PartnerProps[]>(`partiners`).then((response) => {
-      // setPartners(response.data);
+      setPartners(response.data);
     });
 
-    api.get<WorkListProps[]>(`last-work?limit=3`).then((response) => {
-      setLastWork(response.data);
-    });
+    api
+      .get<WorkListProps[]>(`last-work`, {
+        params: {
+          limit: 3,
+        },
+      })
+      .then((response) => {
+        setLastWork(response.data);
+      });
 
     api.get<StatisticsProps>(`statistics`).then((response) => {
       setStatistics(response.data);
@@ -257,8 +263,8 @@ const Home: React.FC = () => {
         <SectionVip id="Partners">
           <header>
             <h2>Parceiros</h2>
-            {partners.length < 0 && (
-              <button type="button">seja um parceiro</button>
+            {partners.length > 0 && (
+              <a href="mailto:naves@utfpr.edu.br">seja um parceiro</a>
             )}
           </header>
           <div>
@@ -277,7 +283,7 @@ const Home: React.FC = () => {
             ) : (
               <CardWarning textColor="#f0f0f0">
                 <img src={imgDoPartner} alt="logoLex" />
-                <button type="button">seja um parceiro</button>
+                <a href="mailto:naves@utfpr.edu.br">seja um parceiro</a>
               </CardWarning>
             )}
           </div>

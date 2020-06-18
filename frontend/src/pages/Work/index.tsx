@@ -186,9 +186,12 @@ const ProjectView: React.FC = () => {
                             </a>
                           </li>
                         )}
-                        <Link to="/" className="BePartner">
-                          seja um Parceiro
-                        </Link>
+                        <a
+                          href="mailto:naves@utfpr.edu.br"
+                          className="BePartner"
+                        >
+                          seja um parceiro
+                        </a>
                       </ul>
                     </Aside>
                   </div>
