@@ -71,7 +71,17 @@ class WorkController {
 
   async show(req, res) {
     const { id } = req.params;
-    const work = await Work.findByPk(id, {
+
+    const idTreated = id
+      .split('')
+      .filter(n => Number(n) || n === 0)
+      .join('');
+
+    if (!idTreated) {
+      return res.json(null);
+    }
+
+    const work = await Work.findByPk(idTreated, {
       include: [
         {
           model: Partner,
