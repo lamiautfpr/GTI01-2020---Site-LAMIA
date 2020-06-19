@@ -1,7 +1,7 @@
 module.exports = {
   up: QueryInterface => {
     return QueryInterface.bulkInsert(
-      'members',
+      'pictures',
       [
         {
           name: 'Support - Brainiac.jpg',
