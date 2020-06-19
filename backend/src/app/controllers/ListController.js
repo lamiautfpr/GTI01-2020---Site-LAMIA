@@ -5,6 +5,7 @@ import Work from '../models/Work';
 import AreaExpertise from '../models/AreaExpertise';
 import Member from '../models/Member';
 import MemberWork from '../models/MemberWork';
+import Picture from '../models/Picture';
 
 class ListController {
   async show(req, res) {
@@ -37,6 +38,12 @@ class ListController {
           as: 'works',
           attributes: ['id', 'title', 'objective', 'date_begin', 'dateBegin'],
           include: [
+            {
+              model: Picture,
+              as: 'pictures',
+              attributes: ['id', 'name', 'path', 'src', 'source'],
+              through: { attributes: [] },
+            },
             {
               model: TypeWork,
               as: 'types',
