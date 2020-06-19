@@ -160,8 +160,8 @@ export const Headline = styled.div`
           align-items:baseline;
 
             img{
-              width: 20px;
-              height: 20px;
+              width: 24px;
+              height: 24px;
             }
 
             svg{
@@ -195,6 +195,7 @@ export const Headline = styled.div`
           justify-content: flex-end;
 
           color: white;
+          text-decoration: none;
 
           svg{
             color: ${primaryColor};

@@ -89,12 +89,12 @@ const Member: React.FC = () => {
                       </div>
                       {member.urlGithub && (
                         <a href={member.urlGithub} target="bank">
-                          <FaGithubSquare size={22} />
+                          <FaGithubSquare size={26} />
                         </a>
                       )}
                       {member.urlLikendin && (
                         <a href={member.urlLikendin} target="bank">
-                          <FaLinkedinIn size={22} />
+                          <FaLinkedinIn size={26} />
                         </a>
                       )}
                       {member.urlLattes && (
@@ -103,10 +103,10 @@ const Member: React.FC = () => {
                         </a>
                       )}
                     </div>
-                    <div className="contact">
+                    <a href={`mailto:${member.email}`} className="contact">
                       <FaEnvelope size={20} />
                       {member.email}
-                    </div>
+                    </a>
                   </div>
                 </div>
                 <div className="leftInfo">
