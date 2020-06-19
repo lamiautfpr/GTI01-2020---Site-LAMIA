@@ -82,28 +82,30 @@ const Member: React.FC = () => {
                     <div className="name">
                       <h1>{member.name}</h1>
                     </div>
-                    <div className="row">
+                    <div className="icons">
                       <div className="office">
                         <FaMedal size={21} />
                         <span>{member.office.label}</span>
                       </div>
-                      <div className="icons">
-                        {member.urlGithub && (
-                          <a href={member.urlGithub} target="bank">
-                            <FaGithubSquare size={24} />
-                          </a>
-                        )}
-                        {member.urlLikendin && (
-                          <a href={member.urlLikendin} target="bank">
-                            <FaLinkedinIn size={24} />
-                          </a>
-                        )}
-                        {member.urlLattes && (
-                          <a href={member.urlLattes} target="bank">
-                            <img src={iconLattes} alt="Lattes" />
-                          </a>
-                        )}
-                      </div>
+                      {member.urlGithub && (
+                        <a href={member.urlGithub} target="bank">
+                          <FaGithubSquare size={22} />
+                        </a>
+                      )}
+                      {member.urlLikendin && (
+                        <a href={member.urlLikendin} target="bank">
+                          <FaLinkedinIn size={22} />
+                        </a>
+                      )}
+                      {member.urlLattes && (
+                        <a href={member.urlLattes} target="bank">
+                          <img src={iconLattes} alt="Lattes" />
+                        </a>
+                      )}
+                    </div>
+                    <div className="contact">
+                      <FaEnvelope size={20} />
+                      {member.email}
                     </div>
                   </div>
                 </div>
@@ -111,18 +113,6 @@ const Member: React.FC = () => {
                   <div className="description">
                     <span>Descrição: </span>
                     {member.description}
-                  </div>
-                  <div className="contact">
-                    <span>
-                      <FaEnvelope />
-                      {member.email}
-                    </span>
-                    {member.phone && (
-                      <span>
-                        <FaPhoneAlt />
-                        {member.phone}
-                      </span>
-                    )}
                   </div>
                 </div>
               </div>
@@ -191,13 +181,13 @@ const Member: React.FC = () => {
                               target="bank"
                               className="box git"
                             >
-                              <FaGithub size={32} />
+                              <FaGithub size={24} />
                               <p>Repositório</p>
                             </a>
                           )}
 
                           <div className="box Date">
-                            <FaRegCalendarAlt size={32} />
+                            <FaRegCalendarAlt size={24} />
                             <p>{workData.dateBegin}</p>
                           </div>
                         </div>

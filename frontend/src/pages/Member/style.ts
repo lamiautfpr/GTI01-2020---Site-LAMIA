@@ -105,9 +105,6 @@ export const Projects = styled.div`
 `;
 
 export const Headline = styled.div`
-
-  /* border: 1px solid green; */
-
   display: flex;
   flex-direction: column;
   /* flex-flow: row wrap; */
@@ -128,123 +125,97 @@ export const Headline = styled.div`
     justify-content: space-between;
     /* flex: 3 2 300px; */
 
-
     .leftInfo{
-      /* border: 1px solid green; */
-
       display:flex;
       flex-direction: row;
       flex-wrap: wrap;
-      align-content: center;
+      align-items: center;
 
       width: calc((100% - 283px)/2);
-
-      padding: 8px;
+      padding: 12px;
 
       .column{
         display:flex;
         flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
 
         .name{
+          top: -8px;
+          position: relative;
 
           height: 40px;
           padding: 0;
-          margin: 12px;
 
           color: white;
-          h1 {
-            font-size: 40px;
-          }
-        }
-
-        .row{
-          display:flex;
-          flex-direction: row;
-          justify-content: space-between;
-
-          .icons{
-          /* border: 1px solid red; */
-
-          margin: 8px;
-
-          width: 200px;
-
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-end;
-
-
-          a{
-            color: ${primaryColor};
-            margin-right: 8px;
-
-            img{
-              width: 22px;
+            h1 {
+              font-size: 40px;
             }
           }
+
+        .icons{
+          display: flex;
+          justify-content: flex-end;
+          align-items:baseline;
+
+            img{
+              width: 20px;
+              height: 20px;
+            }
+
+            svg{
+              margin-right: 8px;
+
+              color: ${primaryColor};
+            }
+
+            .office {
+              margin-right: 12px;
+              margin-top: -3px;
+
+              font-size: 20px;
+              color: white;
+              font-family: dosis;
+
+              span {
+                margin-top: -3px;
+              }
+
+              svg{
+                margin-right: 4px;
+
+              }
+            }
         }
 
-        .office{
+        .contact{
           display: flex;
-          align-items: flex-start;
+          align-items: flex-end;
+          justify-content: flex-end;
 
-          position: relative;
-          margin:8px;
+          color: white;
 
           svg{
             color: ${primaryColor};
-            margin-right: 4px;
+            margin-right: 8px;
           }
-
-          color: white;
-
-          span{
-            font-family: dosis;
-            font-size: 21px;
-            margin-top: -3px;
-          }
-        }
         }
       }
     }
 
     .description{
-      /* border: 1px solid red; */
       width:100%;
       height: auto;
 
       color: #f0f0f0;
-
       font-size: 16px;
 
       span{
         font-weight:bold;
         color: ${primaryColor};
       }
-
     }
-
-    .contact{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 4px;
-      width:400px;
-
-      color: #f0f0f0;
-
-      span,a {
-        margin-top: 8px;
-
-        svg{
-          color: ${primaryColor};
-          margin-right: 8px;
-        }
-      }
-
-    }
-
   }
 
   .imgBorde {
