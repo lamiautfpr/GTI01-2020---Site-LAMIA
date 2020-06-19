@@ -1,11 +1,21 @@
 import styled from 'styled-components';
 
+import logo from '../../assets/logoHeader.jpg';
+
 export const Title = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   padding: 40px 80px 16px 80px;
+
+  .img {
+    width: 120px;
+    height: 120px;
+    background: url(${logo});
+    border-radius: 50%;
+    background-size: cover;
+  }
 
   img {
     max-width: 120px;

@@ -28,10 +28,11 @@ const Header: React.FC<HeaderProps> = ({ title = 'LAMIA' }: HeaderProps) => {
 
   return (
     <Title>
-      <img
+      {/* <img
         src={imgLogo}
         alt="LABORATÓRIO DE APRENDIZADO DE MÁQUINA E IMAGENS APLICADOS À INDÚSTRIA"
-      />
+      /> */}
+      <div className="img" />
       <h1>{title}</h1>
       <p>{subTitle}</p>
       <span>UTFPR Santa Helena</span>
