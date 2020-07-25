@@ -13,6 +13,10 @@ interface ContainerProps {
 }
 
 export const Container = styled.button<ContainerProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   height: 48px;
   margin: 4px 0;
@@ -26,7 +30,7 @@ export const Container = styled.button<ContainerProps>`
   font-weight: 600;
   transition: 0.4s;
 
-  border-radius: 40px;
+  border-radius: 8px;
   border: none;
 
   background: ${tertiaryColor};
@@ -54,4 +58,8 @@ export const Container = styled.button<ContainerProps>`
     css`
       color: ${props.color};
     `}
+
+  svg {
+    margin: auto 8px;
+  }
 `;
