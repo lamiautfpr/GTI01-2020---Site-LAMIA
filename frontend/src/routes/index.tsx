@@ -9,6 +9,7 @@ import ListProducts from '../pages/ListProducts';
 import ListProjects from '../pages/ListProjects';
 import ListPublications from '../pages/ListPublications';
 import Login from '../pages/Login';
+import Dashboard from '../pages/Dashboard';
 
 import ListMembers from '../pages/ListMembers';
 import Member from '../pages/Member';
@@ -20,6 +21,8 @@ const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/members" exact component={ListMembers} />
+    <Route path="/dashboard" exact component={Dashboard} />
+
     <Route path="/login" exact component={Login} />
 
     <Route path="/works/products" exact component={ListProducts} />
