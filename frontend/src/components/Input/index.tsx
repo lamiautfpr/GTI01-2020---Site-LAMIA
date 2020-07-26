@@ -26,6 +26,7 @@ const Input: React.FC<IInputProps> = ({
   icon: Icon,
   isHidden = false,
   activeColor,
+  children,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,6 +62,7 @@ const Input: React.FC<IInputProps> = ({
       activeColor={activeColor}
     >
       {Icon && <Icon size={24} />}
+      {children}
       <input
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}

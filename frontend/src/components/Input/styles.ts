@@ -22,6 +22,9 @@ export const Container = styled.div<ContainerProps>`
   padding: 8px 16px;
   width: 100%;
 
+  font-size: 24px;
+  font-family: 'Source Sans Pro';
+
   display: flex;
   align-items: center;
   transition: 0.4s;
@@ -30,7 +33,7 @@ export const Container = styled.div<ContainerProps>`
     ${(props) =>
       props.isFormGroup &&
       css`
-        margin-right: 4px;
+        margin-right: 12px;
       `}
   }
 
@@ -41,13 +44,15 @@ export const Container = styled.div<ContainerProps>`
       props.isFormGroup &&
       css`
         margin-top: 0;
-        margin-left: 4px;
+        margin-left: 12px;
       `}
   }
 
   input {
     width:100%;
     flex: 1;
+
+    margin-left: 8px;
 
     background: transparent;
     border: 0;
@@ -63,7 +68,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   svg {
-    margin-right: 16px;
+    margin-right: 8px;
   }
 
   ${(props) =>
