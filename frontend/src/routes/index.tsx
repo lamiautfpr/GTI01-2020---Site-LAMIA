@@ -1,8 +1,7 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import Route from './Route';
 
-// import Dashboard from '../pages/Dashboard';
-// import Repository from '../pages/Repository';
 import Home from '../pages/Home';
 
 import ListProducts from '../pages/ListProducts';
@@ -21,7 +20,6 @@ const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/members" exact component={ListMembers} />
-    <Route path="/dashboard" exact component={Dashboard} />
 
     <Route path="/login" exact component={Login} />
 
@@ -30,8 +28,9 @@ const Routes: React.FC = () => (
     <Route path="/works/publications" exact component={ListPublications} />
 
     <Route path="/work/:id" exact component={ProjectView} />
+    <Route path="/dashboard" exact component={Dashboard} isPrivate />
+
     <Route path="/:login" exact component={Member} />
-    {/* <Route path="/repositories/:repository+" exact component={} /> */}
   </Switch>
 );
 
