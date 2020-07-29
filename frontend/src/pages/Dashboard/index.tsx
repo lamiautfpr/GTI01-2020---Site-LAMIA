@@ -12,16 +12,24 @@ import {
 } from 'react-icons/fa';
 import NavBarDashboard from '../../components/NavBarDashboard';
 import Input from '../../components/Input';
+import Textarea from '../../components/Input/Textarea';
 import Button from '../../components/Button';
 
 import imgTeste from '../../assets/logo.jpg';
+
+import { useAuth } from '../../hooks/Auth';
 
 import { Container, Content, HeaderSection } from './styles';
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { member, signOut } = useAuth();
 
-  const handleSubmit = useCallback(async (data: object) => {}, []);
+  console.log(member);
+
+  const handleSubmit = useCallback(async (data: object) => {
+    console.log(data);
+  }, []);
 
   return (
     <Container>
@@ -30,7 +38,7 @@ const Dashboard: React.FC = () => {
         <HeaderSection>
           <h2>Meu Perfil </h2>
         </HeaderSection>
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form ref={formRef} initialData={member} onSubmit={handleSubmit}>
           <section>
             <div className="img">
               <img src={imgTeste} alt="Json Doe" />
@@ -48,24 +56,22 @@ const Dashboard: React.FC = () => {
                   placeholder="Como você prefere ser chamado?"
                   isFormGroup
                 />
-                <Input
+                {/* <Input
                   icon={FaUserTie}
                   name="citationName"
                   type="text"
                   placeholder="Como você deve ser citado nos artigos?"
                   isFormGroup
-                />
+                /> */}
               </div>
 
-              <textarea name="description" id="">
-                Bio...
-              </textarea>
+              <Textarea name="description" placeholder="Bioo" />
             </div>
           </section>
           <Input icon={MdMail} name="email" type="text" placeholder="E-mail" />
           <Input
             icon={FaGithub}
-            name="gitHub"
+            name="git_hub"
             type="text"
             placeholder="DoeJonh"
           >
@@ -73,7 +79,7 @@ const Dashboard: React.FC = () => {
           </Input>
           <Input
             icon={FaLinkedinIn}
-            name="linkedin"
+            name="likendin"
             type="text"
             placeholder="john-doe"
           >
@@ -91,7 +97,7 @@ const Dashboard: React.FC = () => {
           <div className="form-group password">
             <Input
               icon={MdLock}
-              name="password"
+              name="oldPassword"
               type="password"
               placeholder="Senha Atual"
               isFormGroup
