@@ -11,27 +11,37 @@ import Input from '../../components/Input';
 import { Container, Content, Header } from './styles';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/Toast';
+import { useAuth } from '../../hooks/Auth';
 import Button from '../../components/Button';
 import { tertiaryColor } from '../../styles/paletsColorers';
+
+interface ISingInFormData {
+  login: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
+  const { member, signIn } = useAuth();
 
-  const handleSubmit = useCallback(async (data: object) => {
+  console.log(member);
+
+  const handleSubmit = useCallback(async (data: ISingInFormData) => {
     try {
       formRef.current?.setErrors({});
 
       const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('Como deseja logar se email? ')
-          .email('Digite um e-mail válido'),
+        login: Yup.string().required('Como deseja logar sem email ou Login? '),
         password: Yup.string().required('Como deseja logar sem senha? '),
       });
 
       await schema.validate(data, {
         abortEarly: false,
       });
+
+      const { login, password } = data;
+      signIn({ login, password });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -61,7 +71,7 @@ const Login: React.FC = () => {
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input
             icon={MdMail}
-            name="email"
+            name="login"
             type="text"
             placeholder="E-mail ou Login"
             activeColor={tertiaryColor}
