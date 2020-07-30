@@ -1,6 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 import { MdLock, MdMail } from 'react-icons/md';
 import {
   FaCamera,
@@ -10,6 +11,7 @@ import {
   FaUserGraduate,
   FaUserTie,
 } from 'react-icons/fa';
+import getValidationErrors from '../../utils/getValidationErrors';
 import NavBarDashboard from '../../components/NavBarDashboard';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -21,7 +23,52 @@ import { Container, Content, HeaderSection } from './styles';
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: object) => {}, []);
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const shema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatorio'),
+        citationName: Yup.string().required('Nome de citação obrigatorio'),
+        description: Yup.string(),
+        email: Yup.string()
+          .required('E-mail obrigatorio')
+          .email('Digite um e-maio valido'),
+        gitHub: Yup.string(),
+        linkedin: Yup.string(),
+        lattes: Yup.string(),
+        oldPassword: Yup.string(),
+        newPassword: Yup.string().when('oldPassword', {
+          is: (val) => !!val.length,
+          then: Yup.string().min(
+            8,
+            'A senha deve conter no minimo 8 caracteres',
+          ),
+          otherwise: Yup.string(),
+        }),
+        confirmPassword: Yup.string()
+          .when('oldPassword', {
+            is: (val) => !!val.length,
+            then: Yup.string().min(
+              8,
+              'A senha deve conter no minimo 8 caracteres',
+            ),
+            otherwise: Yup.string(),
+          })
+          .oneOf(
+            [Yup.ref('newPassword'), ''],
+            'Duas senhas diferentes, qual devo salvar?',
+          ),
+      });
+
+      await shema.validate(data, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      const errors = getValidationErrors(err);
+      formRef.current?.setErrors(errors);
+    }
+  }, []);
 
   return (
     <Container>
@@ -91,14 +138,14 @@ const Dashboard: React.FC = () => {
           <div className="form-group password">
             <Input
               icon={MdLock}
-              name="password"
+              name="oldPassword"
               type="password"
               placeholder="Senha Atual"
               isFormGroup
             />
             <Input
               icon={MdLock}
-              name="password"
+              name="newPassword"
               type="password"
               placeholder="Nova Senha"
               isFormGroup
