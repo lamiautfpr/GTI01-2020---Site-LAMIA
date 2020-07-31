@@ -23,11 +23,10 @@ interface ISingInFormData {
 const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
-  const { member, signIn } = useAuth();
-
-  console.log(member);
+  const { signIn } = useAuth();
 
   const handleSubmit = useCallback(async (data: ISingInFormData) => {
+    console.log(data);
     try {
       formRef.current?.setErrors({});
 
