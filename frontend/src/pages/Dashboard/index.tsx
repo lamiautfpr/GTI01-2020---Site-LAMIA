@@ -11,6 +11,7 @@ import {
   FaUserGraduate,
   FaUserTie,
 } from 'react-icons/fa';
+import { useAuth, IMembersProps } from '../../hooks/Auth';
 import getValidationErrors from '../../utils/getValidationErrors';
 import NavBarDashboard from '../../components/NavBarDashboard';
 import Input from '../../components/Input';
@@ -22,14 +23,15 @@ import { Container, Content, HeaderSection } from './styles';
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { member } = useAuth();
 
-  const handleSubmit = useCallback(async (data: object) => {
+  const handleSubmit = useCallback(async (data: IMembersProps) => {
     try {
       formRef.current?.setErrors({});
 
       const shema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatorio'),
-        citationName: Yup.string().required('Nome de citação obrigatorio'),
+        nameABNT: Yup.string().required('Nome de citação obrigatorio'),
         description: Yup.string(),
         email: Yup.string()
           .required('E-mail obrigatorio')
@@ -64,6 +66,8 @@ const Dashboard: React.FC = () => {
       await shema.validate(data, {
         abortEarly: false,
       });
+
+      // signIn({ login, password });
     } catch (err) {
       const errors = getValidationErrors(err);
       formRef.current?.setErrors(errors);
@@ -77,7 +81,7 @@ const Dashboard: React.FC = () => {
         <HeaderSection>
           <h2>Meu Perfil </h2>
         </HeaderSection>
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit} initialData={member}>
           <section>
             <div className="img">
               <img src={imgTeste} alt="Json Doe" />
@@ -97,7 +101,7 @@ const Dashboard: React.FC = () => {
                 />
                 <Input
                   icon={FaUserTie}
-                  name="citationName"
+                  name="nameABNT"
                   type="text"
                   placeholder="Como você deve ser citado nos artigos?"
                   isFormGroup
