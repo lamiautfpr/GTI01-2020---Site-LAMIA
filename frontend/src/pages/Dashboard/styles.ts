@@ -53,7 +53,8 @@ export const Content = styled.div`
   padding: 16px;
 
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 
   textarea {
     background: #fff;
