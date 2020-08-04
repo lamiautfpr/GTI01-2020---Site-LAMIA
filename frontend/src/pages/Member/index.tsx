@@ -28,6 +28,7 @@ import { Main, Headline, Title, Shelf, Card, CardWarning } from './style';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import { IMembersProps } from '../../hooks/Auth';
 
 interface MembersParams {
   login: string;
@@ -38,19 +39,7 @@ interface WorkMemberProps {
   workData: WorkListProps;
 }
 
-interface MembersProps {
-  id: number;
-  login: string;
-  nameABNT: string;
-  name: string;
-  email: string;
-  phone: string;
-  description: string;
-  office: SelectItem;
-  avatar?: ImageProps;
-  urlLikendin?: string;
-  urlGithub?: string;
-  urlLattes?: string;
+interface MembersPageProps extends IMembersProps {
   works: WorkMemberProps[];
 }
 
@@ -58,10 +47,10 @@ const Member: React.FC = () => {
   const { params } = useRouteMatch<MembersParams>();
   const [getApi, setGetApi] = useState(false);
 
-  const [member, setMember] = useState<MembersProps | null>(null);
+  const [member, setMember] = useState<MembersPageProps | null>(null);
 
   useEffect(() => {
-    api.get<MembersProps>(`${params.login}`).then((response) => {
+    api.get<MembersPageProps>(`${params.login}`).then((response) => {
       setMember(response.data);
       setGetApi(true);
     });
@@ -69,7 +58,9 @@ const Member: React.FC = () => {
 
   return (
     <>
-      <Header title={member ? `LAMIA - ${member.nameABNT}` : 'LAMIA'} />
+      <Header
+        title={member?.quoteName ? `LAMIA - ${member?.quoteName}` : 'LAMIA'}
+      />
 
       <NavBar />
       <Main>
@@ -87,18 +78,27 @@ const Member: React.FC = () => {
                         <FaMedal size={21} />
                         <span>{member.office.label}</span>
                       </div>
-                      {member.urlGithub && (
-                        <a href={member.urlGithub} target="bank">
+                      {member.gitHub && (
+                        <a
+                          href={`https://github.com/${member.gitHub}`}
+                          target="bank"
+                        >
                           <FaGithubSquare size={26} />
                         </a>
                       )}
-                      {member.urlLikendin && (
-                        <a href={member.urlLikendin} target="bank">
+                      {member.linkedin && (
+                        <a
+                          href={`https://br.linkedin.com/public-profile/in/${member.linkedin}`}
+                          target="bank"
+                        >
                           <FaLinkedinIn size={26} />
                         </a>
                       )}
-                      {member.urlLattes && (
-                        <a href={member.urlLattes} target="bank">
+                      {member.lattes && (
+                        <a
+                          href={`http://lattes.cnpq.br/${member.lattes}`}
+                          target="bank"
+                        >
                           <img src={iconLattes} alt="Lattes" />
                         </a>
                       )}

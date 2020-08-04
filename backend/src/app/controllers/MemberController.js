@@ -94,15 +94,11 @@ class MemberController {
       },
       attributes: [
         'name',
-        'nameABNT',
+        'quoteName',
         'email',
-        'phone',
-        'likendin',
-        'urlLikendin',
-        'git_hub',
-        'urlGithub',
+        'linkedin',
+        'gitHub',
         'lattes',
-        'urlLattes',
         'description',
       ],
       include: [

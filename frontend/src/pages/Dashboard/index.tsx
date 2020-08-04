@@ -155,7 +155,7 @@ const Dashboard: React.FC = () => {
           </Input>
           <Input
             icon={FaLinkedinIn}
-            name="likendin"
+            name="linkedin"
             type="text"
             placeholder="john-doe"
           >

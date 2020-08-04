@@ -41,7 +41,7 @@ class Member extends Model {
             notEmpty: true,
           },
         },
-        likendin: {
+        linkedin: {
           type: Sequelize.STRING,
           allowNull: true,
           unique: false,
