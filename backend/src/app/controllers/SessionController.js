@@ -29,11 +29,11 @@ class SessionController {
         {
           model: TypeMember,
           as: 'office',
-          attributes: ['name'],
+          attributes: ['name', 'label', 'id', 'value'],
         },
         {
           model: Picture,
-          as: 'avatar', 
+          as: 'avatar',
           attributes: ['name', 'path', 'src'],
         },
       ],

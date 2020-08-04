@@ -50,62 +50,66 @@ export const Container = styled.nav`
 `;
 
 export const Header = styled.header`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-  width: 100%;
-
-  > div {
+  a {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
 
-    img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      margin-right: 16px;
+    text-decoration: none;
+    color:#fff;
+
+    width: 100%;
+
+    > div {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      img {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        margin-right: 16px;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 26px;
+
+        span {
+          /* color: ${tertiaryColor}; */
+          font-weight: 700;
+          font-size: 24px;
+        }
+      }
     }
 
-    div {
+    > span {
       display: flex;
-      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
 
+      margin-top: 16px;
+      padding-left: 16px;
+
+      font-weight: 700;
+      font-size: 24px;
       font-family: 'Quicksand';
       font-style: normal;
-      font-weight: normal;
       font-size: 20px;
       line-height: 26px;
 
-      span {
-        /* color: ${tertiaryColor}; */
-        font-weight: 700;
-        font-size: 24px;
+      svg {
+        margin-right: 16px;
       }
     }
   }
-
-  > span {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    margin-top: 16px;
-    padding-left: 16px;
-
-    font-weight: 700;
-    font-size: 24px;
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-size: 20px;
-    line-height: 26px;
-
-    svg {
-      margin-right: 16px;
-    }
-  }
-
 `;
 
 export const ItemMenu = styled.li<IPropsItemMenu>`

@@ -34,6 +34,7 @@ interface IAuthProviderData {
   signOut(): void;
 }
 
+export const officesPermitted: number[] = [1, 2, 3];
 const AuthContext = createContext<IAuthProviderData>({} as IAuthProviderData);
 
 export const AuthProvider: React.FC = ({ children }) => {
