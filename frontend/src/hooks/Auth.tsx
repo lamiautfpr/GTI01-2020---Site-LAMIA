@@ -6,7 +6,7 @@ import { SelectItem } from '../../myTypes/SelectItem';
 export interface IMembersProps {
   id: number;
   login: string;
-  nameABNT: string;
+  quoteName: string;
   name: string;
   email: string;
   phone: string;

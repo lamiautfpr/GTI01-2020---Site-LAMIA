@@ -19,7 +19,7 @@ import Input from '../../components/Input';
 import Textarea from '../../components/Input/Textarea';
 import Button from '../../components/Button';
 
-import imgTeste from '../../assets/logo.jpg';
+import imgMemberDefault from '../../assets/imgDefault/member.jpg';
 
 import { Container, Content, HeaderSection } from './styles';
 import AppError from '../../utils/AppError';
@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
 
       const shema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatorio'),
-        // nameABNT: Yup.string().required('Nome de citação obrigatorio'),
+        quoteName: Yup.string().required('Nome de citação obrigatorio'),
         description: Yup.string(),
         email: Yup.string()
           .required('E-mail obrigatorio')
@@ -114,7 +114,10 @@ const Dashboard: React.FC = () => {
         <Form ref={formRef} initialData={member} onSubmit={handleSubmit}>
           <section>
             <div className="img">
-              <img src={imgTeste} alt="Json Doe" />
+              <img
+                src={member.avatar ? member.avatar.src : imgMemberDefault}
+                alt="Json Doe"
+              />
               <label htmlFor="avatar">
                 <FaCamera />
                 <input type="file" id="avatar" />
@@ -131,7 +134,7 @@ const Dashboard: React.FC = () => {
                 />
                 <Input
                   icon={FaUserTie}
-                  name="nameABNT"
+                  name="quoteName"
                   type="text"
                   placeholder="Como você deve ser citado nos artigos?"
                   isFormGroup
