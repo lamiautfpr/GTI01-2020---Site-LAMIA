@@ -37,6 +37,7 @@ const Dashboard: React.FC = () => {
 
   const handleSubmit = useCallback(async (data: IMemberFormProps) => {
     try {
+      console.log(data);
       formRef.current?.setErrors({});
 
       const shema = Yup.object().shape({
@@ -128,13 +129,13 @@ const Dashboard: React.FC = () => {
                   placeholder="Como você prefere ser chamado?"
                   isFormGroup
                 />
-                {/* <Input
+                <Input
                   icon={FaUserTie}
                   name="nameABNT"
                   type="text"
                   placeholder="Como você deve ser citado nos artigos?"
                   isFormGroup
-                /> */}
+                />
               </div>
 
               <Textarea name="description" placeholder="Bioo" />

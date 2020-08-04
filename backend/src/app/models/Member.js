@@ -65,15 +65,6 @@ class Member extends Model {
             notEmpty: true,
           },
         },
-        phone: {
-          type: Sequelize.STRING,
-          allowNull: true,
-          unique: false,
-          validate: {
-            notNull: false,
-            notEmpty: false,
-          },
-        },
         likendin: {
           type: Sequelize.STRING,
           allowNull: true,
@@ -81,14 +72,6 @@ class Member extends Model {
           validate: {
             notNull: false,
             notEmpty: false,
-          },
-        },
-        urlLikendin: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            return this.likendin
-              ? `https://www.linkedin.com/in/${this.likendin}`
-              : null;
           },
         },
         git_hub: {
@@ -100,12 +83,6 @@ class Member extends Model {
             notEmpty: false,
           },
         },
-        gitHub: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            return this.git_hub;
-          },
-        },
         lattes: {
           type: Sequelize.STRING,
           allowNull: true,
@@ -115,13 +92,7 @@ class Member extends Model {
             notEmpty: false,
           },
         },
-        urlLattes: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            return this.lattes ? `http://lattes.cnpq.br/${this.lattes}` : null;
-          },
-        },
-		description: {
+        description: {
           type: Sequelize.STRING,
           allowNull: true,
           unique: false,
