@@ -95,7 +95,6 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.isFilled &&
     css`
-      color: ${primaryColor};
       border-color: white;
     `}
 

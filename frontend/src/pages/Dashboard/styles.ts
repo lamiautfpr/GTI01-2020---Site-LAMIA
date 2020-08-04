@@ -56,48 +56,6 @@ export const Content = styled.div`
   min-height: 100vh;
   height: 100%;
 
-  textarea {
-    background: #fff;
-    border-radius: 8px;
-    border: 2px solid ${shade(0.025, '#fff')};
-    padding: 16px;
-    width: 100%;
-    height: 120px;
-
-    display: flex;
-    align-items: center;
-    transition: 0.4s;
-
-    font-size: 20px;
-    font-family: 'Source Sans Pro';
-    font-weight: bold;
-
-    &:focus {
-      border-color: ${primaryColor};
-    }
-
-    /* width */
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    /* Track */
-    &::-webkit-scrollbar-track {
-      border-radius: 10px;
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-      background: ${transparentize(0.3, secondaryColor)};
-      border-radius: 10px;
-    }
-
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-      background: ${transparentize(0.1, secondaryColor)};
-    }
-  }
-
   form {
     margin: 12px 0;
     padding: 0 12px;

@@ -32,7 +32,7 @@ const Textarea: React.FC<ITextareaProps> = ({
 }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
+  // const [isFilled, setIsFilled] = useState(false);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   const handleInputFocus = useCallback(() => {
@@ -41,7 +41,7 @@ const Textarea: React.FC<ITextareaProps> = ({
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
-    setIsFilled(!!inputRef.current?.value);
+    // setIsFilled(!!inputRef.current?.value);
   }, []);
 
   useEffect(() => {
@@ -57,7 +57,6 @@ const Textarea: React.FC<ITextareaProps> = ({
       width={width}
       isFormGroup={isFormGroup}
       isErrored={!!error}
-      isFilled={isFilled}
       isFocused={isFocused}
       isHidden={isHidden}
       activeColor={activeColor}
