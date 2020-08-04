@@ -168,7 +168,7 @@ class MemberController {
       return res.status(401).json({ error: 'Integrante não encontrado!' });
     }
 
-    const { email, oldPassword } = req.body;
+    const { email, oldPassword, password } = req.body;
 
     if (email && email !== member.email) {
       const memberExists = await Member.findOne({ where: { email } });
@@ -179,7 +179,7 @@ class MemberController {
     }
 
     if (
-      !oldPassword ||
+      (password && !oldPassword) ||
       (oldPassword && !(await member.checkPassword(oldPassword)))
     ) {
       return res.status(401).json({ error: 'Senha atuação não compatível' });
