@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, ChangeEvent } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -18,6 +18,7 @@ import NavBarDashboard from '../../components/NavBarDashboard';
 import Input from '../../components/Input';
 import Textarea from '../../components/Input/Textarea';
 import Button from '../../components/Button';
+import api from '../../services/api';
 
 import imgMemberDefault from '../../assets/imgDefault/member.jpg';
 
@@ -32,7 +33,7 @@ interface IMemberFormProps extends IMembersProps {
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const { member } = useAuth();
+  const { member, token, updateMember } = useAuth();
   const { addToast } = useToast();
 
   const handleSubmit = useCallback(async (data: IMemberFormProps) => {
@@ -104,6 +105,37 @@ const Dashboard: React.FC = () => {
     }
   }, []);
 
+  const handleAvatarChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files) {
+        const data = new FormData();
+
+        data.append('avatar', e.target.files[0]);
+
+        api
+          .patch('/members/avatar', data, {
+            headers: { authorization: `Bearer ${token}` },
+          })
+          .then((response) => {
+            updateMember(response.data);
+            addToast({
+              type: 'success',
+              title: 'Avatar atualizado!',
+            });
+          })
+          .catch((response) => {
+            console.log(response);
+            addToast({
+              type: 'error',
+              title: 'Erro ao atualizar avatar!',
+              description: response.code,
+            });
+          });
+      }
+    },
+    [addToast],
+  );
+
   return (
     <Container>
       <NavBarDashboard />
@@ -120,7 +152,7 @@ const Dashboard: React.FC = () => {
               />
               <label htmlFor="avatar">
                 <FaCamera />
-                <input type="file" id="avatar" />
+                <input type="file" id="avatar" onChange={handleAvatarChange} />
               </label>
             </div>
             <div className="form">
