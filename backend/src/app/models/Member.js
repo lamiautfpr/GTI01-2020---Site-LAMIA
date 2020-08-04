@@ -50,7 +50,7 @@ class Member extends Model {
             notEmpty: false,
           },
         },
-        git_hub: {
+        gitHub: {
           type: Sequelize.STRING,
           allowNull: true,
           unique: false,
