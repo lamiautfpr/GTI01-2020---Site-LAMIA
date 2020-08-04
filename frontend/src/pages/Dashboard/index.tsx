@@ -11,7 +11,8 @@ import {
   FaUserGraduate,
   FaUserTie,
 } from 'react-icons/fa';
-import { useAuth, IMembersProps, useAuth } from '../../hooks/Auth';
+import { useAuth, IMembersProps } from '../../hooks/Auth';
+import { useToast } from '../../hooks/Toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 import NavBarDashboard from '../../components/NavBarDashboard';
 import Input from '../../components/Input';
@@ -21,18 +22,26 @@ import Button from '../../components/Button';
 import imgTeste from '../../assets/logo.jpg';
 
 import { Container, Content, HeaderSection } from './styles';
+import AppError from '../../utils/AppError';
+
+interface IMemberFormProps extends IMembersProps {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { member } = useAuth();
+  const { addToast } = useToast();
 
-  const handleSubmit = useCallback(async (data: IMembersProps) => {
+  const handleSubmit = useCallback(async (data: IMemberFormProps) => {
     try {
       formRef.current?.setErrors({});
 
       const shema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatorio'),
-        nameABNT: Yup.string().required('Nome de citação obrigatorio'),
+        // nameABNT: Yup.string().required('Nome de citação obrigatorio'),
         description: Yup.string(),
         email: Yup.string()
           .required('E-mail obrigatorio')
@@ -68,10 +77,29 @@ const Dashboard: React.FC = () => {
         abortEarly: false,
       });
 
+      if (
+        data.oldPassword.length === 0 &&
+        (data.newPassword.length !== 0 || data.confirmPassword.length !== 0)
+      ) {
+        throw new AppError(
+          'Para atualizar a senha é preciso confirmar a senha atual!',
+        );
+      }
+
       // signIn({ login, password });
     } catch (err) {
-      const errors = getValidationErrors(err);
-      formRef.current?.setErrors(errors);
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
+
+        formRef.current?.setErrors(errors);
+      }
+      if (err instanceof AppError) {
+        addToast({
+          type: 'error',
+          title: 'Erro na atualização',
+          description: err.mensagem,
+        });
+      }
     }
   }, []);
 
