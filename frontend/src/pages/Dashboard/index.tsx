@@ -1,6 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 import { MdLock, MdMail } from 'react-icons/md';
 import {
   FaCamera,
@@ -10,6 +11,8 @@ import {
   FaUserGraduate,
   FaUserTie,
 } from 'react-icons/fa';
+import { useAuth, IMembersProps, useAuth } from '../../hooks/Auth';
+import getValidationErrors from '../../utils/getValidationErrors';
 import NavBarDashboard from '../../components/NavBarDashboard';
 import Input from '../../components/Input';
 import Textarea from '../../components/Input/Textarea';
@@ -17,18 +20,59 @@ import Button from '../../components/Button';
 
 import imgTeste from '../../assets/logo.jpg';
 
-import { useAuth } from '../../hooks/Auth';
-
 import { Container, Content, HeaderSection } from './styles';
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const { member, signOut } = useAuth();
+  const { member } = useAuth();
 
-  console.log(member);
+  const handleSubmit = useCallback(async (data: IMembersProps) => {
+    try {
+      formRef.current?.setErrors({});
 
-  const handleSubmit = useCallback(async (data: object) => {
-    console.log(data);
+      const shema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatorio'),
+        nameABNT: Yup.string().required('Nome de citação obrigatorio'),
+        description: Yup.string(),
+        email: Yup.string()
+          .required('E-mail obrigatorio')
+          .email('Digite um e-maio valido'),
+        gitHub: Yup.string(),
+        linkedin: Yup.string(),
+        lattes: Yup.string(),
+        oldPassword: Yup.string(),
+        newPassword: Yup.string().when('oldPassword', {
+          is: (val) => !!val.length,
+          then: Yup.string().min(
+            8,
+            'A senha deve conter no minimo 8 caracteres',
+          ),
+          otherwise: Yup.string(),
+        }),
+        confirmPassword: Yup.string()
+          .when('oldPassword', {
+            is: (val) => !!val.length,
+            then: Yup.string().min(
+              8,
+              'A senha deve conter no minimo 8 caracteres',
+            ),
+            otherwise: Yup.string(),
+          })
+          .oneOf(
+            [Yup.ref('newPassword'), ''],
+            'Duas senhas diferentes, qual devo salvar?',
+          ),
+      });
+
+      await shema.validate(data, {
+        abortEarly: false,
+      });
+
+      // signIn({ login, password });
+    } catch (err) {
+      const errors = getValidationErrors(err);
+      formRef.current?.setErrors(errors);
+    }
   }, []);
 
   return (
@@ -58,7 +102,7 @@ const Dashboard: React.FC = () => {
                 />
                 {/* <Input
                   icon={FaUserTie}
-                  name="citationName"
+                  name="nameABNT"
                   type="text"
                   placeholder="Como você deve ser citado nos artigos?"
                   isFormGroup
@@ -104,7 +148,7 @@ const Dashboard: React.FC = () => {
             />
             <Input
               icon={MdLock}
-              name="password"
+              name="newPassword"
               type="password"
               placeholder="Nova Senha"
               isFormGroup
