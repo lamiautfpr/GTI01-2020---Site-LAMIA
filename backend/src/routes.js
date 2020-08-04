@@ -7,6 +7,7 @@ import SessionController from './app/controllers/SessionController';
 import TypeMemberController from './app/controllers/TypeMemberController';
 import FileController from './app/controllers/FileController';
 import MemberController from './app/controllers/MemberController';
+import MemberAvatarController from './app/controllers/MemberAvatarController';
 import OfficeController from './app/controllers/OfficeController';
 
 import AreaExpertiseController from './app/controllers/AreaExpertiseController';
@@ -59,6 +60,11 @@ routes.put('/area-expertises', AreaExpertiseController.update);
 routes.put('/category-work', CategoryWorkController.update);
 routes.put('/type-work', TypeWorkController.update);
 routes.put('/members', MemberController.update);
+routes.patch(
+  '/members/avatar',
+  upload.single('file'),
+  MemberAvatarController.update
+);
 
 routes.delete('/type-members', TypeMemberController.delete);
 routes.delete('/area-expertises', AreaExpertiseController.delete);
