@@ -18,8 +18,8 @@ export const Container = styled.div`
 
     position: absolute;
     bottom: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%);
+    left: 100%;
+    transform: translateX(-100%);
     color: #312e38;
 
     &::before {
@@ -29,8 +29,8 @@ export const Container = styled.div`
       border-width: 6px 6px 0 6px;
       top: 100%;
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 95%;
+      transform: translateX(-95%);
     }
   }
 
