@@ -33,8 +33,8 @@ class SessionController {
         },
         {
           model: Picture,
-          as: 'avatar',
-          attributes: ['name', 'path', 'url'],
+          as: 'avatar', 
+          attributes: ['name', 'path', 'src'],
         },
       ],
     });

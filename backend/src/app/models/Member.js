@@ -100,10 +100,10 @@ class Member extends Model {
             notEmpty: false,
           },
         },
-        urlGithub: {
+        gitHub: {
           type: Sequelize.VIRTUAL,
           get() {
-            return this.git_hub ? `https://github.com/${this.git_hub}` : null;
+            return this.git_hub;
           },
         },
         lattes: {
@@ -119,6 +119,15 @@ class Member extends Model {
           type: Sequelize.VIRTUAL,
           get() {
             return this.lattes ? `http://lattes.cnpq.br/${this.lattes}` : null;
+          },
+        },
+		description: {
+          type: Sequelize.STRING,
+          allowNull: true,
+          unique: false,
+          validate: {
+            notNull: false,
+            notEmpty: false,
           },
         },
       },
