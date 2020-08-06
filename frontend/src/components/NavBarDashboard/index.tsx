@@ -58,7 +58,7 @@ const NavBarDashboard: React.FC<IMenuBurgerProps> = ({ page }) => {
               <Link to="to">Geral</Link>
             </ItemMenu>
             <ItemMenu active={page === 'members'}>
-              <Link to="to">Integrantes</Link>
+              <Link to="/dashboard/members">Integrantes</Link>
             </ItemMenu>
           </>
         )}
