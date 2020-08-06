@@ -1,19 +1,19 @@
-import React, { useRef, useCallback, ChangeEvent } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { MdMail } from 'react-icons/md';
 import { FaUserNinja, FaMedal } from 'react-icons/fa';
+import { OptionTypeBase } from 'react-select';
 import { useAuth, IMembersProps } from '../../../hooks/Auth';
 import { useToast } from '../../../hooks/Toast';
 import getValidationErrors from '../../../utils/getValidationErrors';
 import NavBarDashboard from '../../../components/NavBarDashboard';
 import Input from '../../../components/Input';
-import Textarea from '../../../components/Input/Textarea';
 import Button from '../../../components/Button';
 import api from '../../../services/api';
 
-import CreatableSelect from '../../../components/SelectBoxRef';
+import Select from '../../../components/Select';
 
 import imgMemberDefault from '../../../assets/imgDefault/member.jpg';
 
@@ -30,6 +30,8 @@ const DashboardMembers: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { member, token, updateMember } = useAuth();
   const { addToast } = useToast();
+  const [members, setMembers] = useState<IMembersProps[]>([]);
+  const [offices, setOffices] = useState<OptionTypeBase[]>([]);
 
   const handleSubmit = useCallback(
     async (data: IMemberFormProps) => {
@@ -110,6 +112,15 @@ const DashboardMembers: React.FC = () => {
     [addToast, token, updateMember],
   );
 
+  useEffect(() => {
+    api.get(`members/`).then((response) => {
+      setOffices(response.data.officesMembers);
+      setMembers(response.data.members);
+    });
+
+    console.log(offices);
+  }, []);
+
   return (
     <Container>
       <NavBarDashboard page="members" />
@@ -141,11 +152,11 @@ const DashboardMembers: React.FC = () => {
             type="mail"
             placeholder="Email do novo integrante"
           />
-          <CreatableSelect
+          <Select
             name="office"
             icon={FaMedal}
             placeholder="Selecione a Patente!"
-            isMulti
+            options={offices}
           />
           <Button width="250px" type="submit">
             Novo Integrante

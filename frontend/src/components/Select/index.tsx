@@ -7,18 +7,18 @@ import makeAnimated from 'react-select/animated';
 import { transparentize } from 'polished';
 import { IconBaseProps } from 'react-icons';
 import { Container, Content } from './style';
-import { primaryColor } from '../../styles/paletsColorers';
+import {
+  primaryColor,
+  tertiaryColor,
+  secondaryColor,
+  errorColor,
+} from '../../styles/paletsColorers';
 
 interface Props extends CreatableProps<OptionTypeBase> {
   name: string;
   icon?: React.ComponentType<IconBaseProps>;
 }
-const CreatableSelect: React.FC<Props> = ({
-  icon: Icon,
-  children,
-  name,
-  ...rest
-}) => {
+const Select: React.FC<Props> = ({ icon: Icon, name, ...rest }) => {
   const selectRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const { fieldName, defaultValue, registerField, error } = useField(name);
@@ -50,8 +50,8 @@ const CreatableSelect: React.FC<Props> = ({
         ...theme.colors,
         primary25: transparentize(0.9, primaryColor),
         primary50: transparentize(0.5, primaryColor),
-        primary: '#fff',
-        neutral30: primaryColor,
+        primary: primaryColor,
+        neutral30: transparentize(0.3, secondaryColor),
         neutral10: transparentize(0.5, primaryColor),
       },
       // borderRadius: 12,
@@ -87,4 +87,4 @@ const CreatableSelect: React.FC<Props> = ({
     </Container>
   );
 };
-export default CreatableSelect;
+export default Select;

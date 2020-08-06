@@ -30,7 +30,9 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.isFocused &&
     css`
-      color: ${primaryColor};
+      svg {
+        color: ${primaryColor};
+      }
       border-color: ${primaryColor};
     `}
 
@@ -50,26 +52,18 @@ export const Content = styled(Select)<ContentProps>`
   line-height: 30px;
   font-weight: bold;
 
+  min-width: 150px;
+  margin-top: 0px;
   width: 100%;
   ${(props) =>
     css`
       max-width: ${props.width}px;
     `}
-  min-width:150px;
-  margin-top: 0px;
 
   > div {
-    padding: 4px;
-
-    div {
-      border-radius: 8px;
-    }
-  }
-
-  > div:first-child {
-    border-radius: 8px;
-    border-color: #fff;
-    transition: 0.2s all;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
   }
 
   .react-select__placeholder {
