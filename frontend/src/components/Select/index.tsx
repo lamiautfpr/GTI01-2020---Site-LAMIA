@@ -3,16 +3,12 @@ import { OptionTypeBase, Theme } from 'react-select';
 import { Props as CreatableProps } from 'react-select/creatable';
 import { useField } from '@unform/core';
 
+import { MdInfo } from 'react-icons/md';
 import makeAnimated from 'react-select/animated';
 import { transparentize } from 'polished';
 import { IconBaseProps } from 'react-icons';
-import { Container, Content } from './style';
-import {
-  primaryColor,
-  tertiaryColor,
-  secondaryColor,
-  errorColor,
-} from '../../styles/paletsColorers';
+import { Container, Content, Error } from './style';
+import { primaryColor, secondaryColor } from '../../styles/paletsColorers';
 
 interface Props extends CreatableProps<OptionTypeBase> {
   name: string;
@@ -72,7 +68,7 @@ const Select: React.FC<Props> = ({ icon: Icon, name, ...rest }) => {
   }, []);
 
   return (
-    <Container isFocused={isFocused}>
+    <Container isFocused={isFocused} isErrored={!!error}>
       {Icon && <Icon size={24} />}
       <Content
         onFocus={handleInputFocus}
@@ -84,6 +80,11 @@ const Select: React.FC<Props> = ({ icon: Icon, name, ...rest }) => {
         classNamePrefix="react-select"
         {...rest}
       />
+      {error && (
+        <Error title={error}>
+          <MdInfo size={24} color="#ac3030" />
+        </Error>
+      )}
     </Container>
   );
 };

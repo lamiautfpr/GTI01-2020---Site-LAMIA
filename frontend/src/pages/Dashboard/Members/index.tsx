@@ -36,6 +36,8 @@ const DashboardMembers: React.FC = () => {
   const handleSubmit = useCallback(
     async (data: IMemberFormProps) => {
       try {
+        console.log(data);
+
         formRef.current?.setErrors({});
 
         const shema = Yup.object().shape({
@@ -44,6 +46,7 @@ const DashboardMembers: React.FC = () => {
           email: Yup.string()
             .required('E-mail obrigatório')
             .email('Digite um e-maio valido'),
+          office: Yup.string().required('Patente obrigatória'),
         });
 
         await shema.validate(data, {
@@ -117,8 +120,6 @@ const DashboardMembers: React.FC = () => {
       setOffices(response.data.officesMembers);
       setMembers(response.data.members);
     });
-
-    console.log(offices);
   }, []);
 
   return (

@@ -3,7 +3,12 @@ import styled, { css } from 'styled-components';
 import Select from 'react-select';
 
 import { shade } from 'polished';
-import { secondaryColor, primaryColor } from '../../styles/paletsColorers';
+import {
+  secondaryColor,
+  primaryColor,
+  errorColor,
+} from '../../styles/paletsColorers';
+import Tooltip from '../Tooltip';
 
 interface ContentProps {
   width?: number;
@@ -11,6 +16,7 @@ interface ContentProps {
 
 interface ContainerProps {
   isFocused: boolean;
+  isErrored: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -26,6 +32,12 @@ export const Container = styled.div<ContainerProps>`
   svg {
     margin-right: 8px;
   }
+
+  ${(props) =>
+    props.isErrored &&
+    css`
+      border-color: ${errorColor};
+    `}
 
   ${(props) =>
     props.isFocused &&
@@ -72,5 +84,21 @@ export const Content = styled(Select)<ContentProps>`
     font-weight: bold;
 
     color: ${shade(0.2, '#E5E5E5')};
+  }
+`;
+
+export const Error = styled(Tooltip)`
+  svg {
+    margin-right: 0;
+  }
+  margin-left: 16px;
+
+  span {
+    background: ${errorColor};
+    color: white;
+
+    &::before {
+      border-color: ${errorColor} transparent;
+    }
   }
 `;
