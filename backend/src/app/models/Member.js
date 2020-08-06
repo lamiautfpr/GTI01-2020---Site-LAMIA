@@ -1,7 +1,19 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
+const PROTECTED_ATTRIBUTES = ['password', 'password_hash'];
+
 class Member extends Model {
+  toJSON() {
+    // hide protected fields
+    const attributes = { ...this.get() };
+    // eslint-disable-next-line no-restricted-syntax
+    for (const a of PROTECTED_ATTRIBUTES) {
+      delete attributes[a];
+    }
+    return attributes;
+  }
+
   static init(sequelize) {
     super.init(
       {
@@ -89,6 +101,11 @@ class Member extends Model {
       },
       {
         sequelize,
+        scopes: {
+          withoutPassword: {
+            attributes: { exclude: ['password', 'password_hash'] },
+          },
+        },
       }
     );
 

@@ -158,35 +158,51 @@ class MemberController {
   }
 
   async update(req, res) {
-    const member = await Member.findByPk(req.userId);
+    try {
+      const member = await Member.findByPk(req.userId, {
+        include: [
+          {
+            model: TypeMember,
+            as: 'office',
+            attributes: ['name', 'label', 'id', 'value'],
+          },
+          {
+            model: Picture,
+            as: 'avatar',
+            attributes: ['name', 'path', 'src'],
+          },
+        ],
+      });
 
-    if (!member) {
-      return res.status(401).json({ error: 'Integrante não encontrado!' });
-    }
-
-    const { email, oldPassword, password } = req.body;
-
-    if (email && email !== member.email) {
-      const memberExists = await Member.findOne({ where: { email } });
-
-      if (memberExists) {
-        return res.status(400).json({ error: 'Email já utilizado!' });
+      if (!member) {
+        return res.status(401).json({ error: 'Integrante não encontrado!' });
       }
+
+      const { email, oldPassword, password } = req.body;
+
+      if (email && email !== member.email) {
+        const memberExists = await Member.findOne({ where: { email } });
+
+        if (memberExists) {
+          return res.status(400).json({ error: 'Email já utilizado!' });
+        }
+      }
+
+      if (
+        (password && !oldPassword) ||
+        (oldPassword && !(await member.checkPassword(oldPassword)))
+      ) {
+        return res.status(401).json({ error: 'Senha atuação não compatível' });
+      }
+      delete member.password_hash;
+      delete member.password;
+
+      await member.update(req.body);
+
+      return res.json(member);
+    } catch (error) {
+      return res.status(500).json(error);
     }
-
-    if (
-      (password && !oldPassword) ||
-      (oldPassword && !(await member.checkPassword(oldPassword)))
-    ) {
-      return res.status(401).json({ error: 'Senha atuação não compatível' });
-    }
-
-    await member.update(req.body);
-
-    member.password_hash = null;
-    member.password = null;
-
-    return res.json(member);
   }
 }
 

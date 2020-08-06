@@ -6,6 +6,7 @@ import {
   primaryColor,
   secondaryColor,
   titleColor,
+  tertiaryColor,
 } from '../../styles/paletsColorers';
 
 export const Container = styled.div`
@@ -92,7 +93,7 @@ export const Content = styled.div`
           bottom: 0;
           border: 6px solid ${secondaryBackground};
           cursor: pointer;
-          transition: all 0.2s;
+          transition: 0.3s ease-in-out;
 
           display: flex;
           align-items: center;
@@ -102,10 +103,14 @@ export const Content = styled.div`
             display: none;
           }
 
-          svg {
+          > svg {
             width: 20px;
             height: 20px;
-            color: #fff;
+            color: ${secondaryBackground};
+          }
+
+          &:hover {
+            background: ${tertiaryColor};
           }
         }
       }

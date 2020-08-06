@@ -9,7 +9,6 @@ export interface IMembersProps {
   quoteName: string;
   name: string;
   email: string;
-  phone: string;
   description: string;
   office: SelectItem;
   avatar?: ImageProps;

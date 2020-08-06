@@ -26,9 +26,9 @@ import { Container, Content, HeaderSection } from './styles';
 import AppError from '../../utils/AppError';
 
 interface IMemberFormProps extends IMembersProps {
-  oldPassword: string;
-  newPassword: string;
-  confirmPassword: string;
+  oldPassword?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 const Dashboard: React.FC = () => {
@@ -36,74 +36,110 @@ const Dashboard: React.FC = () => {
   const { member, token, updateMember } = useAuth();
   const { addToast } = useToast();
 
-  const handleSubmit = useCallback(async (data: IMemberFormProps) => {
-    try {
-      console.log(data);
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: IMemberFormProps) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const shema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatorio'),
-        quoteName: Yup.string().required('Nome de citação obrigatorio'),
-        description: Yup.string(),
-        email: Yup.string()
-          .required('E-mail obrigatorio')
-          .email('Digite um e-maio valido'),
-        gitHub: Yup.string(),
-        linkedin: Yup.string(),
-        lattes: Yup.string(),
-        oldPassword: Yup.string(),
-        newPassword: Yup.string().when('oldPassword', {
-          is: (val) => !!val.length,
-          then: Yup.string().min(
-            8,
-            'A senha deve conter no minimo 8 caracteres',
-          ),
-          otherwise: Yup.string(),
-        }),
-        confirmPassword: Yup.string()
-          .when('oldPassword', {
+        const shema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatório'),
+          quoteName: Yup.string().required('Nome de citação obrigatório'),
+          description: Yup.string(),
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-maio valido'),
+          gitHub: Yup.string(),
+          linkedin: Yup.string(),
+          lattes: Yup.string(),
+          oldPassword: Yup.string(),
+          password: Yup.string().when('oldPassword', {
             is: (val) => !!val.length,
             then: Yup.string().min(
               8,
-              'A senha deve conter no minimo 8 caracteres',
+              'A senha deve conter no mínimo 8 caracteres',
             ),
             otherwise: Yup.string(),
-          })
-          .oneOf(
-            [Yup.ref('newPassword'), ''],
-            'Duas senhas diferentes, qual devo salvar?',
-          ),
-      });
+          }),
+          confirmPassword: Yup.string()
+            .when('oldPassword', {
+              is: (val) => !!val.length,
+              then: Yup.string().min(
+                8,
+                'A senha deve conter no mínimo 8 caracteres',
+              ),
+              otherwise: Yup.string(),
+            })
+            .oneOf(
+              [Yup.ref('password'), ''],
+              'Duas senhas diferentes, qual devo salvar?',
+            ),
+        });
 
-      await shema.validate(data, {
-        abortEarly: false,
-      });
+        await shema.validate(data, {
+          abortEarly: false,
+        });
 
-      if (
-        data.oldPassword.length === 0 &&
-        (data.newPassword.length !== 0 || data.confirmPassword.length !== 0)
-      ) {
-        throw new AppError(
-          'Para atualizar a senha é preciso confirmar a senha atual!',
-        );
-      }
+        if (
+          data.oldPassword?.length === 0 &&
+          (data.password?.length !== 0 || data.confirmPassword?.length !== 0)
+        ) {
+          throw new AppError(
+            'Para atualizar a senha é preciso confirmar a senha atual!',
+          );
+        }
 
-      // signIn({ login, password });
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        if (data.oldPassword?.length === 0 && data.password?.length === 0) {
+          // eslint-disable-next-line no-param-reassign
+          delete data.oldPassword;
+          // eslint-disable-next-line no-param-reassign
+          delete data.password;
+        }
 
-        formRef.current?.setErrors(errors);
-      }
-      if (err instanceof AppError) {
+        const response = await api.put('/members', data, {
+          headers: { authorization: `Bearer ${token}` },
+        });
+        updateMember(response.data);
+        addToast({
+          type: 'success',
+          title: 'Perfil Atualizando!',
+        });
+
+        formRef.current?.clearField('oldPassword');
+        formRef.current?.clearField('password');
+        formRef.current?.clearField('confirmPassword');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+
+          formRef.current?.setErrors(errors);
+          return;
+        }
+        if (err instanceof AppError) {
+          addToast({
+            type: 'error',
+            title: 'Erro na atualização',
+            description: err.mensagem,
+          });
+          return;
+        }
+        if (err.response.status === 401) {
+          addToast({
+            type: 'error',
+            title: 'Dados inválidos',
+            description: err.response.data.error,
+          });
+          return;
+        }
         addToast({
           type: 'error',
-          title: 'Erro na atualização',
-          description: err.mensagem,
+          title: 'Internal Server ERROR',
+          description:
+            'Tente mais tarde! Caso erro persista entre em contato com o suporte :D',
         });
       }
-    }
-  }, []);
+    },
+    [addToast, token, updateMember],
+  );
 
   const handleAvatarChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -124,16 +160,14 @@ const Dashboard: React.FC = () => {
             });
           })
           .catch((response) => {
-            console.log(response);
             addToast({
               type: 'error',
               title: 'Erro ao atualizar avatar!',
-              description: response.code,
             });
           });
       }
     },
-    [addToast],
+    [addToast, token, updateMember],
   );
 
   return (
@@ -212,7 +246,7 @@ const Dashboard: React.FC = () => {
             />
             <Input
               icon={MdLock}
-              name="newPassword"
+              name="password"
               type="password"
               placeholder="Nova Senha"
               isFormGroup
