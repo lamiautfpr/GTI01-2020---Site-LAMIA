@@ -60,7 +60,7 @@ export const Content = styled.div`
   form {
     margin: 12px 0;
     padding: 0 12px;
-    width: 50%;
+    width: 100%;
 
     display: flex;
     flex-direction: column;

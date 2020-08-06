@@ -2,8 +2,8 @@ import React, { useRef, useCallback, ChangeEvent } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { MdLock, MdMail } from 'react-icons/md';
-import { FaUserNinja } from 'react-icons/fa';
+import { MdMail } from 'react-icons/md';
+import { FaUserNinja, FaMedal } from 'react-icons/fa';
 import { useAuth, IMembersProps } from '../../../hooks/Auth';
 import { useToast } from '../../../hooks/Toast';
 import getValidationErrors from '../../../utils/getValidationErrors';
@@ -12,6 +12,8 @@ import Input from '../../../components/Input';
 import Textarea from '../../../components/Input/Textarea';
 import Button from '../../../components/Button';
 import api from '../../../services/api';
+
+import CreatableSelect from '../../../components/SelectBoxRef';
 
 import imgMemberDefault from '../../../assets/imgDefault/member.jpg';
 
@@ -139,7 +141,12 @@ const DashboardMembers: React.FC = () => {
             type="mail"
             placeholder="Email do novo integrante"
           />
-
+          <CreatableSelect
+            name="office"
+            icon={FaMedal}
+            placeholder="Selecione a Patente!"
+            isMulti
+          />
           <Button width="250px" type="submit">
             Novo Integrante
           </Button>

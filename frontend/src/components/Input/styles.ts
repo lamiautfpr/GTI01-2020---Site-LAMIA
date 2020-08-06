@@ -59,7 +59,6 @@ export const Container = styled.div<ContainerProps>`
 
     font-size: 24px;
     font-family: 'Source Sans Pro';
-    font-style: oblique;
     font-weight: bold;
 
     &::placeholder {
