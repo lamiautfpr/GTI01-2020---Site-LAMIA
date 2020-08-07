@@ -27,16 +27,6 @@ export const HeaderSection = styled.header`
     font-size: 32px;
     color: ${titleColor};
 
-    &::after{
-      content: "";
-
-      width: 224px;
-      height: 2px;
-      background-image: -webkit-linear-gradient(180deg, ${primaryColor} 15%, ${secondaryColor} 85%);
-
-      position: absolute;
-    }
-
 `;
 
 export const Content = styled.div`
@@ -47,8 +37,8 @@ export const Content = styled.div`
   padding: 16px;
 
   width: 100%;
-  min-height: 100vh;
-  height: 100%;
+  height: 100vh;
+  overflow: auto;
 
   form {
     border-radius: 8px;
@@ -71,7 +61,7 @@ export const Content = styled.div`
 `;
 
 export const Section = styled.section<SectionProps>`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   border-radius: 8px;
   padding: 12px;
 
@@ -103,7 +93,7 @@ export const Section = styled.section<SectionProps>`
 
     display: flex;
     margin-top: 12px;
-    border-top: 1px solid red;
+    /* border-top: 1px solid red; */
     height: 200px;
     overflow: hidden;
 

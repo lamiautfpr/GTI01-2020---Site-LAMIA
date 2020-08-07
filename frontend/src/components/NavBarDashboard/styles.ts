@@ -24,7 +24,6 @@ export const Container = styled.nav`
   width: 320px;
   padding: 16px;
   margin-right: 12px;
-
   color: #fff;
 
   -webkit-box-shadow: 4px 0px 12px -4px rgba(138, 138, 138, 1);

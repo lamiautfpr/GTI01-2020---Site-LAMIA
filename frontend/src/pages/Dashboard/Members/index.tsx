@@ -148,6 +148,7 @@ const DashboardMembers: React.FC = () => {
       <Content>
         <HeaderSection>
           <h2>Integrantes </h2>
+          <div className="bar" />
         </HeaderSection>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <header>
@@ -194,7 +195,11 @@ const DashboardMembers: React.FC = () => {
             <header onClick={() => handleOffice(index)}>
               <h2>{office.label}</h2>
               <div className="bar" />
-              <MdKeyboardArrowLeft size={28} />
+              {office.isOpen ? (
+                <MdKeyboardArrowDown size={28} />
+              ) : (
+                <MdKeyboardArrowLeft size={28} />
+              )}
             </header>
             <div>oi</div>
           </Section>
