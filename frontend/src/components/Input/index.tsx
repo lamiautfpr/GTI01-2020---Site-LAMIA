@@ -60,6 +60,7 @@ const Input: React.FC<IInputProps> = ({
       isFocused={isFocused}
       isHidden={isHidden}
       activeColor={activeColor}
+      className="input__jece"
     >
       {Icon && <Icon size={24} />}
       {children}

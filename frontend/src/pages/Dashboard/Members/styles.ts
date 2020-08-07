@@ -58,32 +58,6 @@ export const Content = styled.div`
   height: 100%;
 
   form {
-    margin: 12px 0;
-    padding: 0 12px;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    border: 2px solid registerField;
-
-    > div {
-      margin: 10px 0;
-    }
-
-    .form-group {
-      display: flex;
-
-      p {
-        width: -webkit-fill-available;
-        font-size: 24px;
-        font-family: 'Source Sans Pro';
-      }
-
-      & + .form-group {
-        /* margin: 8px 0; */
-      }
-    }
-
+    /* background: #fff; */
+  }
 `;

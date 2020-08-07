@@ -28,6 +28,7 @@ export const Container = styled.div<ContainerProps>`
   border: 2.1px solid white;
   transition: 0.2s all ease-in-out;
   padding: 2px 16px;
+  width: 100%;
 
   svg {
     margin-right: 8px;
