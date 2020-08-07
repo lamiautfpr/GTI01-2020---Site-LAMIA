@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { transparentize, shade } from 'polished';
 import {
@@ -8,6 +8,10 @@ import {
   titleColor,
   tertiaryColor,
 } from '../../../styles/paletsColorers';
+
+interface SectionProps {
+  isOpen?: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -51,6 +55,7 @@ export const Content = styled.div`
 
     background: #fff;
     padding: 16px;
+    margin-bottom: 40px;
 
     header {
       width: 100%;
@@ -62,5 +67,50 @@ export const Content = styled.div`
       -moz-box-shadow: 0px 0px 2px 0px rgba(138, 138, 138, 1);
       box-shadow: 0px 0px 2px 0px rgba(138, 138, 138, 1);
     }
+  }
+`;
+
+export const Section = styled.section<SectionProps>`
+  border: 1px solid red;
+  border-radius: 8px;
+  padding: 12px;
+
+  & + section {
+    margin-top: 24px;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    h2 {
+      font-family: 'Source Sans Pro';
+      font-size: 28px;
+      min-width: fit-content;
+      font-weight: 500;
+    }
+
+    .bar {
+      width: 100%;
+      margin: 0 12px;
+    }
+  }
+
+  > div {
+    transition: 0.3s all;
+
+    display: flex;
+    margin-top: 12px;
+    border-top: 1px solid red;
+    height: 200px;
+    overflow: hidden;
+
+    ${(props) =>
+      !props.isOpen &&
+      css`
+        height: 0;
+      `}
   }
 `;

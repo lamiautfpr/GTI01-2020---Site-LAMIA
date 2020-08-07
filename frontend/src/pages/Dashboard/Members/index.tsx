@@ -2,7 +2,11 @@ import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { MdMail } from 'react-icons/md';
+import {
+  MdMail,
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowDown,
+} from 'react-icons/md';
 import { FaUserNinja, FaMedal } from 'react-icons/fa';
 import { GiNinjaHead } from 'react-icons/gi';
 import { OptionTypeBase } from 'react-select';
@@ -18,13 +22,17 @@ import Select from '../../../components/Select';
 
 import imgMemberDefault from '../../../assets/imgDefault/member.jpg';
 
-import { Container, Content, HeaderSection } from './styles';
+import { Container, Content, HeaderSection, Section } from './styles';
 import AppError from '../../../utils/AppError';
 
 interface IMemberFormProps extends IMembersProps {
   oldPassword?: string;
   password?: string;
   confirmPassword?: string;
+}
+
+interface OfficesProps extends OptionTypeBase {
+  isOpen?: boolean;
 }
 
 const DashboardMembers: React.FC = () => {
@@ -116,6 +124,17 @@ const DashboardMembers: React.FC = () => {
     [addToast, token, updateMember],
   );
 
+  const handleOffice = useCallback(
+    (index) => {
+      const office = offices[index];
+
+      office.isOpen = !office.isOpen;
+      setOffices([...offices, (offices[index] = office)]);
+      setOffices(offices.filter((_, i) => i !== offices.length));
+    },
+    [offices],
+  );
+
   useEffect(() => {
     api.get(`members/`).then((response) => {
       setOffices(response.data.officesMembers);
@@ -169,6 +188,17 @@ const DashboardMembers: React.FC = () => {
             <GiNinjaHead size={24} />
           </Button>
         </Form>
+
+        {offices.map((office, index) => (
+          <Section isOpen={!!office.isOpen}>
+            <header onClick={() => handleOffice(index)}>
+              <h2>{office.label}</h2>
+              <div className="bar" />
+              <MdKeyboardArrowLeft size={28} />
+            </header>
+            <div>oi</div>
+          </Section>
+        ))}
       </Content>
     </Container>
   );
