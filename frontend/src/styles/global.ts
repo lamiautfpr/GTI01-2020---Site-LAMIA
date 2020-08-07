@@ -89,6 +89,17 @@ export default createGlobalStyle`
     background: transparent;
   }
 
+  .bar {
+    margin: 16px 0;
+    width: 224px;
+    height: 2px;
+    background-image: -webkit-linear-gradient(
+      180deg,
+      ${primaryColor} 15%,
+      ${secondaryColor} 85%
+    );
+  }
+
   @media ${device.laptop} {
     form {
       .form-group {

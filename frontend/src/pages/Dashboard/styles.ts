@@ -14,17 +14,6 @@ export const Container = styled.div`
   display: flex;
 
   background: ${secondaryBackground};
-
-  .bar {
-    margin: 16px 0;
-    width: 224px;
-    height: 2px;
-    background-image: -webkit-linear-gradient(
-      180deg,
-      ${primaryColor} 15%,
-      ${secondaryColor} 85%
-    );
-  }
 `;
 
 export const HeaderSection = styled.header`

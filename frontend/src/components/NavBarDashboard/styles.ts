@@ -31,13 +31,6 @@ export const Container = styled.nav`
   -moz-box-shadow: 4px 0px 12px -4px rgba(138, 138, 138, 1);
   box-shadow: 4px 0px 12px -4px rgba(138, 138, 138, 1);
 
-  .bar {
-    width: 100%;
-    height: 0.25px;
-    margin: 16px 0;
-    background: ${secondaryBackground};
-  }
-
   ul {
     list-style: none;
     /* height: 80%; */

@@ -68,7 +68,7 @@ const Select: React.FC<Props> = ({ icon: Icon, name, ...rest }) => {
   }, []);
 
   return (
-    <Container isFocused={isFocused} isErrored={!!error}>
+    <Container isFocused={isFocused} isErrored={!!error} className="input-form">
       {Icon && <Icon size={24} />}
       <Content
         onFocus={handleInputFocus}

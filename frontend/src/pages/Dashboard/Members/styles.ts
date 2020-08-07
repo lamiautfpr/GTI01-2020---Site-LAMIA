@@ -13,17 +13,6 @@ export const Container = styled.div`
   display: flex;
 
   background: ${secondaryBackground};
-
-  .bar {
-    margin: 16px 0;
-    width: 224px;
-    height: 2px;
-    background-image: -webkit-linear-gradient(
-      180deg,
-      ${primaryColor} 15%,
-      ${secondaryColor} 85%
-    );
-  }
 `;
 
 export const HeaderSection = styled.header`
@@ -58,6 +47,20 @@ export const Content = styled.div`
   height: 100%;
 
   form {
-    /* background: #fff; */
+    border-radius: 8px;
+
+    background: #fff;
+    padding: 16px;
+
+    header {
+      width: 100%;
+      font-size: 28px;
+    }
+
+    .input-form {
+      -webkit-box-shadow: 0px 0px 2px 0px rgba(138, 138, 138, 1);
+      -moz-box-shadow: 0px 0px 2px 0px rgba(138, 138, 138, 1);
+      box-shadow: 0px 0px 2px 0px rgba(138, 138, 138, 1);
+    }
   }
 `;

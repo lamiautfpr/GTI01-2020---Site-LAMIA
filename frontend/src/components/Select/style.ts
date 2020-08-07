@@ -86,6 +86,14 @@ export const Content = styled(Select)<ContentProps>`
 
     color: ${shade(0.2, '#E5E5E5')};
   }
+
+  .react-select__menu {
+    border-radius: 4px 4px 8px 8px;
+
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(138, 138, 138, 1);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(138, 138, 138, 1);
+    box-shadow: 0px 0px 4px 0px rgba(138, 138, 138, 1);
+  }
 `;
 
 export const Error = styled(Tooltip)`

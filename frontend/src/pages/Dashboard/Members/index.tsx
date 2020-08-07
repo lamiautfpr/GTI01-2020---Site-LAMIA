@@ -4,6 +4,7 @@ import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { MdMail } from 'react-icons/md';
 import { FaUserNinja, FaMedal } from 'react-icons/fa';
+import { GiNinjaHead } from 'react-icons/gi';
 import { OptionTypeBase } from 'react-select';
 import { useAuth, IMembersProps } from '../../../hooks/Auth';
 import { useToast } from '../../../hooks/Toast';
@@ -130,6 +131,10 @@ const DashboardMembers: React.FC = () => {
           <h2>Integrantes </h2>
         </HeaderSection>
         <Form ref={formRef} onSubmit={handleSubmit}>
+          <header>
+            Novo Integrante
+            <div className="bar" />
+          </header>
           <div className="form-group">
             <Input
               icon={FaUserNinja}
@@ -159,8 +164,9 @@ const DashboardMembers: React.FC = () => {
             placeholder="Selecione a Patente!"
             options={offices}
           />
-          <Button width="250px" type="submit">
-            Novo Integrante
+          <Button width="320px" type="submit">
+            Cadastrar Integrante
+            <GiNinjaHead size={24} />
           </Button>
         </Form>
       </Content>
