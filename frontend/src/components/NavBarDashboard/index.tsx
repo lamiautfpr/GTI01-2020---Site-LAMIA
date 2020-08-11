@@ -6,6 +6,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { Container, Header, ItemMenu, Footer } from './styles';
 import Button from '../Button';
 import imgTeste from '../../assets/logo.jpg';
+import { useAuth, IMembersProps } from '../../hooks/Auth';
 
 interface IMenuBurgerProps {
   name?: string;
@@ -22,19 +23,21 @@ const NavBarDashboard: React.FC<IMenuBurgerProps> = ({
   name = 'Jonh Doe',
   page,
 }) => {
+  const { member } = useAuth();
+
   return (
     <Container>
       <Header>
         <div>
-          <img src={imgTeste} alt={name} />
+          <img src={member.avatar?.src} alt={member.name} />
           <div>
             Bem Vindo,
-            <span>{name}</span>
+            <span>{member.name}</span>
           </div>
         </div>
         <span>
           <FaMedal size={32} />
-          Orientador
+          {member.office.label}
         </span>
         <div className="bar" />
       </Header>
