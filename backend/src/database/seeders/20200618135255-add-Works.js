@@ -479,7 +479,7 @@ module.exports = {
       {}
     );
 
-    return QueryInterface.bulkInsert(
+    QueryInterface.bulkInsert(
       'areaExpertise_works',
       [
         {
@@ -587,16 +587,244 @@ module.exports = {
       ],
       {}
     );
-    // QueryInterface.bulkInsert(
-    //   '',
-    //   [
-    //     {
-    //       created_at: new Date(),
-    //       updated_at: new Date(),
-    //     },
-    //   ],
-    //   {}
-    // );
+
+    return QueryInterface.bulkInsert(
+      'members_works',
+      [
+        {
+          work_id: 1,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 1,
+          member_id: 11,
+          responsibility: 'Membro Líder',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 2,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 2,
+          member_id: 13,
+          responsibility: 'Membro Líder',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 2,
+          member_id: 7,
+          responsibility: 'Membro',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 2,
+          member_id: 4,
+          responsibility: 'Membro',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 2,
+          member_id: 6,
+          responsibility: 'Membro',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 3,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 3,
+          member_id: 15,
+          responsibility: 'Membro Líder',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 3,
+          member_id: 16,
+          responsibility: 'Membro',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 4,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 4,
+          member_id: 9,
+          responsibility: 'Membro Líder',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 5,
+          member_id: 2,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 6,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 6,
+          member_id: 2,
+          responsibility: 'Colaborador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 6,
+          member_id: 3,
+          responsibility: 'Colaborador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 7,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 7,
+          member_id: 2,
+          responsibility: 'Colaborador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 7,
+          member_id: 3,
+          responsibility: 'Colaborador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 8,
+          member_id: 3,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 8,
+          member_id: 15,
+          responsibility: 'Colaborador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 8,
+          member_id: 7,
+          responsibility: 'Membro Líder',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 8,
+          member_id: 6,
+          responsibility: 'Membro',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 9,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 9,
+          member_id: 11,
+          responsibility: 'Membro Líder',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 9,
+          member_id: 10,
+          responsibility: 'Membro',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 9,
+          member_id: 14,
+          responsibility: 'Membro',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 10,
+          member_id: 15,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 11,
+          member_id: 3,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 11,
+          member_id: 2,
+          responsibility: 'Colaborador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 12,
+          member_id: 3,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 12,
+          member_id: 2,
+          responsibility: 'Colaborador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          work_id: 13,
+          member_id: 2,
+          responsibility: 'Coordenador',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+      ],
+      {}
+    );
   },
 
   down: () => {},
