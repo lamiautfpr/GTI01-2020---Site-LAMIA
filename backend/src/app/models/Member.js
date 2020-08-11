@@ -1,7 +1,19 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
+const PROTECTED_ATTRIBUTES = ['password', 'password_hash'];
+
 class Member extends Model {
+  toJSON() {
+    // hide protected fields
+    const attributes = { ...this.get() };
+    // eslint-disable-next-line no-restricted-syntax
+    for (const a of PROTECTED_ATTRIBUTES) {
+      delete attributes[a];
+    }
+    return attributes;
+  }
+
   static init(sequelize) {
     super.init(
       {
@@ -11,30 +23,6 @@ class Member extends Model {
           validate: {
             notNull: true,
             notEmpty: true,
-          },
-        },
-        nameABNT: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            const names = this.name.split(' ');
-
-            if (names.length >= 3) {
-              const lastName = names[names.length - 1];
-              const nameABNT = `${lastName.toUpperCase()}, ${names[0]
-                .charAt(0)
-                .toUpperCase()}. ${names[1].charAt(0).toUpperCase()}.`;
-
-              return nameABNT;
-            }
-            if (names.length === 2) {
-              const lastName = names[names.length - 1];
-              const nameABNT = `${lastName.toUpperCase()}, ${names[0]
-                .charAt(0)
-                .toUpperCase()}.`;
-
-              return nameABNT;
-            }
-            return this.name.toUpperCase();
           },
         },
         email: {
@@ -65,33 +53,7 @@ class Member extends Model {
             notEmpty: true,
           },
         },
-        phone: {
-          type: Sequelize.STRING,
-          allowNull: true,
-          unique: false,
-          validate: {
-            notNull: false,
-            notEmpty: false,
-          },
-        },
-        likendin: {
-          type: Sequelize.STRING,
-          allowNull: true,
-          unique: false,
-          validate: {
-            notNull: false,
-            notEmpty: false,
-          },
-        },
-        urlLikendin: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            return this.likendin
-              ? `https://www.linkedin.com/in/${this.likendin}`
-              : null;
-          },
-        },
-        git_hub: {
+        linkedin: {
           type: Sequelize.STRING,
           allowNull: true,
           unique: false,
@@ -101,9 +63,12 @@ class Member extends Model {
           },
         },
         gitHub: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            return this.git_hub;
+          type: Sequelize.STRING,
+          allowNull: true,
+          unique: false,
+          validate: {
+            notNull: false,
+            notEmpty: false,
           },
         },
         lattes: {
@@ -115,13 +80,16 @@ class Member extends Model {
             notEmpty: false,
           },
         },
-        urlLattes: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            return this.lattes ? `http://lattes.cnpq.br/${this.lattes}` : null;
+        description: {
+          type: Sequelize.STRING,
+          allowNull: true,
+          unique: false,
+          validate: {
+            notNull: false,
+            notEmpty: false,
           },
         },
-		description: {
+        quoteName: {
           type: Sequelize.STRING,
           allowNull: true,
           unique: false,
@@ -133,6 +101,11 @@ class Member extends Model {
       },
       {
         sequelize,
+        scopes: {
+          withoutPassword: {
+            attributes: { exclude: ['password', 'password_hash'] },
+          },
+        },
       }
     );
 

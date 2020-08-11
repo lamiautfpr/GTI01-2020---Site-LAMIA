@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import { shade } from 'polished';
 import { primaryColor, secondaryColor } from './paletsColorers';
+import { device } from './device';
 
 export default createGlobalStyle`
   *{
@@ -38,6 +39,34 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  form {
+    margin: 12px 0;
+    padding: 0 12px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    border: 2px solid registerField;
+
+    > div {
+      margin: 10px 0;
+    }
+
+    p {
+      width: -webkit-fill-available;
+      font-size: 24px;
+      font-family: 'Source Sans Pro';
+    }
+
+    .form-group {
+      display: flex;
+      width: 100%;
+    }
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -58,6 +87,29 @@ export default createGlobalStyle`
 
   ::-webkit-scrollbar-corner {
     background: transparent;
+  }
+
+  .bar {
+    margin: 16px 0;
+    width: 224px;
+    height: 2px;
+    background-image: -webkit-linear-gradient(
+      180deg,
+      ${primaryColor} 15%,
+      ${secondaryColor} 85%
+    );
+  }
+
+  @media ${device.laptop} {
+    form {
+      .form-group {
+        flex-direction: column;
+
+        > div{
+          margin: 10px 0;
+        }
+      }
+    }
   }
 
 `;

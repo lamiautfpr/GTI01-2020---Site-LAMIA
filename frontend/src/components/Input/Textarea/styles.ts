@@ -1,13 +1,12 @@
 import styled, { css } from 'styled-components';
 
 import { shade } from 'polished';
-import Tooltip from '../Tooltip';
+import Tooltip from '../../Tooltip';
 
-import { primaryColor, errorColor } from '../../styles/paletsColorers';
+import { primaryColor, errorColor } from '../../../styles/paletsColorers';
 
 interface ContainerProps {
   isFocused: boolean;
-  isFilled: boolean;
   isErrored: boolean;
   isFormGroup: boolean;
   width?: number;
@@ -48,7 +47,7 @@ export const Container = styled.div<ContainerProps>`
       `}
   }
 
-  input {
+  textarea {
     width:100%;
     flex: 1;
 
@@ -59,6 +58,7 @@ export const Container = styled.div<ContainerProps>`
 
     font-size: 24px;
     font-family: 'Source Sans Pro';
+    font-style: oblique;
     font-weight: bold;
 
     &::placeholder {
@@ -90,18 +90,6 @@ export const Container = styled.div<ContainerProps>`
       color: ${props.activeColor};
       border-color: ${props.activeColor};
     `}
-
-  ${(props) =>
-    props.isFilled &&
-    css`
-      border-color: white;
-    `}
-
-    ${(props) =>
-      props.width &&
-      css`
-        width: ${props.width}px;
-      `}
 
   @media (max-width: 800px) {
     width:100%;

@@ -94,15 +94,11 @@ class MemberController {
       },
       attributes: [
         'name',
-        'nameABNT',
+        'quoteName',
         'email',
-        'phone',
-        'likendin',
-        'urlLikendin',
-        'git_hub',
-        'urlGithub',
+        'linkedin',
+        'gitHub',
         'lattes',
-        'urlLattes',
         'description',
       ],
       include: [
@@ -162,71 +158,51 @@ class MemberController {
   }
 
   async update(req, res) {
-    const phoneExp = new RegExp('\\(\\d{2,}\\) \\d{4,}\\-\\d{4}');
+    try {
+      const member = await Member.findByPk(req.userId, {
+        include: [
+          {
+            model: TypeMember,
+            as: 'office',
+            attributes: ['name', 'label', 'id', 'value'],
+          },
+          {
+            model: Picture,
+            as: 'avatar',
+            attributes: ['name', 'path', 'src'],
+          },
+        ],
+      });
 
-    const schema = Yup.object().shape({
-      name: Yup.string(),
-      email: Yup.string().email(),
-      phone: Yup.string().matches(phoneExp),
-      likendin: Yup.string(),
-      git_hub: Yup.string(),
-      lattes: Yup.string(),
-      office_id: Yup.number(),
-      oldPassword: Yup.string().min(6),
-      password: Yup.string()
-        .min(8)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
-        ),
-      confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
-      ),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-
-    const { email, oldPassword } = req.body;
-
-    const member = await Member.findByPk(req.userId, {
-      include: [
-        {
-          model: TypeMember,
-          as: 'office',
-          attributes: ['name'],
-        },
-        {
-          model: Picture,
-          as: 'avatar',
-          attributes: ['name', 'path', 'url'],
-        },
-      ],
-    });
-
-    // acredito que essa validação não seja necessaria
-    if (!member) {
-      return res.status(401).json({ error: 'Email does not found' });
-    }
-
-    if (email && email !== member.email) {
-      const memberExists = await Member.findOne({ where: { email } });
-
-      if (memberExists) {
-        return res.status(400).json({ error: 'Member alrealy exists' });
+      if (!member) {
+        return res.status(401).json({ error: 'Integrante não encontrado!' });
       }
+
+      const { email, oldPassword, password } = req.body;
+
+      if (email && email !== member.email) {
+        const memberExists = await Member.findOne({ where: { email } });
+
+        if (memberExists) {
+          return res.status(400).json({ error: 'Email já utilizado!' });
+        }
+      }
+
+      if (
+        (password && !oldPassword) ||
+        (oldPassword && !(await member.checkPassword(oldPassword)))
+      ) {
+        return res.status(401).json({ error: 'Senha atuação não compatível' });
+      }
+      delete member.password_hash;
+      delete member.password;
+
+      await member.update(req.body);
+
+      return res.json(member);
+    } catch (error) {
+      return res.status(500).json(error);
     }
-
-    if (oldPassword && !(await member.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'Password does not match' });
-    }
-
-    await member.update(req.body);
-
-    member.password_hash = 'LAMIA - SH';
-    return res.json({
-      member,
-    });
   }
 }
 

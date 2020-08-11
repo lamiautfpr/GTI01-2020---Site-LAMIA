@@ -6,16 +6,15 @@ import { SelectItem } from '../../myTypes/SelectItem';
 export interface IMembersProps {
   id: number;
   login: string;
-  nameABNT: string;
+  quoteName: string;
   name: string;
   email: string;
-  phone: string;
   description: string;
   office: SelectItem;
   avatar?: ImageProps;
-  urlLikendin?: string;
-  urlGithub?: string;
-  urlLattes?: string;
+  linkedin?: string;
+  gitHub?: string;
+  lattes?: string;
 }
 
 interface IAuthState {
@@ -29,11 +28,14 @@ interface ISignInCredentials {
 }
 
 interface IAuthProviderData {
+  token: string;
   member: IMembersProps;
   signIn(credentials: ISignInCredentials): Promise<void>;
   signOut(): void;
+  updateMember(member: IMembersProps): void;
 }
 
+export const officesPermitted: number[] = [1, 2, 3];
 const AuthContext = createContext<IAuthProviderData>({} as IAuthProviderData);
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -67,8 +69,27 @@ export const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem('@LAMIA:member');
   }, []);
 
+  const updateMember = useCallback(
+    (member: IMembersProps) => {
+      setData({
+        token: data.token,
+        member,
+      });
+      localStorage.setItem('@LAMIA:member', JSON.stringify(member));
+    },
+    [data.token],
+  );
+
   return (
-    <AuthContext.Provider value={{ member: data.member, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{
+        token: data.token,
+        member: data.member,
+        signIn,
+        signOut,
+        updateMember,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

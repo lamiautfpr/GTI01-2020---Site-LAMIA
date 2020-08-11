@@ -6,23 +6,14 @@ import {
   primaryColor,
   secondaryColor,
   titleColor,
+  tertiaryColor,
 } from '../../styles/paletsColorers';
+import { device } from '../../styles/device';
 
 export const Container = styled.div`
   display: flex;
 
   background: ${secondaryBackground};
-
-  .bar {
-    margin: 16px 0;
-    width: 224px;
-    height: 2px;
-    background-image: -webkit-linear-gradient(
-      180deg,
-      ${primaryColor} 15%,
-      ${secondaryColor} 85%
-    );
-  }
 `;
 
 export const HeaderSection = styled.header`
@@ -54,65 +45,15 @@ export const Content = styled.div`
 
   width: 100%;
   height: 100vh;
-
-  textarea {
-    background: #fff;
-    border-radius: 8px;
-    border: 2px solid ${shade(0.025, '#fff')};
-    padding: 16px;
-    width: 100%;
-    height: 120px;
-
-    display: flex;
-    align-items: center;
-    transition: 0.4s;
-
-    font-size: 20px;
-    font-family: 'Source Sans Pro';
-    font-weight: bold;
-
-    &:focus {
-      border-color: ${primaryColor};
-    }
-
-    /* width */
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    /* Track */
-    &::-webkit-scrollbar-track {
-      border-radius: 10px;
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-      background: ${transparentize(0.3, secondaryColor)};
-      border-radius: 10px;
-    }
-
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-      background: ${transparentize(0.1, secondaryColor)};
-    }
-  }
+  overflow: auto;
 
   form {
-    margin: 12px 0;
-    padding: 0 12px;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-
     section {
       display: flex;
       align-items: center;
       width: 100%;
 
-      margin: 16px;
+      margin-bottom: 16px;
 
       .img {
         margin-right: 32px;
@@ -133,7 +74,7 @@ export const Content = styled.div`
           bottom: 0;
           border: 6px solid ${secondaryBackground};
           cursor: pointer;
-          transition: all 0.2s;
+          transition: 0.3s ease-in-out;
 
           display: flex;
           align-items: center;
@@ -143,10 +84,14 @@ export const Content = styled.div`
             display: none;
           }
 
-          svg {
+          > svg {
             width: 20px;
             height: 20px;
-            color: #fff;
+            color: ${secondaryBackground};
+          }
+
+          &:hover {
+            background: ${tertiaryColor};
           }
         }
       }
@@ -156,23 +101,14 @@ export const Content = styled.div`
           margin: 16px 0;
         }
       }
-    }
-
-    > div {
-      margin: 10px 0;
-    }
-
-    .form-group {
-      display: flex;
-
-      p {
-        width: -webkit-fill-available;
-        font-size: 24px;
-        font-family: 'Source Sans Pro';
-      }
-
-      & + .form-group {
-        /* margin: 8px 0; */
+      @media ${device.laptop} {
+        flex-direction: column;
+        .form {
+          width: 100%;
+          > div {
+            margin: 8px 0;
+          }
+        }
       }
     }
 

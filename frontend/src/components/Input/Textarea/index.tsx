@@ -1,7 +1,7 @@
 import React, {
   useRef,
   useEffect,
-  InputHTMLAttributes,
+  TextareaHTMLAttributes,
   useState,
   useCallback,
 } from 'react';
@@ -10,7 +10,8 @@ import { IconBaseProps } from 'react-icons';
 import { MdInfo } from 'react-icons/md';
 import { Container, Error } from './styles';
 
-export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface ITextareaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   icon?: React.ComponentType<IconBaseProps>;
   isFormGroup?: boolean;
@@ -19,7 +20,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   activeColor?: string;
 }
 
-const Input: React.FC<IInputProps> = ({
+const Textarea: React.FC<ITextareaProps> = ({
   isFormGroup = false,
   width,
   name,
@@ -29,9 +30,9 @@ const Input: React.FC<IInputProps> = ({
   children,
   ...rest
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
+  // const [isFilled, setIsFilled] = useState(false);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   const handleInputFocus = useCallback(() => {
@@ -40,7 +41,7 @@ const Input: React.FC<IInputProps> = ({
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
-    setIsFilled(!!inputRef.current?.value);
+    // setIsFilled(!!inputRef.current?.value);
   }, []);
 
   useEffect(() => {
@@ -56,15 +57,13 @@ const Input: React.FC<IInputProps> = ({
       width={width}
       isFormGroup={isFormGroup}
       isErrored={!!error}
-      isFilled={isFilled}
       isFocused={isFocused}
       isHidden={isHidden}
       activeColor={activeColor}
-      className="input-form"
     >
       {Icon && <Icon size={24} />}
       {children}
-      <input
+      <textarea
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         defaultValue={defaultValue}
@@ -80,4 +79,4 @@ const Input: React.FC<IInputProps> = ({
   );
 };
 
-export default Input;
+export default Textarea;
