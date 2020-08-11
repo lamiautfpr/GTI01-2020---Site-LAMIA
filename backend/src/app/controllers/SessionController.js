@@ -24,7 +24,9 @@ class SessionController {
     const { email = '', password, login = '' } = req.body;
 
     const member = await Member.findOne({
-      where: { [Op.or]: [{ email }, { login }] },
+      where: {
+        [Op.or]: [{ email }, { login }],
+      },
       include: [
         {
           model: TypeMember,
@@ -42,7 +44,15 @@ class SessionController {
     if (!member) return res.status(401).json({ error: 'Member not Found :(' });
 
     if (!(await member.checkPassword(password))) {
-      return res.status(401).json({ error: 'Password does nort match :(' });
+      return res.status(401).json({ error: 'Password does not match :(' });
+    }
+
+    if (
+      member.office_id !== 1 &&
+      member.office_id !== 2 &&
+      member.office_id !== 3
+    ) {
+      return res.status(401).json({ error: "You don't have permission" });
     }
 
     const { id } = member;
