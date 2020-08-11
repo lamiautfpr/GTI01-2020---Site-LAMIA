@@ -8,7 +8,7 @@ module.exports = {
         {
           name: 'Anderson Brilhador',
           email: 'brilhador@utfpr.edu.br',
-          likendin: 'anderson-brilhador-88092b81',
+          linkedin: 'anderson-brilhador-88092b81',
           git_hub: 'Brilhador',
           lattes: '0341341858649732',
           avatar_id: 4,
@@ -25,7 +25,7 @@ module.exports = {
           email: 'arletebeuren@utfpr.edu.br',
           git_hub: 'arletebeuren',
           lattes: '0084145280240578',
-          avatar_id: 2,
+          avatar_id: 13,
           office_id: 3,
           login: 'arletebeuren',
           description:
@@ -37,7 +37,7 @@ module.exports = {
         {
           name: 'Guilherme Yoshida',
           email: 'guilhermet@alunos.utfpr.edu.br',
-          likendin: 'guilherme-yoshida-teixeira-5a8107161',
+          linkedin: 'guilherme-yoshida-teixeira-5a8107161',
           git_hub: 'guiyshd',
           lattes: '9341853064626160',
           avatar_id: 5,
@@ -77,7 +77,7 @@ module.exports = {
         {
           name: 'Jecé Xavier Pereira Neto',
           email: 'jece@alunos.utfpr.edu.br',
-          likendin: 'jece-xavier',
+          linkedin: 'jece-xavier',
           git_hub: 'XavierJece',
           lattes: '1289293936077853',
           avatar_id: 6,
@@ -105,7 +105,7 @@ module.exports = {
         {
           name: 'João Ewerton Duarte de Souza',
           email: 'joaosouza@alunos.utfpr.edu.br',
-          likendin: 'joão-souza-b3862b182',
+          linkedin: 'joão-souza-b3862b182',
           git_hub: 'e-duarte',
           avatar_id: 8,
           office_id: 8,
@@ -132,7 +132,7 @@ module.exports = {
         {
           name: 'Luis Fernando da Rosa',
           email: 'luisrosa.2018@alunos.utfpr.edu.br',
-          likendin: 'luis-fernando-rosa-244096194',
+          linkedin: 'luis-fernando-rosa-244096194',
           git_hub: 'LuisFernandoRosa',
           avatar_id: 9,
           office_id: 5,
@@ -160,7 +160,7 @@ module.exports = {
         {
           name: 'Nathalia Vieira Mota de Oliveira',
           email: 'nathaliaoliveira@alunos.utfpr.edu.br',
-          likendin: 'nathaliavmoliveira',
+          linkedin: 'nathaliavmoliveira',
           git_hub: 'nathmota',
           lattes: '6369603530052208',
           avatar_id: 3,
@@ -175,7 +175,7 @@ module.exports = {
         {
           name: 'Rafael Lechensque de Aquino',
           email: 'rafaelaquino@alunos.utfpr.edu.br',
-          likendin: 'rafael-lechensque-de-aquino-ba602a122',
+          linkedin: 'rafael-lechensque-de-aquino-ba602a122',
           git_hub: 'RafaelLechensqueDeAquino',
           lattes: '2498414553758717',
           avatar_id: 10,
@@ -190,7 +190,7 @@ module.exports = {
         {
           name: 'Thiago França Naves',
           email: 'naves@utfpr.edu.br',
-          likendin: 'thiago-frança-naves-61959857',
+          linkedin: 'thiago-frança-naves-61959857',
           git_hub: 'tfnaves',
           lattes: '2177644773849043',
           avatar_id: 11,
@@ -205,7 +205,7 @@ module.exports = {
         {
           name: 'Wagner Destro',
           email: 'wagnerdestro@alunos.utfpr.edu.br',
-          likendin: 'wagner-leandro-s-576505121',
+          linkedin: 'wagner-leandro-s-576505121',
           git_hub: 'wagnerDestro',
           avatar_id: 12,
           office_id: 5,

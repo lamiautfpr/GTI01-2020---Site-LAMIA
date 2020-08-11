@@ -78,6 +78,13 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
         },
+        {
+          name: 'arlete.jpg',
+          path:
+            'https://avatars2.githubusercontent.com/u/68442700?s=400&u=ea99879d578a867430ae1408ebacba5895e497c5&v=4',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
       ],
       {}
     );
