@@ -6,7 +6,7 @@ class MemberWork extends Model {
       {
         member_id: Sequelize.INTEGER,
         work_id: Sequelize.INTEGER,
-        scholarship: Sequelize.BOOLEAN,
+        responsibility: Sequelize.STRING,
       },
       {
         sequelize,

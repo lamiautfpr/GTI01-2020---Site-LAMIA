@@ -40,7 +40,7 @@ class WorkController {
         {
           model: MemberWork,
           as: 'worksMember',
-          attributes: ['scholarship'],
+          attributes: ['responsibility'],
           include: [
             {
               model: Member,
@@ -114,12 +114,12 @@ class WorkController {
         {
           model: MemberWork,
           as: 'worksMember',
-          attributes: ['scholarship'],
+          attributes: ['responsibility'],
           include: [
             {
               model: Member,
               as: 'memberData',
-              attributes: ['name', 'login', 'nameABNT'],
+              attributes: ['name', 'login', 'quoteName'],
               include: [
                 {
                   model: TypeMember,
@@ -191,7 +191,7 @@ class WorkController {
             .positive()
             .integer()
         ),
-      scholarship: Yup.boolean().required(),
+      responsibility: Yup.boolean().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -207,7 +207,7 @@ class WorkController {
       typesWork_id,
       area_expertises_id,
       members_id,
-      scholarship,
+      responsibility,
     } = req.body;
 
     /**
@@ -337,7 +337,7 @@ class WorkController {
     //   await MemberWork.create({
     //     member_id: members_id[i],
     //     work_id: work.id,
-    //     scholarship: false,
+    //     responsibility: false,
     //   });
     // }
 
@@ -345,7 +345,7 @@ class WorkController {
       await MemberWork.create({
         member_id,
         work_id: work.id,
-        scholarship: false,
+        responsibility: false,
       });
     });
 
@@ -363,17 +363,17 @@ class WorkController {
     /**
      * Add member responsavel no trabalho com bolsista ou não
      */
-    if (scholarship) {
+    if (responsibility) {
       await MemberWork.create({
         member_id: req.userId,
         work_id: work.id,
-        scholarship,
+        responsibility,
       });
     } else {
       await MemberWork.create({
         member_id: req.userId,
         work_id: work.id,
-        scholarship: false,
+        responsibility: false,
       });
     }
 

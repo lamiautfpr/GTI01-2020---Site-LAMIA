@@ -63,28 +63,28 @@ class MemberController {
   }
 
   async index(req, res) {
-    const members = await Member.findAll({
-      attributes: ['id', 'name', 'email', 'description', 'login'],
+    const officesMembers = await TypeMember.findAll({
+      where: { [Op.not]: [{ name: 'administrator' }] },
+      attributes: ['id', 'value', 'name', 'label', 'description'],
+      order: [['id'], [{ model: Member, as: 'members' }, 'name', 'ASC']],
       include: [
         {
-          model: TypeMember,
-          as: 'office',
-          attributes: ['id', 'value', 'name', 'label', 'description'],
-        },
-        {
-          model: Picture,
-          as: 'avatar',
-          attributes: ['name', 'path', 'src'],
+          model: Member,
+          as: 'members',
+          attributes: ['id', 'name', 'email', 'description', 'login'],
+          order: ['name'],
+          include: [
+            {
+              model: Picture,
+              as: 'avatar',
+              attributes: ['name', 'path', 'src'],
+            },
+          ],
         },
       ],
     });
 
-    const officesMembers = await TypeMember.findAll({
-      attributes: ['id', 'value', 'name', 'label', 'description'],
-      order: ['name'],
-    });
-
-    return res.json({ members, officesMembers });
+    return res.json(officesMembers);
   }
 
   async show(req, res) {
@@ -115,7 +115,7 @@ class MemberController {
         {
           model: MemberWork,
           as: 'works',
-          attributes: ['scholarship'],
+          attributes: ['responsibility'],
           include: [
             {
               model: Work,
