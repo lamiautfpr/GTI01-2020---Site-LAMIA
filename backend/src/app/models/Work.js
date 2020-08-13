@@ -29,6 +29,19 @@ class Work extends Model {
             notEmpty: true,
           },
         },
+        abstractCard: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            if (!this.abstract) {
+              return null;
+            }
+
+            if (this.abstract.length <= 300) {
+              return this.abstract;
+            }
+            return `${this.abstract.substr(0, 300)}...`;
+          },
+        },
         git_hub: {
           type: Sequelize.STRING,
           allowNull: true,

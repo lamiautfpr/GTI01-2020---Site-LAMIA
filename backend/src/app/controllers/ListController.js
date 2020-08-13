@@ -36,7 +36,14 @@ class ListController {
         {
           model: Work,
           as: 'works',
-          attributes: ['id', 'title', 'objective', 'date_begin', 'dateBegin'],
+          attributes: [
+            'id',
+            'title',
+            'abstract',
+            'abstractCard',
+            'date_begin',
+            'dateBegin',
+          ],
           include: [
             {
               model: Picture,
@@ -68,7 +75,7 @@ class ListController {
                 {
                   model: Member,
                   as: 'memberData',
-                  attributes: ['name', 'nameABNT', 'login'],
+                  attributes: ['name', 'quoteName', 'login'],
                 },
               ],
             },

@@ -649,7 +649,7 @@ module.exports = {
         },
         {
           work_id: 3,
-          member_id: 15,
+          member_id: 5,
           responsibility: 'Membro Líder',
           created_at: new Date(),
           updated_at: new Date(),
