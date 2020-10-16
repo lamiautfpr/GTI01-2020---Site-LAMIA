@@ -1,4 +1,5 @@
 import Member from '../models/Member';
+import TypeMember from '../models/TypeMember';
 
 class MemberOfficeController {
   async update(req, res) {
@@ -16,16 +17,35 @@ class MemberOfficeController {
           .json({ error: 'Você não possui essa permissão' });
       }
 
-      let member = await Member.findOne({ where: { login: req.body.login } });
+      const member = await Member.findOne({
+        where: { login: req.body.login },
+        include: [
+          {
+            model: TypeMember,
+            as: 'office',
+            attributes: ['id', 'value', 'name', 'label', 'description'],
+          },
+        ],
+      });
 
       if (!member) {
         return res.status(401).json({ error: 'Membro não encontrado' });
       }
 
-      member = await member.update(req.body);
-      // return res.json(member);
+      await member.update(req.body);
 
-      return res.json(member);
+      const memberUpdated = await Member.findOne({
+        where: { login: req.body.login },
+        include: [
+          {
+            model: TypeMember,
+            as: 'office',
+            attributes: ['id', 'value', 'name', 'label', 'description'],
+          },
+        ],
+      });
+
+      return res.json(memberUpdated);
     } catch (error) {
       return res.status(500).json(error);
     }
