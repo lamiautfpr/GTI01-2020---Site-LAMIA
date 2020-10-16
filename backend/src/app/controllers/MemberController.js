@@ -18,9 +18,7 @@ class MemberController {
       email: Yup.string()
         .email()
         .required(),
-      password: Yup.string()
-        .required()
-        .min(8),
+      password: Yup.string().min(8),
       phone: Yup.string().matches(phoneExp),
       likendin: Yup.string(),
       git_hub: Yup.string(),
@@ -40,26 +38,24 @@ class MemberController {
 
     if (memberExists) {
       return res.status(400).json({
-        error: 'Member already exists :/ <br/>Tente outro login ou email ;)',
+        error: 'Member already exists :/ (Tente outro login ou email)',
       });
     }
 
-    const { id, name, email, office_id } = await Member.create(req.body, {
-      include: [
-        {
-          model: TypeMember,
-          as: 'office',
-          attributes: ['name'],
-        },
-      ],
-    });
+    const member = await Member.create(
+      { ...req.body, password: '&8Lamia$f' },
+      {
+        include: [
+          {
+            model: TypeMember,
+            as: 'office',
+            attributes: ['name'],
+          },
+        ],
+      }
+    );
 
-    return res.json({
-      id,
-      name,
-      email,
-      office_id,
-    });
+    return res.json(member);
   }
 
   async index(req, res) {
