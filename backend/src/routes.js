@@ -8,6 +8,7 @@ import TypeMemberController from './app/controllers/TypeMemberController';
 import FileController from './app/controllers/FileController';
 import MemberController from './app/controllers/MemberController';
 import MemberAvatarController from './app/controllers/MemberAvatarController';
+import MemberOfficeController from './app/controllers/MemberOfficeController';
 import OfficeController from './app/controllers/OfficeController';
 
 import AreaExpertiseController from './app/controllers/AreaExpertiseController';
@@ -25,7 +26,7 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.get('/', (req, res) => {
-  return res.json({ msessage: 'Hello Word!' });
+  return res.json({ message: 'Hello Word!' });
 });
 
 routes.get('/type-members', TypeMemberController.index);
@@ -65,6 +66,7 @@ routes.patch(
   upload.single('avatar'),
   MemberAvatarController.update
 );
+routes.patch('/members/office', MemberOfficeController.update);
 
 routes.delete('/type-members', TypeMemberController.delete);
 routes.delete('/area-expertises', AreaExpertiseController.delete);
