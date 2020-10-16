@@ -16,9 +16,6 @@ class MemberOfficeController {
           .json({ error: 'Você não possui essa permissão' });
       }
 
-      console.log(`login: ${req.body.login}`);
-      console.log(`office_id: ${req.body.office_id}`);
-
       let member = await Member.findOne({ where: { login: req.body.login } });
 
       if (!member) {
