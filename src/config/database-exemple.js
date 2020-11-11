@@ -1,9 +1,9 @@
 module.exports = {
   dialect: 'postgres',
-  host: process.env.DB_HOST,
-  username: 'db_developer',
-  password: 'db_developerROOT',
-  database: 'lamia',
+  host: '',
+  username: '',
+  password: '',
+  database: '',
   define: {
     timestamps: true,
     underscored: true,
