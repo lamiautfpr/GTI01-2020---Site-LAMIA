@@ -6,3 +6,4 @@
 tmp/*
 !tmp/uploads
 tmp/uploads/*
+/dist
