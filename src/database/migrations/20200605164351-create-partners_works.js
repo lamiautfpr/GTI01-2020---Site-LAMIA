@@ -1,18 +1,11 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('partners_works', {
-      id: {
+      work_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      editorial: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      abstract: {
-        type: Sequelize.TEXT,
+        references: { model: 'works', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         allowNull: true,
       },
       partner_id: {
