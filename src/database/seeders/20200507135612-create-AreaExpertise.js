@@ -21,7 +21,7 @@ module.exports = {
         },
         {
           id: 3,
-          name: 'GamTecnologia e Sociales',
+          name: 'Tecnologia e Sociales',
           description:
             'São as áreas do LAMIA dedicadas ao desenvolvimento de tecnologias e softwares em parceria com outros grupos, laboratórios e projetos de pesquisa em diversas áreas do conhecimento e a execução de projetos com impacto social através do uso de ciência e tecnologias computacionais para benefício da comunidade externa e população em geral.',
           created_at: new Date(),
