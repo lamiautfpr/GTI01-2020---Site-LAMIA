@@ -8,7 +8,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: true,
       },
-      new_id: {
+      news_id: {
         type: Sequelize.INTEGER,
         references: { model: 'news', key: 'id' },
         onUpdate: 'CASCADE',
