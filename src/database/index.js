@@ -12,6 +12,7 @@ import Partner from '../app/models/Partner';
 import Work from '../app/models/Work';
 import MemberWork from '../app/models/MemberWork';
 import Statistic from '../app/models/Statistic';
+import News from '../app/models/News';
 
 const models = [
   TypeMember,
@@ -24,6 +25,7 @@ const models = [
   Work,
   MemberWork,
   Statistic,
+  News,
 ];
 
 class Database {
