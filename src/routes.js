@@ -1,26 +1,23 @@
 import { Router } from 'express';
 import multer from 'multer';
-import multerConfig from './config/multer';
-
-import authMiddlewares from './app/middlewares/auth';
-import SessionController from './app/controllers/SessionController';
-import TypeMemberController from './app/controllers/TypeMemberController';
-import FileController from './app/controllers/FileController';
-import MemberController from './app/controllers/MemberController';
-import MemberAvatarController from './app/controllers/MemberAvatarController';
-import MemberOfficeController from './app/controllers/MemberOfficeController';
-import OfficeController from './app/controllers/OfficeController';
-
 import AreaExpertiseController from './app/controllers/AreaExpertiseController';
 import CategoryWorkController from './app/controllers/CategoryWorkController';
-import TypeWorkController from './app/controllers/TypeWorkController';
-
-import PartnerController from './app/controllers/PartnerController';
-import WorkController from './app/controllers/WorkController';
-
-import StatisticController from './app/controllers/StatisticController';
-import ListController from './app/controllers/ListController';
+import FileController from './app/controllers/FileController';
 import LastWorkController from './app/controllers/LastWorkController';
+import ListController from './app/controllers/ListController';
+import MemberAvatarController from './app/controllers/MemberAvatarController';
+import MemberController from './app/controllers/MemberController';
+import MemberOfficeController from './app/controllers/MemberOfficeController';
+import NewsController from './app/controllers/NewsController';
+import OfficeController from './app/controllers/OfficeController';
+import PartnerController from './app/controllers/PartnerController';
+import SessionController from './app/controllers/SessionController';
+import StatisticController from './app/controllers/StatisticController';
+import TypeMemberController from './app/controllers/TypeMemberController';
+import TypeWorkController from './app/controllers/TypeWorkController';
+import WorkController from './app/controllers/WorkController';
+import authMiddlewares from './app/middlewares/auth';
+import multerConfig from './config/multer';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -39,7 +36,9 @@ routes.get('/partiners', PartnerController.index);
 routes.get('/works', WorkController.index);
 routes.get('/statistics', StatisticController.index);
 routes.get('/last-work', LastWorkController.index);
+routes.get('/news', NewsController.index);
 
+routes.get('/news/:id', NewsController.show);
 routes.get('/category-works/:category', ListController.show);
 routes.get('/:login', MemberController.show);
 routes.get('/work/:id', WorkController.show);
