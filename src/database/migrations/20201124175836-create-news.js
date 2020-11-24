@@ -17,11 +17,20 @@ module.exports = {
       },
       cover: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       date_publication: {
         type: Sequelize.DATE,
         allowNull: false,
+      },
+      font: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: 'LAMIA',
+      },
+      source: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
