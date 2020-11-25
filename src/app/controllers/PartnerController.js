@@ -4,7 +4,6 @@ import Partner from '../models/Partner';
 class PartnerController {
   async index(req, res) {
     const partner = await Partner.findAll({
-      attributes: ['id', 'name', 'logo', 'linkPage'],
       order: [['name', 'ASC']],
     });
 

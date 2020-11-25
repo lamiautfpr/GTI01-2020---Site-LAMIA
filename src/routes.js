@@ -32,7 +32,7 @@ routes.get('/members/:office', OfficeController.index);
 routes.get('/area-expertises', AreaExpertiseController.index);
 routes.get('/category-works', CategoryWorkController.index);
 routes.get('/type-works', TypeWorkController.index);
-routes.get('/partiners', PartnerController.index);
+routes.get('/partners', PartnerController.index);
 routes.get('/works', WorkController.index);
 routes.get('/statistics', StatisticController.index);
 routes.get('/last-work', LastWorkController.index);
