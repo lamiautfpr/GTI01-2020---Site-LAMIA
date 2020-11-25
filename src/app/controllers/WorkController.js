@@ -16,8 +16,7 @@ class WorkController {
       include: [
         {
           model: Partner,
-          as: 'partner',
-          attributes: ['name'],
+          as: 'partners',
         },
         {
           model: CategoryWork,
@@ -85,7 +84,7 @@ class WorkController {
       include: [
         {
           model: Partner,
-          as: 'partner',
+          as: 'partners',
           // attributes: ['name', 'label'],
         },
         {
@@ -156,7 +155,6 @@ class WorkController {
     const schema = Yup.object().shape({
       title: Yup.string().required(),
       objective: Yup.string().required(),
-      abstract: Yup.string().required(),
 
       date_begin: Yup.date().required(),
       categories_id: Yup.array()
@@ -201,7 +199,6 @@ class WorkController {
     const {
       title,
       objective,
-      abstract,
       date_begin,
       categories_id,
       typesWork_id,
@@ -293,7 +290,6 @@ class WorkController {
     const work = await Work.create({
       title,
       objective,
-      abstract,
       date_begin,
     });
 

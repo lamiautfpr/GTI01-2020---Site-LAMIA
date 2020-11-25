@@ -21,27 +21,6 @@ class Work extends Model {
             notEmpty: true,
           },
         },
-        abstract: {
-          type: Sequelize.TEXT,
-          allowNull: false,
-          validate: {
-            notNull: true,
-            notEmpty: true,
-          },
-        },
-        abstractCard: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            if (!this.abstract) {
-              return null;
-            }
-
-            if (this.abstract.length <= 300) {
-              return this.abstract;
-            }
-            return `${this.abstract.substr(0, 300)}...`;
-          },
-        },
         git_hub: {
           type: Sequelize.STRING,
           allowNull: true,
@@ -93,9 +72,10 @@ class Work extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Partner, {
-      foreignKey: 'partner_id',
-      as: 'partner',
+    this.belongsToMany(models.Partner, {
+      foreignKey: 'work_id',
+      as: 'partners',
+      through: 'partners_works',
     });
 
     this.belongsToMany(models.CategoryWork, {
