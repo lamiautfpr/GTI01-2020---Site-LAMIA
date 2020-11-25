@@ -1,7 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import { format } from 'date-fns';
 
-class Work extends Model {
+class News extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -64,4 +64,4 @@ class Work extends Model {
   }
 }
 
-export default Work;
+export default News;

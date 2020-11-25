@@ -4,7 +4,7 @@ import Picture from '../models/Picture';
 import News from '../models/News';
 import Member from '../models/Member';
 
-class WorkController {
+class NewsController {
   async index(req, res) {
     const { limit = 3 } = req.query;
 
@@ -17,7 +17,7 @@ class WorkController {
         },
       ],
       limit,
-      order: ['date_publications', 'DESC'],
+      order: [['date_publication', 'DESC']],
     });
 
     return res.json(news);
@@ -146,4 +146,4 @@ class WorkController {
   }
 }
 
-export default new WorkController();
+export default new NewsController();
