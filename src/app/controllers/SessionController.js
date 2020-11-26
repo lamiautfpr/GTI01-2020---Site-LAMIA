@@ -47,14 +47,6 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match :(' });
     }
 
-    if (
-      member.office_id !== 1 &&
-      member.office_id !== 2 &&
-      member.office_id !== 3
-    ) {
-      return res.status(401).json({ error: "You don't have permission" });
-    }
-
     const { id } = member;
     member.password_hash = 'LAMIA - SH';
 
