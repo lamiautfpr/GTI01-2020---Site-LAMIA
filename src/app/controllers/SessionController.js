@@ -41,10 +41,10 @@ class SessionController {
       ],
     });
 
-    if (!member) return res.status(401).json({ error: 'Member not Found :(' });
+    if (!member) return res.status(400).json({ error: 'Member not Found :(' });
 
     if (!(await member.checkPassword(password))) {
-      return res.status(401).json({ error: 'Password does not match :(' });
+      return res.status(400).json({ error: 'Password does not match :(' });
     }
 
     const { id } = member;
