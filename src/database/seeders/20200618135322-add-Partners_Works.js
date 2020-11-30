@@ -23,13 +23,13 @@ module.exports = {
         },
         {
           work_id: 6,
-          partner_id: 1,
+          partner_id: 4,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
           work_id: 6,
-          partner_id: 1,
+          partner_id: 6,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -53,13 +53,13 @@ module.exports = {
         },
         {
           work_id: 7,
-          partner_id: 1,
+          partner_id: 4,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
           work_id: 7,
-          partner_id: 1,
+          partner_id: 6,
           created_at: new Date(),
           updated_at: new Date(),
         },

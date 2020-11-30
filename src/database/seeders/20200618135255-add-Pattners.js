@@ -25,7 +25,7 @@ module.exports = {
           name:
             'Associação Brasil Internacional de Inventores, Cientistas e Empreendedores Inovadores - ABIPIR',
           logo: 'abipir.jpg',
-          link_page: 'ttp://abipir.org.br/',
+          link_page: 'http://abipir.org.br/',
           created_at: new Date(),
           updated_at: new Date(),
         },
