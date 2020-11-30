@@ -1,7 +1,10 @@
+require('dotenv/config');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
   up: QueryInterface => {
+    const password_hash = bcrypt.hashSync(process.env.PASSWORD, 8);
+
     return QueryInterface.bulkInsert(
       'members',
       [
@@ -18,7 +21,7 @@ module.exports = {
             'Orientador do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Desenvolve pesquisas nas seguintes áreas: Computer Vision, Data Science, Data Mining, Machine Learning e Deep Learning.',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Arlete Beuren',
@@ -32,7 +35,7 @@ module.exports = {
             'Orientadora do LAMIA e docente no Curso de Ciência da Computação da UTFPR. Interesse de pesquisas nas áreas de Visão Computacional/Processamento de Imagens/Reconhecimento de Padrões/Big Data/Computação Gráfica/Realidade Virtual/Desenvolvimento Web.',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Guilherme Yoshida',
@@ -47,7 +50,7 @@ module.exports = {
             'Bachelor of Computer Science with emphasis on mathematical and theoretical foundations of computing, specializing in business intelligence using data science and machine learning through virtual environments.',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Heitor Vilas Boas',
@@ -60,7 +63,7 @@ module.exports = {
             'Graduando em Ciência da computação e integrante do projeto de aprendizado atráves de um ambiente virtual',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Hugo José Teixeira de Freitas',
@@ -70,7 +73,7 @@ module.exports = {
           login: 'hfreitas',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
           description:
             'Estou tendo muito projetos não consegui fazer minha descrição...',
         },
@@ -87,7 +90,7 @@ module.exports = {
             'Computer Science student. Enthusiast of: Big Data, Data Science, Machine Learning, Mathematics and Full Stack Development with NodeJS, ReactJS, React Native.',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Jeferson Carlos Martin',
@@ -98,7 +101,7 @@ module.exports = {
           login: 'JCMArtin',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
           description:
             'Estou tendo muito projetos não consegui fazer minha descrição...',
         },
@@ -112,7 +115,7 @@ module.exports = {
           login: 'eduarte',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
           description:
             'Estou tendo muito projetos não consegui fazer minha descrição...',
         },
@@ -125,7 +128,7 @@ module.exports = {
           login: 'jpacheco',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
           description:
             'Estou tendo muito projetos não consegui fazer minha descrição...',
         },
@@ -141,7 +144,7 @@ module.exports = {
             'Curso Ciência da Computação na UTFPR-SH, sou membro do LAMIA e participo de um projeto de iniciação cientifica na área de Visão Computacional.',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Marcos Kai Chiun Huang',
@@ -155,7 +158,7 @@ module.exports = {
             'Acadêmico no curso de Ciência da Computação da UTFPR-SH. Atualmente, estudo na área visão computação do Laboratório de Aprendizagem de Máquina Aplicada a Indústria (LAMIA)',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Nathalia Vieira Mota de Oliveira',
@@ -170,7 +173,7 @@ module.exports = {
             'Graduanda em Ciência da Computação e participante de programa de iniciação científica na área de Ciência de Dados.',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Rafael Lechensque de Aquino',
@@ -185,7 +188,7 @@ module.exports = {
             'Acadêmico em Ciência da Computação, estou em pesquisas na área Visão Computacional no Laboratório de Aprendizado de Maquinas Aplicada a Industria - LAMIA',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Thiago França Naves',
@@ -200,7 +203,7 @@ module.exports = {
             'Coordenador do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Conduz pesquisas nas áreas de Ciência de Dados e Visão Computacional e trabalha junto a incubadoras no desenvolvimento de empresas de base técnológicas e startups',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
         {
           name: 'Wagner Destro',
@@ -214,7 +217,7 @@ module.exports = {
             'Graduando em Ciência da Computação e integrante do projeto de Aprendizado Através de um Ambiente Virtual',
           created_at: new Date(),
           updated_at: new Date(),
-          password_hash: bcrypt.hashSync('&mlamia$f', 8),
+          password_hash,
         },
       ],
       {}
