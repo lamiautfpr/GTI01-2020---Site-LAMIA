@@ -6,4 +6,3 @@
 tmp/*
 !tmp/uploads
 /dist
-/src/config/database.js
