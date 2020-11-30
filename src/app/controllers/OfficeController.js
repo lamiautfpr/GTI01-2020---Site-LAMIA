@@ -13,7 +13,7 @@ class OfficeController {
       .concat(office.substring(1));
 
     const members = await Member.findAll({
-      attributes: ['id', 'name', 'description'],
+      attributes: ['id', 'name', 'description', 'login'],
       include: [
         {
           model: TypeMember,
