@@ -46,6 +46,14 @@ class News extends Model {
             return `${process.env.APP_URL}/files/${this.cover}`;
           },
         },
+        font: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        source: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
       },
       {
         sequelize,
