@@ -6,7 +6,7 @@ import Member from '../models/Member';
 
 class NewsController {
   async index(req, res) {
-    const { limit = 3 } = req.query;
+    const { limit = 3, page = 1 } = req.query;
 
     const news = await News.findAll({
       include: [
@@ -17,6 +17,7 @@ class NewsController {
         },
       ],
       limit,
+      offset: (page - 1) * limit,
       order: [['date_publication', 'DESC']],
     });
 
