@@ -21,7 +21,11 @@ class NewsController {
       order: [['date_publication', 'DESC']],
     });
 
-    return res.json(news);
+    const countNews = await News.count();
+
+    const totalPages = Math.ceil(countNews / limit);
+
+    return res.json({ totalPages, news });
   }
 
   async show(req, res) {
