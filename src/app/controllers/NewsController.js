@@ -23,7 +23,11 @@ class NewsController {
 
     const countNews = await News.count();
 
-    const totalPages = Math.ceil(countNews / limit);
+    const totalPages = [];
+
+    for (let i = 1; i <= Math.ceil(countNews / limit); i++) {
+      totalPages.push(i);
+    }
 
     return res.json({ totalPages, news });
   }
