@@ -1,14 +1,14 @@
-import 'dotenv/config';
-
+import cors from 'cors';
+import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
-import cors from 'cors';
-import routes from './routes';
-
 import './database';
+import routes from './routes';
 
 class App {
   constructor() {
+    dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
+
     this.server = express();
     this.middlewares();
     this.routes();
