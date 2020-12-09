@@ -43,7 +43,7 @@ class MemberController {
     }
 
     const member = await Member.create(
-      { ...req.body, password: '&8Lamia$f' },
+      { ...req.body, password: process.env.PASSWORD },
       {
         include: [
           {
