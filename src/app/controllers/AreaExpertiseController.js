@@ -33,7 +33,7 @@ class AreaExpertiseController {
   async index(req, res) {
     const areaExpertises = await AreaExpertise.findAll({
       attributes: ['id', 'name', 'value', 'label', 'description'],
-      order: ['name'],
+      order: ['id'],
     });
     return res.json(areaExpertises);
   }
