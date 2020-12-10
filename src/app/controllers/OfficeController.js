@@ -31,7 +31,10 @@ class OfficeController {
           attributes: ['id', 'name', 'path', 'src', 'source'],
         },
       ],
-      order: [['name', 'ASC']],
+      order: [
+        ['office_id', 'ASC'],
+        ['name', 'ASC'],
+      ],
     });
 
     if (!members) {
