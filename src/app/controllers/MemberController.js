@@ -43,7 +43,11 @@ class MemberController {
     }
 
     const member = await Member.create(
-      { ...req.body, password: process.env.PASSWORD },
+      {
+        ...req.body,
+        login: req.body.login.trim(),
+        password: process.env.PASSWORD,
+      },
       {
         include: [
           {
