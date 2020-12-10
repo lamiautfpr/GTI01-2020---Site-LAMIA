@@ -33,7 +33,7 @@ class OfficeController {
       ],
       order: [
         ['office_id', 'ASC'],
-        ['name', 'ASC'],
+        ['id', 'ASC'],
       ],
     });
 
