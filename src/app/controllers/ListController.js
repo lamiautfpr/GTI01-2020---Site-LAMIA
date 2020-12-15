@@ -36,7 +36,7 @@ class ListController {
         {
           model: Work,
           as: 'works',
-          attributes: ['id', 'title', 'date_end', 'dateEnd', 'objective'],
+          attributes: ['id', 'title', 'date_end', 'dateBegin', 'objective'],
           include: [
             {
               model: Picture,
