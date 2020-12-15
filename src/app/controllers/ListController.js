@@ -36,7 +36,7 @@ class ListController {
         {
           model: Work,
           as: 'works',
-          attributes: ['id', 'title', 'date_begin', 'dateBegin', 'objective'],
+          attributes: ['id', 'title', 'date_end', 'dateEnd', 'objective'],
           include: [
             {
               model: Picture,
@@ -78,7 +78,10 @@ class ListController {
           // },
         },
       ],
-      order: ['name'],
+      order: [
+        ['name', 'asc'],
+        [{ model: Work, as: 'works' }, 'date_end', 'DESC'],
+      ],
     });
     return res.json(categoryWorks);
   }

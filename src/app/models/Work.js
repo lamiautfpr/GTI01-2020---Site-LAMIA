@@ -42,13 +42,6 @@ class Work extends Model {
             notEmpty: true,
           },
         },
-        dateBegin: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            const dateFormated = format(this.date_begin, 'dd/MM/yyyy');
-            return dateFormated;
-          },
-        },
         date_end: {
           type: Sequelize.STRING,
           allowNull: true,
@@ -56,10 +49,12 @@ class Work extends Model {
             notEmpty: false,
           },
         },
-        status: {
+        dateBegin: {
           type: Sequelize.VIRTUAL,
           get() {
-            return this.data_end ? 'Finalizado' : 'Desenvolvendo';
+            return this.date_end
+              ? format(this.date_end, 'dd/MM/yyyy')
+              : 'Em desenvolvimento';
           },
         },
       },
