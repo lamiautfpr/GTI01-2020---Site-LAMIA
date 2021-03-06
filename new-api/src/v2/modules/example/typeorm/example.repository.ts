@@ -6,14 +6,17 @@ import { IFindExampleDTO } from '../dtos/IFindExample.dto';
 import { IOrderExampleDTO } from '../dtos/IOrderExample.dto';
 
 @EntityRepository(ExampleEntity)
-export class ExampleRepository implements IExampleRepository {
+export class ExampleRepository
+  extends Repository<ExampleRepository>
+  implements IExampleRepository {
   private ormRepository: Repository<ExampleEntity>;
 
   constructor() {
+    super();
     this.ormRepository = getRepository(ExampleEntity);
   }
 
-  public async create(
+  public async createSave(
     createExampleDTO: ICreateExampleDTO,
   ): Promise<ExampleEntity> {
     const example = this.ormRepository.create(createExampleDTO);
@@ -23,7 +26,7 @@ export class ExampleRepository implements IExampleRepository {
     return example;
   }
 
-  public async update(example: ExampleEntity): Promise<ExampleEntity> {
+  public async updateSave(example: ExampleEntity): Promise<ExampleEntity> {
     await this.ormRepository.save(example);
     return example;
   }
@@ -33,7 +36,7 @@ export class ExampleRepository implements IExampleRepository {
     return example;
   }
 
-  public async find(
+  public async findAll(
     orderExampleDTO?: IOrderExampleDTO,
   ): Promise<ExampleEntity[] | undefined> {
     const examples = await this.ormRepository.find({
@@ -53,7 +56,7 @@ export class ExampleRepository implements IExampleRepository {
     return examples;
   }
 
-  public async remove(id: string): Promise<void> {
+  public async removeById(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }
 }

@@ -4,11 +4,11 @@ import { IOrderExampleDTO } from '../dtos/IOrderExample.dto';
 import { ExampleEntity } from '../typeorm/example.entity';
 
 export default interface IExampleRepository {
-  create(createExampleDTO: ICreateExampleDTO): Promise<ExampleEntity>;
-  update(example: ExampleEntity): Promise<ExampleEntity>;
+  createSave(createExampleDTO: ICreateExampleDTO): Promise<ExampleEntity>;
+  updateSave(example: ExampleEntity): Promise<ExampleEntity>;
 
   findById(id: string): Promise<ExampleEntity | undefined>;
-  find(
+  findAll(
     orderExampleDTO?: IOrderExampleDTO,
   ): Promise<ExampleEntity[] | undefined>;
   findByWhere(
@@ -16,5 +16,5 @@ export default interface IExampleRepository {
     orderExampleDTO?: IOrderExampleDTO,
   ): Promise<ExampleEntity[] | undefined>;
 
-  remove(id: string): Promise<void>;
+  removeById(id: string): Promise<void>;
 }
