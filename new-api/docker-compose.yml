@@ -1,0 +1,23 @@
+version: "3"
+services:
+  api-portal_lamia:
+    build:
+      context: "."
+      dockerfile: Dockerfile.dev
+    container_name: api-portal_lamia
+    command: yarn start:dev
+    env_file:
+      - .env
+    ports:
+      - "${PORT_API}:3333"
+    networks:
+      - network-portal_lamia
+    volumes:
+      - ./:/app/
+      - nodemodules:/app/node_modules
+
+volumes:
+  nodemodules:
+
+networks:
+  network-portal_lamia:
