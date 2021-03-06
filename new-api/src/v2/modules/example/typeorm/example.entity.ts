@@ -1,13 +1,8 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import BasicEntity from '@modules/BasicEntity';
+import { Column, Entity } from 'typeorm';
 
 @Entity('example')
-export class ExampleEntity {
-  @PrimaryColumn({
-    nullable: false,
-    type: 'varchar',
-  })
-  id: string;
-
+export class ExampleEntity extends BasicEntity {
   @Column({
     nullable: false,
     type: 'varchar',
