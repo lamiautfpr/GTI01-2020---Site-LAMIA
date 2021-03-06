@@ -10,6 +10,10 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+			"@modules/*": ["/src/v2/modules/*"],
+			"@config/*": ["/src/v2/config/*"],
+		}
   }
 }
