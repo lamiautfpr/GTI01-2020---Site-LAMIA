@@ -9,11 +9,11 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "incremental": true,
     "paths": {
-			"@modules/*": ["/src/v2/modules/*"],
-			"@config/*": ["/src/v2/config/*"],
+			"@modules/*": ["./v2/modules/*"],
+			"@config/*": ["./v2/config/*"],
 		}
   }
 }
