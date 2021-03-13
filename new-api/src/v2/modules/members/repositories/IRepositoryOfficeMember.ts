@@ -8,6 +8,8 @@ export default interface IRepositoryOfficeMember {
   updateSave(data: EntityOfficeMember): Promise<EntityOfficeMember>;
 
   findById(id: string): Promise<EntityOfficeMember | undefined>;
+  findByName(name: string): Promise<EntityOfficeMember | undefined>;
+
   findAll(
     order?: IOrderOfficeMember,
   ): Promise<EntityOfficeMember[] | undefined>;

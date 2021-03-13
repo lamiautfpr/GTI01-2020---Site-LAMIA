@@ -34,6 +34,12 @@ export class RepositoryOfficeMember
     return this.ormRepository.findOne(id);
   }
 
+  public async findByName(
+    name: string,
+  ): Promise<EntityOfficeMember | undefined> {
+    return this.ormRepository.findOne({ where: { name } });
+  }
+
   public async findAll(
     order?: IOrderOfficeMember,
   ): Promise<EntityOfficeMember[] | undefined> {

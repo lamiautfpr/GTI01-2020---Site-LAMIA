@@ -7,17 +7,17 @@ import { ServiceOfficeMember } from '../services/officeMember.service';
 export class ControllerOfficeMember {
   constructor(private readonly serviceOfficeMember: ServiceOfficeMember) {}
 
-  // @Post()
-  // create(@Body() createExampleDTO: ICreateExampleDTO) {
-  //   try {
-  //     return this.exampleService.createExample(createExampleDTO);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  @Post()
+  create(@Body() data: ICreateOfficeMemberDTO) {
+    try {
+      return this.serviceOfficeMember.createOfficeMember(data);
+    } catch (error) {
+      return { error };
+    }
+  }
 
-  // @Get()
-  // getTeste(): any {
-  //   return this.exampleService.findAll();
-  // }
+  @Get()
+  getTeste(): any {
+    return this.serviceOfficeMember.findAll();
+  }
 }

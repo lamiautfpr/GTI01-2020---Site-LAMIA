@@ -12,4 +12,4 @@ import { RepositoryOfficeMember } from './typeorm/officeMember.repository';
   controllers: [ControllerOfficeMember],
   providers: [ServiceOfficeMember],
 })
-export class ExampleModule {}
+export class ModuleOfficeMember {}
