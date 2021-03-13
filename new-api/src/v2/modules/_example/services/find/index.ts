@@ -1,6 +1,6 @@
-import IExampleRepository from '@modules/example/repositories/IExampleRepository';
-import { ExampleEntity } from '@modules/example/typeorm/example.entity';
-import { IOrderExampleDTO } from '@modules/example/dtos/IOrderExample.dto';
+import IExampleRepository from '@modules/_example/repositories/IExampleRepository';
+import { ExampleEntity } from '@modules/_example/typeorm/example.entity';
+import { IOrderExampleDTO } from '@modules/_example/dtos/IOrderExample.dto';
 
 interface IRequest {
   repository: IExampleRepository;

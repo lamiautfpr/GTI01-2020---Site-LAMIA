@@ -1,6 +1,6 @@
-import { ICreateExampleDTO } from '@modules/example/dtos/ICreateExample.dto';
-import IExampleRepository from '@modules/example/repositories/IExampleRepository';
-import { ExampleEntity } from '@modules/example/typeorm/example.entity';
+import { ICreateExampleDTO } from '@modules/_example/dtos/ICreateExample.dto';
+import IExampleRepository from '@modules/_example/repositories/IExampleRepository';
+import { ExampleEntity } from '@modules/_example/typeorm/example.entity';
 
 interface IRequest {
   data: ICreateExampleDTO;
