@@ -1,6 +1,7 @@
 import ICreateOfficeMemberDTO from '@modules/members/dtos/ICreateOfficeMember.dto';
 import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
 import { EntityOfficeMember } from '@modules/members/typeorm/officeMember.entity';
+import { ConflictException } from '@nestjs/common';
 
 interface IRequest {
   data: ICreateOfficeMemberDTO;
@@ -13,7 +14,7 @@ export const create = async (params: IRequest): Promise<EntityOfficeMember> => {
   const officeExists = await repository.findByName(data.name);
 
   if (officeExists) {
-    throw new Error('Office member already exists');
+    throw new ConflictException(['Office member already exists']);
   }
 
   return repository.createSave(data);

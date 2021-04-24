@@ -1,22 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export default class BadRequest {
+export default class Conflict {
   @ApiProperty({
-    default: 400,
+    default: 409,
     description: 'HTTP Status Code',
   })
-  statusCode: 400;
+  statusCode: 409;
 
   @ApiProperty({
-    example: ['attributes must be a string'],
+    example: ['attributes already exists'],
     description: ' Error messages',
     isArray: true,
   })
   message: string[];
 
   @ApiProperty({
-    default: 'Bad Request',
+    default: 'Conflict',
     description: 'Type Error',
   })
-  error: 'Bad Request';
+  error: 'Conflict';
 }

@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
+  ApiConflictResponse,
   ApiCreatedResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -29,6 +30,10 @@ export class ControllerOfficeMember {
   @ApiBadRequestResponse({
     description: 'Bad Request',
     type: Errors.BadRequest,
+  })
+  @ApiConflictResponse({
+    description: 'Conflict - Exists data',
+    type: Errors.Conflict,
   })
   @UsePipes(new ValidationPipe())
   @Post()
