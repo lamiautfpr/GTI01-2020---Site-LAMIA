@@ -11,6 +11,7 @@ export class EntityOfficeMember extends BasicEntity {
   @Column({
     nullable: false,
     type: 'varchar',
+    unique: true,
   })
   name: string;
 
