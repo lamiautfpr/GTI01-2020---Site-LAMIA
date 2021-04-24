@@ -1,5 +1,17 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import Errors from 'v2/utils/Errors';
 import { ApiConfig } from '../../../config/api';
 import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
 import { ServiceOfficeMember } from '../services/officeMember.service';
@@ -10,17 +22,18 @@ import { EntityOfficeMember } from '../typeorm/officeMember.entity';
 export class ControllerOfficeMember {
   constructor(private readonly serviceOfficeMember: ServiceOfficeMember) {}
 
-  @Post()
   @ApiCreatedResponse({
     description: 'Created Success',
     type: EntityOfficeMember,
   })
+  @ApiBadRequestResponse({
+    description: 'Bad Request',
+    type: Errors.BadRequest,
+  })
+  @UsePipes(new ValidationPipe())
+  @Post()
   create(@Body() data: ICreateOfficeMemberDTO) {
-    try {
-      return this.serviceOfficeMember.createOfficeMember(data);
-    } catch (error) {
-      return { error };
-    }
+    return this.serviceOfficeMember.createOfficeMember(data);
   }
 
   @Get()
