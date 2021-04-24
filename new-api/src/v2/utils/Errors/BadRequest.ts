@@ -1,6 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiResponseOptions } from '@nestjs/swagger';
 
-export default class BadRequest {
+export class BadRequest {
   @ApiProperty({
     default: 400,
     description: 'HTTP Status Code',
@@ -20,3 +20,8 @@ export default class BadRequest {
   })
   error: 'Bad Request';
 }
+
+export default {
+  description: 'Bad Request',
+  type: BadRequest,
+} as ApiResponseOptions;

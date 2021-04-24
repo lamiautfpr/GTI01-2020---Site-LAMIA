@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export default class Conflict {
+export class Conflict {
   @ApiProperty({
     default: 409,
     description: 'HTTP Status Code',
@@ -20,3 +20,8 @@ export default class Conflict {
   })
   error: 'Conflict';
 }
+
+export default {
+  description: 'Conflict - Exists data',
+  type: Conflict,
+};

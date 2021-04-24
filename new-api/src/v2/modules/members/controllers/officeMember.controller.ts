@@ -10,6 +10,7 @@ import {
   ApiBadRequestResponse,
   ApiConflictResponse,
   ApiCreatedResponse,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
@@ -27,22 +28,22 @@ export class ControllerOfficeMember {
     description: 'Created Success',
     type: EntityOfficeMember,
   })
-  @ApiBadRequestResponse({
-    description: 'Bad Request',
-    type: Errors.BadRequest,
-  })
-  @ApiConflictResponse({
-    description: 'Conflict - Exists data',
-    type: Errors.Conflict,
-  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiConflictResponse(Errors.Conflict)
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreateOfficeMemberDTO) {
     return this.serviceOfficeMember.createOfficeMember(data);
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'List of office members',
+    type: EntityOfficeMember,
+    isArray: true,
+  })
   @Get()
-  getTeste(): any {
+  findAll(): any {
     return this.serviceOfficeMember.findAll();
   }
 }

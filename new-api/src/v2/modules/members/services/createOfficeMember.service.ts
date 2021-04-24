@@ -8,7 +8,7 @@ interface IRequest {
   repository: IRepositoryOfficeMember;
 }
 
-export const create = async (params: IRequest): Promise<EntityOfficeMember> => {
+const create = async (params: IRequest): Promise<EntityOfficeMember> => {
   const { repository, data } = params;
 
   const officeExists = await repository.findByName(data.name);
@@ -19,3 +19,5 @@ export const create = async (params: IRequest): Promise<EntityOfficeMember> => {
 
   return repository.createSave(data);
 };
+
+export default create;

@@ -5,8 +5,10 @@ interface IRequest {
   repository: IRepositoryOfficeMember;
 }
 
-export const find = async (params: IRequest): Promise<EntityOfficeMember[]> => {
+const findAll = async (params: IRequest): Promise<EntityOfficeMember[]> => {
   const { repository } = params;
 
   return repository.findAll({ createAt: 'DESC' });
 };
+
+export default findAll;
