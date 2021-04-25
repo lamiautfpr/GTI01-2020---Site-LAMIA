@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ControllerOfficeMember } from './controllers/officeMember.controller';
 import { ServiceOfficeMember } from './services/officeMember.service';
-import { EntityOfficeMember } from './typeorm/officeMember.entity';
-import { RepositoryOfficeMember } from './typeorm/officeMember.repository';
+import { EntityOfficeMember } from './typeorm/entities/officeMember.entity';
+import { RepositoryOfficeMember } from './typeorm/repositories/officeMember.repository';
 
 @Module({
   imports: [
