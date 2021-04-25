@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ControllerOfficeMember } from './controllers/officeMember.controller';
 import { ServiceOfficeMember } from './services/officeMember.service';
-import Entities from './typeorm/entities';
-import { RepositoryOfficeMember } from './typeorm/repositories/officeMember.repository';
+import TypeOrmModule from './typeorm';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([...Entities, RepositoryOfficeMember])],
+  imports: [TypeOrmModule],
   controllers: [ControllerOfficeMember],
   providers: [ServiceOfficeMember],
 })
