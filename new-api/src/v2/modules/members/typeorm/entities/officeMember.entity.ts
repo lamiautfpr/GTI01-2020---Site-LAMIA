@@ -1,6 +1,7 @@
 import BasicEntity from '@modules/BasicEntity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { EntityMember } from './members.entity';
 
 @Entity('tb_office_member')
 export class EntityOfficeMember extends BasicEntity {
@@ -25,4 +26,7 @@ export class EntityOfficeMember extends BasicEntity {
     type: 'text',
   })
   description: string;
+
+  @OneToMany(() => EntityMember, (member) => member.patent)
+  members: EntityMember[];
 }
