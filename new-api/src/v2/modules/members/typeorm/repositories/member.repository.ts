@@ -16,9 +16,9 @@ export class RepositoryMember
   }
 
   public async createSave(data: ICreateMemberDTO): Promise<EntityMember> {
-    const Member = this.ormRepository.create(data);
+    const member = this.ormRepository.create(data);
 
-    return this.ormRepository.save(Member);
+    return this.ormRepository.save(member);
   }
 
   public async updateSave(data: EntityMember): Promise<EntityMember> {

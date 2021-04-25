@@ -1,5 +1,6 @@
 import BasicEntity from '@modules/BasicEntity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { EntityOfficeMember } from './officeMember.entity';
 
@@ -118,6 +119,7 @@ export class EntityMember extends BasicEntity {
   })
   description: string;
 
+  @Exclude()
   @Column({
     nullable: true,
     type: 'varchar',
@@ -125,6 +127,7 @@ export class EntityMember extends BasicEntity {
   })
   avatar: string;
 
+  @Exclude()
   @Column({
     nullable: false,
     type: 'varchar',

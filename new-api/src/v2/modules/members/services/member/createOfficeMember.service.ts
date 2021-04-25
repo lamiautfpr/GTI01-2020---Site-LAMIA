@@ -13,15 +13,18 @@ interface IRequest {
 const create = async (params: IRequest): Promise<EntityMember> => {
   const { repositoryMember, repositoryOfficeMember, data } = params;
 
-  const emailExists = await repositoryMember.findByEmail(data.name);
+  const emailExists = await repositoryMember.findByEmail(data.email);
+  console.log(data.email);
+  console.log('---');
+  console.log(emailExists);
 
   if (emailExists) {
-    throw new ConflictException([' email already exists']);
+    throw new ConflictException('Email already exists');
   }
 
   const patent = await repositoryOfficeMember.findById(data.patentId);
 
-  if (patent) {
+  if (!patent) {
     throw new BadRequestException('Patent not found');
   }
 
