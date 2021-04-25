@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
+import IOrderOfficeMemberDTO, {
+  ISelectOrderOfficeMemberDTO,
+} from '../dtos/IOrderOfficeMember.dto';
 import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
 import { EntityOfficeMember } from '../typeorm/officeMember.entity';
 import { RepositoryOfficeMember } from '../typeorm/officeMember.repository';
@@ -22,7 +25,14 @@ export class ServiceOfficeMember {
     });
   }
 
-  public async findAll(): Promise<EntityOfficeMember[]> {
-    return findAll({ repository: this.exampleRepository });
+  public async findAll({
+    attribute,
+    direction,
+  }: ISelectOrderOfficeMemberDTO): Promise<EntityOfficeMember[]> {
+    const order: IOrderOfficeMemberDTO = {
+      [attribute || 'name']: direction || 'ASC',
+    };
+
+    return findAll({ repository: this.exampleRepository, order });
   }
 }
