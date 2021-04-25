@@ -1,6 +1,6 @@
 import ICreateOfficeMemberDTO from '@modules/members/dtos/ICreateOfficeMember.dto';
 import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
-import { EntityOfficeMember } from '@modules/members/typeorm/officeMember.entity';
+import { EntityOfficeMember } from '@modules/members/typeorm/entities/officeMember.entity';
 import { ConflictException } from '@nestjs/common';
 
 interface IRequest {

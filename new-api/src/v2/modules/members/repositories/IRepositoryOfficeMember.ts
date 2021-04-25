@@ -1,7 +1,7 @@
 import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
 import IFindOfficeMember from '../dtos/IFindOfficeMember.dto';
 import IOrderOfficeMember from '../dtos/IOrderOfficeMember.dto';
-import { EntityOfficeMember } from '../typeorm/officeMember.entity';
+import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 
 export default interface IRepositoryOfficeMember {
   createSave(data: ICreateOfficeMemberDTO): Promise<EntityOfficeMember>;

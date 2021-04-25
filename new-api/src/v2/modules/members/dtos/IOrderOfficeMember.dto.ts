@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { EntityOfficeMember } from '../typeorm/officeMember.entity';
+import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 
 type IDirection = 'ASC' | 'DESC';
 type IAttributes = 'name' | 'createAt';

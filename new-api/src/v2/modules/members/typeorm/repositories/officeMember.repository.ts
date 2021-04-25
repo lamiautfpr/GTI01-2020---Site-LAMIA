@@ -1,9 +1,9 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm';
-import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
-import IFindOfficeMember from '../dtos/IFindOfficeMember.dto';
-import IOrderOfficeMember from '../dtos/IOrderOfficeMember.dto';
-import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
-import { EntityOfficeMember } from './officeMember.entity';
+import ICreateOfficeMemberDTO from '../../dtos/ICreateOfficeMember.dto';
+import IFindOfficeMember from '../../dtos/IFindOfficeMember.dto';
+import IOrderOfficeMember from '../../dtos/IOrderOfficeMember.dto';
+import IRepositoryOfficeMember from '../../repositories/IRepositoryOfficeMember';
+import { EntityOfficeMember } from '../entities/officeMember.entity';
 
 @EntityRepository(EntityOfficeMember)
 export class RepositoryOfficeMember

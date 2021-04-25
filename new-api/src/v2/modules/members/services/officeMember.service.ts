@@ -5,8 +5,8 @@ import IOrderOfficeMemberDTO, {
   ISelectOrderOfficeMemberDTO,
 } from '../dtos/IOrderOfficeMember.dto';
 import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
-import { EntityOfficeMember } from '../typeorm/officeMember.entity';
-import { RepositoryOfficeMember } from '../typeorm/officeMember.repository';
+import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
+import { RepositoryOfficeMember } from '../typeorm/repositories/officeMember.repository';
 import { create, findAll } from './';
 
 @Injectable()

@@ -21,7 +21,7 @@ import { ApiConfig } from '../../../config/api';
 import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
 import { ISelectOrderOfficeMemberDTO } from '../dtos/IOrderOfficeMember.dto';
 import { ServiceOfficeMember } from '../services/officeMember.service';
-import { EntityOfficeMember } from '../typeorm/officeMember.entity';
+import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 
 @ApiTags('offices')
 @Controller(`${ApiConfig.version}/members/offices`)
