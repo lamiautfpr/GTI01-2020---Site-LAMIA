@@ -1,6 +1,6 @@
 import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
 import { EntityOfficeMember } from '@modules/members/typeorm/entities/officeMember.entity';
-import IOrderOfficeMemberDTO from '../dtos/IOrderOfficeMember.dto';
+import IOrderOfficeMemberDTO from '../../dtos/IOrderOfficeMember.dto';
 
 interface IRequest {
   repository: IRepositoryOfficeMember;

@@ -7,7 +7,7 @@ import IOrderOfficeMemberDTO, {
 import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
 import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 import { RepositoryOfficeMember } from '../typeorm/repositories/officeMember.repository';
-import { create, findAll } from './';
+import { create, findAll } from './officeMember';
 
 @Injectable()
 export class ServiceOfficeMember {

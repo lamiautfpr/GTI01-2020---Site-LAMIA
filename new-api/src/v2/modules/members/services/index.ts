@@ -1,4 +1,4 @@
-import create from './createOfficeMember.service';
-import findAll from './FindAllOfficeMember.service';
+import { ServiceMember } from './member.service';
+import { ServiceOfficeMember } from './officeMember.service';
 
-export { create, findAll };
+export default [ServiceMember, ServiceOfficeMember];

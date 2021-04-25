@@ -29,6 +29,14 @@ export class RepositoryMember
     return this.ormRepository.findOne(id);
   }
 
+  public async findByEmail(email: string): Promise<EntityMember | undefined> {
+    return this.ormRepository.findOne({ where: { email } });
+  }
+
+  public async findByLogin(login: string): Promise<EntityMember | undefined> {
+    return this.ormRepository.findOne({ where: { login } });
+  }
+
   public async findByLikeName(
     name: string,
     order?: IOrderMember,
@@ -43,6 +51,12 @@ export class RepositoryMember
     order?: IOrderMember,
   ): Promise<EntityMember[] | undefined> {
     return this.ormRepository.find({ order });
+  }
+
+  public async countLogin(login: string): Promise<[EntityMember[], number]> {
+    return this.ormRepository.findAndCount({
+      where: { login: Like(`${login}%`) },
+    });
   }
 
   public async removeById(id: string): Promise<void> {

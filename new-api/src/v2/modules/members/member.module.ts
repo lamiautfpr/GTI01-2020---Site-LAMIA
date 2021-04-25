@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ControllerOfficeMember } from './controllers/officeMember.controller';
-import { ServiceOfficeMember } from './services/officeMember.service';
+import Services from './services';
 import TypeOrmModule from './typeorm';
 
 @Module({
   imports: [TypeOrmModule],
   controllers: [ControllerOfficeMember],
-  providers: [ServiceOfficeMember],
+  providers: [...Services],
 })
 export class ModuleOfficeMember {}
