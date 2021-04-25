@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import { classToClass } from 'class-transformer';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
@@ -17,6 +18,9 @@ export class ServiceMember {
 
     @InjectRepository(RepositoryOfficeMember)
     private readonly officeMemberRepository: IRepositoryOfficeMember,
+
+    @Inject('HashProvider')
+    private readonly hashProvider: IHashProvider,
   ) {}
 
   public async createMember(
@@ -26,6 +30,7 @@ export class ServiceMember {
       data: data,
       repositoryMember: this.memberRepository,
       repositoryOfficeMember: this.officeMemberRepository,
+      hashProvider: this.hashProvider,
     });
 
     return classToClass(newMember);

@@ -3,20 +3,24 @@ import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
 import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { BadRequestException, ConflictException } from '@nestjs/common';
+import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
   data: ICreateMemberBasicDataDTO;
   repositoryMember: IRepositoryMember;
   repositoryOfficeMember: IRepositoryOfficeMember;
+  hashProvider: IHashProvider;
 }
 
 const create = async (params: IRequest): Promise<EntityMember> => {
-  const { repositoryMember, repositoryOfficeMember, data } = params;
+  const {
+    repositoryMember,
+    repositoryOfficeMember,
+    hashProvider,
+    data,
+  } = params;
 
   const emailExists = await repositoryMember.findByEmail(data.email);
-  console.log(data.email);
-  console.log('---');
-  console.log(emailExists);
 
   if (emailExists) {
     throw new ConflictException('Email already exists');
@@ -29,12 +33,15 @@ const create = async (params: IRequest): Promise<EntityMember> => {
   }
 
   const login = await createLogin(data.email, repositoryMember);
+  const password = await hashProvider.generateHash(
+    `${process.env.PASSWORD_DEFAULT_MEMBERS}`,
+  );
 
   return repositoryMember.createSave({
     email: data.email,
     name: data.name,
     login,
-    password: 'teste',
+    password,
     patent,
   });
 };
