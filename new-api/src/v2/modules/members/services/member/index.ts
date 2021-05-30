@@ -1,4 +1,4 @@
-import create from './createOfficeMember.service';
-// import findAll from './FindAllOfficeMember.service';
+import create from './createMember.service';
+import findAll from './FindAllMember.service';
 
-export { create };
+export { create, findAll };

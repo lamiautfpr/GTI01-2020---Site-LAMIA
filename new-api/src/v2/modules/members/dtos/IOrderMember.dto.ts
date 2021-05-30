@@ -8,19 +8,26 @@ type IOrderMember = {
   [K in keyof EntityMember]?: IDirection;
 };
 
-const AttributesOrderMemberEum = Object.keys(EntityMember);
-const DirectionsOrderMemberEum = ['ASC', 'DESC'];
+const AttributesOrderMemberEnum = [
+  'name',
+  'email',
+  'login',
+  'patent',
+  'quoteName',
+  'createAt',
+];
+const DirectionsOrderMemberEnum = ['ASC', 'DESC'];
 
 export class ISelectOrderMemberDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  @IsIn(AttributesOrderMemberEum)
+  @IsIn(AttributesOrderMemberEnum)
   @ApiProperty({
     type: String,
     required: false,
     description: 'Attribute that will be ordered',
-    enum: AttributesOrderMemberEum,
+    enum: AttributesOrderMemberEnum,
     default: 'name',
   })
   attribute?: string;
@@ -28,13 +35,13 @@ export class ISelectOrderMemberDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  @IsIn(DirectionsOrderMemberEum)
+  @IsIn(DirectionsOrderMemberEnum)
   @ApiProperty({
     type: String,
     required: false,
     description:
       'Direction of the listing, whether it is increasing or decreasing',
-    enum: DirectionsOrderMemberEum,
+    enum: DirectionsOrderMemberEnum,
     default: 'ASC',
   })
   direction?: IDirection;

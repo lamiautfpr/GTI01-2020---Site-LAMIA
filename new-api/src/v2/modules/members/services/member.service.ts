@@ -3,12 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import { classToClass } from 'class-transformer';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
+import IOrderMember, { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
 import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
 import { EntityMember } from '../typeorm/entities/member.entity';
 import { RepositoryMember } from '../typeorm/repositories/member.repository';
 import { RepositoryOfficeMember } from '../typeorm/repositories/officeMember.repository';
-import { create } from './member';
+import * as memberServices from './member';
 
 @Injectable()
 export class ServiceMember {
@@ -26,7 +27,7 @@ export class ServiceMember {
   public async createMember(
     data: ICreateMemberBasicDataDTO,
   ): Promise<EntityMember> {
-    const newMember = await create({
+    const newMember = await memberServices.create({
       data: data,
       repositoryMember: this.memberRepository,
       repositoryOfficeMember: this.officeMemberRepository,
@@ -36,14 +37,19 @@ export class ServiceMember {
     return classToClass(newMember);
   }
 
-  // public async findAll({
-  //   attribute,
-  //   direction,
-  // }: ISelectOrderMemberDTO): Promise<EntityMember[]> {
-  //   const order: IOrderMemberDTO = {
-  //     [attribute || 'name']: direction || 'ASC',
-  //   };
+  public async findAll({
+    attribute,
+    direction,
+  }: ISelectOrderMemberDTO): Promise<EntityMember[]> {
+    const order: IOrderMember = {
+      [attribute || 'name']: direction || 'ASC',
+    };
 
-  //   return findAll({ repository: this.exampleRepository, order });
-  // }
+    return classToClass(
+      await memberServices.findAll({
+        repository: this.memberRepository,
+        order,
+      }),
+    );
+  }
 }
