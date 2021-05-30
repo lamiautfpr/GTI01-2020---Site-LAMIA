@@ -52,4 +52,13 @@ export class ServiceMember {
       }),
     );
   }
+
+  public async findByLogin(login: string): Promise<EntityMember> {
+    return classToClass(
+      memberServices.FindByLogin({
+        repository: this.memberRepository,
+        login,
+      }),
+    );
+  }
 }

@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
   UsePipes,
@@ -12,6 +13,8 @@ import {
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
+  ApiParam,
   ApiQuery,
   ApiResponse,
   ApiTags,
@@ -56,5 +59,19 @@ export class ControllerMember {
   @Get()
   findAll(@Query() order: ISelectOrderMemberDTO) {
     return this.serviceMember.findAll(order);
+  }
+
+  @ApiResponse({
+    status: 200,
+    description: 'find member',
+    type: EntityMember,
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiNotFoundResponse(Errors.NotFound)
+  @UsePipes(new ValidationPipe())
+  @Get(':login')
+  findOne(@Param('login') login: string) {
+    return this.serviceMember.findByLogin(login);
   }
 }
