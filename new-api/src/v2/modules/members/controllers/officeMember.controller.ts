@@ -24,7 +24,7 @@ import { ServiceOfficeMember } from '../services/officeMember.service';
 import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 
 @ApiTags('offices')
-@Controller(`${ApiConfig.version}/members/offices`)
+@Controller(`${ApiConfig.version}/offices/members`)
 export class ControllerOfficeMember {
   constructor(private readonly serviceOfficeMember: ServiceOfficeMember) {}
 

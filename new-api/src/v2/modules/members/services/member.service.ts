@@ -61,4 +61,8 @@ export class ServiceMember {
       }),
     );
   }
+
+  public async removeById(id: string): Promise<void> {
+    await memberServices.remove({ repository: this.memberRepository, id });
+  }
 }

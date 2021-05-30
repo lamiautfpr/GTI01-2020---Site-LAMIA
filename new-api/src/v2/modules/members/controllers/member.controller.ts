@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Query,
@@ -13,8 +15,8 @@ import {
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
   ApiNotFoundResponse,
-  ApiParam,
   ApiQuery,
   ApiResponse,
   ApiTags,
@@ -23,6 +25,7 @@ import Errors from 'v2/utils/Errors';
 import { ApiConfig } from '../../../config/api';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
+import { IParamsIdDTO } from '../dtos/IParamsId.dto';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
@@ -66,12 +69,25 @@ export class ControllerMember {
     description: 'find member',
     type: EntityMember,
   })
-  @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiNotFoundResponse(Errors.NotFound)
   @UsePipes(new ValidationPipe())
   @Get(':login')
   findOne(@Param('login') login: string) {
     return this.serviceMember.findByLogin(login);
+  }
+
+  @ApiNoContentResponse({
+    status: 204,
+    description: 'Deleted Success',
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiNotFoundResponse(Errors.NotFound)
+  @UsePipes(new ValidationPipe())
+  @HttpCode(204)
+  @Delete(':id')
+  async remove(@Param() params: IParamsIdDTO) {
+    await this.serviceMember.removeById(params.id);
   }
 }
