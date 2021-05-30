@@ -27,14 +27,14 @@ export class ServiceMember {
   public async createMember(
     data: ICreateMemberBasicDataDTO,
   ): Promise<EntityMember> {
-    const newMember = await memberServices.create({
-      data: data,
-      repositoryMember: this.memberRepository,
-      repositoryOfficeMember: this.officeMemberRepository,
-      hashProvider: this.hashProvider,
-    });
-
-    return classToClass(newMember);
+    return classToClass(
+      await memberServices.create({
+        data: data,
+        repositoryMember: this.memberRepository,
+        repositoryOfficeMember: this.officeMemberRepository,
+        hashProvider: this.hashProvider,
+      }),
+    );
   }
 
   public async findAll({
