@@ -25,14 +25,14 @@ export class RepositoryAreaExpertise
   public async createSave(
     data: ICreateAreaExpertiseDTO,
   ): Promise<EntityAreaExpertise | undefined> {
-    const { id, createAt, name, updateAt, description } = data;
+    const { name, description } = data;
 
     const date = new Date();
 
     const newData = {
       id: uuidv4(),
       created: date.toString(),
-      updateAt,
+      updateAt: '',
       name,
       description,
     };
