@@ -1,32 +1,30 @@
+import BasicEntity from '@modules/BasicEntity';
 import { EntityOfficeMember } from '@modules/members/typeorm/entities/officeMember.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('tb_area_expertise')
-export class EntityAreaExpertise extends EntityOfficeMember {
+export class EntityAreaExpertise extends BasicEntity {
   // Definindo os parametros do ID
-  @PrimaryGeneratedColumn()
-  id: string;
-
-  // Atributo CreateAt
   @ApiProperty({
-    nullable: false,
-    description: '',
+    description: 'Name of area expertise',
+    example: 'Cientista de computadores',
   })
   @Column({
     nullable: false,
-    type: 'date',
+    type: 'varchar',
+    unique: true,
   })
-  createAt: Date;
+  name: string;
 
-  // Atributo UpdateAt
+  // Description
+
   @ApiProperty({
-    nullable: false,
-    description: 'Define a ultima atualização no dado',
+    description: 'Description of Area Expertise',
   })
   @Column({
-    nullable: false,
-    type: 'date',
+    nullable: true,
+    type: 'varchar',
   })
-  updateAt: Date;
+  description: string;
 }

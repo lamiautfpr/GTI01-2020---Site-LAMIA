@@ -1,30 +1,22 @@
-import {
-  IsDefined,
-  IsNotEmpty,
-  IsString,
-  IsInt,
-  IsOptional,
-} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsDefined, IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
 export default class ICreateAreaExpertiseDTO {
-  @IsDefined()
-  @IsNotEmpty()
-  @IsInt()
-  id: string;
-
   @IsString()
   @IsNotEmpty()
   @IsDefined()
+  @ApiProperty({
+    description: 'Name of area Expetise',
+    example: 'Novato',
+  })
   name: string;
 
   @IsNotEmpty()
   @IsString()
   @IsOptional()
+  @ApiProperty({
+    description: 'Description of area expertise',
+    example: 'The studant is novato',
+  })
   description?: string;
-
-  @IsDefined()
-  createAt: Date;
-
-  @IsDefined()
-  updateAt: Date;
 }
