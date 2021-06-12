@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUUID,
   Matches,
   MaxLength,
   MinLength,
@@ -15,7 +16,7 @@ const RegExpStrongPassword = new RegExp(
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@@#\$%\^&\*])(?=.{8,})/,
 );
 
-export class IUpdateMemberDTO {
+export class IUpdateMemberBasicDataDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
@@ -117,4 +118,17 @@ export class IUpdateMemberDTO {
   @ValidateIf((obj) => !!obj.oldPassword)
   @IsDefined()
   newPassword: string;
+}
+
+export class IUpdateMemberDTO {
+  @IsDefined()
+  newMemberData: IUpdateMemberBasicDataDTO;
+
+  @IsDefined()
+  @IsUUID()
+  idMember: string;
+
+  @IsDefined()
+  @IsUUID()
+  idMemberLoggedIn: string;
 }

@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  Request,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -30,7 +31,10 @@ import { ApiConfig } from '../../../config/api';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IParamsIdDTO } from '../dtos/IParamsId.dto';
-import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
+import {
+  IUpdateMemberBasicDataDTO,
+  IUpdateMemberDTO,
+} from '../dtos/IUpdateMember.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
@@ -64,9 +68,17 @@ export class ControllerMember {
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
-  @Put()
-  update(@Body() data: IUpdateMemberDTO) {
-    return data;
+  @Put(':id')
+  update(
+    @Request() req: any,
+    @Body() data: IUpdateMemberBasicDataDTO,
+    @Param() params: IParamsIdDTO,
+  ) {
+    return this.serviceMember.updateMember({
+      idMember: params.id,
+      idMemberLoggedIn: req.user.userId,
+      newMemberData: data,
+    });
   }
 
   @ApiQuery({

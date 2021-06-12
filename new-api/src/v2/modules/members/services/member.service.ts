@@ -1,9 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import { classToClass } from 'class-transformer';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import IOrderMember, { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
+import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
 import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
 import { EntityMember } from '../typeorm/entities/member.entity';
@@ -32,6 +33,27 @@ export class ServiceMember {
         data: data,
         repositoryMember: this.memberRepository,
         repositoryOfficeMember: this.officeMemberRepository,
+        hashProvider: this.hashProvider,
+      }),
+    );
+  }
+
+  public async updateMember({
+    idMember,
+    idMemberLoggedIn,
+    newMemberData,
+  }: IUpdateMemberDTO): Promise<EntityMember> {
+    if (idMember !== idMemberLoggedIn) {
+      throw new UnauthorizedException();
+    }
+
+    return classToClass(
+      await memberServices.update({
+        newMemberData: {
+          ...newMemberData,
+          id: idMember,
+        },
+        repository: this.memberRepository,
         hashProvider: this.hashProvider,
       }),
     );
