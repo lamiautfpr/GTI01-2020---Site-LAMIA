@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Query,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -15,11 +16,13 @@ import {
   ApiQuery,
   ApiResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { ApiConfig } from '../../../config/api';
 import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
 import { ISelectOrderOfficeMemberDTO } from '../dtos/IOrderOfficeMember.dto';
+import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceOfficeMember } from '../services/officeMember.service';
 import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 
@@ -35,6 +38,8 @@ export class ControllerOfficeMember {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreateOfficeMemberDTO) {

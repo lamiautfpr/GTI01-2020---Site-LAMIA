@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Query,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -20,12 +21,14 @@ import {
   ApiQuery,
   ApiResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { ApiConfig } from '../../../config/api';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IParamsIdDTO } from '../dtos/IParamsId.dto';
+import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
@@ -41,6 +44,8 @@ export class ControllerMember {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreateMemberBasicDataDTO) {
@@ -84,6 +89,8 @@ export class ControllerMember {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiNotFoundResponse(Errors.NotFound)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @HttpCode(204)
   @Delete(':id')
