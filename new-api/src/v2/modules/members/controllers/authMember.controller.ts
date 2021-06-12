@@ -6,23 +6,26 @@ import {
   ApiBody,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
-  ApiResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { ILoginDTO } from '../dtos/ILogin.dto';
+import { IResponseLogin } from '../dtos/IResponseLogin.dto';
+import { ServiceAuth } from '../services/auth.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
 @ApiTags('Auth')
 @Controller(`${ApiConfig.version}/auth`)
 export class ControllerAuthMember {
+  constructor(private readonly authService: ServiceAuth) {}
+
   @ApiBody({
     type: ILoginDTO,
   })
   @ApiOkResponse({
     description: 'successfully logged in',
-    type: EntityMember,
+    type: IResponseLogin,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
@@ -31,6 +34,6 @@ export class ControllerAuthMember {
   @HttpCode(200)
   @Post('login')
   async login(@Request() req: any) {
-    return req.user;
+    return this.authService.login(req.user);
   }
 }
