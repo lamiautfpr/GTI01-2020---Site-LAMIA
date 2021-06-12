@@ -6,6 +6,7 @@ import {
   HttpCode,
   Param,
   Post,
+  Put,
   Query,
   UseGuards,
   UsePipes,
@@ -18,6 +19,7 @@ import {
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
+  ApiOkResponse,
   ApiQuery,
   ApiResponse,
   ApiTags,
@@ -28,6 +30,7 @@ import { ApiConfig } from '../../../config/api';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IParamsIdDTO } from '../dtos/IParamsId.dto';
+import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
@@ -50,6 +53,20 @@ export class ControllerMember {
   @Post()
   create(@Body() data: ICreateMemberBasicDataDTO) {
     return this.serviceMember.createMember(data);
+  }
+
+  @ApiOkResponse({
+    description: 'Updated Success',
+    type: EntityMember,
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @Put()
+  update(@Body() data: IUpdateMemberDTO) {
+    return data;
   }
 
   @ApiQuery({
