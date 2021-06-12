@@ -1,5 +1,5 @@
+import { ServiceAuth } from './auth.service';
 import { ServiceMember } from './member.service';
 import { ServiceOfficeMember } from './officeMember.service';
-import { ServiceAuth } from './auth.service';
 
-export default [ServiceMember, ServiceOfficeMember, ServiceAuth];
+export default [ServiceAuth, ServiceMember, ServiceOfficeMember];

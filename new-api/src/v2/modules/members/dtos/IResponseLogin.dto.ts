@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
-class AuthResponse {
+export class IAuthResponse {
   @ApiProperty({
     type: String,
     description: 'API access token',
@@ -11,12 +11,12 @@ class AuthResponse {
   accessToken: string;
 }
 
-export class IResponseLogin {
+export class IResponseLoginDTO {
   @ApiProperty({
-    type: AuthResponse,
+    type: IAuthResponse,
     description: "Authentication's data",
   })
-  auth: AuthResponse;
+  auth: IAuthResponse;
 
   @ApiProperty({
     type: EntityMember,
