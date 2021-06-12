@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import { classToClass } from 'class-transformer';
 import { ILoginDTO } from '../dtos/ILogin.dto';
+import IPayloadToken from '../dtos/IPayloadToken.dto';
 import { IResponseLogin } from '../dtos/IResponseLogin.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
 import { EntityMember } from '../typeorm/entities/member.entity';
@@ -37,9 +38,9 @@ export class ServiceAuth {
   }
 
   async login(member: EntityMember): Promise<IResponseLogin> {
-    const payload = {
-      username: member.email,
+    const payload: IPayloadToken = {
       sub: member.id,
+      login: member.login,
       patent: member.patent.name,
     };
 
