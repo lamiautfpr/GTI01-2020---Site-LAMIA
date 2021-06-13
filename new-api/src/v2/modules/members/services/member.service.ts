@@ -40,13 +40,8 @@ export class ServiceMember {
 
   public async updateMember({
     idMember,
-    idMemberLoggedIn,
     newMemberData,
   }: IUpdateMemberDTO): Promise<EntityMember> {
-    if (idMember !== idMemberLoggedIn) {
-      throw new UnauthorizedException();
-    }
-
     return classToClass(
       await memberServices.update({
         newMemberData: {

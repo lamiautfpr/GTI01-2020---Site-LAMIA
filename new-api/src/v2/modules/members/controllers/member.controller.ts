@@ -68,15 +68,10 @@ export class ControllerMember {
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
-  @Put(':id')
-  update(
-    @Request() req: any,
-    @Body() data: IUpdateMemberBasicDataDTO,
-    @Param() params: IParamsIdDTO,
-  ) {
+  @Put()
+  update(@Request() req: any, @Body() data: IUpdateMemberBasicDataDTO) {
     return this.serviceMember.updateMember({
-      idMember: params.id,
-      idMemberLoggedIn: req.user.userId,
+      idMember: req.user.userId,
       newMemberData: data,
     });
   }

@@ -127,8 +127,4 @@ export class IUpdateMemberDTO {
   @IsDefined()
   @IsUUID()
   idMember: string;
-
-  @IsDefined()
-  @IsUUID()
-  idMemberLoggedIn: string;
 }
