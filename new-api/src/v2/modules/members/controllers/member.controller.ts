@@ -5,14 +5,18 @@ import {
   Get,
   HttpCode,
   Param,
+  Patch,
   Post,
   Put,
   Query,
   Request,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
   ApiConflictResponse,
@@ -27,7 +31,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
-import { ApiConfig } from '../../../config/api';
+import { ApiConfig } from '@config/api';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IParamsIdDTO } from '../dtos/IParamsId.dto';
@@ -38,6 +42,7 @@ import {
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
+import uploadConfig from '@config/upload';
 
 @ApiTags('members')
 @Controller(`${ApiConfig.version}/members`)
@@ -74,6 +79,25 @@ export class ControllerMember {
       idMember: req.user.userId,
       newMemberData: data,
     });
+  }
+
+  @ApiOkResponse({
+    description: 'Updated Success',
+    type: EntityMember,
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  @UseInterceptors(FileInterceptor('avatar', uploadConfig.multer))
+  @Patch()
+  updateAvatar(
+    @Request() req: any,
+    @UploadedFile() avatar: Express.Multer.File,
+  ) {
+    console.log(avatar);
+    return 'FOI';
   }
 
   @ApiQuery({
