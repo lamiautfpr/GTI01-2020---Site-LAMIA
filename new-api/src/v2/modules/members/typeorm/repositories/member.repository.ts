@@ -22,7 +22,8 @@ export class RepositoryMember
   }
 
   public async updateSave(data: EntityMember): Promise<EntityMember> {
-    return this.ormRepository.save(data);
+    await this.ormRepository.save(data);
+    return this.findById(data.id);
   }
 
   public async findById(id: string): Promise<EntityMember | undefined> {

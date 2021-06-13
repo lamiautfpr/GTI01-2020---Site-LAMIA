@@ -1,8 +1,7 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
-import { classToClass } from 'class-transformer';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import IOrderMember, { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IUpdateAvatarMemberDTO } from '../dtos/IUpdateAvatarMember.dto';
@@ -33,44 +32,42 @@ export class ServiceMember {
   public async createMember(
     data: ICreateMemberBasicDataDTO,
   ): Promise<EntityMember> {
-    return classToClass(
-      await memberServices.create({
-        data: data,
-        repositoryMember: this.memberRepository,
-        repositoryOfficeMember: this.officeMemberRepository,
-        hashProvider: this.hashProvider,
-      }),
-    );
+    return memberServices.create({
+      data: data,
+      repositoryMember: this.memberRepository,
+      repositoryOfficeMember: this.officeMemberRepository,
+      hashProvider: this.hashProvider,
+    });
   }
 
   public async updateMember({
     idMember,
     newMemberData,
   }: IUpdateMemberDTO): Promise<EntityMember> {
-    return classToClass(
-      await memberServices.update({
-        newMemberData: {
-          ...newMemberData,
-          id: idMember,
-        },
-        repository: this.memberRepository,
-        hashProvider: this.hashProvider,
-      }),
-    );
+    const member = await memberServices.update({
+      newMemberData: {
+        ...newMemberData,
+        id: idMember,
+      },
+      repository: this.memberRepository,
+      hashProvider: this.hashProvider,
+    });
+
+    console.log(member);
+
+    return member;
   }
 
   public async updateAvatarMember({
     idMember,
     fileName,
   }: IUpdateAvatarMemberDTO): Promise<EntityMember> {
-    const member = await memberServices.updateAvatar({
+    return memberServices.updateAvatar({
       repository: this.memberRepository,
       id: idMember,
       fileName,
       storageProvider: this.storageProvider,
     });
-
-    return classToClass(member);
   }
 
   public async findAll({
@@ -81,21 +78,17 @@ export class ServiceMember {
       [attribute || 'name']: direction || 'ASC',
     };
 
-    return classToClass(
-      await memberServices.findAll({
-        repository: this.memberRepository,
-        order,
-      }),
-    );
+    return memberServices.findAll({
+      repository: this.memberRepository,
+      order,
+    });
   }
 
   public async findByLogin(login: string): Promise<EntityMember> {
-    return classToClass(
-      memberServices.FindByLogin({
-        repository: this.memberRepository,
-        login,
-      }),
-    );
+    return memberServices.FindByLogin({
+      repository: this.memberRepository,
+      login,
+    });
   }
 
   public async removeById(id: string): Promise<void> {

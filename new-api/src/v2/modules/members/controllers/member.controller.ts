@@ -2,6 +2,7 @@ import { apiConfig } from '@config/api';
 import uploadConfig from '@config/upload';
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -63,6 +64,7 @@ export class ControllerMember {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   create(@Body() data: ICreateMemberBasicDataDTO) {
     return this.serviceMember.createMember(data);
@@ -79,6 +81,7 @@ export class ControllerMember {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
+  @UseInterceptors(ClassSerializerInterceptor)
   @Put()
   update(@Request() req: any, @Body() data: IUpdateMemberBasicDataDTO) {
     return this.serviceMember.updateMember({
@@ -100,7 +103,10 @@ export class ControllerMember {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
-  @UseInterceptors(FileInterceptor('avatar', uploadConfig.multer))
+  @UseInterceptors(
+    FileInterceptor('avatar', uploadConfig.multer),
+    ClassSerializerInterceptor,
+  )
   @Patch()
   updateAvatar(
     @Request() req: any,
@@ -127,6 +133,7 @@ export class ControllerMember {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   findAll(@Query() order: ISelectOrderMemberDTO) {
     return this.serviceMember.findAll(order);
@@ -141,6 +148,7 @@ export class ControllerMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiNotFoundResponse(Errors.NotFound)
   @UsePipes(new ValidationPipe())
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get(':login')
   findOne(@Param('login') login: string) {
     return this.serviceMember.findByLogin(login);
