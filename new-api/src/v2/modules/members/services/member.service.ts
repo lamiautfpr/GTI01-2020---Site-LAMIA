@@ -54,6 +54,22 @@ export class ServiceMember {
     );
   }
 
+  public async updateAvatarMember({
+    idMember,
+    newMemberData,
+  }: IUpdateMemberDTO): Promise<EntityMember> {
+    return classToClass(
+      await memberServices.update({
+        newMemberData: {
+          ...newMemberData,
+          id: idMember,
+        },
+        repository: this.memberRepository,
+        hashProvider: this.hashProvider,
+      }),
+    );
+  }
+
   public async findAll({
     attribute,
     direction,

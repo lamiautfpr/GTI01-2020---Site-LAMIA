@@ -10,9 +10,11 @@ import {
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
+  ApiOperation,
   ApiQuery,
   ApiResponse,
   ApiTags,
@@ -31,6 +33,7 @@ import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 export class ControllerOfficeMember {
   constructor(private readonly serviceOfficeMember: ServiceOfficeMember) {}
 
+  @ApiOperation({ summary: 'create' })
   @ApiCreatedResponse({
     description: 'Created Success',
     type: EntityOfficeMember,
@@ -40,12 +43,14 @@ export class ControllerOfficeMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreateOfficeMemberDTO) {
     return this.serviceOfficeMember.createOfficeMember(data);
   }
 
+  @ApiOperation({ summary: 'findAll' })
   @ApiQuery({
     type: ISelectOrderOfficeMemberDTO,
   })

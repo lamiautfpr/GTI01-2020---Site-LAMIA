@@ -3,7 +3,12 @@ import { diskStorage, Options } from 'multer';
 import { resolve } from 'path';
 
 const tmpFolder = resolve(__dirname, '..', '..', '..', 'tmp');
-const AllowedImagesType = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+export const AllowedImagesType = [
+  'image/png',
+  'image/jpg',
+  'image/jpeg',
+  'image/gif',
+];
 const maxSize = 10; // MB
 
 interface IUploadConfig {

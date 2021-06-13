@@ -7,6 +7,7 @@ import {
   ApiBody,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
@@ -20,6 +21,7 @@ import { ServiceAuth } from '../services/auth.service';
 export class ControllerAuthMember {
   constructor(private readonly authService: ServiceAuth) {}
 
+  @ApiOperation({ summary: 'loginIn' })
   @ApiBody({
     type: ILoginDTO,
   })
@@ -36,6 +38,8 @@ export class ControllerAuthMember {
   async login(@Request() req: any) {
     return this.authService.login(req.user);
   }
+
+  @ApiOperation({ summary: 'refreshToken' })
   @ApiOkResponse({
     description: 'successfully refreshed token',
     type: IAuthResponse,

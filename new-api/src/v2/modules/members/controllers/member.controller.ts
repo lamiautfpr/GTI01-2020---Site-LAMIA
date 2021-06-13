@@ -1,3 +1,5 @@
+import { ApiConfig } from '@config/api';
+import uploadConfig from '@config/upload';
 import {
   Body,
   Controller,
@@ -19,36 +21,37 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiConflictResponse,
+  ApiConsumes,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiQuery,
   ApiResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
-import { ApiConfig } from '@config/api';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IParamsIdDTO } from '../dtos/IParamsId.dto';
-import {
-  IUpdateMemberBasicDataDTO,
-  IUpdateMemberDTO,
-} from '../dtos/IUpdateMember.dto';
+import { IUpdateAvatarMemberBasicDataDTO } from '../dtos/IUpdateAvatarMember.dto';
+import { IUpdateMemberBasicDataDTO } from '../dtos/IUpdateMember.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
-import uploadConfig from '@config/upload';
 
 @ApiTags('members')
 @Controller(`${ApiConfig.version}/members`)
 export class ControllerMember {
   constructor(private readonly serviceMember: ServiceMember) {}
 
+  @ApiOperation({ summary: 'create' })
   @ApiCreatedResponse({
     description: 'Created Success',
     type: EntityMember,
@@ -58,12 +61,14 @@ export class ControllerMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreateMemberBasicDataDTO) {
     return this.serviceMember.createMember(data);
   }
 
+  @ApiOperation({ summary: 'updateInfo' })
   @ApiOkResponse({
     description: 'Updated Success',
     type: EntityMember,
@@ -72,6 +77,7 @@ export class ControllerMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Put()
   update(@Request() req: any, @Body() data: IUpdateMemberBasicDataDTO) {
@@ -81,25 +87,31 @@ export class ControllerMember {
     });
   }
 
+  @ApiOperation({ summary: 'updateAvatar' })
   @ApiOkResponse({
     description: 'Updated Success',
     type: EntityMember,
   })
+  @ApiConsumes('multipart/form-data')
   @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiForbiddenResponse(Errors.Forbidden)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('avatar', uploadConfig.multer))
   @Patch()
   updateAvatar(
     @Request() req: any,
+    @Body() uploadDto: IUpdateAvatarMemberBasicDataDTO,
     @UploadedFile() avatar: Express.Multer.File,
   ) {
     console.log(avatar);
     return 'FOI';
   }
 
+  @ApiOperation({ summary: 'findAll' })
   @ApiQuery({
     type: ISelectOrderMemberDTO,
   })
@@ -117,6 +129,7 @@ export class ControllerMember {
     return this.serviceMember.findAll(order);
   }
 
+  @ApiOperation({ summary: 'findOne' })
   @ApiResponse({
     status: 200,
     description: 'find member',
@@ -130,6 +143,7 @@ export class ControllerMember {
     return this.serviceMember.findByLogin(login);
   }
 
+  @ApiOperation({ summary: 'delete' })
   @ApiNoContentResponse({
     status: 204,
     description: 'Deleted Success',
@@ -139,6 +153,7 @@ export class ControllerMember {
   @ApiNotFoundResponse(Errors.NotFound)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @HttpCode(204)
   @Delete(':id')
