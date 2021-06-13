@@ -1,9 +1,11 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { classToClass } from 'class-transformer';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import IOrderMember, { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
+import { IUpdateAvatarMemberDTO } from '../dtos/IUpdateAvatarMember.dto';
 import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
 import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
@@ -23,6 +25,9 @@ export class ServiceMember {
 
     @Inject('HashProvider')
     private readonly hashProvider: IHashProvider,
+
+    @Inject('StorageProvider')
+    private readonly storageProvider: IStorageProvider,
   ) {}
 
   public async createMember(
@@ -56,18 +61,16 @@ export class ServiceMember {
 
   public async updateAvatarMember({
     idMember,
-    newMemberData,
-  }: IUpdateMemberDTO): Promise<EntityMember> {
-    return classToClass(
-      await memberServices.update({
-        newMemberData: {
-          ...newMemberData,
-          id: idMember,
-        },
-        repository: this.memberRepository,
-        hashProvider: this.hashProvider,
-      }),
-    );
+    fileName,
+  }: IUpdateAvatarMemberDTO): Promise<EntityMember> {
+    const member = await memberServices.updateAvatar({
+      repository: this.memberRepository,
+      id: idMember,
+      fileName,
+      storageProvider: this.storageProvider,
+    });
+
+    return classToClass(member);
   }
 
   public async findAll({

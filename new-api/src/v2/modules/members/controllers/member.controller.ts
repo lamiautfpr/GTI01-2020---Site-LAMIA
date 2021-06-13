@@ -104,11 +104,14 @@ export class ControllerMember {
   @Patch()
   updateAvatar(
     @Request() req: any,
-    @Body() uploadDto: IUpdateAvatarMemberBasicDataDTO,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    @Body() _uploadDto: IUpdateAvatarMemberBasicDataDTO,
     @UploadedFile() avatar: Express.Multer.File,
   ) {
-    console.log(avatar);
-    return 'FOI';
+    return this.serviceMember.updateAvatarMember({
+      idMember: req.user.userId,
+      fileName: avatar.filename,
+    });
   }
 
   @ApiOperation({ summary: 'findAll' })

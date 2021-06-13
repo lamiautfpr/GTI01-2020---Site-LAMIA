@@ -41,8 +41,6 @@ export default {
           throw new UnauthorizedException('I need to be logged in');
         }
 
-        console.log(member);
-
         const fileName = `${member.userId}.jpg`;
 
         return callback(null, fileName);
