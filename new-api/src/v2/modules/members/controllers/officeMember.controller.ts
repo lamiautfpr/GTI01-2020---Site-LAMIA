@@ -21,7 +21,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
-import { ApiConfig } from '../../../config/api';
+import { apiConfig } from '../../../config/api';
 import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
 import { ISelectOrderOfficeMemberDTO } from '../dtos/IOrderOfficeMember.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
@@ -29,7 +29,7 @@ import { ServiceOfficeMember } from '../services/officeMember.service';
 import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
 
 @ApiTags('offices')
-@Controller(`${ApiConfig.version}/offices/members`)
+@Controller(`${apiConfig.version}/offices/members`)
 export class ControllerOfficeMember {
   constructor(private readonly serviceOfficeMember: ServiceOfficeMember) {}
 

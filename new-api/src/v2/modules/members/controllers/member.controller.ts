@@ -1,4 +1,4 @@
-import { ApiConfig } from '@config/api';
+import { apiConfig } from '@config/api';
 import uploadConfig from '@config/upload';
 import {
   Body,
@@ -47,7 +47,7 @@ import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
 @ApiTags('members')
-@Controller(`${ApiConfig.version}/members`)
+@Controller(`${apiConfig.version}/members`)
 export class ControllerMember {
   constructor(private readonly serviceMember: ServiceMember) {}
 

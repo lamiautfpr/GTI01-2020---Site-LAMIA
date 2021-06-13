@@ -1,4 +1,4 @@
-import { ApiConfig } from '@config/api';
+import { apiConfig } from '@config/api';
 import { Headers, Put } from '@nestjs/common';
 import { Controller, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -17,7 +17,7 @@ import { IAuthResponse, IResponseLoginDTO } from '../dtos/IResponseLogin.dto';
 import { ServiceAuth } from '../services/auth.service';
 
 @ApiTags('Auth')
-@Controller(`${ApiConfig.version}/auth`)
+@Controller(`${apiConfig.version}/auth`)
 export class ControllerAuthMember {
   constructor(private readonly authService: ServiceAuth) {}
 
