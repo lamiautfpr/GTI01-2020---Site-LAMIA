@@ -1,6 +1,7 @@
 import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { diskStorage, Options } from 'multer';
 import { resolve } from 'path';
+import { apiConfig } from './api';
 
 const tmpFolder = resolve(__dirname, '..', '..', '..', 'tmp');
 export const AllowedImagesType = [
@@ -23,7 +24,7 @@ interface IUploadConfig {
 
 export default {
   driver: process.env.STORAGE_DRIVER,
-  url: process.env.APP_URL_FILE_STATIC,
+  url: `${apiConfig.apiUrl}${apiConfig.pathFileStatic}/`,
 
   tmpFolder,
   uploadsFolder: resolve(tmpFolder, 'upload'),

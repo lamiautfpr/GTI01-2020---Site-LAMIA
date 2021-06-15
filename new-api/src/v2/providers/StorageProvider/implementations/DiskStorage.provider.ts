@@ -49,7 +49,13 @@ export default class DiskStorageProvider implements IStorageProvider {
     await fs.promises.unlink(filePath);
   }
 
-  public async getUrl(fileName: string): Promise<string> {
-    return `${uploadConfig.url}${encodeURI(fileName)}`;
+  public async getUrl({
+    fileName,
+    targetFolder,
+    subFolders = [],
+  }: ILocationFileDTO): Promise<string> {
+    const pathFile = targetFolder + '/' + subFolders.join('/') + fileName;
+
+    return `${uploadConfig.url}${encodeURI(pathFile)}`;
   }
 }

@@ -48,6 +48,7 @@ import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
 @ApiTags('members')
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller(`${apiConfig.version}/members`)
 export class ControllerMember {
   constructor(private readonly serviceMember: ServiceMember) {}
@@ -64,7 +65,6 @@ export class ControllerMember {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
-  @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   create(@Body() data: ICreateMemberBasicDataDTO) {
     return this.serviceMember.createMember(data);
@@ -81,7 +81,6 @@ export class ControllerMember {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
-  @UseInterceptors(ClassSerializerInterceptor)
   @Put()
   update(@Request() req: any, @Body() data: IUpdateMemberBasicDataDTO) {
     return this.serviceMember.updateMember({
@@ -103,10 +102,7 @@ export class ControllerMember {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
-  @UseInterceptors(
-    FileInterceptor('avatar', uploadConfig.multer),
-    ClassSerializerInterceptor,
-  )
+  @UseInterceptors(FileInterceptor('avatar', uploadConfig.multer))
   @Patch()
   updateAvatar(
     @Request() req: any,
@@ -133,7 +129,6 @@ export class ControllerMember {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
-  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   findAll(@Query() order: ISelectOrderMemberDTO) {
     return this.serviceMember.findAll(order);
@@ -148,9 +143,8 @@ export class ControllerMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiNotFoundResponse(Errors.NotFound)
   @UsePipes(new ValidationPipe())
-  @UseInterceptors(ClassSerializerInterceptor)
   @Get(':login')
-  findOne(@Param('login') login: string) {
+  async findOne(@Param('login') login: string): Promise<EntityMember> {
     return this.serviceMember.findByLogin(login);
   }
 
