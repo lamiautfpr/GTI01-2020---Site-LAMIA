@@ -1,0 +1,38 @@
+version: "3"
+services:
+  postgres_pl:
+    container_name: backend-lamia
+    image: postgres:12
+    restart: unless-stopped
+    volumes:
+      - postgres_pl:/data
+    environment:
+      POSTGRES_DB: ${TYPEORM_DATABASE}
+      POSTGRES_USER: ${TYPEORM_USERNAME}
+      POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
+    ports:
+      - "5432:5432"
+    networks:
+      - network-frontend-lamia
+  backend_lamia:
+    build:
+      context: "."
+      dockerfile: dockerfile.dev
+    container_name: backend
+    command: yarn start:dev
+    env_file:
+      - .env
+    ports:
+      - "${PORT_API}:3333"
+    networks:
+      - network-backend-lamia
+    depends_on:
+      - postgres_pl
+    volumes:
+      - ./:/app/
+
+volumes:
+  postgres_pl:
+
+networks:
+  network-backend-lamia:
