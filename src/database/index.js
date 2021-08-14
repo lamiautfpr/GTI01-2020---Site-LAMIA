@@ -15,16 +15,16 @@ import Statistic from '../app/models/Statistic';
 import News from '../app/models/News';
 
 const models = [
-  TypeMember,
-  Picture,
-  Member,
   AreaExpertise,
   CategoryWork,
-  TypeWork,
-  Partner,
-  Work,
+  TypeMember,
   MemberWork,
   Statistic,
+  TypeWork,
+  Picture,
+  Partner,
+  Member,
+  Work,
   News,
 ];
 
