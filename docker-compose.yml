@@ -13,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - network-frontend-lamia
+      - network-backend-lamia
   backend_lamia:
     build:
       context: "."
