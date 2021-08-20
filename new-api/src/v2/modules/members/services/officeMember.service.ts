@@ -4,15 +4,15 @@ import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
 import IOrderOfficeMemberDTO, {
   ISelectOrderOfficeMemberDTO,
 } from '../dtos/IOrderOfficeMember.dto';
-import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
+import IRepositoryOfficeMember from '../repositories/IRepositoryPatent';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
-import { RepositoryOfficeMember } from '../typeorm/repositories/officeMember.repository';
+import { RepositoryPatent } from '../typeorm/repositories/patent.repository';
 import { create, findAll } from './officeMember';
 
 @Injectable()
 export class ServiceOfficeMember {
   constructor(
-    @InjectRepository(RepositoryOfficeMember)
+    @InjectRepository(RepositoryPatent)
     private readonly officeMemberRepository: IRepositoryOfficeMember,
   ) {}
 

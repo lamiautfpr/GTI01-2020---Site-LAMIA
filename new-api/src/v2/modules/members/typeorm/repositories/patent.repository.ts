@@ -2,13 +2,13 @@ import { EntityRepository, getRepository, Repository } from 'typeorm';
 import ICreateOfficeMemberDTO from '../../dtos/ICreateOfficeMember.dto';
 import IFindOfficeMember from '../../dtos/IFindOfficeMember.dto';
 import IOrderOfficeMember from '../../dtos/IOrderOfficeMember.dto';
-import IRepositoryOfficeMember from '../../repositories/IRepositoryOfficeMember';
+import IRepositoryPatent from '../../repositories/IRepositoryPatent';
 import { EntityPatent } from '../entities/patent.entity';
 
 @EntityRepository(EntityPatent)
-export class RepositoryOfficeMember
-  extends Repository<RepositoryOfficeMember>
-  implements IRepositoryOfficeMember {
+export class RepositoryPatent
+  extends Repository<RepositoryPatent>
+  implements IRepositoryPatent {
   private ormRepository: Repository<EntityPatent>;
 
   constructor() {
@@ -17,9 +17,9 @@ export class RepositoryOfficeMember
   }
 
   public async createSave(data: ICreateOfficeMemberDTO): Promise<EntityPatent> {
-    const officeMember = this.ormRepository.create(data);
+    const patent = this.ormRepository.create(data);
 
-    return this.ormRepository.save(officeMember);
+    return this.ormRepository.save(patent);
   }
 
   public async updateSave(data: EntityPatent): Promise<EntityPatent> {

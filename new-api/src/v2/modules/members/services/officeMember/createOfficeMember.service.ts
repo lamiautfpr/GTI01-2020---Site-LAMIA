@@ -1,11 +1,11 @@
 import ICreateOfficeMemberDTO from '@modules/members/dtos/ICreateOfficeMember.dto';
-import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
+import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
 import { ConflictException } from '@nestjs/common';
 
 interface IRequest {
   data: ICreateOfficeMemberDTO;
-  repository: IRepositoryOfficeMember;
+  repository: IRepositoryPatent;
 }
 
 const create = async (params: IRequest): Promise<EntityPatent> => {

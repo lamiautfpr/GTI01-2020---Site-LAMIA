@@ -1,9 +1,9 @@
-import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
+import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
 import IOrderOfficeMemberDTO from '../../dtos/IOrderOfficeMember.dto';
 
 interface IRequest {
-  repository: IRepositoryOfficeMember;
+  repository: IRepositoryPatent;
   order?: IOrderOfficeMemberDTO;
 }
 

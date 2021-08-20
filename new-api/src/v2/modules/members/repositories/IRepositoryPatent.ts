@@ -3,7 +3,7 @@ import IFindOfficeMember from '../dtos/IFindOfficeMember.dto';
 import IOrderOfficeMember from '../dtos/IOrderOfficeMember.dto';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 
-export default interface IRepositoryOfficeMember {
+export default interface IRepositoryPatent {
   createSave(data: ICreateOfficeMemberDTO): Promise<EntityPatent>;
   updateSave(data: EntityPatent): Promise<EntityPatent>;
 

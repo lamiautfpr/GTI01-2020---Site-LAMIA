@@ -7,10 +7,10 @@ import IOrderMember, { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IUpdateAvatarMemberDTO } from '../dtos/IUpdateAvatarMember.dto';
 import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
-import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
+import IRepositoryPatent from '../repositories/IRepositoryPatent';
 import { EntityMember } from '../typeorm/entities/member.entity';
 import { RepositoryMember } from '../typeorm/repositories/member.repository';
-import { RepositoryOfficeMember } from '../typeorm/repositories/officeMember.repository';
+import { RepositoryPatent } from '../typeorm/repositories/patent.repository';
 import * as memberServices from './member';
 
 @Injectable()
@@ -19,8 +19,8 @@ export class ServiceMember {
     @InjectRepository(RepositoryMember)
     private readonly memberRepository: IRepositoryMember,
 
-    @InjectRepository(RepositoryOfficeMember)
-    private readonly officeMemberRepository: IRepositoryOfficeMember,
+    @InjectRepository(RepositoryPatent)
+    private readonly officeMemberRepository: IRepositoryPatent,
 
     @Inject('HashProvider')
     private readonly hashProvider: IHashProvider,

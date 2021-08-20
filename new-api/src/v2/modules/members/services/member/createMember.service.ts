@@ -1,6 +1,6 @@
 import { ICreateMemberBasicDataDTO } from '@modules/members/dtos/ICreateMember.dto';
 import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
-import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
+import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryPatent';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { BadRequestException, ConflictException } from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
