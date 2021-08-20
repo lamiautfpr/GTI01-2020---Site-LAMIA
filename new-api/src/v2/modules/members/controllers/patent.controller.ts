@@ -28,10 +28,10 @@ import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServicePatent } from '../services/patent.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 
-@ApiTags('offices')
-@Controller(`${apiConfig.version}/offices/members`)
-export class ControllerOfficeMember {
-  constructor(private readonly serviceOfficeMember: ServicePatent) {}
+@ApiTags('patents')
+@Controller(`${apiConfig.version}/members/patents`)
+export class ControllerPatent {
+  constructor(private readonly servicePatent: ServicePatent) {}
 
   @ApiOperation({ summary: 'create' })
   @ApiCreatedResponse({
@@ -47,7 +47,7 @@ export class ControllerOfficeMember {
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreatePatentDTO) {
-    return this.serviceOfficeMember.createPatent(data);
+    return this.servicePatent.createPatent(data);
   }
 
   @ApiOperation({ summary: 'findAll' })
@@ -65,6 +65,7 @@ export class ControllerOfficeMember {
   @UsePipes(new ValidationPipe())
   @Get()
   findAll(@Query() order: ISelectOrderPatentDTO) {
-    return this.serviceOfficeMember.findAll(order);
+    console.log('OI');
+    return this.servicePatent.findAll(order);
   }
 }

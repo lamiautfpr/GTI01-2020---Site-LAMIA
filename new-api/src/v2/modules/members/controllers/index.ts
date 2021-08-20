@@ -1,5 +1,5 @@
 import { ControllerAuthMember } from './authMember.controller';
 import { ControllerMember } from './member.controller';
-import { ControllerOfficeMember } from './officeMember.controller';
+import { ControllerPatent } from './patent.controller';
 
-export default [ControllerAuthMember, ControllerMember, ControllerOfficeMember];
+export default [ControllerAuthMember, ControllerPatent, ControllerMember];
