@@ -1,5 +1,5 @@
 import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryOfficeMember';
-import { EntityOfficeMember } from '@modules/members/typeorm/entities/officeMember.entity';
+import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
 import IOrderOfficeMemberDTO from '../../dtos/IOrderOfficeMember.dto';
 
 interface IRequest {
@@ -10,7 +10,7 @@ interface IRequest {
 const findAll = async ({
   repository,
   order,
-}: IRequest): Promise<EntityOfficeMember[]> => {
+}: IRequest): Promise<EntityPatent[]> => {
   return repository.findAll(order);
 };
 

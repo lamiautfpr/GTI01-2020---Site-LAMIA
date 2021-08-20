@@ -26,7 +26,7 @@ import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
 import { ISelectOrderOfficeMemberDTO } from '../dtos/IOrderOfficeMember.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceOfficeMember } from '../services/officeMember.service';
-import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
+import { EntityPatent } from '../typeorm/entities/patent.entity';
 
 @ApiTags('offices')
 @Controller(`${apiConfig.version}/offices/members`)
@@ -36,7 +36,7 @@ export class ControllerOfficeMember {
   @ApiOperation({ summary: 'create' })
   @ApiCreatedResponse({
     description: 'Created Success',
-    type: EntityOfficeMember,
+    type: EntityPatent,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiConflictResponse(Errors.Conflict)
@@ -57,7 +57,7 @@ export class ControllerOfficeMember {
   @ApiResponse({
     status: 200,
     description: 'List of office members',
-    type: EntityOfficeMember,
+    type: EntityPatent,
     isArray: true,
   })
   @ApiBadRequestResponse(Errors.BadRequest)

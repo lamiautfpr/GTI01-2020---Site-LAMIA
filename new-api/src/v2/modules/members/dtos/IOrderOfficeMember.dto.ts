@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
+import { EntityPatent } from '../typeorm/entities/patent.entity';
 
 type IDirection = 'ASC' | 'DESC';
 type IAttributes = 'name' | 'createAt';
 
 type IOrderOfficeMemberDTO = {
-  [K in keyof EntityOfficeMember]?: IDirection;
+  [K in keyof EntityPatent]?: IDirection;
 };
 
 const AttributesOrderOfficeMemberEum = ['name', 'createAt'];

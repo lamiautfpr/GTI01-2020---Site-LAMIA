@@ -1,10 +1,9 @@
 import ICreateRefreshTokenDTO from '@modules/members/dtos/ICreateRefreshToken.dto';
 import IRepositoryRefreshToken from '@modules/members/repositories/IRepositoryRefreshToken';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
-import { EntityOfficeMember } from '../entities/officeMember.entity';
 import { EntityRefreshToken } from '../entities/refreshToken.entity';
 
-@EntityRepository(EntityOfficeMember)
+@EntityRepository(EntityRefreshToken)
 export class RepositoryRefreshToken
   extends Repository<IRepositoryRefreshToken>
   implements IRepositoryRefreshToken {

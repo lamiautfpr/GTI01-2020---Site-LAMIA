@@ -6,7 +6,7 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
-import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
+import { EntityPatent } from '../typeorm/entities/patent.entity';
 
 export class ICreateMemberBasicDataDTO {
   @IsString()
@@ -42,7 +42,7 @@ export class ICreateMemberBasicDataDTO {
 export default class ICreateMemberDTO {
   name: string;
   email: string;
-  patent: EntityOfficeMember;
+  patent: EntityPatent;
   login: string;
   password: string;
 }

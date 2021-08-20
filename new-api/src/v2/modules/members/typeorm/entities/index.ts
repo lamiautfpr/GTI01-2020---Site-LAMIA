@@ -1,5 +1,5 @@
 import { EntityMember } from './member.entity';
-import { EntityOfficeMember } from './officeMember.entity';
+import { EntityPatent } from './patent.entity';
 import { EntityRefreshToken } from './refreshToken.entity';
 
-export default [EntityMember, EntityOfficeMember, EntityRefreshToken];
+export default [EntityMember, EntityPatent, EntityRefreshToken];

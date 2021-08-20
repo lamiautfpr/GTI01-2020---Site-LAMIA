@@ -4,7 +4,7 @@ import { storageProvider } from '@providers/StorageProvider';
 import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
 import { Exclude, Transform } from 'class-transformer';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { EntityOfficeMember } from './officeMember.entity';
+import { EntityPatent } from './patent.entity';
 
 @Entity('tb_member')
 export class EntityMember extends BasicEntity {
@@ -45,19 +45,19 @@ export class EntityMember extends BasicEntity {
   login: string;
 
   @ApiProperty({
-    type: EntityOfficeMember,
+    type: EntityPatent,
     description: "Member's patent",
     example: {
       name: 'Notavo',
       id: '2bac045b-7109-473f-af2a-32234b067694',
       description: 'Lab freshman',
-    } as EntityOfficeMember,
+    } as EntityPatent,
   })
-  @ManyToOne(() => EntityOfficeMember, (patent) => patent.members, {
+  @ManyToOne(() => EntityPatent, (patent) => patent.members, {
     eager: true,
     nullable: false,
   })
-  patent: EntityOfficeMember;
+  patent: EntityPatent;
 
   @ApiProperty({
     nullable: true,

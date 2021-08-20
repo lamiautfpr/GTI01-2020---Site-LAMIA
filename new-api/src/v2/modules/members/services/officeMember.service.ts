@@ -5,7 +5,7 @@ import IOrderOfficeMemberDTO, {
   ISelectOrderOfficeMemberDTO,
 } from '../dtos/IOrderOfficeMember.dto';
 import IRepositoryOfficeMember from '../repositories/IRepositoryOfficeMember';
-import { EntityOfficeMember } from '../typeorm/entities/officeMember.entity';
+import { EntityPatent } from '../typeorm/entities/patent.entity';
 import { RepositoryOfficeMember } from '../typeorm/repositories/officeMember.repository';
 import { create, findAll } from './officeMember';
 
@@ -18,7 +18,7 @@ export class ServiceOfficeMember {
 
   public async createOfficeMember(
     data: ICreateOfficeMemberDTO,
-  ): Promise<EntityOfficeMember> {
+  ): Promise<EntityPatent> {
     return create({
       data: data,
       repository: this.officeMemberRepository,
@@ -28,7 +28,7 @@ export class ServiceOfficeMember {
   public async findAll({
     attribute,
     direction,
-  }: ISelectOrderOfficeMemberDTO): Promise<EntityOfficeMember[]> {
+  }: ISelectOrderOfficeMemberDTO): Promise<EntityPatent[]> {
     const order: IOrderOfficeMemberDTO = {
       [attribute || 'name']: direction || 'ASC',
     };
