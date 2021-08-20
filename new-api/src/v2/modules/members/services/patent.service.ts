@@ -4,24 +4,22 @@ import ICreatePatentDTO from '../dtos/Patent/ICreatePatent.dto';
 import IOrderPatentDTO, {
   ISelectOrderPatentDTO,
 } from '../dtos/Patent/IOrderPatent.dto';
-import IRepositoryOfficeMember from '../repositories/IRepositoryPatent';
+import IRepositoryPatent from '../repositories/IRepositoryPatent';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 import { RepositoryPatent } from '../typeorm/repositories/patent.repository';
-import { create, findAll } from './officeMember';
+import { create, findAll } from './patent';
 
 @Injectable()
-export class ServiceOfficeMember {
+export class ServicePatent {
   constructor(
     @InjectRepository(RepositoryPatent)
-    private readonly officeMemberRepository: IRepositoryOfficeMember,
+    private readonly patentRepository: IRepositoryPatent,
   ) {}
 
-  public async createOfficeMember(
-    data: ICreatePatentDTO,
-  ): Promise<EntityPatent> {
+  public async createPatent(data: ICreatePatentDTO): Promise<EntityPatent> {
     return create({
       data: data,
-      repository: this.officeMemberRepository,
+      repository: this.patentRepository,
     });
   }
 
@@ -33,6 +31,6 @@ export class ServiceOfficeMember {
       [attribute || 'name']: direction || 'ASC',
     };
 
-    return findAll({ repository: this.officeMemberRepository, order });
+    return findAll({ repository: this.patentRepository, order });
   }
 }

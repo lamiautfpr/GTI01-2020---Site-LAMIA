@@ -25,13 +25,13 @@ import { apiConfig } from '../../../config/api';
 import ICreatePatentDTO from '../dtos/Patent/ICreatePatent.dto';
 import { ISelectOrderPatentDTO } from '../dtos/Patent/IOrderPatent.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
-import { ServiceOfficeMember } from '../services/officeMember.service';
+import { ServicePatent } from '../services/patent.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 
 @ApiTags('offices')
 @Controller(`${apiConfig.version}/offices/members`)
 export class ControllerOfficeMember {
-  constructor(private readonly serviceOfficeMember: ServiceOfficeMember) {}
+  constructor(private readonly serviceOfficeMember: ServicePatent) {}
 
   @ApiOperation({ summary: 'create' })
   @ApiCreatedResponse({
@@ -47,7 +47,7 @@ export class ControllerOfficeMember {
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreatePatentDTO) {
-    return this.serviceOfficeMember.createOfficeMember(data);
+    return this.serviceOfficeMember.createPatent(data);
   }
 
   @ApiOperation({ summary: 'findAll' })

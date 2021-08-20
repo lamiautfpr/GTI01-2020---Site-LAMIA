@@ -11,10 +11,10 @@ interface IRequest {
 const create = async (params: IRequest): Promise<EntityPatent> => {
   const { repository, data } = params;
 
-  const officeExists = await repository.findByName(data.name);
+  const patentExists = await repository.findByName(data.name);
 
-  if (officeExists) {
-    throw new ConflictException(['Office member already exists']);
+  if (patentExists) {
+    throw new ConflictException(['Patent already exists']);
   }
 
   return repository.createSave(data);
