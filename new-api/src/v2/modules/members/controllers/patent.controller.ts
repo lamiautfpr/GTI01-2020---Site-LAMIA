@@ -56,7 +56,7 @@ export class ControllerPatent {
   })
   @ApiResponse({
     status: 200,
-    description: 'List of office members',
+    description: 'List of patents',
     type: EntityPatent,
     isArray: true,
   })

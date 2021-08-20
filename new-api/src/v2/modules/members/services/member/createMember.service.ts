@@ -1,6 +1,6 @@
 import { ICreateMemberBasicDataDTO } from '@modules/members/dtos/ICreateMember.dto';
 import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
-import IRepositoryOfficeMember from '@modules/members/repositories/IRepositoryPatent';
+import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { BadRequestException, ConflictException } from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
@@ -8,17 +8,12 @@ import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 interface IRequest {
   data: ICreateMemberBasicDataDTO;
   repositoryMember: IRepositoryMember;
-  repositoryOfficeMember: IRepositoryOfficeMember;
+  repositoryPatent: IRepositoryPatent;
   hashProvider: IHashProvider;
 }
 
 const create = async (params: IRequest): Promise<EntityMember> => {
-  const {
-    repositoryMember,
-    repositoryOfficeMember,
-    hashProvider,
-    data,
-  } = params;
+  const { repositoryMember, repositoryPatent, hashProvider, data } = params;
 
   const emailExists = await repositoryMember.findByEmail(data.email);
 
@@ -26,7 +21,7 @@ const create = async (params: IRequest): Promise<EntityMember> => {
     throw new ConflictException('Email already exists');
   }
 
-  const patent = await repositoryOfficeMember.findById(data.patentId);
+  const patent = await repositoryPatent.findById(data.patentId);
 
   if (!patent) {
     throw new BadRequestException('Patent not found');

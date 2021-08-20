@@ -1,7 +1,7 @@
 import ICreateRefreshToken from '../dtos/ICreateRefreshToken.dto';
 import { EntityRefreshToken } from '../typeorm/entities/refreshToken.entity';
 
-export default interface IRepositoryOfficeMember {
+export default interface IRepositoryRefreshToken {
   createSave(data: ICreateRefreshToken): Promise<EntityRefreshToken>;
   updateSave(data: EntityRefreshToken): Promise<EntityRefreshToken>;
 

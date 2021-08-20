@@ -20,7 +20,7 @@ export class ServiceMember {
     private readonly memberRepository: IRepositoryMember,
 
     @InjectRepository(RepositoryPatent)
-    private readonly officeMemberRepository: IRepositoryPatent,
+    private readonly patentRepository: IRepositoryPatent,
 
     @Inject('HashProvider')
     private readonly hashProvider: IHashProvider,
@@ -35,7 +35,7 @@ export class ServiceMember {
     return memberServices.create({
       data: data,
       repositoryMember: this.memberRepository,
-      repositoryOfficeMember: this.officeMemberRepository,
+      repositoryPatent: this.patentRepository,
       hashProvider: this.hashProvider,
     });
   }
