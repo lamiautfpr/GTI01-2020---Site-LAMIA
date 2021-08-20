@@ -53,8 +53,6 @@ export class ServiceMember {
       hashProvider: this.hashProvider,
     });
 
-    console.log(member);
-
     return member;
   }
 

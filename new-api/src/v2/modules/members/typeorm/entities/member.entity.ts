@@ -1,6 +1,8 @@
 import BasicEntity from '@modules/BasicEntity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude } from 'class-transformer';
+import { storageProvider } from '@providers/StorageProvider';
+import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
+import { Exclude, Transform } from 'class-transformer';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { EntityOfficeMember } from './officeMember.entity';
 
@@ -119,7 +121,19 @@ export class EntityMember extends BasicEntity {
   })
   description: string;
 
-  @Exclude()
+  @ApiProperty({
+    nullable: true,
+    description: "Member's avatar URL",
+    example: `${process.env.URL_API}${process.env.PATH_FILE_STATIC}/${TARGET_FOLDER.MEMBERS}/img.jpg`,
+  })
+  @Transform(async ({ value }) => {
+    return !value
+      ? null
+      : await storageProvider.getUrl({
+          fileName: value,
+          targetFolder: TARGET_FOLDER.MEMBERS,
+        });
+  })
   @Column({
     nullable: true,
     type: 'varchar',
