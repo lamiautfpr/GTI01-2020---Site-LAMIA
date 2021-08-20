@@ -1,27 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { EntityPatent } from '../typeorm/entities/patent.entity';
+import { EntityPatent } from '../../typeorm/entities/patent.entity';
 
 type IDirection = 'ASC' | 'DESC';
 type IAttributes = 'name' | 'createAt';
 
-type IOrderOfficeMemberDTO = {
+type IOrderPatentDTO = {
   [K in keyof EntityPatent]?: IDirection;
 };
 
-const AttributesOrderOfficeMemberEum = ['name', 'createAt'];
-const DirectionsOrderOfficeMemberEum = ['ASC', 'DESC'];
+const AttributesOrderPatentEum = ['name', 'createAt'];
+const DirectionsOrderPatentEum = ['ASC', 'DESC'];
 
-export class ISelectOrderOfficeMemberDTO {
+export class ISelectOrderPatentDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  @IsIn(AttributesOrderOfficeMemberEum)
+  @IsIn(AttributesOrderPatentEum)
   @ApiProperty({
     type: String,
     required: false,
     description: 'Attribute that will be ordered',
-    enum: AttributesOrderOfficeMemberEum,
+    enum: AttributesOrderPatentEum,
     default: 'name',
   })
   attribute?: IAttributes;
@@ -29,16 +29,16 @@ export class ISelectOrderOfficeMemberDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  @IsIn(DirectionsOrderOfficeMemberEum)
+  @IsIn(DirectionsOrderPatentEum)
   @ApiProperty({
     type: String,
     required: false,
     description:
       'Direction of the listing, whether it is increasing or decreasing',
-    enum: DirectionsOrderOfficeMemberEum,
+    enum: DirectionsOrderPatentEum,
     default: 'ASC',
   })
   direction?: IDirection;
 }
 
-export default IOrderOfficeMemberDTO;
+export default IOrderPatentDTO;

@@ -1,7 +1,7 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm';
-import ICreateOfficeMemberDTO from '../../dtos/ICreateOfficeMember.dto';
-import IFindOfficeMember from '../../dtos/IFindOfficeMember.dto';
-import IOrderOfficeMember from '../../dtos/IOrderOfficeMember.dto';
+import ICreatePatentDTO from '../../dtos/Patent/ICreatePatent.dto';
+import IFindPatentDTO from '../../dtos/Patent/IFindPatent.dto';
+import IOrderPatentDTO from '../../dtos/Patent/IOrderPatent.dto';
 import IRepositoryPatent from '../../repositories/IRepositoryPatent';
 import { EntityPatent } from '../entities/patent.entity';
 
@@ -16,7 +16,7 @@ export class RepositoryPatent
     this.ormRepository = getRepository(EntityPatent);
   }
 
-  public async createSave(data: ICreateOfficeMemberDTO): Promise<EntityPatent> {
+  public async createSave(data: ICreatePatentDTO): Promise<EntityPatent> {
     const patent = this.ormRepository.create(data);
 
     return this.ormRepository.save(patent);
@@ -35,14 +35,14 @@ export class RepositoryPatent
   }
 
   public async findAll(
-    order?: IOrderOfficeMember,
+    order?: IOrderPatentDTO,
   ): Promise<EntityPatent[] | undefined> {
     return this.ormRepository.find({ order });
   }
 
   public async findByWhere(
-    where: IFindOfficeMember,
-    order?: IOrderOfficeMember,
+    where: IFindPatentDTO,
+    order?: IOrderPatentDTO,
   ): Promise<EntityPatent[] | undefined> {
     return this.ormRepository.find({ order, where });
   }

@@ -22,8 +22,8 @@ import {
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { apiConfig } from '../../../config/api';
-import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
-import { ISelectOrderOfficeMemberDTO } from '../dtos/IOrderOfficeMember.dto';
+import ICreatePatentDTO from '../dtos/Patent/ICreatePatent.dto';
+import { ISelectOrderPatentDTO } from '../dtos/Patent/IOrderPatent.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceOfficeMember } from '../services/officeMember.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
@@ -46,13 +46,13 @@ export class ControllerOfficeMember {
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Post()
-  create(@Body() data: ICreateOfficeMemberDTO) {
+  create(@Body() data: ICreatePatentDTO) {
     return this.serviceOfficeMember.createOfficeMember(data);
   }
 
   @ApiOperation({ summary: 'findAll' })
   @ApiQuery({
-    type: ISelectOrderOfficeMemberDTO,
+    type: ISelectOrderPatentDTO,
   })
   @ApiResponse({
     status: 200,
@@ -64,7 +64,7 @@ export class ControllerOfficeMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
-  findAll(@Query() order: ISelectOrderOfficeMemberDTO) {
+  findAll(@Query() order: ISelectOrderPatentDTO) {
     return this.serviceOfficeMember.findAll(order);
   }
 }

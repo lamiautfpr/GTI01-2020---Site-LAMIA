@@ -1,10 +1,10 @@
-import ICreateOfficeMemberDTO from '@modules/members/dtos/ICreateOfficeMember.dto';
+import ICreatePatentDTO from '@modules/members/dtos/Patent/ICreatePatent.dto';
 import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
 import { ConflictException } from '@nestjs/common';
 
 interface IRequest {
-  data: ICreateOfficeMemberDTO;
+  data: ICreatePatentDTO;
   repository: IRepositoryPatent;
 }
 

@@ -1,10 +1,10 @@
 import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
-import IOrderOfficeMemberDTO from '../../dtos/IOrderOfficeMember.dto';
+import IOrderPatentDTO from '../../dtos/Patent/IOrderPatent.dto';
 
 interface IRequest {
   repository: IRepositoryPatent;
-  order?: IOrderOfficeMemberDTO;
+  order?: IOrderPatentDTO;
 }
 
 const findAll = async ({

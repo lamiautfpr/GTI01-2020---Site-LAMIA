@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import ICreateOfficeMemberDTO from '../dtos/ICreateOfficeMember.dto';
-import IOrderOfficeMemberDTO, {
-  ISelectOrderOfficeMemberDTO,
-} from '../dtos/IOrderOfficeMember.dto';
+import ICreatePatentDTO from '../dtos/Patent/ICreatePatent.dto';
+import IOrderPatentDTO, {
+  ISelectOrderPatentDTO,
+} from '../dtos/Patent/IOrderPatent.dto';
 import IRepositoryOfficeMember from '../repositories/IRepositoryPatent';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 import { RepositoryPatent } from '../typeorm/repositories/patent.repository';
@@ -17,7 +17,7 @@ export class ServiceOfficeMember {
   ) {}
 
   public async createOfficeMember(
-    data: ICreateOfficeMemberDTO,
+    data: ICreatePatentDTO,
   ): Promise<EntityPatent> {
     return create({
       data: data,
@@ -28,8 +28,8 @@ export class ServiceOfficeMember {
   public async findAll({
     attribute,
     direction,
-  }: ISelectOrderOfficeMemberDTO): Promise<EntityPatent[]> {
-    const order: IOrderOfficeMemberDTO = {
+  }: ISelectOrderPatentDTO): Promise<EntityPatent[]> {
+    const order: IOrderPatentDTO = {
       [attribute || 'name']: direction || 'ASC',
     };
 
