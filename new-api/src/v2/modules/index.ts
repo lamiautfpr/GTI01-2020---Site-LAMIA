@@ -1,3 +1,3 @@
-import { ModuleOfficeMember } from './members/member.module';
+import { ModuleMember } from './members/member.module';
 
-export const Modules = [ModuleOfficeMember];
+export const Modules = [ModuleMember];

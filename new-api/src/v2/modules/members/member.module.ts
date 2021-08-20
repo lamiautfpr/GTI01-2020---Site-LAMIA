@@ -19,4 +19,4 @@ const jwtConfig = JwtModule.register({
   controllers: [...Controllers],
   providers: [...Services, ...Strategies, HashProvider, StorageProvider],
 })
-export class ModuleOfficeMember {}
+export class ModuleMember {}
