@@ -37,5 +37,7 @@ lerna-debug.log*
 tmp/*
 tmp/upload/members/*
 tmp/upload/works/*
+tmp/upload/news/*
 !tmp/upload/members/.gitKeep
 !tmp/upload/works/.gitKeep
+!tmp/upload/news/.gitKeep
