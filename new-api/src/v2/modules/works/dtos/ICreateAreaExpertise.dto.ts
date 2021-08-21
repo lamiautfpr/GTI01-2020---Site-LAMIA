@@ -6,8 +6,8 @@ export default class ICreateAreaExpertiseDTO {
   @IsNotEmpty()
   @IsDefined()
   @ApiProperty({
-    description: 'Name of area Expetise',
-    example: 'Novato',
+    description: 'Name of Area Expetise',
+    example: 'Ciência de Dados',
   })
   name: string;
 
@@ -15,8 +15,8 @@ export default class ICreateAreaExpertiseDTO {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    description: 'Description of area expertise',
-    example: 'The studant is novato',
+    description: 'Description of Area expertise',
+    example: 'Ciência de Dados é...',
   })
   description?: string;
 }

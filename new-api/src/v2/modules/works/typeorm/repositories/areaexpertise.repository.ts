@@ -25,19 +25,7 @@ export class RepositoryAreaExpertise
   public async createSave(
     data: ICreateAreaExpertiseDTO,
   ): Promise<EntityAreaExpertise | undefined> {
-    const { name, description } = data;
-
-    const date = new Date();
-
-    const newData = {
-      id: uuidv4(),
-      created: date.toString(),
-      updateAt: '',
-      name,
-      description,
-    };
-
-    const AreaExpertise = this.ormRepository.create(newData);
+    const AreaExpertise = this.ormRepository.create(data);
 
     return this.ormRepository.save(AreaExpertise);
   }

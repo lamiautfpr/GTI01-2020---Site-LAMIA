@@ -6,8 +6,8 @@ import { Column, Entity } from 'typeorm';
 export class EntityAreaExpertise extends BasicEntity {
   // Definindo os parametros do ID
   @ApiProperty({
-    description: 'Name of area expertise',
-    example: 'Cientista de computadores',
+    description: 'Name of Area Expertise',
+    example: 'Ciência de Dados',
   })
   @Column({
     nullable: false,
@@ -20,6 +20,7 @@ export class EntityAreaExpertise extends BasicEntity {
 
   @ApiProperty({
     description: 'Description of Area Expertise',
+    example: 'Ciência de Dados é...',
   })
   @Column({
     nullable: true,

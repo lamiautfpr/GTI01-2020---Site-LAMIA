@@ -11,7 +11,6 @@ import { ServiceAreaExpertise } from './services/areaExpertise.service';
     TypeOrmModule.forFeature([EntityAreaExpertise, RepositoryAreaExpertise]),
   ],
 
-  // Realiza as rotas
   controllers: [ControllerAreaExpertise],
   providers: [ServiceAreaExpertise],
 })

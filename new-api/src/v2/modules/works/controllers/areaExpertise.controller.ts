@@ -29,8 +29,8 @@ import ICreateAreaExpertiseDTO from '../dtos/ICreateAreaExpertise.dto';
 import { ISelectOrderAreaExpertiseDTO } from '../dtos/IOrderAreaExpertise.dto';
 import { ApiConfig } from '@config/api';
 
-@ApiTags('area')
-@Controller(`${ApiConfig.version}/areaExpertise`)
+@ApiTags('Area Expertise')
+@Controller(`${ApiConfig.version}/area-expertise`)
 export class ControllerAreaExpertise {
   constructor(private readonly serviceAreaExpertise: ServiceAreaExpertise) {}
 
@@ -42,7 +42,6 @@ export class ControllerAreaExpertise {
   @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
-  // If request is Post, it will be created new areaExpertise
   @Post()
   create(@Body() data: ICreateAreaExpertiseDTO) {
     return this.serviceAreaExpertise.createAreaExpertise(data);
@@ -60,7 +59,6 @@ export class ControllerAreaExpertise {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
-  // Else request is the POST, it will be returned all areaExpertises
   @Get()
   findAll(@Query() order: ISelectOrderAreaExpertiseDTO) {
     return this.serviceAreaExpertise.findAll(order);
