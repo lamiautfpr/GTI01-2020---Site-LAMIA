@@ -1,5 +1,4 @@
 import BasicEntity from '@modules/BasicEntity';
-import { EntityOfficeMember } from '@modules/members/typeorm/entities/officeMember.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity } from 'typeorm';
 

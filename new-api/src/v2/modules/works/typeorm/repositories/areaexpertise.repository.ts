@@ -2,13 +2,13 @@ import { EntityRepository, Repository, getRepository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 // Interface
-import IRepositoryAreaExpertise from '@modules/areaExpertise/repositories/IRepositoryAreaExpertise';
+import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
 
 // Entidade
 import { EntityAreaExpertise } from '../entities/areaExpertise.entity';
 
 // DTO
-import ICreateAreaExpertiseDTO from '@modules/areaExpertise/dtos/ICreateAreaExpertise.dto';
+import ICreateAreaExpertiseDTO from '@modules/works/dtos/ICreateAreaExpertise.dto';
 import IOrderOfficeMemberDTO from '@modules/members/dtos/IOrderOfficeMember.dto';
 
 @EntityRepository(EntityAreaExpertise)
