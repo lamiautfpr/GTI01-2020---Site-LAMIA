@@ -8,6 +8,7 @@ export default class ICreateAreaExpertiseDTO {
   @ApiProperty({
     description: 'Name of Area Expetise',
     example: 'Ciência de Dados',
+    required: true,
   })
   name: string;
 
@@ -17,6 +18,7 @@ export default class ICreateAreaExpertiseDTO {
   @ApiProperty({
     description: 'Description of Area expertise',
     example: 'Ciência de Dados é...',
+    required: false,
   })
   description?: string;
 }
