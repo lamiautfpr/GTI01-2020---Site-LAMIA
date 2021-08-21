@@ -1,17 +1,13 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { EntityAreaExpertise } from './typeorm/entities/areaExpertise.entity';
-import { RepositoryAreaExpertise } from './typeorm/repositories/areaexpertise.repository';
-
 // Controllers
-import { ControllerAreaExpertise } from './controllers/areaExpertise.controller';
-import { ServiceAreaExpertise } from './services/areaExpertise.service';
-@Module({
-  imports: [
-    TypeOrmModule.forFeature([EntityAreaExpertise, RepositoryAreaExpertise]),
-  ],
+import { Controllers } from './controllers';
+import { Services } from './services';
 
-  controllers: [ControllerAreaExpertise],
-  providers: [ServiceAreaExpertise],
+import TypeOrmModules from '@modules/works/typeorm';
+
+@Module({
+  imports: [TypeOrmModules],
+  controllers: [...Controllers],
+  providers: [...Services],
 })
 export class ModuleWorks {}

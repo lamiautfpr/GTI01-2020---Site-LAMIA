@@ -25,17 +25,17 @@ import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 
 // Erros
 import Errors from 'v2/utils/Errors';
-import ICreateAreaExpertiseDTO from '../dtos/ICreateAreaExpertise.dto';
-import { ISelectOrderAreaExpertiseDTO } from '../dtos/IOrderAreaExpertise.dto';
+import ICreateAreaExpertiseDTO from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
+import { ISelectOrderAreaExpertiseDTO } from '../dtos/areaExpertise/IOrderAreaExpertise.dto';
 import { ApiConfig } from '@config/api';
 
-@ApiTags('Area Expertise')
-@Controller(`${ApiConfig.version}/area-expertise`)
+@ApiTags('Areas Expertise')
+@Controller(`${ApiConfig.version}/works/areas-expertise`)
 export class ControllerAreaExpertise {
   constructor(private readonly serviceAreaExpertise: ServiceAreaExpertise) {}
 
   @ApiCreatedResponse({
-    description: 'Created Sucess',
+    description: 'Created Success',
     type: EntityAreaExpertise,
   })
   @ApiBadRequestResponse(Errors.BadRequest)

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
+import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
 
 type IDirection = 'ASC' | 'DESC';
 type IAttributes = 'name' | 'createdAt';
@@ -10,8 +10,6 @@ type IOrderAreaExpertiseDTO = {
 };
 
 const AttributesOrderAreaExpertise = ['name', 'createAt'];
-
-// Define a sequencia de retorno, Crescente ou decrecente;
 const DirectionsOrderAreaExpertise = ['ASC', 'DESC'];
 
 export class ISelectOrderAreaExpertiseDTO {

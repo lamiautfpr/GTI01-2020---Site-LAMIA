@@ -1,4 +1,3 @@
-import create from './createAreaExpertise.service';
-import findAll from './findAllAreaExpertise.service';
+import { ServiceAreaExpertise } from './areaExpertise.service';
 
-export { create, findAll };
+export const Services = [ServiceAreaExpertise];
