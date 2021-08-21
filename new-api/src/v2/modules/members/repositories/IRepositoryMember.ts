@@ -4,7 +4,7 @@ import { EntityMember } from '../typeorm/entities/member.entity';
 
 export default interface IRepositoryMember {
   createSave(data: ICreateMemberDTO): Promise<EntityMember>;
-  updateSave(data: Omit<EntityMember, 'avatarUrl'>): Promise<EntityMember>;
+  updateSave(data: EntityMember): Promise<EntityMember>;
   findById(id: string): Promise<EntityMember | undefined>;
   findByEmail(email: string): Promise<EntityMember | undefined>;
   findByLogin(login: string): Promise<EntityMember | undefined>;

@@ -1,5 +1,6 @@
 enum TARGET_FOLDER {
   MEMBERS = 'members',
+  NEWS = 'news',
   WORKS = 'works',
 }
 

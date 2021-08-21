@@ -65,7 +65,6 @@ export class ControllerPatent {
   @UsePipes(new ValidationPipe())
   @Get()
   findAll(@Query() order: ISelectOrderPatentDTO) {
-    console.log('OI');
     return this.servicePatent.findAll(order);
   }
 }
