@@ -15,4 +15,4 @@ import { ServiceAreaExpertise } from './services/areaExpertise.service';
   controllers: [ControllerAreaExpertise],
   providers: [ServiceAreaExpertise],
 })
-export class ModuleAreaExpertise {}
+export class ModuleWorks {}
