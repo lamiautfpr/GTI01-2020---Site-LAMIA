@@ -6,7 +6,7 @@ import { EntityAreaExpertise } from '@modules/works/typeorm/entities/areaExperti
 
 // DTO
 import ICreateAreaExpertiseDTO from '@modules/works/dtos/areaExpertise/ICreateAreaExpertise.dto';
-import IOrderOfficeMemberDTO from '@modules/members/dtos/IOrderOfficeMember.dto';
+import IOrderPatentDTO from '@modules/members/dtos/Patent/IOrderPatent.dto';
 
 export class FakeRepositoryAreaExpertise implements IRepositoryAreaExpertise {
   private areasExpertise: EntityAreaExpertise[];
@@ -27,7 +27,7 @@ export class FakeRepositoryAreaExpertise implements IRepositoryAreaExpertise {
 
   // Método para retornar todos os dados, em forma de um array
   public async findAll(
-    order?: IOrderOfficeMemberDTO,
+    order?: IOrderPatentDTO,
   ): Promise<EntityAreaExpertise[] | undefined> {
     return this.areasExpertise;
   }
