@@ -6,14 +6,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2017",
+    "target": "es2019",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./src",
     "incremental": true,
     "paths": {
 			"@modules/*": ["./v2/modules/*"],
-			"@config/*": ["./v2/config/*"]
+			"@config/*": ["./v2/config/*"],
+			"@providers/*": ["./v2/providers/*"]
 		}
   }
 }
