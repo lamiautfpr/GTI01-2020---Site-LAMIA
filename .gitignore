@@ -1,6 +1,7 @@
 # dependencies
 /node_modules
-/new-api
+/new-api/
+/new-api/*
 
 .env
 
