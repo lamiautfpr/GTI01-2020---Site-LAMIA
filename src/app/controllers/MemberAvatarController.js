@@ -24,8 +24,6 @@ class MemberAvatarController {
       });
       const { originalname: name, filename: path } = req.file;
 
-      console.log(req.userId);
-
       if (!member) {
         return res.status(401).json({ error: 'Integrante não encontrado!' });
       }

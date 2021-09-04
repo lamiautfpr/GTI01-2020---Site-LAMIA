@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import multer from 'multer';
+
 import AreaExpertiseController from './app/controllers/AreaExpertiseController';
 import CategoryWorkController from './app/controllers/CategoryWorkController';
 import FileController from './app/controllers/FileController';
 import LastWorkController from './app/controllers/LastWorkController';
 import ListController from './app/controllers/ListController';
 import MemberAvatarController from './app/controllers/MemberAvatarController';
+import MemberPasswordController from './app/controllers/MemberPasswordController';
 import MemberController from './app/controllers/MemberController';
 import MemberOfficeController from './app/controllers/MemberOfficeController';
 import NewsController from './app/controllers/NewsController';
@@ -66,6 +68,7 @@ routes.patch(
   MemberAvatarController.update
 );
 routes.patch('/members/office', MemberOfficeController.update);
+routes.patch('/members/reset-password/:id', MemberPasswordController.update);
 
 routes.delete('/type-members', TypeMemberController.delete);
 routes.delete('/area-expertises', AreaExpertiseController.delete);
