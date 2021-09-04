@@ -24,6 +24,8 @@ class MemberAvatarController {
       });
       const { originalname: name, filename: path } = req.file;
 
+      console.log(req.userId);
+
       if (!member) {
         return res.status(401).json({ error: 'Integrante não encontrado!' });
       }
@@ -38,15 +40,29 @@ class MemberAvatarController {
       const picture = await Picture.findByPk(member.avatar_id);
       const filePath = resolve(uploadConfig.folderUpload, picture.path);
 
-      await fs.promises.unlink(filePath);
-      // eslint-disable-next-line no-empty
+      try {
+        await fs.promises.unlink(filePath);
+      } catch (error) {
+        console.log(error);
+      }
 
       await picture.update({ name, path });
       member.update({ avatar_id: picture.id, avatar: picture });
 
       return res.json(member);
     } catch (err) {
-      return res.json(err);
+      try {
+        // Apagando arquivo updado agora
+        await fs.promises.unlink(
+          resolve(uploadConfig.folderUpload, req.file.filename)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+
+      return res
+        .status(400)
+        .json({ message: 'Erro ao atualizar avatar!', err });
     }
   }
 }

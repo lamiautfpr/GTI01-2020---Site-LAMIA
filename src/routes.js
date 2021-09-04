@@ -61,7 +61,7 @@ routes.put('/category-work', CategoryWorkController.update);
 routes.put('/type-work', TypeWorkController.update);
 routes.put('/members', MemberController.update);
 routes.patch(
-  '/members/ ',
+  '/members',
   upload.single('avatar'),
   MemberAvatarController.update
 );
