@@ -20,11 +20,10 @@ import { ApiConfig } from '../../../config/api';
 import ICreateCategoryDTO from '../dtos/category/ICreateCategory.dto';
 import { ISelectOrderCategoryDTO } from '../dtos/category/IOrderCategory.dto';
 import { EntityCategory } from '../typeorm/entities/category.entity';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ServiceCategory } from '../services/category.service';
 
 @ApiTags('category')
-@Controller(`${ApiConfig.version}/category`)
+@Controller(`${ApiConfig.version}works/categories`)
 export class ControllerCategory {
   constructor(private readonly ServiceCategory: ServiceCategory) {}
 
@@ -35,7 +34,6 @@ export class ControllerCategory {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
-  // If request is Post, it will be created new areaExpertise
   @Post()
   create(@Body() data: ICreateCategoryDTO) {
     return this.ServiceCategory.createCategory(data);
@@ -53,7 +51,6 @@ export class ControllerCategory {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
-  // Else request is the POST, it will be returned all areaExpertises
   @Get()
   findAll(@Query() order: ISelectOrderCategoryDTO) {
     return this.ServiceCategory.findAll(order);

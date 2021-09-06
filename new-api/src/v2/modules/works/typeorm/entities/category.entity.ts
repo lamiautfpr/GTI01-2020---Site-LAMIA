@@ -1,5 +1,4 @@
 import BasicEntity from '@modules/BasicEntity';
-
 import { ApiProperty } from '@nestjs/swagger';
 
 import { Column, Entity } from 'typeorm';
@@ -18,6 +17,7 @@ export class EntityCategory extends BasicEntity {
 
   @ApiProperty({
     description: 'Description of Category',
+    example: 'Latinoware 2019'
   })
   @Column({
     nullable: true,
