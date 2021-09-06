@@ -23,7 +23,7 @@ import { EntityCategory } from '../typeorm/entities/category.entity';
 import { ServiceCategory } from '../services/category.service';
 
 @ApiTags('category')
-@Controller(`${ApiConfig.version}works/categories`)
+@Controller(`${ApiConfig.version}/works/categories`)
 export class ControllerCategory {
   constructor(private readonly ServiceCategory: ServiceCategory) {}
 
