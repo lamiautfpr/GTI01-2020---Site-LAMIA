@@ -1,5 +1,4 @@
 import IOrderCategoryDTO from '@modules/works/dtos/category/IOrderCategory.dto';
-
 import { EntityCategory } from '@modules/works/typeorm/entities/category.entity';
 
 import IRepositoryCategory from '@modules/works/repositories/IRepositoryCategory';

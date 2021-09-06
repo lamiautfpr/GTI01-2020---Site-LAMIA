@@ -1,9 +1,6 @@
 import ICreateCategoryDTO from '../dtos/category/ICreateCategory.dto';
-
 import IFindCategoryDTO from '../dtos/category/IFindCategory.dto';
-
 import IOrderCategoryDTO from '../dtos/category/IOrderCategory.dto';
-
 import { EntityCategory } from '../typeorm/entities/category.entity';
 
 export default interface IRepositoryCategory {
