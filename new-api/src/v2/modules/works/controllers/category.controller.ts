@@ -11,6 +11,7 @@ import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
   ApiQuery,
   ApiResponse,
   ApiTags,
@@ -42,9 +43,12 @@ export class ControllerCategory {
   @ApiQuery({
     type: ISelectOrderCategoryDTO,
   })
+  @ApiNoContentResponse({
+    description: 'Category not exists',
+  })
   @ApiResponse({
     status: 200,
-    description: 'List of Categorys',
+    description: 'List of Categories',
     type: EntityCategory,
     isArray: true,
   })
@@ -55,4 +59,5 @@ export class ControllerCategory {
   findAll(@Query() order: ISelectOrderCategoryDTO) {
     return this.ServiceCategory.findAll(order);
   }
+
 }
