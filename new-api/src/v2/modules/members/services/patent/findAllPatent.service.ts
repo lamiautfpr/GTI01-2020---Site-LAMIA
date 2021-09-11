@@ -1,6 +1,6 @@
 import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
-import NoContentExcepetion from 'v2/utils/Exceptions/NoContent.excepetion';
+import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.excepetion';
 import IOrderPatentDTO from '../../dtos/Patent/IOrderPatent.dto';
 
 interface IRequest {

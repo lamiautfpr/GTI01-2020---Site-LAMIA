@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import Unauthorized from 'v2/utils/Errors/Unauthorized';
 import { ICreatePatentDTO } from '../dtos/Patent/ICreatePatent.dto';
 import IOrderPatentDTO, {
   ISelectOrderPatentDTO,
