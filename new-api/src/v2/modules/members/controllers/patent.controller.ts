@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
   Post,
   Query,
   Request,
@@ -16,6 +17,7 @@ import {
   ApiCreatedResponse,
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
   ApiOperation,
   ApiQuery,
   ApiResponse,
@@ -67,6 +69,9 @@ export class ControllerPatent {
     isArray: true,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiNoContentResponse({
+    description: 'No Content',
+  })
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
