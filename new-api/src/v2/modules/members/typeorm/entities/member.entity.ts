@@ -1,6 +1,6 @@
 import BasicEntity from '@modules/BasicEntity';
 import { ApiProperty } from '@nestjs/swagger';
-import { storageProvider } from '@providers/StorageProvider';
+import { StorageProvider } from '@providers/StorageProvider';
 import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
 import { Exclude, Transform } from 'class-transformer';
 import { Column, Entity, ManyToOne } from 'typeorm';
@@ -129,6 +129,8 @@ export class EntityMember extends BasicEntity {
     example: `${process.env.URL_API}${process.env.PATH_FILE_STATIC}/${TARGET_FOLDER.MEMBERS}/img.jpg`,
   })
   @Transform(async ({ value }) => {
+    const storageProvider = new StorageProvider();
+
     return !value
       ? null
       : await storageProvider.getUrl({

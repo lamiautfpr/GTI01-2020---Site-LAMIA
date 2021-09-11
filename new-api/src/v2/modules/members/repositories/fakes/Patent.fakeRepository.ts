@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import CREATION_PERMISSION_PATENTS from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
+import { getKeys } from '../../../../utils/handleEnums';
 import ICreatePatentDTO from '../../dtos/Patent/ICreatePatent.dto';
 import IFindPatentDTO from '../../dtos/Patent/IFindPatent.dto';
 import IOrderPatentDTO from '../../dtos/Patent/IOrderPatent.dto';
@@ -14,6 +16,10 @@ export class FakeRepositoryPatent implements IRepositoryPatent {
 
   public async createSave(data: ICreatePatentDTO): Promise<EntityPatent> {
     const patent = new EntityPatent(data);
+
+    if (getKeys(CREATION_PERMISSION_PATENTS).includes(data.name)) {
+      patent.id = CREATION_PERMISSION_PATENTS[data.name];
+    }
 
     this.patents.push(patent);
 

@@ -1,4 +1,4 @@
-import { getValues } from 'v2/utils/handleEnums';
+import { getValues } from '../../../utils/handleEnums';
 
 enum CREATION_PERMISSION_PATENTS {
   ADMINISTRATOR = 'd4975451-c598-4af4-9a3b-070df207dab7',
