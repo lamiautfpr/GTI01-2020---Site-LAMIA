@@ -27,6 +27,9 @@ export class EntityPatent extends BasicEntity {
   })
   description: string;
 
-  @OneToMany(() => EntityMember, (member) => member.patent)
+  @OneToMany(() => EntityMember, (member) => member.patent, {
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  })
   members: EntityMember[];
 }

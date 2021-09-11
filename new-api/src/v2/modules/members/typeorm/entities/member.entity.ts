@@ -56,6 +56,8 @@ export class EntityMember extends BasicEntity {
   @ManyToOne(() => EntityPatent, (patent) => patent.members, {
     eager: true,
     nullable: false,
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
   })
   patent: EntityPatent;
 
