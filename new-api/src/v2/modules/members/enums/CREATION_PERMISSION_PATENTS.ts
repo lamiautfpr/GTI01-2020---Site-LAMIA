@@ -5,7 +5,7 @@ enum CREATION_PERMISSION_PATENTS {
   COORDINATOR = 'ff4332f2-a870-48d7-861f-4cf14f4e228f',
 }
 
-export const hasCreatePermission = (patientId: string): boolean =>
-  getValues(CREATION_PERMISSION_PATENTS).includes(patientId);
+export const hasCreatePermission = (ppatentId: string): boolean =>
+  getValues(CREATION_PERMISSION_PATENTS).includes(ppatentId);
 
 export default CREATION_PERMISSION_PATENTS;

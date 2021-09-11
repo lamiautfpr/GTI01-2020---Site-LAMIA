@@ -51,7 +51,7 @@ export class ControllerPatent {
   @Post()
   create(@Request() req: any, @Body() data: ICreatePatentBasicDataDTO) {
     return this.servicePatent.createPatent({
-      newPatientData: data,
+      newPatentData: data,
       idMember: req.user.id,
     });
   }

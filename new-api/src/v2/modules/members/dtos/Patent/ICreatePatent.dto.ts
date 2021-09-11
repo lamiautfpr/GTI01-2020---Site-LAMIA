@@ -31,7 +31,7 @@ export default class ICreatePatentBasicDataDTO {
 
 export class ICreatePatentDTO {
   @IsDefined()
-  newPatientData: ICreatePatentBasicDataDTO;
+  newPatentData: ICreatePatentBasicDataDTO;
 
   @IsDefined()
   @IsUUID()

@@ -23,7 +23,7 @@ export class ServicePatent {
   ) {}
 
   public async createPatent({
-    newPatientData,
+    newPatentData,
     idMember,
   }: ICreatePatentDTO): Promise<EntityPatent> {
     const member = await this.memberRepository.findById(idMember);
@@ -33,7 +33,7 @@ export class ServicePatent {
     }
 
     return create({
-      newPatientData,
+      newPatentData,
       member,
       repository: this.patentRepository,
     });

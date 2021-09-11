@@ -10,24 +10,22 @@ interface IRequest extends ICreatePatentServiceDTO {
 
 const create = async ({
   repository,
-  newPatientData,
+  newPatentData,
   member,
 }: IRequest): Promise<EntityPatent> => {
-  console.log(member);
-
   if (!hasCreatePermission(member.patent.id)) {
     throw new ForbiddenException([
       'Your patent not have permission for creating a new patent',
     ]);
   }
 
-  const patentExists = await repository.findByName(newPatientData.name);
+  const patentExists = await repository.findByName(newPatentData.name);
 
   if (patentExists) {
     throw new ConflictException(['Patent already exists']);
   }
 
-  return repository.createSave(newPatientData);
+  return repository.createSave(newPatentData);
 };
 
 export default create;
