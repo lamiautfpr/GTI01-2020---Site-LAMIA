@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export default class AlterTableMemberAddCascadeWithPatient1631359107976
+export default class AlterTableMemberAddCascadeWithPatent1631359107976
   implements MigrationInterface {
-  name = 'AlterTableMemberAddCascadeWithPatient1631359107976';
+  name = 'AlterTableMemberAddCascadeWithPatent1631359107976';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
