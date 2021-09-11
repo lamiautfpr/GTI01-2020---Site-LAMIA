@@ -32,4 +32,9 @@ export class EntityPatent extends BasicEntity {
     onUpdate: 'CASCADE',
   })
   members: EntityMember[];
+
+  constructor(data?: Partial<EntityPatent>) {
+    super();
+    Object.assign(this, data);
+  }
 }

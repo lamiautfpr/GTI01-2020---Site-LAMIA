@@ -149,4 +149,9 @@ export class EntityMember extends BasicEntity {
     type: 'varchar',
   })
   password: string;
+
+  constructor(data?: Partial<EntityMember>) {
+    super();
+    Object.assign(this, data);
+  }
 }
