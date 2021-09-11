@@ -1,7 +1,14 @@
+import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsDefined,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
-export default class ICreatePatentDTO {
+export default class ICreatePatentBasicDataDTO {
   @IsString()
   @IsNotEmpty()
   @IsDefined()
@@ -20,4 +27,18 @@ export default class ICreatePatentDTO {
     required: false,
   })
   description?: string;
+}
+
+export class ICreatePatentDTO {
+  @IsDefined()
+  newPatientData: ICreatePatentBasicDataDTO;
+
+  @IsDefined()
+  @IsUUID()
+  idMember: string;
+}
+
+export interface ICreatePatentServiceDTO
+  extends Omit<ICreatePatentDTO, 'idMember'> {
+  member: EntityMember;
 }

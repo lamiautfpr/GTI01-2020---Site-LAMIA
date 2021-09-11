@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Query,
+  Request,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -13,6 +14,7 @@ import {
   ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiOperation,
   ApiQuery,
@@ -22,7 +24,7 @@ import {
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { apiConfig } from '../../../config/api';
-import ICreatePatentDTO from '../dtos/Patent/ICreatePatent.dto';
+import ICreatePatentBasicDataDTO from '../dtos/Patent/ICreatePatent.dto';
 import { ISelectOrderPatentDTO } from '../dtos/Patent/IOrderPatent.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServicePatent } from '../services/patent.service';
@@ -42,12 +44,16 @@ export class ControllerPatent {
   @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @ApiForbiddenResponse(Errors.Forbidden)
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Post()
-  create(@Body() data: ICreatePatentDTO) {
-    return this.servicePatent.createPatent(data);
+  create(@Request() req: any, @Body() data: ICreatePatentBasicDataDTO) {
+    return this.servicePatent.createPatent({
+      newPatientData: data,
+      idMember: req.user.id,
+    });
   }
 
   @ApiOperation({ summary: 'findAll' })

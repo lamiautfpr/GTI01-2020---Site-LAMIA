@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import ICreatePatentDTO from '../dtos/Patent/ICreatePatent.dto';
+import Unauthorized from 'v2/utils/Errors/Unauthorized';
+import { ICreatePatentDTO } from '../dtos/Patent/ICreatePatent.dto';
 import IOrderPatentDTO, {
   ISelectOrderPatentDTO,
 } from '../dtos/Patent/IOrderPatent.dto';
+import IRepositoryMember from '../repositories/IRepositoryMember';
 import IRepositoryPatent from '../repositories/IRepositoryPatent';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
+import { RepositoryMember } from '../typeorm/repositories/member.repository';
 import { RepositoryPatent } from '../typeorm/repositories/patent.repository';
 import { create, findAll } from './patent';
 
@@ -14,11 +17,24 @@ export class ServicePatent {
   constructor(
     @InjectRepository(RepositoryPatent)
     private readonly patentRepository: IRepositoryPatent,
+
+    @InjectRepository(RepositoryMember)
+    private readonly memberRepository: IRepositoryMember,
   ) {}
 
-  public async createPatent(data: ICreatePatentDTO): Promise<EntityPatent> {
+  public async createPatent({
+    newPatientData,
+    idMember,
+  }: ICreatePatentDTO): Promise<EntityPatent> {
+    const member = await this.memberRepository.findById(idMember);
+
+    if (!member) {
+      throw new UnauthorizedException(['Member not found']);
+    }
+
     return create({
-      data: data,
+      newPatientData,
+      member,
       repository: this.patentRepository,
     });
   }
