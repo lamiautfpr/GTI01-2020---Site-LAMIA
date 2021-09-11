@@ -43,7 +43,7 @@ describe('Create Area Expertise - SERVICES', () => {
         name: 'Area Expertise MocK',
       });
 
-      expect(
+      await expect(
         serviceAreaExpertise.createAreaExpertise({
           name: 'Area Expertise MocK',
         }),
@@ -56,7 +56,7 @@ describe('Create Area Expertise - SERVICES', () => {
         description: 'this is a description',
       });
 
-      expect(
+      await expect(
         serviceAreaExpertise.createAreaExpertise({
           name: 'Area Expertise MocK',
           description: 'this is a description',
