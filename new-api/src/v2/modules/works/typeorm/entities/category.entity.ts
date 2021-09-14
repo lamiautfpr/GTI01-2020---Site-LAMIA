@@ -24,4 +24,9 @@ export class EntityCategory extends BasicEntity {
     type: 'varchar',
   })
   description: string;
+
+  constructor(data?: Partial<EntityCategory>) {
+    super();
+    Object.assign(this, data);
+  }
 }
