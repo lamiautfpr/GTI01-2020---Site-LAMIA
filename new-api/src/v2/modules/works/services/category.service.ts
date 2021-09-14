@@ -19,7 +19,7 @@ import IOrderCategoryDTO, {
 export class ServiceCategory {
   constructor(
     @InjectRepository(RepositoryCategory)
-    private readonly exampleRepository: IRepositoryCategory,
+    private readonly categoryRepository: IRepositoryCategory,
   ) {}
 
   public async createCategory(
@@ -27,7 +27,7 @@ export class ServiceCategory {
   ): Promise<EntityCategory> {
     return create({
       data: data,
-      repository: this.exampleRepository,
+      repository: this.categoryRepository,
     });
   }
 
@@ -39,6 +39,6 @@ export class ServiceCategory {
       [attribute || 'name']: direction || 'ASC',
     };
 
-    return findAll({ repository: this.exampleRepository, order });
+    return findAll({ repository: this.categoryRepository, order });
   }
 }
