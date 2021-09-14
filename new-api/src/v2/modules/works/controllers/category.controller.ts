@@ -17,14 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
-import { ApiConfig } from '../../../config/api';
+import { apiConfig } from '../../../config/api';
 import ICreateCategoryDTO from '../dtos/category/ICreateCategory.dto';
 import { ISelectOrderCategoryDTO } from '../dtos/category/IOrderCategory.dto';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 import { ServiceCategory } from '../services/category.service';
 
 @ApiTags('category')
-@Controller(`${ApiConfig.version}/works/categories`)
+@Controller(`${apiConfig.version}/works/categories`)
 export class ControllerCategory {
   constructor(private readonly ServiceCategory: ServiceCategory) {}
 
@@ -59,5 +59,4 @@ export class ControllerCategory {
   findAll(@Query() order: ISelectOrderCategoryDTO) {
     return this.ServiceCategory.findAll(order);
   }
-
 }
