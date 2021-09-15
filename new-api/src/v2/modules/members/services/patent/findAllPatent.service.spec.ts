@@ -1,12 +1,6 @@
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
-import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import {
-  ConflictException,
-  ForbiddenException,
-  UnauthorizedException,
-} from '@nestjs/common';
-import NoContentException from '../../../../utils/Exceptions/NoContent.excepetion';
+import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
 import { ServicePatent } from '../patent.service';
 
 let fakeRepositoryPatent: FakeRepositoryPatent;
