@@ -1,4 +1,5 @@
 import authConfig from '@config/auth';
+import { ServiceAreaExpertise } from '@modules/works/services/areaExpertise.service';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';

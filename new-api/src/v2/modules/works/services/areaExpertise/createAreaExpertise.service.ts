@@ -1,6 +1,6 @@
+import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
 import { ConflictException } from '@nestjs/common';
 import ICreateAreaExpertiseDTO from '../../dtos/areaExpertise/ICreateAreaExpertise.dto';
-import IRepositoryAreaExpertise from '../../repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
 
 interface IRequest {

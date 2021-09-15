@@ -13,6 +13,7 @@ import {
   Get,
   Post,
   Query,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -28,6 +29,7 @@ import Errors from 'v2/utils/Errors';
 import ICreateAreaExpertiseDTO from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import { ISelectOrderAreaExpertiseDTO } from '../dtos/areaExpertise/IOrderAreaExpertise.dto';
 import { apiConfig } from '@config/api';
+import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
 
 @ApiTags('Areas Expertise')
 @Controller(`${apiConfig.version}/works/areas-expertise`)
@@ -42,6 +44,7 @@ export class ControllerAreaExpertise {
   @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() data: ICreateAreaExpertiseDTO) {
     return this.serviceAreaExpertise.createAreaExpertise(data);
@@ -59,6 +62,7 @@ export class ControllerAreaExpertise {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll(@Query() order: ISelectOrderAreaExpertiseDTO) {
     return this.serviceAreaExpertise.findAll(order);
