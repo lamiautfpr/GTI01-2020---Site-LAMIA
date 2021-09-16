@@ -6,7 +6,7 @@ const providers = {
   disk: DiskStorageProvider,
 };
 
-export const storageProvider = new providers[uploadConfig.driver]();
+export const StorageProvider = providers[uploadConfig.driver];
 
 export default {
   provide: 'StorageProvider',
