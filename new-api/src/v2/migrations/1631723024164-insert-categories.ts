@@ -1,7 +1,7 @@
 import { EntityCategory } from '@modules/works/typeorm/entities/category.entity';
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class insertCategories1631723024164 implements MigrationInterface {
+export class InsertCategories1631723024164 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.manager.insert(EntityCategory, [
       {
@@ -41,6 +41,9 @@ export class insertCategories1631723024164 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.manager.delete(EntityCategory, [
+      '66125bb4-78e7-427f-a1e9-bbabb73e8248',
+      '0ef5c9c7-ff52-4d40-b765-d03448a1568d',
+      'a1e29ee9-63eb-4cb9-a449-841c39b24fa5',
       '1544cea7-ac1e-41ec-b07f-2b46989fcb28',
     ]);
   }
