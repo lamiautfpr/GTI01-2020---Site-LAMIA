@@ -1,5 +1,5 @@
 import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, ForbiddenException } from '@nestjs/common';
 import ICreateAreaExpertiseDTO from '../../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
 
@@ -10,9 +10,9 @@ interface IRequest {
 
 const create = async (params: IRequest): Promise<EntityAreaExpertise> => {
   const { repository, data } = params;
-
+  //Todo verificar a patente do membro
   const areaExpertise = await repository.findByName(data.name);
-
+  // new ForbiddenException
   if (areaExpertise) {
     throw new ConflictException('AreaExpertise already exists');
   }

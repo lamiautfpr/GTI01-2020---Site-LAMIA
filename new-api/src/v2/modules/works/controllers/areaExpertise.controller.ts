@@ -1,5 +1,19 @@
+import { apiConfig } from '@config/api';
+import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
@@ -7,29 +21,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Query,
-  UseGuards,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
-
-// Service
-import { ServiceAreaExpertise } from '../services/areaExpertise.service';
-
-// Entity
-import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
-
-// Erros
 import Errors from 'v2/utils/Errors';
-import ICreateAreaExpertiseDTO from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
+import ICreateAreaExpertiseBasicDTO from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import { ISelectOrderAreaExpertiseDTO } from '../dtos/areaExpertise/IOrderAreaExpertise.dto';
-import { apiConfig } from '@config/api';
-import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
+import { ServiceAreaExpertise } from '../services/areaExpertise.service';
+import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 
 @ApiTags('Areas Expertise')
 @Controller(`${apiConfig.version}/works/areas-expertise`)
@@ -44,10 +40,14 @@ export class ControllerAreaExpertise {
   @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() data: ICreateAreaExpertiseDTO) {
-    return this.serviceAreaExpertise.createAreaExpertise(data);
+  create(@Body() data: ICreateAreaExpertiseBasicDTO, @Req() request: any) {
+    return this.serviceAreaExpertise.createAreaExpertise({
+      areaExpertise: data,
+      idMember: request.user.userId,
+    });
   }
 
   @ApiQuery({
@@ -62,7 +62,6 @@ export class ControllerAreaExpertise {
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
-  @UseGuards(JwtAuthGuard)
   @Get()
   findAll(@Query() order: ISelectOrderAreaExpertiseDTO) {
     return this.serviceAreaExpertise.findAll(order);

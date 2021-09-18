@@ -1,5 +1,4 @@
 import authConfig from '@config/auth';
-import { ServiceAreaExpertise } from '@modules/works/services/areaExpertise.service';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -19,5 +18,6 @@ const jwtConfig = JwtModule.register({
   imports: [TypeOrmModule, PassportModule, jwtConfig],
   controllers: [...Controllers],
   providers: [...Services, ...Strategies, HashProvider, StorageProvider],
+  exports: [...Services],
 })
 export class ModuleMember {}

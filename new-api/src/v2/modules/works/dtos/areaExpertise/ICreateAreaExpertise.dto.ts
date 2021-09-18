@@ -1,7 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, IsString, IsOptional } from 'class-validator';
+import {
+  IsDefined,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
-export default class ICreateAreaExpertiseDTO {
+export default class ICreateAreaExpertiseBasicDTO {
   @IsString()
   @IsNotEmpty()
   @IsDefined()
@@ -21,4 +27,13 @@ export default class ICreateAreaExpertiseDTO {
     required: false,
   })
   description?: string;
+}
+
+export class ICreateAreaExpertiseDTO {
+  @IsDefined()
+  areaExpertise: ICreateAreaExpertiseBasicDTO;
+
+  @IsDefined()
+  @IsUUID()
+  idMember: string;
 }
