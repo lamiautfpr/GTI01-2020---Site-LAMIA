@@ -35,7 +35,7 @@ describe('Create Area Expertise - Service', () => {
   });
 
   describe('successful cases', () => {
-    it('should return a list of areaExpertise when Expertise exist', async () => {
+    it('should return a list of areaExpertis when Expertise exist', async () => {
       await fakeRepositoryAreaExpertise.createSave({
         name: 'Ciência de Dados',
       });
