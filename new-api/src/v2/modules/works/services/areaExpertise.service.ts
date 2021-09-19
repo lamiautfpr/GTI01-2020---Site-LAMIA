@@ -1,6 +1,8 @@
 import { ServiceMember } from '@modules/members/services/member.service';
-import { Inject, Injectable } from '@nestjs/common';
+import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import BadRequest from 'v2/utils/Errors/BadRequest';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IOrderAreaExpertiseDTO, {
   ISelectOrderAreaExpertiseDTO,
@@ -23,9 +25,21 @@ export class ServiceAreaExpertise {
     idMember,
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
     //Todo Buscar membro pelo id
+
+    const userAll = await this.serviceMember.findAll({});
+
+    const member = userAll.map((user) => {
+      return user.id == idMember ? user : undefined;
+    })[0];
+
+    if (!member) {
+      throw new BadRequestException('invalid parameter');
+    }
+
     return create({
       data: areaExpertise,
       repository: this.repositoryAreaExpertise,
+      member,
     });
   }
 
