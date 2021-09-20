@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
-export default class ICreateAreaExpertiseDTO {
+export default class ICreateTypeDTO {
   @IsString()
   @IsNotEmpty()
   @IsDefined()
@@ -16,7 +16,7 @@ export default class ICreateAreaExpertiseDTO {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    description: 'Description of Tyep',
+    description: 'Description of Type',
     example: 'Pesquisa Científica é...',
     required: false,
   })
