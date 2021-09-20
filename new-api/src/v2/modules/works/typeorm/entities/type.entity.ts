@@ -4,8 +4,6 @@ import { Column, Entity } from 'typeorm';
 
 @Entity('tb_type')
 export class EntityType extends BasicEntity {
-  // Definindo os parametros do ID
-
   @ApiProperty({
     description: 'Name of Types',
     example: 'Pesquisa Científica',
