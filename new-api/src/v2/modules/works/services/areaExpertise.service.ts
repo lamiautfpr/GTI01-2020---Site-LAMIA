@@ -11,12 +11,11 @@ import IRepositoryAreaExpertise from '../repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 import { RepositoryAreaExpertise } from '../typeorm/repositories/areaExpertise.repository';
 import { create, findAll } from './areaExpertise';
-
 @Injectable()
 export class ServiceAreaExpertise {
   constructor(
     @InjectRepository(RepositoryAreaExpertise)
-    private readonly repositoryAreaExpertise: IRepositoryAreaExpertise, // @Inject('ServiceMember') // private readonly serviceMember: ServiceMember,
+    private readonly repositoryAreaExpertise: IRepositoryAreaExpertise,
     private readonly serviceMember: ServiceMember,
   ) {}
 
@@ -24,8 +23,6 @@ export class ServiceAreaExpertise {
     areaExpertise,
     idMember,
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
-    //Todo Buscar membro pelo id
-
     const userAll = await this.serviceMember.findAll({});
 
     const member = userAll.map((user) => {
