@@ -56,6 +56,8 @@ export class EntityMember extends BasicEntity {
   @ManyToOne(() => EntityPatent, (patent) => patent.members, {
     eager: true,
     nullable: false,
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
   })
   patent: EntityPatent;
 
@@ -149,4 +151,9 @@ export class EntityMember extends BasicEntity {
     type: 'varchar',
   })
   password: string;
+
+  constructor(data?: Partial<EntityMember>) {
+    super();
+    Object.assign(this, data);
+  }
 }

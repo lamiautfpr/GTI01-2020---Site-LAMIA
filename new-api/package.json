@@ -92,7 +92,8 @@
       "coverageDirectory": "../coverage",
       "testEnvironment": "node",
       "collectCoverageFrom": [
-        "**/*.(t|j)s"
+        "**/**/modules/**/services/**/*.(t|j)s",
+        "!**/**/modules/**/services/**/index.ts"
       ],
       "moduleNameMapper": {
         "@modules/(.*)": "<rootDir>/v2/modules/$1",

@@ -1,5 +1,6 @@
 import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
+import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
 import IOrderPatentDTO from '../../dtos/Patent/IOrderPatent.dto';
 
 interface IRequest {
@@ -11,7 +12,12 @@ const findAll = async ({
   repository,
   order,
 }: IRequest): Promise<EntityPatent[]> => {
-  return repository.findAll(order);
+  const patents = await repository.findAll(order);
+
+  if (patents.length <= 0) {
+    throw new NoContentExcepetion();
+  }
+  return patents;
 };
 
 export default findAll;
