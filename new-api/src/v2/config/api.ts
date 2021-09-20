@@ -5,7 +5,7 @@ interface IApi {
 }
 
 export const apiConfig = {
-  version: 'v2',
+  version: '/api/v2',
   apiUrl: `${process.env.URL_API}`,
   pathFileStatic: `${process.env.PATH_FILE_STATIC}`,
 } as IApi;

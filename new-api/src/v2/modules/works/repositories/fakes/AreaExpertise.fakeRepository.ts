@@ -1,12 +1,8 @@
-// Interface
-import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
-
-// Entidade
-import { EntityAreaExpertise } from '@modules/works/typeorm/entities/areaExpertise.entity';
-
-// DTO
-import ICreateAreaExpertiseDTO from '@modules/works/dtos/areaExpertise/ICreateAreaExpertise.dto';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import IOrderPatentDTO from '@modules/members/dtos/Patent/IOrderPatent.dto';
+import ICreateAreaExpertiseDTO from '@modules/works/dtos/areaExpertise/ICreateAreaExpertise.dto';
+import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
+import { EntityAreaExpertise } from '@modules/works/typeorm/entities/areaExpertise.entity';
 
 export class FakeRepositoryAreaExpertise implements IRepositoryAreaExpertise {
   private areasExpertise: EntityAreaExpertise[];
@@ -25,14 +21,12 @@ export class FakeRepositoryAreaExpertise implements IRepositoryAreaExpertise {
     return areaExpertise;
   }
 
-  // Método para retornar todos os dados, em forma de um array
   public async findAll(
     order?: IOrderPatentDTO,
   ): Promise<EntityAreaExpertise[] | undefined> {
     return this.areasExpertise;
   }
 
-  // Retorna somente um
   public async findByName(
     name: string,
   ): Promise<EntityAreaExpertise | undefined> {
