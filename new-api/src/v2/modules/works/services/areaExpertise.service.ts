@@ -1,6 +1,7 @@
 import { ServiceMember } from '@modules/members/services/member.service';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Unauthorized } from 'v2/utils/Errors/Unauthorized';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IOrderAreaExpertiseDTO, {
   ISelectOrderAreaExpertiseDTO,
@@ -28,7 +29,7 @@ export class ServiceAreaExpertise {
     })[0];
 
     if (!member) {
-      throw new BadRequestException('invalid parameter');
+      throw new Unauthorized();
     }
 
     return create({
