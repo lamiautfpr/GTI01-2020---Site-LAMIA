@@ -5,37 +5,37 @@ import IRepositoryType from '@modules/works/repositories/IRepositoryType';
 import { EntityType } from '@modules/works/typeorm/entities/type.entity';
 
 // DTO
-import ICreateTypeDTO from '@modules/works/dtos/areaExpertise/ICreateType.dto';
-import IOrderTypeDTO from '@modules/works/dtos/areaExpertise/IOrderType.dto';
+import ICreateTypeDTO from '@modules/works/dtos/type/ICreateType.dto';
+import IOrderTypeDTO from '@modules/works/dtos/type/IOrderType.dto';
 
 export class FakeRepositoryAreaExpertise implements IRepositoryType {
-  private type: EntityType[];
+  private types: EntityType[];
 
   constructor() {
-    this.type = [];
+    this.types = [];
   }
 
   public async createSave(
     data: ICreateTypeDTO,
   ): Promise<EntityType | undefined> {
-    const areaExpertise = new EntityType(data);
+    const type = new EntityType(data);
 
-    this.type.push(areaExpertise);
+    this.types.push(type);
 
-    return areaExpertise;
+    return type;
   }
 
   // Método para retornar todos os dados, em forma de um array
   public async findAll(
     order?: IOrderTypeDTO,
   ): Promise<EntityType[] | undefined> {
-    return this.type;
+    return this.types;
   }
 
   // Retorna somente um
   public async findByName(name: string): Promise<EntityType | undefined> {
-    const areaExpertise = this.type.find((type) => type.name === name);
+    const type = this.types.find((type) => type.name === name);
 
-    return areaExpertise;
+    return type;
   }
 }
