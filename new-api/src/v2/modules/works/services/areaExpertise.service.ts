@@ -1,7 +1,6 @@
 import { ServiceMember } from '@modules/members/services/member.service';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Unauthorized } from 'v2/utils/Errors/Unauthorized';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IOrderAreaExpertiseDTO, {
   ISelectOrderAreaExpertiseDTO,
@@ -9,7 +8,8 @@ import IOrderAreaExpertiseDTO, {
 import IRepositoryAreaExpertise from '../repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 import { RepositoryAreaExpertise } from '../typeorm/repositories/areaExpertise.repository';
-import { create, findAll } from './areaExpertise';
+import { create, findAll, findByIdMember } from './areaExpertise';
+
 @Injectable()
 export class ServiceAreaExpertise {
   constructor(
@@ -22,15 +22,10 @@ export class ServiceAreaExpertise {
     areaExpertise,
     idMember,
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
-    const userAll = await this.serviceMember.findAll({});
-
-    const member = userAll.map((user) => {
-      return user.id == idMember ? user : undefined;
-    })[0];
-
-    if (!member) {
-      throw new Unauthorized();
-    }
+    const member = await findByIdMember({
+      serviceMember: this.serviceMember,
+      idMember,
+    });
 
     return create({
       data: areaExpertise,
