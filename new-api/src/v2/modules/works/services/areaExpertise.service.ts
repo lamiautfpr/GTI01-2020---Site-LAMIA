@@ -1,8 +1,6 @@
 import { ServiceMember } from '@modules/members/services/member.service';
-import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import BadRequest from 'v2/utils/Errors/BadRequest';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IOrderAreaExpertiseDTO, {
   ISelectOrderAreaExpertiseDTO,
