@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { EntityType } from '@modules/works/typeorm/entities/type.entity';
 
-export default class insertDefaultType1631877596483
+export default class InsertDefaultType1631877596483
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.manager.insert(EntityType, [

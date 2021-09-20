@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export default class createTableType1631832367459
+export default class CreateTableType1631832367459
   implements MigrationInterface {
   name = 'createTableType1631832367459';
 
