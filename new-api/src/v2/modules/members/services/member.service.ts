@@ -83,9 +83,16 @@ export class ServiceMember {
   }
 
   public async findByLogin(login: string): Promise<EntityMember> {
-    return memberServices.FindByLogin({
+    return memberServices.findByLogin({
       repository: this.memberRepository,
       login,
+    });
+  }
+
+  public async findById(id: string): Promise<EntityMember> {
+    return memberServices.findById({
+      repository: this.memberRepository,
+      id,
     });
   }
 

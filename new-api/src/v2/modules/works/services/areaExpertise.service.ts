@@ -8,7 +8,7 @@ import IOrderAreaExpertiseDTO, {
 import IRepositoryAreaExpertise from '../repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 import { RepositoryAreaExpertise } from '../typeorm/repositories/areaExpertise.repository';
-import { create, findAll, findByIdMember } from './areaExpertise';
+import { create, findAll } from './areaExpertise';
 
 @Injectable()
 export class ServiceAreaExpertise {
@@ -22,10 +22,7 @@ export class ServiceAreaExpertise {
     areaExpertise,
     idMember,
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
-    const member = await findByIdMember({
-      serviceMember: this.serviceMember,
-      idMember,
-    });
+    const member = await this.serviceMember.findById(idMember);
 
     return create({
       data: areaExpertise,
