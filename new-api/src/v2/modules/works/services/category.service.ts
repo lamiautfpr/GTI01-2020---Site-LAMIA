@@ -1,33 +1,33 @@
+import { ServiceMember } from '@modules/members/services/member.service';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
-import { RepositoryCategory } from '../typeorm/repositories/category.repository';
-
-import IRepositoryCategory from '../repositories/IRepositoryCategory';
-
-import ICreateCategoryDTO from '../dtos/category/ICreateCategory.dto';
-
-import { EntityCategory } from '../typeorm/entities/category.entity';
-
-import { create, findAll } from './category';
-
+import { ICreateCategoryDTO } from '../dtos/category/ICreateCategory.dto';
 import IOrderCategoryDTO, {
   ISelectOrderCategoryDTO,
 } from '../dtos/category/IOrderCategory.dto';
+import IRepositoryCategory from '../repositories/IRepositoryCategory';
+import { EntityCategory } from '../typeorm/entities/category.entity';
+import { RepositoryCategory } from '../typeorm/repositories/category.repository';
+import { create, findAll } from './category';
 
 @Injectable()
 export class ServiceCategory {
   constructor(
     @InjectRepository(RepositoryCategory)
     private readonly categoryRepository: IRepositoryCategory,
+    private readonly serviceMember: ServiceMember,
   ) {}
 
-  public async createCategory(
-    data: ICreateCategoryDTO,
-  ): Promise<EntityCategory> {
+  public async createCategory({
+    category,
+    idMember,
+  }: ICreateCategoryDTO): Promise<EntityCategory> {
+    const member = await this.serviceMember.findByLogin(idMember);
+
     return create({
-      data: data,
+      data: category,
       repository: this.categoryRepository,
+      member,
     });
   }
 

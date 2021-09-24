@@ -1,5 +1,5 @@
-import ICreateTypeDTO from '../dtos/areaExpertise/ICreateType.dto';
-import IOrderTypeDTO from '../dtos/areaExpertise/IOrderType.dto';
+import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
+import IOrderTypeDTO from '../dtos/type/IOrderType.dto';
 import { EntityType } from '../typeorm/entities/type.entity';
 
 export default interface IRepositoryType {

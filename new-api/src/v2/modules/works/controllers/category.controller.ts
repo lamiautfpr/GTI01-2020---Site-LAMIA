@@ -1,45 +1,63 @@
+import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
 import {
   Body,
   Controller,
   Get,
   Post,
   Query,
+  Req,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiConflictResponse,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
+  ApiOperation,
   ApiQuery,
   ApiResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { apiConfig } from '../../../config/api';
-import ICreateCategoryDTO from '../dtos/category/ICreateCategory.dto';
+import ICreateCategoryBasicDTO from '../dtos/category/ICreateCategory.dto';
 import { ISelectOrderCategoryDTO } from '../dtos/category/IOrderCategory.dto';
-import { EntityCategory } from '../typeorm/entities/category.entity';
 import { ServiceCategory } from '../services/category.service';
+import { EntityCategory } from '../typeorm/entities/category.entity';
 
 @ApiTags('category')
 @Controller(`${apiConfig.version}/works/categories`)
 export class ControllerCategory {
   constructor(private readonly ServiceCategory: ServiceCategory) {}
 
+  @ApiOperation({ summary: 'create' })
   @ApiCreatedResponse({
     description: 'Create success',
     type: EntityCategory,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @ApiForbiddenResponse(Errors.Forbidden)
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Post()
-  create(@Body() data: ICreateCategoryDTO) {
-    return this.ServiceCategory.createCategory(data);
+  create(@Body() data: ICreateCategoryBasicDTO, @Req() request: any) {
+    return this.ServiceCategory.createCategory({
+      category: data,
+      idMember: request.user.userId,
+    });
   }
 
+  @ApiOperation({ summary: 'findAll' })
   @ApiQuery({
     type: ISelectOrderCategoryDTO,
   })
@@ -53,6 +71,9 @@ export class ControllerCategory {
     isArray: true,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiNoContentResponse({
+    description: 'No Content',
+  })
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
