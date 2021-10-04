@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RepositoryType } from '../typeorm/repositories/type.repository';
 import IRepositoryType from '../repositories/IRepositoryType';
-import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
+import { ICreateTypeDTO } from '../dtos/type/ICreateType.dto';
 import { EntityType } from '../typeorm/entities/type.entity';
-
+import { ServiceMember } from '@modules/members/services/member.service';
 // Service
 import { create, findAll } from './type';
 
@@ -18,12 +18,18 @@ export class ServiceType {
   constructor(
     @InjectRepository(RepositoryType)
     private readonly repositoryType: IRepositoryType,
+    private readonly serviceMember: ServiceMember,
   ) {}
 
-  public async createType(data: ICreateTypeDTO): Promise<EntityType> {
+  public async createType({
+    type,
+    idMember,
+  }: ICreateTypeDTO): Promise<EntityType> {
+    const member = await this.serviceMember.findByLogin(idMember);
     return create({
-      data: data,
+      data: type,
       repository: this.repositoryType,
+      member,
     });
   }
 
