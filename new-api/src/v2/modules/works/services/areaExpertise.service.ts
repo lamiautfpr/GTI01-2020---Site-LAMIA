@@ -1,5 +1,5 @@
 import { ServiceMember } from '@modules/members/services/member.service';
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IOrderAreaExpertiseDTO, {
@@ -23,6 +23,8 @@ export class ServiceAreaExpertise {
     idMember,
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
     const member = await this.serviceMember.findById(idMember);
+
+    if (member) throw new ConflictException('Member already exists');
 
     return create({
       data: areaExpertise,

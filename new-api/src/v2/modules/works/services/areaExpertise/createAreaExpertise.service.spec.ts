@@ -15,6 +15,7 @@ let serviceAreaExpertise: ServiceAreaExpertise;
 let serviceMember: ServiceMember;
 let iHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
+const idMember = '25ff2e6b-a777-41dc-827c-3fb8d6b4dbe7';
 
 describe('Create Area Expertise - SERVICES', () => {
   beforeEach(() => {
@@ -37,10 +38,6 @@ describe('Create Area Expertise - SERVICES', () => {
 
   describe('successful cases', () => {
     it('should create an area expertise successfully when there is full datas', async () => {
-      const idMember = '25ff2e6b-a777-41dc-827c-3fb8d6b4dbe7';
-
-      const users = serviceMember.findAll({});
-
       const areaExpertise = new EntityAreaExpertise({
         name: 'Ciência de dados',
         description: 'Ciência de dados é uma area da computação que estuda...',
@@ -58,10 +55,6 @@ describe('Create Area Expertise - SERVICES', () => {
     });
 
     it('should create an area expertise successfully when there not is description', async () => {
-      const idMember = '25ff2e6b-a777-41dc-827c-3fb8d6b4dbe7';
-
-      const users = serviceMember.findAll({});
-
       const areaExpertise = new EntityAreaExpertise({
         name: 'Inteligência Artificial',
       });
@@ -77,12 +70,9 @@ describe('Create Area Expertise - SERVICES', () => {
       expect(result.name).toBe('Area Expertise MocK');
     });
   });
+
   describe('failure cases', () => {
     it('should not create an area expertise when already exists one with the same name and without description', async () => {
-      const idMember = '25ff2e6b-a777-41dc-827c-3fb8d6b4dbe7';
-
-      const users = serviceMember.findAll({});
-
       const areaExpertise = new EntityAreaExpertise({
         name: 'Ciência de dados',
         description: '',

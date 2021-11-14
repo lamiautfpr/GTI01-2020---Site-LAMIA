@@ -5,6 +5,11 @@ import { EntityMember } from './member.entity';
 
 @Entity('tb_patent')
 export class EntityPatent extends BasicEntity {
+  constructor(data?: Partial<EntityPatent>) {
+    super();
+    Object.assign(this, data);
+  }
+
   @ApiProperty({
     description: "Patent's name",
     example: 'Novato',

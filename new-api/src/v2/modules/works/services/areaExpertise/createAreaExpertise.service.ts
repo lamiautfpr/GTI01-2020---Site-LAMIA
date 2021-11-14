@@ -1,11 +1,11 @@
+import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
-import { ConflictException, ForbiddenException } from '@nestjs/common';
+import { ConflictException, UnauthorizedException } from '@nestjs/common';
 import { Unauthorized } from 'v2/utils/Errors/Unauthorized';
 import ICreateAreaExpertiseDTO from '../../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
 
-const patentMemberEnum = ['Administrador', 'Coordenador', 'Orientadores'];
 interface IRequest {
   data: ICreateAreaExpertiseDTO;
   repository: IRepositoryAreaExpertise;
@@ -14,16 +14,14 @@ interface IRequest {
 
 const create = async (params: IRequest): Promise<EntityAreaExpertise> => {
   const { repository, data, member } = params;
-  // Todo verificar a patente do membro
+
   if (!member) {
     throw new Unauthorized();
   }
 
-  const { patent } = member;
+  const { id } = member;
 
-  if (!patentMemberEnum.includes(patent.name)) {
-    throw new ForbiddenException('Permission denied');
-  }
+  if (!hasCreatePermission(id)) throw new UnauthorizedException();
 
   const areaExpertise = await repository.findByName(data.name);
 
