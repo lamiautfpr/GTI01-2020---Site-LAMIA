@@ -12,6 +12,7 @@ import {
 import {
   Body,
   Controller,
+  Req,
   Post,
   UsePipes,
   ValidationPipe,
@@ -29,7 +30,7 @@ import Errors from 'v2/utils/Errors';
 import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
 import { apiConfig } from '@config/api';
 
-@ApiTags('Types')
+@ApiTags('Works Types')
 @Controller(`${apiConfig.version}/works/types`)
 export class ControllerType {
   constructor(private readonly serviceType: ServiceType) {}
@@ -47,7 +48,10 @@ export class ControllerType {
   @UsePipes(new ValidationPipe())
   @ApiBearerAuth()
   @Post()
-  create(@Body() data: ICreateTypeDTO) {
-    return this.serviceType.createType(data);
+  create(@Body() data: ICreateTypeDTO, @Req() request: any) {
+    return this.serviceType.createType({
+      type: data,
+      idMember: request.user.id,
+    });
   }
 }
