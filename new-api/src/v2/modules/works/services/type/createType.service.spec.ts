@@ -1,5 +1,5 @@
 import { FakeRepositoryType } from '@modules/works/repositories/fakes/Type.fakeRepository';
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, ForbiddenException } from '@nestjs/common';
 import { ServiceType } from '../type.service';
 
 let fakeRepositoryType: FakeRepositoryType;
@@ -60,6 +60,16 @@ describe('Create Type - SERVICES', () => {
           description: 'this is a description',
         }),
       ).rejects.toBeInstanceOf(ConflictException);
+    });
+    it("should not create a patent when member's type hasn't permission", async () => {
+      const member = await serviceType.createType('Type without permission');
+
+      await expect(
+        serviceType.createType({
+          type: 'adsad'
+          idMember: member.id,
+        }),
+      ).rejects.toBeInstanceOf(ForbiddenException);
     });
   });
 });
