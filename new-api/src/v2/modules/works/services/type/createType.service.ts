@@ -4,8 +4,9 @@ import IRepositoryType from '../../repositories/IRepositoryType';
 import { EntityType } from '../../typeorm/entities/type.entity';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { Unauthorized } from 'v2/utils/Errors/Unauthorized';
+import CREATION_PERMISSION_PATENTS from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 
-const patentMemberEnum = ['Administrador', 'Coordenador', 'Orientadores'];
+const patentMemberEnum = CREATION_PERMISSION_PATENTS;
 
 interface IRequest {
   data: ICreateTypeDTO;
@@ -13,16 +14,23 @@ interface IRequest {
   member: EntityMember;
 }
 
-const create = async (params: IRequest): Promise<EntityType> => {
-  const { repository, data, member } = params;
-
+const create = async ({
+  data,
+  member,
+  repository,
+}: IRequest): Promise<EntityType> => {
   if (!member) {
     throw new Unauthorized();
   }
 
   const { patent } = member;
 
-  if (!patentMemberEnum.includes(patent.name)) {
+  if (
+    !(
+      patentMemberEnum.ADMINISTRATOR === patent.id ||
+      patentMemberEnum.COORDINATOR === patent.id
+    )
+  ) {
     throw new ForbiddenException('Permission denied');
   }
 
