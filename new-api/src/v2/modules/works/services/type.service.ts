@@ -26,6 +26,9 @@ export class ServiceType {
     idMember,
   }: ICreateTypeDTO): Promise<EntityType> {
     const member = await this.serviceMember.findByLogin(idMember);
+    if (member) {
+      throw new Error('already existing member');
+    }
     return create({
       data: type,
       repository: this.repositoryType,
