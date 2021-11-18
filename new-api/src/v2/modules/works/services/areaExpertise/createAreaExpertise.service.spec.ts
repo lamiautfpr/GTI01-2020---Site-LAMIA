@@ -15,6 +15,7 @@ let serviceAreaExpertise: ServiceAreaExpertise;
 let serviceMember: ServiceMember;
 let iHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
+
 const idMember = '25ff2e6b-a777-41dc-827c-3fb8d6b4dbe7';
 
 describe('Create Area Expertise - SERVICES', () => {
