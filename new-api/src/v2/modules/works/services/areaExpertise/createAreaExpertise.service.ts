@@ -9,19 +9,10 @@ import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity
 interface IRequest {
   data: ICreateAreaExpertiseDTO;
   repository: IRepositoryAreaExpertise;
-  member: EntityMember;
 }
 
 const create = async (params: IRequest): Promise<EntityAreaExpertise> => {
-  const { repository, data, member } = params;
-
-  if (!member) {
-    throw new Unauthorized();
-  }
-
-  const { id } = member;
-
-  if (!hasCreatePermission(id)) throw new UnauthorizedException();
+  const { repository, data } = params;
 
   const areaExpertise = await repository.findByName(data.name);
 
