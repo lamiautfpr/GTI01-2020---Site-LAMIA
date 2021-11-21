@@ -1,5 +1,6 @@
+import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import { ServiceMember } from '@modules/members/services/member.service';
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IOrderAreaExpertiseDTO, {
@@ -24,12 +25,13 @@ export class ServiceAreaExpertise {
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
     const member = await this.serviceMember.findById(idMember);
 
-    if (member) throw new ConflictException('Member already exists');
+    if (!member) throw new UnauthorizedException();
+
+    if (!hasCreatePermission(idMember)) throw new UnauthorizedException();
 
     return create({
       data: areaExpertise,
       repository: this.repositoryAreaExpertise,
-      member,
     });
   }
 
