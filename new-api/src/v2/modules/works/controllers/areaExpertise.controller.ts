@@ -17,6 +17,8 @@ import {
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
+  ApiOperation,
   ApiQuery,
   ApiResponse,
   ApiTags,
@@ -32,6 +34,7 @@ import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 export class ControllerAreaExpertise {
   constructor(private readonly serviceAreaExpertise: ServiceAreaExpertise) {}
 
+  @ApiOperation({ summary: 'Create Expertise Areas' })
   @ApiCreatedResponse({
     description: 'Created Success',
     type: EntityAreaExpertise,
@@ -49,7 +52,7 @@ export class ControllerAreaExpertise {
       idMember: request.user.userId,
     });
   }
-
+  @ApiOperation({ summary: 'Create Expertise Areas' })
   @ApiQuery({
     type: ISelectOrderAreaExpertiseDTO,
   })
@@ -60,6 +63,9 @@ export class ControllerAreaExpertise {
     isArray: true,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiNoContentResponse({
+    description: 'No Expertise Areas Content',
+  })
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()

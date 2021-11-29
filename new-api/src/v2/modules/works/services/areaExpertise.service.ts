@@ -25,13 +25,14 @@ export class ServiceAreaExpertise {
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
     const member = await this.serviceMember.findById(idMember);
 
-    if (!member) throw new UnauthorizedException();
-
-    if (!hasCreatePermission(idMember)) throw new UnauthorizedException();
+    if (!member) {
+      throw new UnauthorizedException(['Member not found']);
+    }
 
     return create({
       data: areaExpertise,
       repository: this.repositoryAreaExpertise,
+      member,
     });
   }
 
