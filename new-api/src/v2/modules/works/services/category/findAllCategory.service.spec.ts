@@ -1,34 +1,57 @@
+import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
+import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
+import { ServiceMember } from '@modules/members/services/member.service';
 import { FakeRepositoryCategory } from '@modules/works/repositories/fakes/Category.fakeRepository';
+import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
 import { ServiceCategory } from '../category.service';
 
+let fakeRepositoryPatent: FakeRepositoryPatent;
+let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryCategory: FakeRepositoryCategory;
-let categoryService: ServiceCategory;
 
-describe('findAll Category - SERVICES', () => {
+let iHashProvider: IHashProvider;
+let iStorageProver: IStorageProvider;
+
+let serviceMember: ServiceMember;
+let serviceCategory: ServiceCategory;
+
+describe('Find all Categories - SERVICES', () => {
   beforeEach(() => {
+    fakeRepositoryPatent = new FakeRepositoryPatent();
+    fakeRepositoryMember = new FakeRepositoryMember();
     fakeRepositoryCategory = new FakeRepositoryCategory();
-    categoryService = new ServiceCategory(fakeRepositoryCategory);
-  });
+    serviceMember = new ServiceMember(
+      fakeRepositoryMember,
+      fakeRepositoryPatent,
+      iHashProvider,
+      iStorageProver,
+    );
 
+    serviceCategory = new ServiceCategory(
+      fakeRepositoryCategory,
+      serviceMember,
+    );
+  });
   describe('successful cases', () => {
-    it('should return an array of categories', async () => {
-      fakeRepositoryCategory.createSave({
-        name: 'Latinoware',
-        description: 'Evento de código open source na America do Sul',
+    it('should return a list of categories when categories exist', async () => {
+      await fakeRepositoryCategory.createSave({
+        name: 'Category Mocked 1',
       });
-      fakeRepositoryCategory.createSave({
-        name: 'SICITE',
-        description: 'Evento de aprensatação de Artigos Científicos',
+      await fakeRepositoryCategory.createSave({
+        name: 'Category Mocked 2',
       });
-      const result = await categoryService.findAll({});
+
+      const result = await serviceCategory.findAll({});
 
       expect(result.length).toBe(2);
-      expect(result[0].name).toBe('Latinoware');
+      expect(result[0].name).toBe('Category Mocked 1');
+      expect(result[1].name).toBe('Category Mocked 2');
     });
 
-    it('should return NO_CONTENT when not exists category', async () => {
-      await expect(categoryService.findAll({})).rejects.toBeInstanceOf(
+    it('should return NO_CONTENT when there no category exists', async () => {
+      await expect(serviceCategory.findAll({})).rejects.toBeInstanceOf(
         NoContentException,
       );
     });
