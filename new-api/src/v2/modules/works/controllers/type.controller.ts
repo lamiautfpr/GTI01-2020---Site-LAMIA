@@ -30,7 +30,7 @@ import Errors from 'v2/utils/Errors';
 import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
 import { apiConfig } from '@config/api';
 
-@ApiTags('Works Types')
+@ApiTags("Works's Types")
 @Controller(`${apiConfig.version}/works/types`)
 export class ControllerType {
   constructor(private readonly serviceType: ServiceType) {}

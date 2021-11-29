@@ -16,7 +16,7 @@ import { ILoginDTO } from '../dtos/ILogin.dto';
 import { IAuthResponse, IResponseLoginDTO } from '../dtos/IResponseLogin.dto';
 import { ServiceAuth } from '../services/auth.service';
 
-@ApiTags('Auth')
+@ApiTags('Member Authentication')
 @Controller(`${apiConfig.version}/auth`)
 export class ControllerAuthMember {
   constructor(private readonly authService: ServiceAuth) {}

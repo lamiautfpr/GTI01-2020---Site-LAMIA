@@ -31,7 +31,7 @@ import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServicePatent } from '../services/patent.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 
-@ApiTags('patents')
+@ApiTags("Members's Patents")
 @Controller(`${apiConfig.version}/members/patents`)
 export class ControllerPatent {
   constructor(private readonly servicePatent: ServicePatent) {}

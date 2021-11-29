@@ -27,7 +27,7 @@ import { ISelectOrderAreaExpertiseDTO } from '../dtos/areaExpertise/IOrderAreaEx
 import { ServiceAreaExpertise } from '../services/areaExpertise.service';
 import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 
-@ApiTags('Areas Expertise')
+@ApiTags('Expertise Areas')
 @Controller(`${apiConfig.version}/works/areas-expertise`)
 export class ControllerAreaExpertise {
   constructor(private readonly serviceAreaExpertise: ServiceAreaExpertise) {}

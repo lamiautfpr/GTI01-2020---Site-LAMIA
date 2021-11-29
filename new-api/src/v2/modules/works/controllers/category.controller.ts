@@ -31,7 +31,7 @@ import { ISelectOrderCategoryDTO } from '../dtos/category/IOrderCategory.dto';
 import { ServiceCategory } from '../services/category.service';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 
-@ApiTags('category')
+@ApiTags("Works's Categories")
 @Controller(`${apiConfig.version}/works/categories`)
 export class ControllerCategory {
   constructor(private readonly ServiceCategory: ServiceCategory) {}

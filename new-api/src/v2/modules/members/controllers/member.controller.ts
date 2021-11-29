@@ -47,7 +47,7 @@ import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
-@ApiTags('members')
+@ApiTags('Members')
 @UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/members`)
 export class ControllerMember {
