@@ -1,9 +1,7 @@
-import { UnauthorizedException } from '@nestjs/common';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
-import { classToClass } from 'class-transformer';
 import { ILoginDTO } from '../dtos/ILogin.dto';
 import IPayloadTokenDTO from '../dtos/IPayloadToken.dto';
 import { IAuthResponse, IResponseLoginDTO } from '../dtos/IResponseLogin.dto';
@@ -39,7 +37,7 @@ export class ServiceAuth {
       member &&
       (await this.hashProvider.compareHash(password, member.password))
     ) {
-      return classToClass(member);
+      return member;
     }
     return null;
   }

@@ -1,5 +1,5 @@
 import { apiConfig } from '@config/api';
-import { Headers, Put } from '@nestjs/common';
+import { Headers, Put, UseInterceptors } from '@nestjs/common';
 import { Controller, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
@@ -12,11 +12,13 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
+import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { ILoginDTO } from '../dtos/ILogin.dto';
 import { IAuthResponse, IResponseLoginDTO } from '../dtos/IResponseLogin.dto';
 import { ServiceAuth } from '../services/auth.service';
 
 @ApiTags('Member Authentication')
+@UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/auth`)
 export class ControllerAuthMember {
   constructor(private readonly authService: ServiceAuth) {}
@@ -35,7 +37,7 @@ export class ControllerAuthMember {
   @UseGuards(AuthGuard('local'))
   @HttpCode(200)
   @Post('login')
-  async login(@Request() req: any) {
+  async login(@Request() req: any): Promise<IResponseLoginDTO> {
     return this.authService.login(req.user);
   }
 

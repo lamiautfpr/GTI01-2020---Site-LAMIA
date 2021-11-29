@@ -109,7 +109,7 @@ export class ServiceMember {
 
     await memberServices.remove({
       repository: this.memberRepository,
-      idMemberLogged,
+      idMemberToDelete,
       member,
     });
   }
