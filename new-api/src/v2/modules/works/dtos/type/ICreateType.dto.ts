@@ -1,7 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, IsString, IsOptional } from 'class-validator';
+import {
+  IsDefined,
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+  IsUUID,
+} from 'class-validator';
 
-export default class ICreateTypeDTO {
+export default class ICreateTypeBasicDTO {
   @IsString()
   @IsNotEmpty()
   @IsDefined()
@@ -21,4 +27,12 @@ export default class ICreateTypeDTO {
     required: false,
   })
   description?: string;
+}
+export class ICreateTypeDTO {
+  @IsDefined()
+  type: ICreateTypeBasicDTO;
+
+  @IsDefined()
+  @IsUUID()
+  idMember: string;
 }
