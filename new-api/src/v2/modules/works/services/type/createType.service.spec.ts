@@ -46,7 +46,7 @@ describe('Create Type - SERVICES', () => {
       });
 
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
         description: 'this is description',
       };
 
@@ -69,7 +69,7 @@ describe('Create Type - SERVICES', () => {
       });
 
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
         description: 'this is description',
       };
 
@@ -92,7 +92,7 @@ describe('Create Type - SERVICES', () => {
       });
 
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
         description: 'this is description',
       };
 
@@ -115,7 +115,7 @@ describe('Create Type - SERVICES', () => {
       });
 
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
       };
 
       const result = await serviceType.createType({
@@ -137,7 +137,7 @@ describe('Create Type - SERVICES', () => {
       });
 
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
       };
 
       const result = await serviceType.createType({
@@ -159,7 +159,7 @@ describe('Create Type - SERVICES', () => {
       });
 
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
       };
 
       const result = await serviceType.createType({
@@ -178,7 +178,7 @@ describe('Create Type - SERVICES', () => {
       await expect(
         serviceType.createType({
           newTypeData: {
-            name: 'Patent MocK',
+            name: 'Type Mock',
           },
           idMember: 'not exists member',
         }),
@@ -195,7 +195,7 @@ describe('Create Type - SERVICES', () => {
       await expect(
         serviceType.createType({
           newTypeData: {
-            name: 'Patent MocK',
+            name: 'Type Mock',
           },
           idMember: member.id,
         }),
@@ -209,7 +209,7 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
       };
       await fakeRepositoryType.createSave(newTypeData);
       await expect(
@@ -228,7 +228,7 @@ describe('Create Type - SERVICES', () => {
       });
 
       const newTypeData = {
-        name: 'Patent MocK',
+        name: 'Type Mock',
         description: 'this is a description',
       };
       await fakeRepositoryType.createSave(newTypeData);
