@@ -1,8 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
+import IDeleteMemberDTO from '../dtos/IDeleteMember.dto';
 import IOrderMember, { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
 import { IUpdateAvatarMemberDTO } from '../dtos/IUpdateAvatarMember.dto';
 import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
@@ -96,7 +97,20 @@ export class ServiceMember {
     });
   }
 
-  public async removeById(id: string): Promise<void> {
-    await memberServices.remove({ repository: this.memberRepository, id });
+  public async removeById({
+    idMemberLogged,
+    idMemberToDelete,
+  }: IDeleteMemberDTO): Promise<void> {
+    const member = await this.memberRepository.findById(idMemberLogged);
+
+    if (!member) {
+      throw new UnauthorizedException(['Member not found']);
+    }
+
+    await memberServices.remove({
+      repository: this.memberRepository,
+      idMemberLogged,
+      member,
+    });
   }
 }

@@ -157,12 +157,16 @@ export class ControllerMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiNotFoundResponse(Errors.NotFound)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @ApiForbiddenResponse(Errors.Forbidden)
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @HttpCode(204)
   @Delete(':id')
-  async remove(@Param() params: IParamsIdDTO) {
-    await this.serviceMember.removeById(params.id);
+  async remove(@Request() req: any, @Param() params: IParamsIdDTO) {
+    await this.serviceMember.removeById({
+      idMemberLogged: req.user.userId,
+      idMemberToDelete: params.id,
+    });
   }
 }
