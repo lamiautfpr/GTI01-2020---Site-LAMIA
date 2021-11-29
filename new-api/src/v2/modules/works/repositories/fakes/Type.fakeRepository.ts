@@ -1,14 +1,9 @@
-// Interface
-import IRepositoryType from '@modules/works/repositories/IRepositoryType';
-
-// Entidade
-import { EntityType } from '@modules/works/typeorm/entities/type.entity';
-
-// DTO
 import ICreateTypeDTO from '@modules/works/dtos/type/ICreateType.dto';
 import IOrderTypeDTO from '@modules/works/dtos/type/IOrderType.dto';
+import IRepositoryType from '@modules/works/repositories/IRepositoryType';
+import { EntityType } from '@modules/works/typeorm/entities/type.entity';
 
-export class FakeRepositoryAreaExpertise implements IRepositoryType {
+export class FakeRepositoryType implements IRepositoryType {
   private types: EntityType[];
 
   constructor() {
@@ -25,7 +20,6 @@ export class FakeRepositoryAreaExpertise implements IRepositoryType {
     return type;
   }
 
-  // Método para retornar todos os dados, em forma de um array
   public async findAll(
     order?: IOrderTypeDTO,
   ): Promise<EntityType[] | undefined> {
