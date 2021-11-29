@@ -30,7 +30,7 @@ export default class ICreateTypeBasicDTO {
 }
 export class ICreateTypeDTO {
   @IsDefined()
-  type: ICreateTypeBasicDTO;
+  newTypeData: ICreateTypeBasicDTO;
 
   @IsDefined()
   @IsUUID()

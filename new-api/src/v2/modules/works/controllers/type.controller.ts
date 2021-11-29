@@ -52,7 +52,7 @@ export class ControllerType {
   @Post()
   create(@Body() data: ICreateTypeDTO, @Req() request: any) {
     return this.serviceType.createType({
-      type: data,
+      newTypeData: data,
       idMember: request.user.userId,
     });
   }

@@ -19,7 +19,7 @@ export class ServiceType {
   ) {}
 
   public async createType({
-    type,
+    newTypeData,
     idMember,
   }: ICreateTypeDTO): Promise<EntityType> {
     const member = await this.serviceMember.findById(idMember);
@@ -29,7 +29,7 @@ export class ServiceType {
     }
 
     return create({
-      data: type,
+      newTypeData,
       repository: this.repositoryType,
       member,
     });

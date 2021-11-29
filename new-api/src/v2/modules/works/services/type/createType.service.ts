@@ -6,13 +6,13 @@ import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 
 interface IRequest {
-  data: ICreateTypeDTO;
+  newTypeData: ICreateTypeDTO;
   repository: IRepositoryType;
   member: EntityMember;
 }
 
 const create = async ({
-  data,
+  newTypeData,
   member,
   repository,
 }: IRequest): Promise<EntityType> => {
@@ -22,13 +22,13 @@ const create = async ({
     ]);
   }
 
-  const typeExists = await repository.findByName(data.name);
+  const typeExists = await repository.findByName(newTypeData.name);
 
   if (typeExists) {
     throw new ConflictException('Type already exists');
   }
 
-  return repository.createSave(data);
+  return repository.createSave(newTypeData);
 };
 
 export default create;
