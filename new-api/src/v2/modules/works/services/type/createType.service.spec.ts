@@ -2,6 +2,7 @@ import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
 import { ServiceMember } from '@modules/members/services/member.service';
+import { FakeRepositoryType } from '@modules/works/repositories/fakes/Type.fakeRepository';
 import {
   ConflictException,
   ForbiddenException,
@@ -13,6 +14,8 @@ import { ServiceType } from '../type.service';
 
 let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
+let fakeRepositoryType: FakeRepositoryType;
+
 let iHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
@@ -23,6 +26,7 @@ describe('Create Type - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+    fakeRepositoryType = new FakeRepositoryType();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
@@ -30,7 +34,7 @@ describe('Create Type - SERVICES', () => {
       iStorageProver,
     );
 
-    serviceType = new ServiceType(fakeRepositoryPatent, serviceMember);
+    serviceType = new ServiceType(fakeRepositoryType, serviceMember);
   });
 
   describe('successful cases', () => {
@@ -207,7 +211,7 @@ describe('Create Type - SERVICES', () => {
       const newTypeData = {
         name: 'Patent MocK',
       };
-      await fakeRepositoryPatent.createSave(newTypeData);
+      await fakeRepositoryType.createSave(newTypeData);
       await expect(
         serviceType.createType({
           newTypeData,
@@ -227,7 +231,7 @@ describe('Create Type - SERVICES', () => {
         name: 'Patent MocK',
         description: 'this is a description',
       };
-      await fakeRepositoryPatent.createSave(newTypeData);
+      await fakeRepositoryType.createSave(newTypeData);
       await expect(
         serviceType.createType({
           newTypeData,
