@@ -3,10 +3,7 @@ import ICreateTypeDTO from '../../dtos/type/ICreateType.dto';
 import IRepositoryType from '../../repositories/IRepositoryType';
 import { EntityType } from '../../typeorm/entities/type.entity';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import { Unauthorized } from 'v2/utils/Errors/Unauthorized';
-import CREATION_PERMISSION_PATENTS from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
-
-const patentMemberEnum = CREATION_PERMISSION_PATENTS;
+import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 
 interface IRequest {
   data: ICreateTypeDTO;
@@ -19,19 +16,10 @@ const create = async ({
   member,
   repository,
 }: IRequest): Promise<EntityType> => {
-  if (!member) {
-    throw new Unauthorized();
-  }
-
-  const { patent } = member;
-
-  if (
-    !(
-      patentMemberEnum.ADMINISTRATOR === patent.id ||
-      patentMemberEnum.COORDINATOR === patent.id
-    )
-  ) {
-    throw new ForbiddenException('Permission denied');
+  if (!hasCreatePermission(member.patent.id)) {
+    throw new ForbiddenException([
+      'Your patent not have permission for creating a new patent',
+    ]);
   }
 
   const type = await repository.findByName(data.name);

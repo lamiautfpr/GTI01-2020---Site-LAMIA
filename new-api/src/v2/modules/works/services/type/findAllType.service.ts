@@ -1,3 +1,4 @@
+import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
 import IOrderTypeDTO from '../../dtos/type/IOrderType.dto';
 import IRepositoryType from '../../repositories/IRepositoryType';
 import { EntityType } from '../../typeorm/entities/type.entity';
@@ -11,7 +12,12 @@ const findAll = async ({
   repository,
   order,
 }: IRequest): Promise<EntityType[]> => {
-  return repository.findAll(order);
+  const types = await repository.findAll(order);
+
+  if (types.length <= 0) {
+    throw new NoContentExcepetion();
+  }
+  return types;
 };
 
 export default findAll;

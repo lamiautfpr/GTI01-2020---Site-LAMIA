@@ -1,40 +1,42 @@
+import { apiConfig } from '@config/api';
 import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
-import {
-  ApiBadRequestResponse,
-  ApiConflictResponse,
-  ApiCreatedResponse,
-  ApiInternalServerErrorResponse,
-  ApiTags,
-  ApiUnauthorizedResponse,
-  ApiForbiddenResponse,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
 import {
   Body,
   Controller,
-  Req,
+  Get,
   Post,
+  Query,
+  Req,
+  UseGuards,
   UsePipes,
   ValidationPipe,
-  UseGuards,
 } from '@nestjs/common';
-
-// Service
-import { ServiceType } from '../services/type.service';
-
-// Entity
-import { EntityType } from '../typeorm/entities/type.entity';
-
-// Erros
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiConflictResponse,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
-import { apiConfig } from '@config/api';
+import { ISelectOrderTypeDTO } from '../dtos/type/IOrderType.dto';
+import { ServiceType } from '../services/type.service';
+import { EntityType } from '../typeorm/entities/type.entity';
 
 @ApiTags("Works's Types")
 @Controller(`${apiConfig.version}/works/types`)
 export class ControllerType {
   constructor(private readonly serviceType: ServiceType) {}
 
+  @ApiOperation({ summary: "Create Works's Types" })
   @ApiCreatedResponse({
     description: 'Created Success',
     type: EntityType,
@@ -51,7 +53,28 @@ export class ControllerType {
   create(@Body() data: ICreateTypeDTO, @Req() request: any) {
     return this.serviceType.createType({
       type: data,
-      idMember: request.user.id,
+      idMember: request.user.userId,
     });
+  }
+
+  @ApiOperation({ summary: "Find all Works's Types" })
+  @ApiQuery({
+    type: ISelectOrderTypeDTO,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'List of patents',
+    type: EntityType,
+    isArray: true,
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiNoContentResponse({
+    description: 'No Content',
+  })
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @UsePipes(new ValidationPipe())
+  @Get()
+  findAll(@Query() order: ISelectOrderTypeDTO) {
+    return this.serviceType.findAll(order);
   }
 }

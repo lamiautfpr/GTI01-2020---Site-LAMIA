@@ -1,17 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { RepositoryType } from '../typeorm/repositories/type.repository';
-import IRepositoryType from '../repositories/IRepositoryType';
-import { ICreateTypeDTO } from '../dtos/type/ICreateType.dto';
-import { EntityType } from '../typeorm/entities/type.entity';
 import { ServiceMember } from '@modules/members/services/member.service';
-// Service
-import { create, findAll } from './type';
-
-// Order
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ICreateTypeDTO } from '../dtos/type/ICreateType.dto';
 import IOrderTypeDTO, {
   ISelectOrderTypeDTO,
 } from '../dtos/type/IOrderType.dto';
+import IRepositoryType from '../repositories/IRepositoryType';
+import { EntityType } from '../typeorm/entities/type.entity';
+import { RepositoryType } from '../typeorm/repositories/type.repository';
+import { create, findAll } from './type';
 
 @Injectable()
 export class ServiceType {
@@ -25,10 +22,12 @@ export class ServiceType {
     type,
     idMember,
   }: ICreateTypeDTO): Promise<EntityType> {
-    const member = await this.serviceMember.findByLogin(idMember);
-    if (member) {
-      throw new Error('already existing member');
+    const member = await this.serviceMember.findById(idMember);
+
+    if (!member) {
+      throw new UnauthorizedException(['Member not found']);
     }
+
     return create({
       data: type,
       repository: this.repositoryType,
