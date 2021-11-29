@@ -1,4 +1,4 @@
 import create from './createPatent.service';
-import findAll from './FindAllPatent.service';
+import findAll from './findAllPatent.service';
 
 export { create, findAll };

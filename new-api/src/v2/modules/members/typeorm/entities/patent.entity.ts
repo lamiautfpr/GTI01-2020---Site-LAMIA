@@ -5,11 +5,6 @@ import { EntityMember } from './member.entity';
 
 @Entity('tb_patent')
 export class EntityPatent extends BasicEntity {
-  constructor(data?: Partial<EntityPatent>) {
-    super();
-    Object.assign(this, data);
-  }
-
   @ApiProperty({
     description: "Patent's name",
     example: 'Novato',
@@ -32,6 +27,14 @@ export class EntityPatent extends BasicEntity {
   })
   description: string;
 
-  @OneToMany(() => EntityMember, (member) => member.patent)
+  @OneToMany(() => EntityMember, (member) => member.patent, {
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  })
   members: EntityMember[];
+
+  constructor(data?: Partial<EntityPatent>) {
+    super();
+    Object.assign(this, data);
+  }
 }

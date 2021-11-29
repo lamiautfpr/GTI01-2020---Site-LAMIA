@@ -1,6 +1,6 @@
 import BasicEntity from '@modules/BasicEntity';
 import { ApiProperty } from '@nestjs/swagger';
-import { storageProvider } from '@providers/StorageProvider';
+import { StorageProvider } from '@providers/StorageProvider';
 import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
 import { Exclude, Transform } from 'class-transformer';
 import { Column, Entity, ManyToOne } from 'typeorm';
@@ -8,11 +8,6 @@ import { EntityPatent } from './patent.entity';
 
 @Entity('tb_member')
 export class EntityMember extends BasicEntity {
-  constructor(data?: Partial<EntityMember>) {
-    super();
-    Object.assign(this, data);
-  }
-
   @ApiProperty({
     description: "Member's name",
     example: 'John Doe',
@@ -61,6 +56,8 @@ export class EntityMember extends BasicEntity {
   @ManyToOne(() => EntityPatent, (patent) => patent.members, {
     eager: true,
     nullable: false,
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
   })
   patent: EntityPatent;
 
@@ -132,6 +129,8 @@ export class EntityMember extends BasicEntity {
     example: `${process.env.URL_API}${process.env.PATH_FILE_STATIC}/${TARGET_FOLDER.MEMBERS}/img.jpg`,
   })
   @Transform(async ({ value }) => {
+    const storageProvider = new StorageProvider();
+
     return !value
       ? null
       : await storageProvider.getUrl({
@@ -152,4 +151,9 @@ export class EntityMember extends BasicEntity {
     type: 'varchar',
   })
   password: string;
+
+  constructor(data?: Partial<EntityMember>) {
+    super();
+    Object.assign(this, data);
+  }
 }
