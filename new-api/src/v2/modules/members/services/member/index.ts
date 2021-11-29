@@ -1,8 +1,9 @@
 import create from './createMember.service';
 import remove from './deleteMember.service';
-import findAll from './FindAllMember.service';
-import FindByLogin from './FindMemberByLogin.service';
+import findAll from './findAllMember.service';
+import findByLogin from './findMemberByLogin.service';
+import findById from './findMemberByID.service';
 import update from './updateMember.service';
 import updateAvatar from './updateAvatarMember.service';
 
-export { create, remove, findAll, FindByLogin, update, updateAvatar };
+export { create, remove, findAll, findByLogin, findById, update, updateAvatar };

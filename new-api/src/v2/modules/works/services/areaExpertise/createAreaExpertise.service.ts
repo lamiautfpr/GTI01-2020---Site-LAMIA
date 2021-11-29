@@ -1,6 +1,9 @@
-import { ConflictException } from '@nestjs/common';
+import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
+import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
+import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
+import { ConflictException, UnauthorizedException } from '@nestjs/common';
+import { Unauthorized } from 'v2/utils/Errors/Unauthorized';
 import ICreateAreaExpertiseDTO from '../../dtos/areaExpertise/ICreateAreaExpertise.dto';
-import IRepositoryAreaExpertise from '../../repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
 
 interface IRequest {
