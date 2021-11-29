@@ -1,5 +1,5 @@
 import { ServiceMember } from '@modules/members/services/member.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateCategoryDTO } from '../dtos/category/ICreateCategory.dto';
 import IOrderCategoryDTO, {
@@ -22,7 +22,11 @@ export class ServiceCategory {
     category,
     idMember,
   }: ICreateCategoryDTO): Promise<EntityCategory> {
-    const member = await this.serviceMember.findByLogin(idMember);
+    const member = await this.serviceMember.findById(idMember);
+
+    if (!member) {
+      throw new UnauthorizedException(['Member not found']);
+    }
 
     return create({
       data: category,

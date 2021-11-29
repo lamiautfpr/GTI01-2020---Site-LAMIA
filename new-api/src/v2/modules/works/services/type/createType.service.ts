@@ -22,9 +22,9 @@ const create = async ({
     ]);
   }
 
-  const type = await repository.findByName(data.name);
+  const typeExists = await repository.findByName(data.name);
 
-  if (type) {
+  if (typeExists) {
     throw new ConflictException('Type already exists');
   }
 

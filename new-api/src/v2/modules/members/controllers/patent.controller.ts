@@ -36,7 +36,7 @@ import { EntityPatent } from '../typeorm/entities/patent.entity';
 export class ControllerPatent {
   constructor(private readonly servicePatent: ServicePatent) {}
 
-  @ApiOperation({ summary: 'create' })
+  @ApiOperation({ summary: "Create Members's Patents" })
   @ApiCreatedResponse({
     description: 'Created Success',
     type: EntityPatent,
@@ -57,7 +57,7 @@ export class ControllerPatent {
     });
   }
 
-  @ApiOperation({ summary: 'findAll' })
+  @ApiOperation({ summary: "Find all Members's Patents" })
   @ApiQuery({
     type: ISelectOrderPatentDTO,
   })
@@ -69,7 +69,7 @@ export class ControllerPatent {
   })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiNoContentResponse({
-    description: 'No Content',
+    description: 'No Categories Content',
   })
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())

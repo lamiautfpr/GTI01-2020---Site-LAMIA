@@ -69,7 +69,7 @@ export class ControllerType {
   })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiNoContentResponse({
-    description: 'No Content',
+    description: 'No Types Content',
   })
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())

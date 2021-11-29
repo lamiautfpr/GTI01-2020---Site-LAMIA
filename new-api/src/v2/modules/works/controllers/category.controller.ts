@@ -36,9 +36,9 @@ import { EntityCategory } from '../typeorm/entities/category.entity';
 export class ControllerCategory {
   constructor(private readonly ServiceCategory: ServiceCategory) {}
 
-  @ApiOperation({ summary: 'create' })
+  @ApiOperation({ summary: "Create Works's Categories" })
   @ApiCreatedResponse({
-    description: 'Create success',
+    description: 'Created success',
     type: EntityCategory,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
@@ -57,12 +57,12 @@ export class ControllerCategory {
     });
   }
 
-  @ApiOperation({ summary: 'findAll' })
+  @ApiOperation({ summary: "Find all Works's Categories" })
   @ApiQuery({
     type: ISelectOrderCategoryDTO,
   })
   @ApiNoContentResponse({
-    description: 'Category not exists',
+    description: 'No Categories Content',
   })
   @ApiResponse({
     status: 200,
@@ -71,9 +71,6 @@ export class ControllerCategory {
     isArray: true,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
-  @ApiNoContentResponse({
-    description: 'No Content',
-  })
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
