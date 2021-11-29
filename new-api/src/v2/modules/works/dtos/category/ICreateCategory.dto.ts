@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
+import { IsDefined, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
-export default class ICreateCategoryDTO {
+export default class ICreateCategoryBasicDTO {
   @IsString()
   @IsNotEmpty()
   @IsDefined()
@@ -20,4 +20,13 @@ export default class ICreateCategoryDTO {
     example: 'Latinoware event at 2020, where I study Linux!',
   })
   description: string;
+}
+
+export class ICreateCategoryDTO {
+  @IsDefined()
+  category: ICreateCategoryBasicDTO;
+
+  @IsDefined()
+  @IsUUID()
+  idMember: string;
 }
