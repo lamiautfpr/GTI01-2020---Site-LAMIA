@@ -1,6 +1,6 @@
+import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
-import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import {
   ConflictException,
   ForbiddenException,
@@ -22,25 +22,13 @@ describe('Create Patient - SERVICES', () => {
     );
   });
 
-  const createMemberMock = async (
-    patentName: string,
-  ): Promise<EntityMember> => {
-    const patent = await fakeRepositoryPatent.createSave({
-      name: patentName,
-    });
-
-    return fakeRepositoryMember.createSave({
-      email: 'user.mock@test.com',
-      login: 'user.mock',
-      name: 'User Mock',
-      password: 'fake password',
-      patent,
-    });
-  };
-
   describe('successful cases', () => {
     it("should create a patent successfully when there is full datas and member's patent is ADMINISTRATOR", async () => {
-      const member = await createMemberMock('ADMINISTRATOR');
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
 
       const newPatentData = {
         name: 'Patent MocK',
@@ -59,7 +47,34 @@ describe('Create Patient - SERVICES', () => {
     });
 
     it("should create a patent successfully when there is full datas and member's patent is COORDINATOR", async () => {
-      const member = await createMemberMock('COORDINATOR');
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'COORDINATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const newPatentData = {
+        name: 'Patent MocK',
+        description: 'this is description',
+      };
+
+      const result = await servicePatent.createPatent({
+        newPatentData,
+        idMember: member.id,
+      });
+
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('name');
+      expect(result).toHaveProperty('description');
+      expect(result.name).toBe(newPatentData.name);
+    });
+
+    it("should create a patent successfully when there is full datas and member's patent is ADVISOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADVISOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
 
       const newPatentData = {
         name: 'Patent MocK',
@@ -78,7 +93,11 @@ describe('Create Patient - SERVICES', () => {
     });
 
     it("should create a patent successfully when there not is description and member's patent is ADMINISTRATOR", async () => {
-      const member = await createMemberMock('ADMINISTRATOR');
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
 
       const newPatentData = {
         name: 'Patent MocK',
@@ -96,7 +115,33 @@ describe('Create Patient - SERVICES', () => {
     });
 
     it("should create a patent successfully when there not is description and member's patent is COORDINATOR", async () => {
-      const member = await createMemberMock('COORDINATOR');
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'COORDINATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const newPatentData = {
+        name: 'Patent MocK',
+      };
+
+      const result = await servicePatent.createPatent({
+        newPatentData,
+        idMember: member.id,
+      });
+
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('name');
+      expect(result.description).toBe(undefined);
+      expect(result.name).toBe(newPatentData.name);
+    });
+
+    it("should create a patent successfully when there not is description and member's patent is ADVISOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADVISOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
 
       const newPatentData = {
         name: 'Patent MocK',
@@ -124,8 +169,13 @@ describe('Create Patient - SERVICES', () => {
         }),
       ).rejects.toBeInstanceOf(UnauthorizedException);
     });
+
     it("should not create a patent when member's patent hasn't permission", async () => {
-      const member = await createMemberMock('Patent without permission');
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'Patent without permission',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
 
       await expect(
         servicePatent.createPatent({
@@ -138,14 +188,15 @@ describe('Create Patient - SERVICES', () => {
     });
 
     it('should not create a patent when already exists one with the same name and without description', async () => {
-      const member = await createMemberMock('ADMINISTRATOR');
-
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
       const newPatentData = {
         name: 'Patent MocK',
       };
-
       await fakeRepositoryPatent.createSave(newPatentData);
-
       await expect(
         servicePatent.createPatent({
           newPatentData,
@@ -155,15 +206,17 @@ describe('Create Patient - SERVICES', () => {
     });
 
     it('should not create a patent when already exists one with the same name', async () => {
-      const member = await createMemberMock('ADMINISTRATOR');
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
 
       const newPatentData = {
         name: 'Patent MocK',
         description: 'this is a description',
       };
-
       await fakeRepositoryPatent.createSave(newPatentData);
-
       await expect(
         servicePatent.createPatent({
           newPatentData,
