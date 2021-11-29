@@ -2,6 +2,7 @@ import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
 import { ServiceMember } from '@modules/members/services/member.service';
+import { FakeRepositoryCategory } from '@modules/works/repositories/fakes/Category.fakeRepository';
 import {
   ConflictException,
   ForbiddenException,
@@ -13,16 +14,19 @@ import { ServiceCategory } from '../category.service';
 
 let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
+let fakeRepositoryCategory: FakeRepositoryCategory;
+
 let iHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
 let serviceCategory: ServiceCategory;
 
-describe('Create Type - SERVICES', () => {
+describe('Create Category - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+    fakeRepositoryCategory = new FakeRepositoryCategory();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
@@ -30,7 +34,10 @@ describe('Create Type - SERVICES', () => {
       iStorageProver,
     );
 
-    serviceCategory = new ServiceCategory(fakeRepositoryPatent, serviceMember);
+    serviceCategory = new ServiceCategory(
+      fakeRepositoryCategory,
+      serviceMember,
+    );
   });
 
   describe('successful cases', () => {
@@ -41,20 +48,20 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
 
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
         description: 'this is description',
       };
 
-      const result = await serviceType.createType({
-        newTypeData,
+      const result = await serviceCategory.createCategory({
+        newCategoryData,
         idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result).toHaveProperty('description');
-      expect(result.name).toBe(newTypeData.name);
+      expect(result.name).toBe(newCategoryData.name);
     });
 
     it("should create a patent successfully when there is full datas and member's patent is COORDINATOR", async () => {
@@ -64,20 +71,20 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
 
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
         description: 'this is description',
       };
 
-      const result = await serviceType.createType({
-        newTypeData,
+      const result = await serviceCategory.createCategory({
+        newCategoryData,
         idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result).toHaveProperty('description');
-      expect(result.name).toBe(newTypeData.name);
+      expect(result.name).toBe(newCategoryData.name);
     });
 
     it("should create a patent successfully when there is full datas and member's patent is ADVISOR", async () => {
@@ -87,20 +94,20 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
 
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
         description: 'this is description',
       };
 
-      const result = await serviceType.createType({
-        newTypeData,
+      const result = await serviceCategory.createCategory({
+        newCategoryData,
         idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result).toHaveProperty('description');
-      expect(result.name).toBe(newTypeData.name);
+      expect(result.name).toBe(newCategoryData.name);
     });
 
     it("should create a patent successfully when there not is description and member's patent is ADMINISTRATOR", async () => {
@@ -110,19 +117,19 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
 
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
       };
 
-      const result = await serviceType.createType({
-        newTypeData,
+      const result = await serviceCategory.createCategory({
+        newCategoryData,
         idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result.description).toBe(undefined);
-      expect(result.name).toBe(newTypeData.name);
+      expect(result.name).toBe(newCategoryData.name);
     });
 
     it("should create a patent successfully when there not is description and member's patent is COORDINATOR", async () => {
@@ -132,19 +139,19 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
 
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
       };
 
-      const result = await serviceType.createType({
-        newTypeData,
+      const result = await serviceCategory.createCategory({
+        newCategoryData,
         idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result.description).toBe(undefined);
-      expect(result.name).toBe(newTypeData.name);
+      expect(result.name).toBe(newCategoryData.name);
     });
 
     it("should create a patent successfully when there not is description and member's patent is ADVISOR", async () => {
@@ -154,27 +161,27 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
 
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
       };
 
-      const result = await serviceType.createType({
-        newTypeData,
+      const result = await serviceCategory.createCategory({
+        newCategoryData,
         idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result.description).toBe(undefined);
-      expect(result.name).toBe(newTypeData.name);
+      expect(result.name).toBe(newCategoryData.name);
     });
   });
   describe('failure cases', () => {
     it('should not create a patent when memberId not exists', async () => {
       await expect(
-        serviceType.createType({
-          newTypeData: {
-            name: 'Patent MocK',
+        serviceCategory.createCategory({
+          newCategoryData: {
+            name: 'Category Mock',
           },
           idMember: 'not exists member',
         }),
@@ -189,9 +196,9 @@ describe('Create Type - SERVICES', () => {
       });
 
       await expect(
-        serviceType.createType({
-          newTypeData: {
-            name: 'Patent MocK',
+        serviceCategory.createCategory({
+          newCategoryData: {
+            name: 'Category Mock',
           },
           idMember: member.id,
         }),
@@ -204,13 +211,13 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryMember,
         fakeRepositoryPatent,
       });
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
       };
-      await fakeRepositoryPatent.createSave(newTypeData);
+      await fakeRepositoryCategory.createSave(newCategoryData);
       await expect(
-        serviceType.createType({
-          newTypeData,
+        serviceCategory.createCategory({
+          newCategoryData,
           idMember: member.id,
         }),
       ).rejects.toBeInstanceOf(ConflictException);
@@ -223,14 +230,14 @@ describe('Create Type - SERVICES', () => {
         fakeRepositoryPatent,
       });
 
-      const newTypeData = {
-        name: 'Patent MocK',
+      const newCategoryData = {
+        name: 'Category Mock',
         description: 'this is a description',
       };
-      await fakeRepositoryPatent.createSave(newTypeData);
+      await fakeRepositoryCategory.createSave(newCategoryData);
       await expect(
-        serviceType.createType({
-          newTypeData,
+        serviceCategory.createCategory({
+          newCategoryData,
           idMember: member.id,
         }),
       ).rejects.toBeInstanceOf(ConflictException);

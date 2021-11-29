@@ -25,12 +25,12 @@ export default class ICreateCategoryBasicDTO {
     description: 'Description of category',
     example: 'Latinoware event at 2020, where I study Linux!',
   })
-  description: string;
+  description?: string;
 }
 
 export class ICreateCategoryDTO {
   @IsDefined()
-  category: ICreateCategoryBasicDTO;
+  newCategoryData: ICreateCategoryBasicDTO;
 
   @IsDefined()
   @IsUUID()

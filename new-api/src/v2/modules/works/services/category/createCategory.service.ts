@@ -6,13 +6,13 @@ import { EntityCategory } from '@modules/works/typeorm/entities/category.entity'
 import { ConflictException, ForbiddenException } from '@nestjs/common';
 
 interface IRequest {
-  data: ICreateCategoryDTO;
+  newCategoryData: ICreateCategoryDTO;
   repository: IRepositoryCategory;
   member: EntityMember;
 }
 
 const create = async ({
-  data,
+  newCategoryData,
   repository,
   member,
 }: IRequest): Promise<EntityCategory> => {
@@ -22,13 +22,13 @@ const create = async ({
     ]);
   }
 
-  const categoryExists = await repository.findByName(data.name);
+  const categoryExists = await repository.findByName(newCategoryData.name);
 
   if (categoryExists) {
     throw new ConflictException(['Category already exists']);
   }
 
-  return repository.createSave(data);
+  return repository.createSave(newCategoryData);
 };
 
 export default create;

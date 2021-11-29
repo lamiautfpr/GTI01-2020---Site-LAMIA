@@ -52,7 +52,7 @@ export class ControllerCategory {
   @Post()
   create(@Body() data: ICreateCategoryBasicDTO, @Req() request: any) {
     return this.ServiceCategory.createCategory({
-      category: data,
+      newCategoryData: data,
       idMember: request.user.userId,
     });
   }

@@ -19,7 +19,7 @@ export class ServiceCategory {
   ) {}
 
   public async createCategory({
-    category,
+    newCategoryData,
     idMember,
   }: ICreateCategoryDTO): Promise<EntityCategory> {
     const member = await this.serviceMember.findById(idMember);
@@ -29,7 +29,7 @@ export class ServiceCategory {
     }
 
     return create({
-      data: category,
+      newCategoryData,
       repository: this.categoryRepository,
       member,
     });
