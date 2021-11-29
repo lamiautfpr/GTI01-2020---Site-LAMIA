@@ -17,7 +17,7 @@ const jwtConfig = JwtModule.register({
 @Module({
   imports: [TypeOrmModule, PassportModule, jwtConfig],
   controllers: [...Controllers],
-  providers: [...Services, ...Strategies, HashProvider, StorageProvider],
+  providers: [StorageProvider, HashProvider, ...Strategies, ...Services],
   exports: [...Services],
 })
 export class ModuleMember {}

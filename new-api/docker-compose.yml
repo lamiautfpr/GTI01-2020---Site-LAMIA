@@ -22,6 +22,9 @@ services:
     command: yarn start:dev
     env_file:
       - .env
+    environment:
+      TYPEORM_HOST: postgres_pl
+      STORAGE_DRIVER: disk
     ports:
       - "${PORT_API}:3333"
     networks:

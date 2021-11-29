@@ -13,7 +13,7 @@ export const AllowedImagesType = [
 const maxSize = 10; // MB
 
 interface IUploadConfig {
-  driver: 'disk';
+  driver: 'disk' | 'S3';
   url: string;
   tmpFolder: string;
   uploadsFolder: string;
