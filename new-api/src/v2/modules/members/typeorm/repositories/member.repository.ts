@@ -27,7 +27,7 @@ export class RepositoryMember
   }
 
   public async findById(id: string): Promise<EntityMember | undefined> {
-    return this.ormRepository.findOne(id);
+    return !id ? undefined : this.ormRepository.findOne(id);
   }
 
   public async findByEmail(email: string): Promise<EntityMember | undefined> {
