@@ -110,7 +110,7 @@ export class EntityWork extends BasicEntity {
     isArray: true,
   })
   @ManyToMany(() => EntityMember, (member) => member.works, {
-    cascade: ['update'],
+    cascade: ['update', 'remove'],
   })
   @JoinTable()
   members: EntityMember[];
@@ -124,7 +124,7 @@ export class EntityWork extends BasicEntity {
     () => EntityAreaExpertise,
     (areaExpertise) => areaExpertise.works,
     {
-      cascade: ['update'],
+      cascade: ['update', 'remove'],
     },
   )
   @JoinTable()
@@ -136,7 +136,7 @@ export class EntityWork extends BasicEntity {
     isArray: true,
   })
   @ManyToMany(() => EntityCategory, (category) => category.works, {
-    cascade: ['update'],
+    cascade: ['update', 'remove'],
   })
   @JoinTable()
   categories: EntityCategory[];
@@ -147,7 +147,7 @@ export class EntityWork extends BasicEntity {
     isArray: true,
   })
   @ManyToMany(() => EntityType, (type) => type.works, {
-    cascade: ['update'],
+    cascade: ['update', 'remove'],
   })
   @JoinTable()
   types: EntityType[];
