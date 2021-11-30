@@ -48,7 +48,7 @@ export class ControllerAreaExpertise {
   @Post()
   create(@Body() data: ICreateAreaExpertiseBasicDTO, @Req() request: any) {
     return this.serviceAreaExpertise.createAreaExpertise({
-      areaExpertise: data,
+      newExpertiseAreaData: data,
       idMember: request.user.userId,
     });
   }

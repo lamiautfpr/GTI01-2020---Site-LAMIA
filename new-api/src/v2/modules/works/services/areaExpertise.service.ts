@@ -20,7 +20,7 @@ export class ServiceAreaExpertise {
   ) {}
 
   public async createAreaExpertise({
-    areaExpertise,
+    newExpertiseAreaData,
     idMember,
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
     const member = await this.serviceMember.findById(idMember);
@@ -30,7 +30,7 @@ export class ServiceAreaExpertise {
     }
 
     return create({
-      data: areaExpertise,
+      newExpertiseAreaData,
       repository: this.repositoryAreaExpertise,
       member,
     });

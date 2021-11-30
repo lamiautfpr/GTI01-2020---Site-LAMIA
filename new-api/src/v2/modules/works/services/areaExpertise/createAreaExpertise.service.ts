@@ -6,13 +6,13 @@ import ICreateAreaExpertiseDTO from '../../dtos/areaExpertise/ICreateAreaExperti
 import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
 
 interface IRequest {
-  data: ICreateAreaExpertiseDTO;
+  newExpertiseAreaData: ICreateAreaExpertiseDTO;
   repository: IRepositoryAreaExpertise;
   member: EntityMember;
 }
 
 const create = async ({
-  data,
+  newExpertiseAreaData,
   repository,
   member,
 }: IRequest): Promise<EntityAreaExpertise> => {
@@ -22,13 +22,15 @@ const create = async ({
     ]);
   }
 
-  const expertiseAreaExists = await repository.findByName(data.name);
+  const expertiseAreaExists = await repository.findByName(
+    newExpertiseAreaData.name,
+  );
 
   if (expertiseAreaExists) {
     throw new ConflictException(['Expertise Area already exists']);
   }
 
-  return repository.createSave(data);
+  return repository.createSave(newExpertiseAreaData);
 };
 
 export default create;

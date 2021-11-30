@@ -1,28 +1,32 @@
+import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
 import { ServiceMember } from '@modules/members/services/member.service';
-import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { FakeRepositoryAreaExpertise } from '@modules/works/repositories/fakes/AreaExpertise.fakeRepository';
-import { EntityAreaExpertise } from '@modules/works/typeorm/entities/areaExpertise.entity';
-import { ConflictException, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  ForbiddenException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceAreaExpertise } from '../areaExpertise.service';
 
-let fakeRepositoryAreaExpertise: FakeRepositoryAreaExpertise;
-let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryPatent: FakeRepositoryPatent;
-let serviceAreaExpertise: ServiceAreaExpertise;
-let serviceMember: ServiceMember;
+let fakeRepositoryMember: FakeRepositoryMember;
+let fakeRepositoryExpertiseArea: FakeRepositoryAreaExpertise;
+
 let iHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
-describe('Create Area Expertise - SERVICES', () => {
-  beforeEach(() => {
-    fakeRepositoryAreaExpertise = new FakeRepositoryAreaExpertise();
-    fakeRepositoryMember = new FakeRepositoryMember();
-    fakeRepositoryPatent = new FakeRepositoryPatent();
+let serviceMember: ServiceMember;
+let serviceExpertiseArea: ServiceAreaExpertise;
 
+describe('Create ExpertiseArea - SERVICES', () => {
+  beforeEach(() => {
+    fakeRepositoryPatent = new FakeRepositoryPatent();
+    fakeRepositoryMember = new FakeRepositoryMember();
+    fakeRepositoryExpertiseArea = new FakeRepositoryAreaExpertise();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
@@ -30,104 +34,213 @@ describe('Create Area Expertise - SERVICES', () => {
       iStorageProver,
     );
 
-    serviceAreaExpertise = new ServiceAreaExpertise(
-      fakeRepositoryAreaExpertise,
+    serviceExpertiseArea = new ServiceAreaExpertise(
+      fakeRepositoryExpertiseArea,
       serviceMember,
     );
   });
 
-  const createMemberMock = async (
-    patentName: string,
-  ): Promise<EntityMember> => {
-    const patent = await fakeRepositoryPatent.createSave({
-      name: patentName,
-    });
-
-    return fakeRepositoryMember.createSave({
-      email: 'user.mick@gmail.com',
-      name: 'user.mock',
-      login: 'user.mock',
-      password: 'passwordForget',
-      patent,
-    });
-  };
-
-  const createAreaExpertiseMock = async (
-    areaExpertiseName: string,
-    areaExpertisedescription: string,
-  ): Promise<EntityAreaExpertise> => {
-    return fakeRepositoryAreaExpertise.createSave({
-      name: areaExpertiseName,
-      description: areaExpertisedescription,
-    });
-  };
-
   describe('successful cases', () => {
-    it('should create an area expertise successfully when there is full datas', async () => {
-      const areaExpertise = new EntityAreaExpertise({
-        name: 'Ciência de dados',
-        description: 'Ciência de dados é uma area da computação que estuda...',
+    it("should create a new expertise area successfully when there is full datas and member's patent is ADMINISTRATOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
       });
 
-      const result = await serviceAreaExpertise.createAreaExpertise({
-        areaExpertise,
-        idMember: 'd4975451-c598-4af4-9a3b-070df207dab7',
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+        description: 'this is description',
+      };
+
+      const result = await serviceExpertiseArea.createAreaExpertise({
+        newExpertiseAreaData,
+        idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result).toHaveProperty('description');
-      expect(result.name).toBe('Ciência de dados');
+      expect(result.name).toBe(newExpertiseAreaData.name);
     });
 
-    it('should create an area expertise successfully when there not is description', async () => {
-      const areaExpertise = new EntityAreaExpertise({
-        name: 'Inteligência Artificial',
+    it("should create a new expertise area successfully when there is full datas and member's patent is COORDINATOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'COORDINATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
       });
 
-      const result = await serviceAreaExpertise.createAreaExpertise({
-        areaExpertise,
-        idMember: 'd4975451-c598-4af4-9a3b-070df207dab7',
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+        description: 'this is description',
+      };
+
+      const result = await serviceExpertiseArea.createAreaExpertise({
+        newExpertiseAreaData,
+        idMember: member.id,
+      });
+
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('name');
+      expect(result).toHaveProperty('description');
+      expect(result.name).toBe(newExpertiseAreaData.name);
+    });
+
+    it("should create a new expertise area successfully when there is full datas and member's patent is ADVISOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADVISOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+        description: 'this is description',
+      };
+
+      const result = await serviceExpertiseArea.createAreaExpertise({
+        newExpertiseAreaData,
+        idMember: member.id,
+      });
+
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('name');
+      expect(result).toHaveProperty('description');
+      expect(result.name).toBe(newExpertiseAreaData.name);
+    });
+
+    it("should create a new expertise area successfully when there not is description and member's patent is ADMINISTRATOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+      };
+
+      const result = await serviceExpertiseArea.createAreaExpertise({
+        newExpertiseAreaData,
+        idMember: member.id,
       });
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('name');
       expect(result.description).toBe(undefined);
-      expect(result.name).toBe('Inteligência Artificial');
+      expect(result.name).toBe(newExpertiseAreaData.name);
     });
-  });
 
-  describe('failure cases', () => {
-    it('should not create an area expertise when already exists one with the same name and without description', async () => {
-      const areaExpertise = new EntityAreaExpertise({
-        name: 'Ciência de dados',
-        description: '',
+    it("should create a new expertise area successfully when there not is description and member's patent is COORDINATOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'COORDINATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
       });
 
-      await createAreaExpertiseMock('Ciência de dados', 'description full');
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+      };
+
+      const result = await serviceExpertiseArea.createAreaExpertise({
+        newExpertiseAreaData,
+        idMember: member.id,
+      });
+
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('name');
+      expect(result.description).toBe(undefined);
+      expect(result.name).toBe(newExpertiseAreaData.name);
+    });
+
+    it("should create a new expertise area successfully when there not is description and member's patent is ADVISOR", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADVISOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+      };
+
+      const result = await serviceExpertiseArea.createAreaExpertise({
+        newExpertiseAreaData,
+        idMember: member.id,
+      });
+
+      expect(result).toHaveProperty('id');
+      expect(result).toHaveProperty('name');
+      expect(result.description).toBe(undefined);
+      expect(result.name).toBe(newExpertiseAreaData.name);
+    });
+  });
+  describe('failure cases', () => {
+    it('should not create a new expertise area when memberId not exists', async () => {
+      await expect(
+        serviceExpertiseArea.createAreaExpertise({
+          newExpertiseAreaData: {
+            name: 'ExpertiseArea Mock',
+          },
+          idMember: 'not exists member',
+        }),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
+
+    it("should not create a new expertise area when member's patent hasn't permission", async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'Patent without permission',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
 
       await expect(
-        serviceAreaExpertise.createAreaExpertise({
-          areaExpertise,
-          idMember: 'd4975451-c598-4af4-9a3b-070df207dab7',
+        serviceExpertiseArea.createAreaExpertise({
+          newExpertiseAreaData: {
+            name: 'ExpertiseArea Mock',
+          },
+          idMember: member.id,
+        }),
+      ).rejects.toBeInstanceOf(ForbiddenException);
+    });
+
+    it('should not create a new expertise area when already exists one with the same name and without description', async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+      };
+      await fakeRepositoryExpertiseArea.createSave(newExpertiseAreaData);
+      await expect(
+        serviceExpertiseArea.createAreaExpertise({
+          newExpertiseAreaData,
+          idMember: member.id,
         }),
       ).rejects.toBeInstanceOf(ConflictException);
     });
 
-    it('Should not create an area expertise when type of user not authorized', async () => {
-      const member = await createMemberMock('NOVATO');
-
-      const areaExpertise = new EntityAreaExpertise({
-        name: 'Desenvolvimento web',
-        description: '',
+    it('should not create a new expertise area when already exists one with the same name', async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
       });
 
+      const newExpertiseAreaData = {
+        name: 'ExpertiseArea Mock',
+        description: 'this is a description',
+      };
+      await fakeRepositoryExpertiseArea.createSave(newExpertiseAreaData);
       await expect(
-        serviceAreaExpertise.createAreaExpertise({
-          areaExpertise,
+        serviceExpertiseArea.createAreaExpertise({
+          newExpertiseAreaData,
           idMember: member.id,
         }),
-      ).rejects.toBeInstanceOf(UnauthorizedException);
+      ).rejects.toBeInstanceOf(ConflictException);
     });
   });
 });

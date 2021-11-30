@@ -31,7 +31,7 @@ export default class ICreateAreaExpertiseBasicDTO {
 
 export class ICreateAreaExpertiseDTO {
   @IsDefined()
-  areaExpertise: ICreateAreaExpertiseBasicDTO;
+  newExpertiseAreaData: ICreateAreaExpertiseBasicDTO;
 
   @IsDefined()
   @IsUUID()
