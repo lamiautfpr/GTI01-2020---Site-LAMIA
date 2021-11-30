@@ -61,7 +61,7 @@ describe('Create Type - SERVICES', () => {
       expect(result.name).toBe(newTypeData.name);
     });
 
-    it("should create a patent successfully when there is full datas and member's patent is COORDINATOR", async () => {
+    it("should create new a type successfully when there is full datas and member's patent is COORDINATOR", async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'COORDINATOR',
         fakeRepositoryMember,
@@ -84,7 +84,7 @@ describe('Create Type - SERVICES', () => {
       expect(result.name).toBe(newTypeData.name);
     });
 
-    it("should create a patent successfully when there is full datas and member's patent is ADVISOR", async () => {
+    it("should create new a type successfully when there is full datas and member's patent is ADVISOR", async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'ADVISOR',
         fakeRepositoryMember,
@@ -107,7 +107,7 @@ describe('Create Type - SERVICES', () => {
       expect(result.name).toBe(newTypeData.name);
     });
 
-    it("should create a patent successfully when there not is description and member's patent is ADMINISTRATOR", async () => {
+    it("should create new a type successfully when there not is description and member's patent is ADMINISTRATOR", async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'ADMINISTRATOR',
         fakeRepositoryMember,
@@ -129,7 +129,7 @@ describe('Create Type - SERVICES', () => {
       expect(result.name).toBe(newTypeData.name);
     });
 
-    it("should create a patent successfully when there not is description and member's patent is COORDINATOR", async () => {
+    it("should create new a type successfully when there not is description and member's patent is COORDINATOR", async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'COORDINATOR',
         fakeRepositoryMember,
@@ -151,7 +151,7 @@ describe('Create Type - SERVICES', () => {
       expect(result.name).toBe(newTypeData.name);
     });
 
-    it("should create a patent successfully when there not is description and member's patent is ADVISOR", async () => {
+    it("should create new a type successfully when there not is description and member's patent is ADVISOR", async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'ADVISOR',
         fakeRepositoryMember,
@@ -174,7 +174,7 @@ describe('Create Type - SERVICES', () => {
     });
   });
   describe('failure cases', () => {
-    it('should not create a patent when memberId not exists', async () => {
+    it('should not create new a type when memberId not exists', async () => {
       await expect(
         serviceType.createType({
           newTypeData: {
@@ -185,7 +185,7 @@ describe('Create Type - SERVICES', () => {
       ).rejects.toBeInstanceOf(UnauthorizedException);
     });
 
-    it("should not create a patent when member's patent hasn't permission", async () => {
+    it("should not create new a type when member's patent hasn't permission", async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'Patent without permission',
         fakeRepositoryMember,
@@ -202,7 +202,7 @@ describe('Create Type - SERVICES', () => {
       ).rejects.toBeInstanceOf(ForbiddenException);
     });
 
-    it('should not create a patent when already exists one with the same name and without description', async () => {
+    it('should not create new a type when already exists one with the same name and without description', async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'ADMINISTRATOR',
         fakeRepositoryMember,
@@ -220,7 +220,7 @@ describe('Create Type - SERVICES', () => {
       ).rejects.toBeInstanceOf(ConflictException);
     });
 
-    it('should not create a patent when already exists one with the same name', async () => {
+    it('should not create new a type when already exists one with the same name', async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'ADMINISTRATOR',
         fakeRepositoryMember,
