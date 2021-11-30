@@ -11,7 +11,7 @@ services:
       POSTGRES_USER: ${TYPEORM_USERNAME}
       POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     networks:
       - network-portal_lamia
   api-portal_lamia:
@@ -23,6 +23,7 @@ services:
     env_file:
       - .env
     environment:
+      TYPEORM_PORT: 5432
       TYPEORM_HOST: postgres_pl
       STORAGE_DRIVER: disk
     ports:
