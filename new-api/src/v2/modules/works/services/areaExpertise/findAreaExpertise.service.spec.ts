@@ -2,25 +2,26 @@ import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
 import { ServiceMember } from '@modules/members/services/member.service';
 import { FakeRepositoryAreaExpertise } from '@modules/works/repositories/fakes/AreaExpertise.fakeRepository';
-import { ApiNoContentResponse } from '@nestjs/swagger';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
 import { ServiceAreaExpertise } from '../areaExpertise.service';
+
+let fakeRepositoryPatent: FakeRepositoryPatent;
+let fakeRepositoryMember: FakeRepositoryMember;
+let fakeRepositoryAreaExpertise: FakeRepositoryAreaExpertise;
 
 let iHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
-let fakeRepositoryMember: FakeRepositoryMember;
-let fakeRepositoryPatent: FakeRepositoryPatent;
-let fakeRepositoryAreaExpertise: FakeRepositoryAreaExpertise;
-let serviceAreaExpertise: ServiceAreaExpertise;
+
 let serviceMember: ServiceMember;
+let serviceAreaExpertise: ServiceAreaExpertise;
 
-describe('Create Area Expertise - Service', () => {
+describe('Find all Categories - SERVICES', () => {
   beforeEach(() => {
-    fakeRepositoryAreaExpertise = new FakeRepositoryAreaExpertise();
-    fakeRepositoryMember = new FakeRepositoryMember();
     fakeRepositoryPatent = new FakeRepositoryPatent();
-
+    fakeRepositoryMember = new FakeRepositoryMember();
+    fakeRepositoryAreaExpertise = new FakeRepositoryAreaExpertise();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
@@ -33,26 +34,25 @@ describe('Create Area Expertise - Service', () => {
       serviceMember,
     );
   });
-
   describe('successful cases', () => {
-    it('should return a list of areaExpertis when Expertise exist', async () => {
+    it('should return a list of expertise areas when expertise areas exist', async () => {
       await fakeRepositoryAreaExpertise.createSave({
-        name: 'Ciência de Dados',
+        name: 'AreaExpertise Mocked 1',
       });
       await fakeRepositoryAreaExpertise.createSave({
-        name: 'Inteligência Artificial',
+        name: 'AreaExpertise Mocked 2',
       });
 
       const result = await serviceAreaExpertise.findAll({});
 
       expect(result.length).toBe(2);
-      expect(result[0].name).toBe('Ciência de Dados');
-      expect(result[1].name).toBe('Inteligência Artificial');
+      expect(result[0].name).toBe('AreaExpertise Mocked 1');
+      expect(result[1].name).toBe('AreaExpertise Mocked 2');
     });
 
-    it('should return to NO_CONTENT when no areaExpertise exists', async () => {
+    it('should return NO_CONTENT when there no expertise area exists', async () => {
       await expect(serviceAreaExpertise.findAll({})).rejects.toBeInstanceOf(
-        ApiNoContentResponse,
+        NoContentException,
       );
     });
   });
