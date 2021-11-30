@@ -21,30 +21,32 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
-import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
+import ICreateWorkBasicDTO from '../dtos/work/ICreateWork.dto';
 import { ServiceType } from '../services/type.service';
-import { EntityType } from '../typeorm/entities/type.entity';
+import { EntityWork } from '../typeorm/entities/work.entity';
 
 @ApiTags('Works')
 @Controller(`${apiConfig.version}/works`)
-export class ControllerType {
+export class ControllerWork {
   constructor(private readonly serviceType: ServiceType) {}
 
   @ApiOperation({ summary: 'Create Works' })
   @ApiCreatedResponse({
     description: 'Created Success',
-    type: EntityType,
+    type: EntityWork,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiConflictResponse(Errors.Conflict)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @ApiForbiddenResponse(Errors.Forbidden)
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @ApiBearerAuth()
   @Post()
-  create(@Body() data: ICreateTypeDTO, @Req() request: any) {}
+  create(@Body() data: ICreateWorkBasicDTO, @Req() request: any) {
+    return { test: true, data };
+  }
 
   // @ApiOperation({ summary: 'Find all Works' })
   // @ApiQuery({

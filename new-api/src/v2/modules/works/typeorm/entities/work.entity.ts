@@ -62,6 +62,7 @@ export class EntityWork extends BasicEntity {
     description: "Work's Github URL",
     example: 'https://github.com/lamiautfpr/GTI01-2020---Site-LAMIA',
     uniqueItems: true,
+    nullable: true,
     maxLength: 255,
   })
   @Column({
