@@ -13,13 +13,14 @@ export class EntityWork extends BasicEntity {
     description: "Work's intenal code",
     example: 'IC01/2019',
     uniqueItems: true,
+    nullable: true,
   })
   @Column({
-    nullable: false,
+    nullable: true,
     type: 'varchar',
     unique: true,
   })
-  internalCode: string;
+  internalCode?: string;
 
   @ApiProperty({
     description: "Work's title",
