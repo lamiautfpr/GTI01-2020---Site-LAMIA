@@ -22,8 +22,6 @@ const create = async ({
     ]);
   }
 
-  console.log('repository =>', repository);
-
   const typeExists = await repository.findByName(newTypeData.name);
 
   if (typeExists) {
