@@ -1,10 +1,10 @@
 import BasicEntity from '@modules/BasicEntity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToMany } from 'typeorm';
+import { EntityWork } from './work.entity';
 
 @Entity('tb_area_expertise')
 export class EntityAreaExpertise extends BasicEntity {
-  // Definindo os parametros do ID
   @ApiProperty({
     description: 'Name of Area Expertise',
     example: 'Ciência de Dados',
@@ -16,8 +16,6 @@ export class EntityAreaExpertise extends BasicEntity {
   })
   name: string;
 
-  // Description
-
   @ApiProperty({
     description: 'Description of Area Expertise',
     example: 'Ciência de Dados é...',
@@ -27,6 +25,17 @@ export class EntityAreaExpertise extends BasicEntity {
     type: 'varchar',
   })
   description: string;
+
+  //Relations
+  @ApiProperty({
+    type: EntityWork,
+    description: 'Works that are of this Expertise Area',
+    isArray: true,
+  })
+  @ManyToMany(() => EntityWork, (work) => work.areaExpertise, {
+    cascade: ['update'],
+  })
+  works: EntityWork[];
 
   constructor(data?: Partial<EntityAreaExpertise>) {
     super();

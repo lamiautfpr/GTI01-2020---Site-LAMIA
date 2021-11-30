@@ -1,9 +1,10 @@
 import BasicEntity from '@modules/BasicEntity';
+import { EntityWork } from '@modules/works/typeorm/entities/work.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { StorageProvider } from '@providers/StorageProvider';
 import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
 import { Exclude, Transform } from 'class-transformer';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 import { EntityPatent } from './patent.entity';
 
 @Entity('tb_member')
@@ -43,23 +44,6 @@ export class EntityMember extends BasicEntity {
     unique: true,
   })
   login: string;
-
-  @ApiProperty({
-    type: EntityPatent,
-    description: "Member's patent",
-    example: {
-      name: 'Notavo',
-      id: '2bac045b-7109-473f-af2a-32234b067694',
-      description: 'Lab freshman',
-    } as EntityPatent,
-  })
-  @ManyToOne(() => EntityPatent, (patent) => patent.members, {
-    eager: true,
-    nullable: false,
-    onDelete: 'SET NULL',
-    onUpdate: 'CASCADE',
-  })
-  patent: EntityPatent;
 
   @ApiProperty({
     nullable: true,
@@ -151,6 +135,34 @@ export class EntityMember extends BasicEntity {
     type: 'varchar',
   })
   password: string;
+
+  //Relations
+  @ApiProperty({
+    type: EntityPatent,
+    description: "Member's patent",
+    example: {
+      name: 'Notavo',
+      id: '2bac045b-7109-473f-af2a-32234b067694',
+      description: 'Lab freshman',
+    } as EntityPatent,
+  })
+  @ManyToOne(() => EntityPatent, (patent) => patent.members, {
+    eager: true,
+    nullable: false,
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  })
+  patent: EntityPatent;
+
+  @ApiProperty({
+    type: EntityWork,
+    description: 'Works that the member participated',
+    isArray: true,
+  })
+  @ManyToMany(() => EntityWork, (work) => work.members, {
+    cascade: ['update'],
+  })
+  works: EntityWork[];
 
   constructor(data?: Partial<EntityMember>) {
     super();

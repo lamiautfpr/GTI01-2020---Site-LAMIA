@@ -1,7 +1,8 @@
 import BasicEntity from '@modules/BasicEntity';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToMany } from 'typeorm';
+import { EntityWork } from './work.entity';
 
 @Entity('tb_category')
 export class EntityCategory extends BasicEntity {
@@ -24,6 +25,17 @@ export class EntityCategory extends BasicEntity {
     type: 'varchar',
   })
   description: string;
+
+  //Relations
+  @ApiProperty({
+    type: EntityWork,
+    description: 'Works that are of this Category',
+    isArray: true,
+  })
+  @ManyToMany(() => EntityWork, (work) => work.categories, {
+    cascade: ['update'],
+  })
+  works: EntityWork[];
 
   constructor(data?: Partial<EntityCategory>) {
     super();
