@@ -22,7 +22,8 @@ const create = async ({
     ]);
   }
 
-  return repository.createSave(newWorkData);
+  const { slug } = await repository.createSave(newWorkData);
+  return repository.findBySlug(slug);
 };
 
 export default create;
