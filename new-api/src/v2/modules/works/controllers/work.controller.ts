@@ -83,7 +83,7 @@ export class ControllerWork {
   @UsePipes(new ValidationPipe())
   @Get()
   findAll(@Query() order: ISelectOrderWorkDTO) {
-    return { test: true, order };
+    return this.serviceWork.findAll(order);
   }
 
   @ApiOperation({ summary: 'find one Work by SLUG' })

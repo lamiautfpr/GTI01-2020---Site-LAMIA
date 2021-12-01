@@ -63,6 +63,6 @@ export class ServiceWork {
       [attribute || 'name']: direction || 'ASC',
     };
 
-    // return findAll({ repository: this.repositoryWork, order });
+    return findAll({ repository: this.repositoryWork, order });
   }
 }

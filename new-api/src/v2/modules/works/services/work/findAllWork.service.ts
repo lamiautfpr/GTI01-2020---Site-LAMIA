@@ -1,23 +1,23 @@
+import IRepositoryWork from '@modules/works/repositories/IRepositoryWork';
+import { EntityWork } from '@modules/works/typeorm/entities/work.entity';
 import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
 import IOrderTypeDTO from '../../dtos/type/IOrderType.dto';
-import IRepositoryType from '../../repositories/IRepositoryType';
-import { EntityType } from '../../typeorm/entities/type.entity';
 
 interface IRequest {
-  repository: IRepositoryType;
+  repository: IRepositoryWork;
   order?: IOrderTypeDTO;
 }
 
 const findAll = async ({
   repository,
   order,
-}: IRequest): Promise<EntityType[]> => {
-  const types = await repository.findAll(order);
+}: IRequest): Promise<EntityWork[]> => {
+  const works = await repository.findAll(order);
 
-  if (types.length <= 0) {
+  if (works.length <= 0) {
     throw new NoContentExcepetion();
   }
-  return types;
+  return works;
 };
 
 export default findAll;
