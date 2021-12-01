@@ -10,6 +10,7 @@ import {
   Req,
   UseFilters,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -30,6 +31,7 @@ import {
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
+import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import ICreateWorkBasicDTO from '../dtos/work/ICreateWork.dto';
 import { ISelectOrderWorkDTO } from '../dtos/work/IOrderWork.dto';
 import { ServiceWork } from '../services/work.service';
@@ -37,6 +39,7 @@ import { EntityWork } from '../typeorm/entities/work.entity';
 
 @ApiTags('Works')
 @UseFilters(new AllExceptionsFilter())
+@UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/works`)
 export class ControllerWork {
   constructor(private readonly serviceWork: ServiceWork) {}
@@ -93,7 +96,7 @@ export class ControllerWork {
   @ApiNotFoundResponse(Errors.NotFound)
   @UsePipes(new ValidationPipe())
   @Get(':slug')
-  async findOne(@Param('slug') slug: string): Promise<any> {
-    return { test: true, slug };
+  async findOneBySlug(@Param('slug') slug: string) {
+    return this.serviceWork.findBySlug(slug);
   }
 }

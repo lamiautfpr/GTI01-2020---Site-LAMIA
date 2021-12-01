@@ -52,7 +52,7 @@ export class ServiceWork {
   }
 
   public async findBySlug(slug: string): Promise<EntityWork | void> {
-    // return findWorkBySlug({ repository: this.repositoryWork, order });
+    return findWorkBySlug({ repository: this.repositoryWork, slug });
   }
 
   public async findAll({

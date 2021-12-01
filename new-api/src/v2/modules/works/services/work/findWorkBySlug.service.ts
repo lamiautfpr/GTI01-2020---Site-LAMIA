@@ -1,23 +1,22 @@
-import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
-import IOrderTypeDTO from '../../dtos/type/IOrderType.dto';
-import IRepositoryType from '../../repositories/IRepositoryType';
-import { EntityType } from '../../typeorm/entities/type.entity';
+import IRepositoryWork from '@modules/works/repositories/IRepositoryWork';
+import { EntityWork } from '@modules/works/typeorm/entities/work.entity';
+import { NotFoundException } from '@nestjs/common';
 
 interface IRequest {
-  repository: IRepositoryType;
-  order?: IOrderTypeDTO;
+  repository: IRepositoryWork;
+  slug: string;
 }
 
-const findAll = async ({
+const findWorkBySlug = async ({
   repository,
-  order,
-}: IRequest): Promise<EntityType[]> => {
-  const types = await repository.findAll(order);
+  slug,
+}: IRequest): Promise<EntityWork> => {
+  const work = await repository.findBySlug(slug);
 
-  if (types.length <= 0) {
-    throw new NoContentExcepetion();
+  if (!work) {
+    throw new NotFoundException('Not found work');
   }
-  return types;
+  return work;
 };
 
-export default findAll;
+export default findWorkBySlug;

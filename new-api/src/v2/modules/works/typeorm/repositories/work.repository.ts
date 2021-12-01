@@ -18,9 +18,9 @@ export class RepositoryWork
   public async createSave(
     data: ICreateWorkDTO,
   ): Promise<EntityWork | undefined> {
-    const Work = this.ormRepository.create(data);
+    const work = this.ormRepository.create(data);
 
-    return this.ormRepository.save(Work);
+    return this.ormRepository.save(work);
   }
 
   public async findBySlug(slug: string): Promise<EntityWork | undefined> {
