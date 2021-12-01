@@ -1,9 +1,9 @@
-import { ConflictException, ForbiddenException } from '@nestjs/common';
+import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
+import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
+import { ForbiddenException } from '@nestjs/common';
 import ICreateWorkDTO from '../../dtos/work/ICreateWork.dto';
 import IRepositoryWork from '../../repositories/IRepositoryWork';
 import { EntityWork } from '../../typeorm/entities/work.entity';
-import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 
 interface IRequest {
   newWorkData: ICreateWorkDTO;
