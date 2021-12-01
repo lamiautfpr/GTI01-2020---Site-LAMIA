@@ -8,6 +8,7 @@ import {
   Post,
   Query,
   Req,
+  UseFilters,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -28,15 +29,17 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
+import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
 import ICreateWorkBasicDTO from '../dtos/work/ICreateWork.dto';
 import { ISelectOrderWorkDTO } from '../dtos/work/IOrderWork.dto';
-import { ServiceType } from '../services/type.service';
+import { ServiceWork } from '../services/work.service';
 import { EntityWork } from '../typeorm/entities/work.entity';
 
 @ApiTags('Works')
+@UseFilters(new AllExceptionsFilter())
 @Controller(`${apiConfig.version}/works`)
 export class ControllerWork {
-  constructor(private readonly serviceType: ServiceType) {}
+  constructor(private readonly serviceWork: ServiceWork) {}
 
   @ApiOperation({ summary: 'Create Works' })
   @ApiCreatedResponse({
@@ -48,12 +51,15 @@ export class ControllerWork {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @ApiForbiddenResponse(Errors.Forbidden)
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
-  @ApiBearerAuth()
   @Post()
   create(@Body() data: ICreateWorkBasicDTO, @Req() request: any) {
-    return { test: true, data };
+    return this.serviceWork.createWork({
+      newWorkData: data,
+      idMember: request.user.userId,
+    });
   }
 
   @ApiOperation({ summary: 'Find all Works' })

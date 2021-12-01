@@ -1,14 +1,8 @@
-import { EntityRepository, Repository, getRepository } from 'typeorm';
-
-// Interface
-import IRepositoryType from '@modules/works/repositories/IRepositoryType';
-
-// Entidade
-import { EntityType } from '../entities/type.entity';
-
-// DTO
 import ICreateTypeDTO from '@modules/works/dtos/type/ICreateType.dto';
 import IOrderTypeDTO from '@modules/works/dtos/type/IOrderType.dto';
+import IRepositoryType from '@modules/works/repositories/IRepositoryType';
+import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { EntityType } from '../entities/type.entity';
 
 @EntityRepository(EntityType)
 export class RepositoryType
