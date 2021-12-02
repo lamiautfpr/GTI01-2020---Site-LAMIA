@@ -39,7 +39,7 @@ import { ServiceWork } from '../services/work.service';
 import { EntityWork } from '../typeorm/entities/work.entity';
 
 @ApiTags('Works')
-// @UseFilters(new AllExceptionsFilter())
+@UseFilters(new AllExceptionsFilter())
 @UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/works`)
 export class ControllerWork {

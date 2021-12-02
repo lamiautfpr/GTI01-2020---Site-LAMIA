@@ -5,17 +5,11 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Response, Request } from 'express';
-
+import { Request, Response } from 'express';
 import * as fs from 'fs';
-import { QueryFailedError } from 'typeorm';
 import HandleOrmError from '../Errors/HandleErrorORM/HandleOrmError';
 import TypeOrmError from '../Errors/HandleErrorORM/TypeOrmError';
-
-import {
-  CustomHttpExceptionResponse,
-  HttpExceptionResponse,
-} from './models/http-exception-response.interface';
+import { CustomHttpExceptionResponse } from './models/http-exception-response.interface';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -25,28 +19,31 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
 
     let status: HttpStatus;
-    let errorMessage: string | string[];
-
-    console.log(request.body.members);
+    let errorMessage: string;
+    let errors: string | string[] | undefined;
 
     const handleOrmError = new HandleOrmError(new TypeOrmError());
 
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const errorResponse = exception.getResponse();
-      errorMessage =
-        (errorResponse as HttpExceptionResponse).error || exception.message;
+      errorMessage = (errorResponse as any).error || exception.message;
+      errors = (errorResponse as any).message;
     } else if (handleOrmError.isError(exception)) {
-      console.log('BATATA');
       const errorResponse = handleOrmError.getErrorResponse(exception);
       status = errorResponse.statusCode;
-      errorMessage = errorResponse.error;
+      errorMessage = errorResponse.errorMessage;
     } else {
       status = HttpStatus.INTERNAL_SERVER_ERROR;
       errorMessage = 'Critical internal server error occurred!';
     }
 
-    const errorResponse = this.getErrorResponse(status, errorMessage, request);
+    const errorResponse = this.getErrorResponse(
+      status,
+      errorMessage,
+      request,
+      errors,
+    );
     const errorLog = this.getErrorLog(errorResponse, request, exception);
     this.writeErrorLogToFile(errorLog);
     response.status(status).json(errorResponse);
@@ -54,14 +51,16 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
   private getErrorResponse = (
     status: HttpStatus,
-    errorMessage: string | string[],
+    errorMessage: string,
     request: Request,
+    errors?: string | string[],
   ): CustomHttpExceptionResponse => ({
-    statusCode: status,
-    error: errorMessage,
-    path: request.url,
-    method: request.method,
     timeStamp: new Date(),
+    path: request.url,
+    statusCode: status,
+    errorMessage,
+    method: request.method,
+    errors: errors,
   });
 
   private getErrorLog = (
@@ -69,12 +68,12 @@ export class AllExceptionsFilter implements ExceptionFilter {
     request: Request,
     exception: unknown,
   ): string => {
-    const { statusCode, error } = errorResponse;
+    const { statusCode, errorMessage } = errorResponse;
     const { method, url } = request;
     const errorLog = `Response Code: ${statusCode} - Method: ${method} - URL: ${url}\n\n
     ${JSON.stringify(errorResponse)}\n\n
     User: ${JSON.stringify(request.user ?? 'Not signed in')}\n\n
-    ${exception instanceof HttpException ? exception.stack : error}\n\n`;
+    ${exception instanceof HttpException ? exception.stack : errorMessage}\n\n`;
     return errorLog;
   };
 
