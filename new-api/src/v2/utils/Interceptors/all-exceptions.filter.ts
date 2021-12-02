@@ -8,7 +8,7 @@ import {
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import HandleOrmError from '../Errors/HandleErrorORM/HandleOrmError';
-import TypeOrmError from '../Errors/HandleErrorORM/TypeOrmError';
+import TypeOrmError from '../Errors/HandleErrorORM/TypeOrmError.strategy';
 import { CustomHttpExceptionResponse } from './models/http-exception-response.interface';
 
 @Catch()
