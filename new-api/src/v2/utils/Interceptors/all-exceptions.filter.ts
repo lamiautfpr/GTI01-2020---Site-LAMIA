@@ -11,6 +11,13 @@ import HandleOrmError from '../Errors/HandleErrorORM/HandleOrmError';
 import TypeOrmError from '../Errors/HandleErrorORM/TypeOrmError.strategy';
 import { CustomHttpExceptionResponse } from './models/http-exception-response.interface';
 
+interface IGetErrorResponse {
+  status: HttpStatus;
+  errorMessage: string;
+  errors?: string[];
+  request: Request;
+}
+
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
@@ -18,47 +25,47 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
-    let status: HttpStatus;
-    let errorMessage: string;
-    let errors: string | string[] | undefined;
+    const propsGetErrorResponse: IGetErrorResponse = {
+      request,
+    } as IGetErrorResponse;
 
     const handleOrmError = new HandleOrmError(new TypeOrmError());
 
     if (exception instanceof HttpException) {
-      status = exception.getStatus();
+      propsGetErrorResponse.status = exception.getStatus();
       const errorResponse = exception.getResponse();
-      errorMessage = (errorResponse as any).error || exception.message;
-      errors = (errorResponse as any).message;
+      propsGetErrorResponse.errorMessage =
+        (errorResponse as any).error || exception.message;
+      propsGetErrorResponse.errors = (errorResponse as any).message;
     } else if (handleOrmError.isError(exception)) {
       const errorResponse = handleOrmError.getErrorResponse(exception);
-      status = errorResponse.statusCode;
-      errorMessage = errorResponse.errorMessage;
+      propsGetErrorResponse.status = errorResponse.statusCode;
+      propsGetErrorResponse.errorMessage = errorResponse.errorMessage;
+      propsGetErrorResponse.errors = errorResponse.errors;
     } else {
-      status = HttpStatus.INTERNAL_SERVER_ERROR;
-      errorMessage = 'Critical internal server error occurred!';
+      propsGetErrorResponse.status = HttpStatus.INTERNAL_SERVER_ERROR;
+      propsGetErrorResponse.errorMessage = 'INTERNAL_SERVER_ERROR';
+      propsGetErrorResponse.errors = [
+        'Critical internal server error occurred!',
+      ];
     }
 
-    const errorResponse = this.getErrorResponse(
-      status,
-      errorMessage,
-      request,
-      errors,
-    );
+    const errorResponse = this.getErrorResponse(propsGetErrorResponse);
     const errorLog = this.getErrorLog(errorResponse, request, exception);
     this.writeErrorLogToFile(errorLog);
-    response.status(status).json(errorResponse);
+    response.status(propsGetErrorResponse.status).json(errorResponse);
   }
 
-  private getErrorResponse = (
-    status: HttpStatus,
-    errorMessage: string,
-    request: Request,
-    errors?: string | string[],
-  ): CustomHttpExceptionResponse => ({
+  private getErrorResponse = ({
+    status,
+    errorMessage,
+    request,
+    errors,
+  }: IGetErrorResponse): CustomHttpExceptionResponse => ({
     timeStamp: new Date(),
     path: request.url,
     statusCode: status,
-    errorMessage,
+    errorMessage: errorMessage.toUpperCase(),
     method: request.method,
     errors: errors,
   });

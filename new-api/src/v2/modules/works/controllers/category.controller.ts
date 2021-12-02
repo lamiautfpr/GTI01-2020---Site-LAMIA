@@ -6,7 +6,9 @@ import {
   Post,
   Query,
   Req,
+  UseFilters,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -25,6 +27,8 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
+import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
+import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { apiConfig } from '../../../config/api';
 import ICreateCategoryBasicDTO from '../dtos/category/ICreateCategory.dto';
 import { ISelectOrderCategoryDTO } from '../dtos/category/IOrderCategory.dto';
@@ -32,6 +36,8 @@ import { ServiceCategory } from '../services/category.service';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 
 @ApiTags("Works's Categories")
+@UseFilters(new AllExceptionsFilter())
+@UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/works/categories`)
 export class ControllerCategory {
   constructor(private readonly ServiceCategory: ServiceCategory) {}

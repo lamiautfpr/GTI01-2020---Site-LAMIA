@@ -2,24 +2,30 @@ import { HttpStatus } from '@nestjs/common';
 import { HttpExceptionResponse } from 'v2/utils/Interceptors/models/http-exception-response.interface';
 import IHandleOrmError from './IHandleOrmError';
 
+interface IError {
+  [key: number]: (detail: string) => HttpExceptionResponse;
+}
+
 export default class TypeOrmError implements IHandleOrmError {
   private errors = ['QueryFailedError'];
 
   // Documentation: https://www.postgresql.org/docs/10/errcodes-appendix.html POSTGRESQL ERROR CODES
-  private error = {
+  private error: IError = {
     23503: (detail: string) => {
       const className = detail.split('tb_')[1].replace('".', '');
       const item = detail.split('=(')[1].split(')')[0];
 
       return {
-        error: `NOT_FOUND "${className}" with id: "${item}".`,
+        errorMessage: `NOT_FOUND`,
+        errors: [`"Not found ${className}" with id: "${item}".`],
         statusCode: HttpStatus.NOT_FOUND,
       };
     },
     23505: (detail: string) => {
       const key = detail.replace(/\"/g, '').split('(')[1].split(')')[0];
       return {
-        error: `CONFLICT "${key}" already exists.`,
+        errorMessage: 'CONFLICT',
+        errors: [`"${key}" already exists.`],
         statusCode: HttpStatus.CONFLICT,
       };
     },
@@ -36,7 +42,7 @@ export default class TypeOrmError implements IHandleOrmError {
     return {
       errorMessage: 'INTERNAL_SERVER_ERROR',
       statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-      errors: `${exception}`,
+      errors: [`${exception}`],
     };
   }
 }

@@ -5,7 +5,9 @@ import {
   Post,
   Query,
   Request,
+  UseFilters,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -24,6 +26,8 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
+import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
+import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { apiConfig } from '../../../config/api';
 import ICreatePatentBasicDataDTO from '../dtos/Patent/ICreatePatent.dto';
 import { ISelectOrderPatentDTO } from '../dtos/Patent/IOrderPatent.dto';
@@ -32,6 +36,8 @@ import { ServicePatent } from '../services/patent.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 
 @ApiTags("Members's Patents")
+@UseFilters(new AllExceptionsFilter())
+@UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/members/patents`)
 export class ControllerPatent {
   constructor(private readonly servicePatent: ServicePatent) {}

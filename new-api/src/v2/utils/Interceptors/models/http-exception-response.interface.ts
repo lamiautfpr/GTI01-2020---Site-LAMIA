@@ -1,7 +1,7 @@
 export interface HttpExceptionResponse {
   statusCode: number;
   errorMessage: string;
-  errors: string | string[] | undefined;
+  errors?: string[];
 }
 
 export interface CustomHttpExceptionResponse extends HttpExceptionResponse {

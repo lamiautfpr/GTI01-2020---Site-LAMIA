@@ -13,6 +13,7 @@ import {
   Query,
   Request,
   UploadedFile,
+  UseFilters,
   UseGuards,
   UseInterceptors,
   UsePipes,
@@ -37,6 +38,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
+import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
@@ -48,6 +50,7 @@ import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
 @ApiTags('Members')
+@UseFilters(new AllExceptionsFilter())
 @UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/members`)
 export class ControllerMember {

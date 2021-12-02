@@ -7,7 +7,9 @@ import {
   Post,
   Query,
   Req,
+  UseFilters,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -26,12 +28,16 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
+import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
+import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
 import { ISelectOrderTypeDTO } from '../dtos/type/IOrderType.dto';
 import { ServiceType } from '../services/type.service';
 import { EntityType } from '../typeorm/entities/type.entity';
 
 @ApiTags("Works's Types")
+@UseFilters(new AllExceptionsFilter())
+@UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/works/types`)
 export class ControllerType {
   constructor(private readonly serviceType: ServiceType) {}
