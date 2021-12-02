@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { EntityWork } from '../../typeorm/entities/work.entity';
+import IPaginationWorkDTO from './IPaginationWork.dto';
 
 type IDirection = 'ASC' | 'DESC';
 type IAttributes = 'name' | 'createdAt';
@@ -12,7 +13,7 @@ type IOrderWorkDTO = {
 const AttributesOrderWork = ['name', 'createAt'];
 const DirectionsOrderWork = ['ASC', 'DESC'];
 
-export class ISelectOrderWorkDTO {
+export class ISelectOrderWorkDTO extends IPaginationWorkDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()

@@ -5,6 +5,7 @@ import { ICreateWorkDTO } from '../dtos/work/ICreateWork.dto';
 import IOrderWorkDTO, {
   ISelectOrderWorkDTO,
 } from '../dtos/work/IOrderWork.dto';
+import { IPaginationWorkReponseDTO } from '../dtos/work/IPaginationWork.dto';
 import IRepositoryAreaExpertise from '../repositories/IRepositoryAreaExpertise';
 import IRepositoryCategory from '../repositories/IRepositoryCategory';
 import IRepositoryType from '../repositories/IRepositoryType';
@@ -51,18 +52,24 @@ export class ServiceWork {
     });
   }
 
-  public async findBySlug(slug: string): Promise<EntityWork | void> {
+  public async findBySlug(slug: string): Promise<EntityWork> {
     return findWorkBySlug({ repository: this.repositoryWork, slug });
   }
 
   public async findAll({
     attribute,
     direction,
-  }: ISelectOrderWorkDTO): Promise<EntityWork[] | void> {
+    page,
+    perPage,
+  }: ISelectOrderWorkDTO): Promise<IPaginationWorkReponseDTO> {
     const order: IOrderWorkDTO = {
       [attribute || 'name']: direction || 'ASC',
     };
 
-    return findAll({ repository: this.repositoryWork, order });
+    return findAll({
+      order,
+      repository: this.repositoryWork,
+      pagination: { page: page || 1, perPage: perPage || 5 },
+    });
   }
 }

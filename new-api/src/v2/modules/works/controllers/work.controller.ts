@@ -34,11 +34,12 @@ import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import ICreateWorkBasicDTO from '../dtos/work/ICreateWork.dto';
 import { ISelectOrderWorkDTO } from '../dtos/work/IOrderWork.dto';
+import { IPaginationWorkReponseDTO } from '../dtos/work/IPaginationWork.dto';
 import { ServiceWork } from '../services/work.service';
 import { EntityWork } from '../typeorm/entities/work.entity';
 
 @ApiTags('Works')
-@UseFilters(new AllExceptionsFilter())
+// @UseFilters(new AllExceptionsFilter())
 @UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/works`)
 export class ControllerWork {
@@ -72,8 +73,7 @@ export class ControllerWork {
   @ApiResponse({
     status: 200,
     description: 'List of works',
-    type: EntityWork,
-    isArray: true,
+    type: IPaginationWorkReponseDTO,
   })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiNoContentResponse({
@@ -82,8 +82,8 @@ export class ControllerWork {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
-  findAll(@Query() order: ISelectOrderWorkDTO) {
-    return this.serviceWork.findAll(order);
+  findAll(@Query() query: ISelectOrderWorkDTO) {
+    return this.serviceWork.findAll(query);
   }
 
   @ApiOperation({ summary: 'find one Work by SLUG' })

@@ -1,5 +1,6 @@
 import ICreateWorkDTO from '@modules/works/dtos/work/ICreateWork.dto';
 import IOrderWorkDTO from '@modules/works/dtos/work/IOrderWork.dto';
+import { IPaginationDTO } from '@modules/works/dtos/work/IPaginationWork.dto';
 import IRepositoryWork from '@modules/works/repositories/IRepositoryWork';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { EntityWork } from '../entities/work.entity';
@@ -28,8 +29,18 @@ export class RepositoryWork
   }
 
   public async findAll(
+    { skip, take }: IPaginationDTO,
     order?: IOrderWorkDTO,
-  ): Promise<EntityWork[] | undefined> {
-    return this.ormRepository.find({ order });
+  ): Promise<{ works: EntityWork[]; totalItems: number } | undefined> {
+    const [result, total] = await this.ormRepository.findAndCount({
+      order,
+      take,
+      skip,
+    });
+
+    return {
+      works: result,
+      totalItems: total,
+    };
   }
 }
