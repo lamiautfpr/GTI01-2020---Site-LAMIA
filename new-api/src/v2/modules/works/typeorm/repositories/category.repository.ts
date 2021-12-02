@@ -31,22 +31,25 @@ export class RepositoryCategory
   }
 
   public async findById(id: string): Promise<EntityCategory> {
-    return this.ormRepository.findOne(id);
+    return this.ormRepository.findOne(id, { relations: ['works'] });
   }
 
   public async findByName(name: string): Promise<EntityCategory> {
-    return this.ormRepository.findOne({ where: { name } });
+    return this.ormRepository.findOne({
+      where: { name },
+      relations: ['works'],
+    });
   }
 
   public async findAll(order?: IOrderCategoryDTO): Promise<EntityCategory[]> {
-    return this.ormRepository.find({ order });
+    return this.ormRepository.find({ order, relations: ['works'] });
   }
 
   public async findByWhere(
     where: IFindCategoryDTO,
     order?: IOrderCategoryDTO,
   ): Promise<EntityCategory[]> {
-    return this.ormRepository.find({ order, where });
+    return this.ormRepository.find({ order, where, relations: ['works'] });
   }
 
   public async deleteById(id: string): Promise<void> {

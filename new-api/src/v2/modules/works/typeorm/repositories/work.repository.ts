@@ -25,7 +25,10 @@ export class RepositoryWork
   }
 
   public async findBySlug(slug: string): Promise<EntityWork | undefined> {
-    return this.ormRepository.findOne({ where: { slug } });
+    return this.ormRepository.findOne({
+      where: { slug },
+      relations: ['members', 'areaExpertise', 'categories', 'types'],
+    });
   }
 
   public async findAll(
@@ -36,6 +39,7 @@ export class RepositoryWork
       order,
       take,
       skip,
+      relations: ['members', 'areaExpertise', 'categories', 'types'],
     });
 
     return {

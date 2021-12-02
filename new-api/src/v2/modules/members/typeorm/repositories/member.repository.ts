@@ -1,4 +1,4 @@
-import { EntityRepository, getRepository, Repository, Like } from 'typeorm';
+import { EntityRepository, getRepository, Like, Repository } from 'typeorm';
 import ICreateMemberDTO from '../../dtos/ICreateMember.dto';
 import IOrderMember from '../../dtos/IOrderMember.dto';
 import IRepositoryMember from '../../repositories/IRepositoryMember';
@@ -27,15 +27,23 @@ export class RepositoryMember
   }
 
   public async findById(id: string): Promise<EntityMember | undefined> {
-    return !id ? undefined : this.ormRepository.findOne(id);
+    return !id
+      ? undefined
+      : this.ormRepository.findOne(id, { relations: ['works'] });
   }
 
   public async findByEmail(email: string): Promise<EntityMember | undefined> {
-    return this.ormRepository.findOne({ where: { email } });
+    return this.ormRepository.findOne({
+      where: { email },
+      relations: ['works'],
+    });
   }
 
   public async findByLogin(login: string): Promise<EntityMember | undefined> {
-    return this.ormRepository.findOne({ where: { login } });
+    return this.ormRepository.findOne({
+      where: { login },
+      relations: ['works'],
+    });
   }
 
   public async findByLikeName(
@@ -44,6 +52,7 @@ export class RepositoryMember
   ): Promise<EntityMember[] | undefined> {
     return this.ormRepository.find({
       where: { name: Like(`%${name}%`) },
+      relations: ['works'],
       order,
     });
   }
@@ -51,12 +60,13 @@ export class RepositoryMember
   public async findAll(
     order?: IOrderMember,
   ): Promise<EntityMember[] | undefined> {
-    return this.ormRepository.find({ order });
+    return this.ormRepository.find({ order, relations: ['works'] });
   }
 
   public async countLogin(login: string): Promise<[EntityMember[], number]> {
     return this.ormRepository.findAndCount({
       where: { login: Like(`${login}%`) },
+      relations: ['works'],
     });
   }
 

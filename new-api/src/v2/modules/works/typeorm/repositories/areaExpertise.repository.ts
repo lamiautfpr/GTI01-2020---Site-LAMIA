@@ -33,13 +33,16 @@ export class RepositoryAreaExpertise
   public async findAll(
     order?: IOrderAreaExpertiseDTO,
   ): Promise<EntityAreaExpertise[] | undefined> {
-    return this.ormRepository.find({ order });
+    return this.ormRepository.find({ order, relations: ['works'] });
   }
 
   // Retorna somente um
   public async findByName(
     name: string,
   ): Promise<EntityAreaExpertise | undefined> {
-    return this.ormRepository.findOne({ where: { name } });
+    return this.ormRepository.findOne({
+      where: { name },
+      relations: ['works'],
+    });
   }
 }

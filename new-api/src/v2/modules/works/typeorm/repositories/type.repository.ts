@@ -27,11 +27,14 @@ export class RepositoryType
   public async findAll(
     order?: IOrderTypeDTO,
   ): Promise<EntityType[] | undefined> {
-    return this.ormRepository.find({ order });
+    return this.ormRepository.find({ order, relations: ['works'] });
   }
 
   // Retorna somente um
   public async findByName(name: string): Promise<EntityType | undefined> {
-    return this.ormRepository.findOne({ where: { name } });
+    return this.ormRepository.findOne({
+      where: { name },
+      relations: ['works'],
+    });
   }
 }
