@@ -31,10 +31,14 @@ export class RepositoryCategory
   }
 
   public async findByName(name: string): Promise<EntityCategory> {
-    return this.ormRepository.findOne({
-      where: { name },
-      relations: ['works'],
-    });
+    const a = await this.ormRepository
+      .createQueryBuilder('category')
+      .leftJoinAndSelect('category.works', 'work')
+      .leftJoinAndSelect('work.types', 'type')
+      .leftJoinAndSelect('work.areaExpertise', 'areaExpertise')
+      .where('category.name = :name', { name });
+
+    return a.getOne();
   }
 
   public async findAll(
