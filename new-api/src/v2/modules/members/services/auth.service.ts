@@ -109,8 +109,6 @@ export class ServiceAuth {
     loggedMemberId,
     updatedMemberLogin,
   }: IResetPasswordMemberDTO): Promise<void> {
-    console.log('BATATA - SERVICE');
-
     const loggedMember = await this.memberRepository.findById(loggedMemberId);
 
     if (!loggedMember) {

@@ -78,7 +78,6 @@ export class ControllerAuthMember {
   @HttpCode(HttpStatus.NO_CONTENT)
   @Patch('reset-password/:login')
   async resetPassword(@Request() req: any, @Param('login') login: string) {
-    console.log('BATATA - CONTROLLER');
     return this.authService.resetPassword({
       loggedMemberId: req.user.userId,
       updatedMemberLogin: login,
