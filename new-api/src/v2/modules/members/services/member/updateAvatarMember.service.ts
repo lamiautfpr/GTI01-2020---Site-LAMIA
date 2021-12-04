@@ -36,12 +36,18 @@ const updateAvatar = async ({
       avatar: fileName,
     });
   }
+
+  const memberWithNewAvatar = await repository.updateSave({
+    ...member,
+    avatar: fileName,
+  });
+
   await storageProvider.saveFile({
     fileName,
     targetFolder,
   });
 
-  return member;
+  return memberWithNewAvatar;
 };
 
 export default updateAvatar;

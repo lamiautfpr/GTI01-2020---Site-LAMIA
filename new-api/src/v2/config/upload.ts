@@ -42,7 +42,7 @@ export default {
           throw new UnauthorizedException('I need to be logged in');
         }
 
-        const fileName = `${member.userId}.jpg`;
+        const fileName = `${Date.now()}-${member.userId}.jpg`;
 
         return callback(null, fileName);
       },

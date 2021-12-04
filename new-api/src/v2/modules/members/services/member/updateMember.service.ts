@@ -34,7 +34,6 @@ const update = async ({
   ) {
     throw new BadRequestException('Invalid Old password');
   }
-  console.log(newMemberData);
 
   return repository.updateSave({
     ...member,
