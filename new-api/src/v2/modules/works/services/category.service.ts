@@ -25,7 +25,7 @@ export class ServiceCategory {
     const member = await this.serviceMember.findById(idMember);
 
     if (!member) {
-      throw new UnauthorizedException(['Member not found']);
+      throw new UnauthorizedException(['I need to be logged in']);
     }
 
     return services.create({

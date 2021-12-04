@@ -39,7 +39,7 @@ export default {
         const member = request.user as { userId: string };
 
         if (!member) {
-          throw new UnauthorizedException('I need to be logged in');
+          throw new UnauthorizedException(['I need to be logged in']);
         }
 
         const fileName = `${Date.now()}-${member.userId}.jpg`;

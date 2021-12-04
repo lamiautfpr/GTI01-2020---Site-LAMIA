@@ -28,7 +28,7 @@ export class ServicePatent {
     const member = await this.memberRepository.findById(idMember);
 
     if (!member) {
-      throw new UnauthorizedException(['Member not found']);
+      throw new UnauthorizedException(['I need to be logged in']);
     }
 
     return services.create({

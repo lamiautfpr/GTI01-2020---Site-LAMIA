@@ -87,7 +87,7 @@ export class ServiceMember {
     const loggedMember = await this.memberRepository.findById(loggedMemberId);
 
     if (!loggedMember) {
-      throw new UnauthorizedException(['Member not found']);
+      throw new UnauthorizedException(['I need to be logged in']);
     }
 
     const updatedMember = await this.memberRepository.findByLogin(
@@ -151,7 +151,7 @@ export class ServiceMember {
     const member = await this.memberRepository.findById(idMemberLogged);
 
     if (!member) {
-      throw new UnauthorizedException(['Member not found']);
+      throw new UnauthorizedException(['I need to be logged in']);
     }
 
     await memberServices.remove({

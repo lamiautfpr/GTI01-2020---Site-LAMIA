@@ -1,7 +1,13 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { IResetPasswordMemberDTO } from '../dtos/auth/IResetPasswordMember.dto';
 import { ILoginDTO } from '../dtos/ILogin.dto';
 import IPayloadTokenDTO from '../dtos/IPayloadToken.dto';
 import { IAuthResponse, IResponseLoginDTO } from '../dtos/IResponseLogin.dto';
@@ -11,6 +17,7 @@ import { EntityMember } from '../typeorm/entities/member.entity';
 import { EntityRefreshToken } from '../typeorm/entities/refreshToken.entity';
 import { RepositoryMember } from '../typeorm/repositories/member.repository';
 import { RepositoryRefreshToken } from '../typeorm/repositories/refreshToken.repository';
+import * as services from './auth';
 
 @Injectable()
 export class ServiceAuth {
@@ -95,6 +102,36 @@ export class ServiceAuth {
     await this.refreshTokenRepository.updateSave({
       ...token,
       status: false,
+    });
+  }
+
+  async resetPassword({
+    loggedMemberId,
+    updatedMemberLogin,
+  }: IResetPasswordMemberDTO): Promise<void> {
+    console.log('BATATA - SERVICE');
+
+    const loggedMember = await this.memberRepository.findById(loggedMemberId);
+
+    if (!loggedMember) {
+      throw new UnauthorizedException(['I need to be logged in']);
+    }
+
+    const updatedMember = await this.memberRepository.findByLogin(
+      updatedMemberLogin,
+    );
+
+    if (!updatedMember) {
+      throw new NotFoundException([
+        `Not found member with login "${updatedMemberLogin}""`,
+      ]);
+    }
+
+    await services.resetPassword({
+      updatedMember,
+      loggedMember,
+      repository: this.memberRepository,
+      hashProvider: this.hashProvider,
     });
   }
 }

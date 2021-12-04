@@ -1,11 +1,21 @@
 import { apiConfig } from '@config/api';
-import { Headers, Put, UseFilters, UseInterceptors } from '@nestjs/common';
+import {
+  Headers,
+  HttpStatus,
+  Param,
+  Patch,
+  Put,
+  UseFilters,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Controller, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiBody,
   ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -16,6 +26,7 @@ import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { ILoginDTO } from '../dtos/ILogin.dto';
 import { IAuthResponse, IResponseLoginDTO } from '../dtos/IResponseLogin.dto';
+import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceAuth } from '../services/auth.service';
 
 @ApiTags('Member Authentication')
@@ -53,5 +64,24 @@ export class ControllerAuthMember {
   @Put('refresh-token')
   async refreshToken(@Headers('oldToken') oldToken: string) {
     return this.authService.refreshToken(oldToken);
+  }
+
+  @ApiOperation({ summary: "reset member's password to default" })
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @ApiNoContentResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'Updated Success',
+  })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Patch('reset-password/:login')
+  async resetPassword(@Request() req: any, @Param('login') login: string) {
+    console.log('BATATA - CONTROLLER');
+    return this.authService.resetPassword({
+      loggedMemberId: req.user.userId,
+      updatedMemberLogin: login,
+    });
   }
 }
