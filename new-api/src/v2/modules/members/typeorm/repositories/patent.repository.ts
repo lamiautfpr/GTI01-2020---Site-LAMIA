@@ -35,7 +35,18 @@ export class RepositoryPatent
     const patent = await this.ormRepository.findOne({
       where: { name },
       relations: ['members'],
+      order: { name: 'ASC' },
     });
+
+    if (name === 'Orientador') {
+      const { members } = await this.ormRepository.findOne({
+        where: { name: 'Coordenador' },
+        relations: ['members'],
+        order: { name: 'ASC' },
+      });
+
+      patent.members = [...members, ...patent.members];
+    }
 
     const membersWithoutPatent = patent.members.map((member) => {
       delete member.patent;
