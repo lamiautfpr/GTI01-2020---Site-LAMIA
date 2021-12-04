@@ -9,7 +9,7 @@ import IRepositoryPatent from '../repositories/IRepositoryPatent';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 import { RepositoryMember } from '../typeorm/repositories/member.repository';
 import { RepositoryPatent } from '../typeorm/repositories/patent.repository';
-import { create, findAll, findOnePatentByName } from './patent';
+import * as services from './patent';
 
 @Injectable()
 export class ServicePatent {
@@ -31,7 +31,7 @@ export class ServicePatent {
       throw new UnauthorizedException(['Member not found']);
     }
 
-    return create({
+    return services.create({
       newPatentData,
       member,
       repository: this.patentRepository,
@@ -46,10 +46,10 @@ export class ServicePatent {
       [orderBy || 'name']: direction || 'ASC',
     };
 
-    return findAll({ repository: this.patentRepository, order });
+    return services.findAll({ repository: this.patentRepository, order });
   }
 
   public async findOneByName(name: string): Promise<EntityPatent> {
-    return findOnePatentByName({ repository: this.patentRepository, name });
+    return services.findOneByName({ repository: this.patentRepository, name });
   }
 }

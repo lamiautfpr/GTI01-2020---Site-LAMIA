@@ -4,6 +4,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
   Req,
@@ -21,6 +22,7 @@ import {
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
+  ApiNotFoundResponse,
   ApiOperation,
   ApiQuery,
   ApiResponse,
@@ -32,6 +34,7 @@ import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { apiConfig } from '../../../config/api';
 import ICreateCategoryBasicDTO from '../dtos/category/ICreateCategory.dto';
+import IFindOneCategoryByName from '../dtos/category/IFindOneCategoryByName.dto';
 import { ServiceCategory } from '../services/category.service';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 
@@ -82,5 +85,20 @@ export class ControllerCategory {
   @Get()
   findAll(@Query() order: ISelectOrderDTO) {
     return this.ServiceCategory.findAll(order);
+  }
+
+  @ApiOperation({ summary: "Find works's categories by name" })
+  @ApiResponse({
+    status: 200,
+    description: 'Found patent and its members',
+    type: EntityCategory,
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiNotFoundResponse(Errors.NotFound)
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @UsePipes(new ValidationPipe())
+  @Get(':name')
+  findOneByName(@Param() params: IFindOneCategoryByName) {
+    return this.ServiceCategory.findOneByName(params.name);
   }
 }

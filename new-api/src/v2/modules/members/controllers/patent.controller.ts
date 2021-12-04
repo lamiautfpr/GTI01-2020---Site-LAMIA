@@ -33,7 +33,7 @@ import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSe
 import { apiConfig } from '../../../config/api';
 import { ISelectOrderDTO } from '../../shared/dtos/IOrderBy.dto';
 import ICreatePatentBasicDataDTO from '../dtos/Patent/ICreatePatent.dto';
-import IFindPatentByNameDTO from '../dtos/Patent/IFindPatentByName.dto';
+import IFindOnePatentByName from '../dtos/Patent/IFindOnePatentByName.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServicePatent } from '../services/patent.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
@@ -87,7 +87,7 @@ export class ControllerPatent {
     return this.servicePatent.findAll(order);
   }
 
-  @ApiOperation({ summary: "Find Mmembers's Patent By name" })
+  @ApiOperation({ summary: "Find members's patent by name" })
   @ApiResponse({
     status: 200,
     description: 'Found patent and its members',
@@ -98,7 +98,7 @@ export class ControllerPatent {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get(':name')
-  findOneByName(@Param() params: IFindPatentByNameDTO) {
+  findOneByName(@Param() params: IFindOnePatentByName) {
     return this.servicePatent.findOneByName(params.name);
   }
 }

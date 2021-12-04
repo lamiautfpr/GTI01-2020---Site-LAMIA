@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsString } from 'class-validator';
 
-export default class IFindPatentByNameDTO {
+export default class IFindOneCategoryByName {
   @ApiProperty({
     type: String,
     nullable: false,
-    description: "Patent's name",
-    example: 'Orientador',
+    description: "Category's name",
+    example: 'Produto',
   })
   @IsString()
   @IsDefined()

@@ -8,7 +8,7 @@ import { ICreateCategoryDTO } from '../dtos/category/ICreateCategory.dto';
 import IRepositoryCategory from '../repositories/IRepositoryCategory';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 import { RepositoryCategory } from '../typeorm/repositories/category.repository';
-import { create, findAll } from './category';
+import * as services from './category';
 
 @Injectable()
 export class ServiceCategory {
@@ -28,7 +28,7 @@ export class ServiceCategory {
       throw new UnauthorizedException(['Member not found']);
     }
 
-    return create({
+    return services.create({
       newCategoryData,
       repository: this.categoryRepository,
       member,
@@ -43,6 +43,13 @@ export class ServiceCategory {
       [orderBy || 'name']: direction || 'ASC',
     };
 
-    return findAll({ repository: this.categoryRepository, order });
+    return services.findAll({ repository: this.categoryRepository, order });
+  }
+
+  public async findOneByName(name: string): Promise<EntityCategory> {
+    return services.findOneByName({
+      repository: this.categoryRepository,
+      name,
+    });
   }
 }
