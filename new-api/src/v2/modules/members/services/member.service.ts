@@ -4,7 +4,9 @@ import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import IDeleteMemberDTO from '../dtos/IDeleteMember.dto';
-import IOrderMember, { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
+import IOrderByMember, {
+  ISelectOrderMemberDTO,
+} from '../dtos/IOrderByMember.dto';
 import { IUpdateAvatarMemberDTO } from '../dtos/IUpdateAvatarMember.dto';
 import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
@@ -70,11 +72,11 @@ export class ServiceMember {
   }
 
   public async findAll({
-    attribute,
+    orderBy,
     direction,
   }: ISelectOrderMemberDTO): Promise<EntityMember[]> {
-    const order: IOrderMember = {
-      [attribute || 'name']: direction || 'ASC',
+    const order: IOrderByMember = {
+      [orderBy || 'name']: direction || 'ASC',
     };
 
     return memberServices.findAll({

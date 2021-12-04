@@ -1,11 +1,11 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
-import IOrderAreaExpertiseDTO from '../../dtos/areaExpertise/IOrderAreaExpertise.dto';
 import IRepositoryAreaExpertise from '../../repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
 
 interface IRequest {
   repository: IRepositoryAreaExpertise;
-  order?: IOrderAreaExpertiseDTO;
+  order?: IOrderByDTO<EntityAreaExpertise>;
 }
 
 const findAll = async ({

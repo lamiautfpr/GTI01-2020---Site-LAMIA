@@ -1,5 +1,5 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import ICreateCategoryDTO from '@modules/works/dtos/category/ICreateCategory.dto';
-import IOrderCategoryDTO from '@modules/works/dtos/category/IOrderCategory.dto';
 import { EntityCategory } from '@modules/works/typeorm/entities/category.entity';
 import IRepositoryCategory from '../IRepositoryCategory';
 
@@ -21,8 +21,8 @@ export class FakeRepositoryCategory implements IRepositoryCategory {
   }
 
   public async findAll(
-    order?: IOrderCategoryDTO,
-  ): Promise<EntityCategory [] | undefined> {
+    order?: IOrderByDTO<EntityCategory>,
+  ): Promise<EntityCategory[] | undefined> {
     return this.categories;
   }
 

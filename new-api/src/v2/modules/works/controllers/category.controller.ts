@@ -1,4 +1,5 @@
 import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
+import { ISelectOrderDTO } from '@modules/shared/dtos/IOrderBy.dto';
 import {
   Body,
   Controller,
@@ -31,7 +32,6 @@ import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { apiConfig } from '../../../config/api';
 import ICreateCategoryBasicDTO from '../dtos/category/ICreateCategory.dto';
-import { ISelectOrderCategoryDTO } from '../dtos/category/IOrderCategory.dto';
 import { ServiceCategory } from '../services/category.service';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 
@@ -65,7 +65,7 @@ export class ControllerCategory {
 
   @ApiOperation({ summary: "Find all Works's Categories" })
   @ApiQuery({
-    type: ISelectOrderCategoryDTO,
+    type: ISelectOrderDTO,
   })
   @ApiNoContentResponse({
     description: 'No Categories Content',
@@ -80,7 +80,7 @@ export class ControllerCategory {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
-  findAll(@Query() order: ISelectOrderCategoryDTO) {
+  findAll(@Query() order: ISelectOrderDTO) {
     return this.ServiceCategory.findAll(order);
   }
 }

@@ -1,6 +1,6 @@
 import CREATION_PERMISSION_PATENTS from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import ICreateTypeDTO from '@modules/works/dtos/type/ICreateType.dto';
-import IOrderTypeDTO from '@modules/works/dtos/type/IOrderType.dto';
 import IRepositoryType from '@modules/works/repositories/IRepositoryType';
 import { EntityType } from '@modules/works/typeorm/entities/type.entity';
 import { getKeys } from '../../../../utils/handleEnums';
@@ -29,7 +29,7 @@ export class FakeRepositoryType implements IRepositoryType {
   }
 
   public async findAll(
-    order?: IOrderTypeDTO,
+    order?: IOrderByDTO<EntityType>,
   ): Promise<EntityType[] | undefined> {
     return this.types;
   }

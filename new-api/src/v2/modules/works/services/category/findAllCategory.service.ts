@@ -1,12 +1,12 @@
-import IOrderCategoryDTO from '@modules/works/dtos/category/IOrderCategory.dto';
 import { EntityCategory } from '@modules/works/typeorm/entities/category.entity';
 
 import IRepositoryCategory from '@modules/works/repositories/IRepositoryCategory';
 import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 
 interface IRequest {
   repository: IRepositoryCategory;
-  order?: IOrderCategoryDTO;
+  order?: IOrderByDTO<EntityCategory>;
 }
 
 const findAll = async ({

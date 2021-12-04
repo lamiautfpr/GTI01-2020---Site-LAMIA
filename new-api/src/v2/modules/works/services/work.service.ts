@@ -4,16 +4,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateWorkDTO } from '../dtos/work/ICreateWork.dto';
 import IOrderWorkDTO, {
   ISelectOrderWorkDTO,
-} from '../dtos/work/IOrderWork.dto';
+} from '../dtos/work/IOrderByWork.dto';
 import { IPaginationWorkReponseDTO } from '../dtos/work/IPaginationWork.dto';
-import IRepositoryAreaExpertise from '../repositories/IRepositoryAreaExpertise';
-import IRepositoryCategory from '../repositories/IRepositoryCategory';
-import IRepositoryType from '../repositories/IRepositoryType';
 import IRepositoryWork from '../repositories/IRepositoryWork';
 import { EntityWork } from '../typeorm/entities/work.entity';
-import { RepositoryAreaExpertise } from '../typeorm/repositories/areaExpertise.repository';
-import { RepositoryCategory } from '../typeorm/repositories/category.repository';
-import { RepositoryType } from '../typeorm/repositories/type.repository';
 import { RepositoryWork } from '../typeorm/repositories/work.repository';
 import { create, findAll, findWorkBySlug } from './work';
 
@@ -22,15 +16,6 @@ export class ServiceWork {
   constructor(
     @InjectRepository(RepositoryWork)
     private readonly repositoryWork: IRepositoryWork,
-
-    @InjectRepository(RepositoryType)
-    private readonly repositoryType: IRepositoryType,
-
-    @InjectRepository(RepositoryCategory)
-    private readonly categoryRepository: IRepositoryCategory,
-
-    @InjectRepository(RepositoryAreaExpertise)
-    private readonly repositoryAreaExpertise: IRepositoryAreaExpertise,
 
     private readonly serviceMember: ServiceMember,
   ) {}
@@ -57,15 +42,14 @@ export class ServiceWork {
   }
 
   public async findAll({
-    attribute,
+    orderBy,
     direction,
     page,
     perPage,
   }: ISelectOrderWorkDTO): Promise<IPaginationWorkReponseDTO> {
     const order: IOrderWorkDTO = {
-      [attribute || 'name']: direction || 'ASC',
+      [orderBy || 'title']: direction || 'ASC',
     };
-
     return findAll({
       order,
       repository: this.repositoryWork,

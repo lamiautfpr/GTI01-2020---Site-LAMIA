@@ -1,7 +1,7 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import ICreatePatentDTO from '../../dtos/Patent/ICreatePatent.dto';
 import IFindPatentDTO from '../../dtos/Patent/IFindPatent.dto';
-import IOrderPatentDTO from '../../dtos/Patent/IOrderPatent.dto';
 import IRepositoryPatent from '../../repositories/IRepositoryPatent';
 import { EntityPatent } from '../entities/patent.entity';
 
@@ -35,14 +35,14 @@ export class RepositoryPatent
   }
 
   public async findAll(
-    order?: IOrderPatentDTO,
+    order?: IOrderByDTO<EntityPatent>,
   ): Promise<EntityPatent[] | undefined> {
     return this.ormRepository.find({ order });
   }
 
   public async findByWhere(
     where: IFindPatentDTO,
-    order?: IOrderPatentDTO,
+    order?: IOrderByDTO<EntityPatent>,
   ): Promise<EntityPatent[] | undefined> {
     return this.ormRepository.find({ order, where });
   }

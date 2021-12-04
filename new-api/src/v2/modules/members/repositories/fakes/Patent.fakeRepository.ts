@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import CREATION_PERMISSION_PATENTS from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import { getKeys } from '../../../../utils/handleEnums';
 import ICreatePatentDTO from '../../dtos/Patent/ICreatePatent.dto';
 import IFindPatentDTO from '../../dtos/Patent/IFindPatent.dto';
-import IOrderPatentDTO from '../../dtos/Patent/IOrderPatent.dto';
 import IRepositoryPatent from '../IRepositoryPatent';
 
 export class FakeRepositoryPatent implements IRepositoryPatent {
@@ -43,14 +43,14 @@ export class FakeRepositoryPatent implements IRepositoryPatent {
   }
 
   public async findAll(
-    order?: IOrderPatentDTO,
+    order?: IOrderByDTO<EntityPatent>,
   ): Promise<EntityPatent[] | undefined> {
     return this.patents;
   }
 
   public async findByWhere(
     where: IFindPatentDTO,
-    order?: IOrderPatentDTO,
+    order?: IOrderByDTO<EntityPatent>,
   ): Promise<EntityPatent[] | undefined> {
     return this.patents;
   }

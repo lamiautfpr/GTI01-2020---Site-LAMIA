@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import IOrderPatentDTO from '@modules/members/dtos/Patent/IOrderPatent.dto';
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import ICreateAreaExpertiseDTO from '@modules/works/dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IRepositoryAreaExpertise from '@modules/works/repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '@modules/works/typeorm/entities/areaExpertise.entity';
@@ -22,7 +22,7 @@ export class FakeRepositoryAreaExpertise implements IRepositoryAreaExpertise {
   }
 
   public async findAll(
-    order?: IOrderPatentDTO,
+    order?: IOrderByDTO<EntityAreaExpertise>,
   ): Promise<EntityAreaExpertise[] | undefined> {
     return this.areasExpertise;
   }

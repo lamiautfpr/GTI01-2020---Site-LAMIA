@@ -1,10 +1,10 @@
 import { ServiceMember } from '@modules/members/services/member.service';
+import IOrderByDTO, {
+  ISelectOrderDTO,
+} from '@modules/shared/dtos/IOrderBy.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateCategoryDTO } from '../dtos/category/ICreateCategory.dto';
-import IOrderCategoryDTO, {
-  ISelectOrderCategoryDTO,
-} from '../dtos/category/IOrderCategory.dto';
 import IRepositoryCategory from '../repositories/IRepositoryCategory';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 import { RepositoryCategory } from '../typeorm/repositories/category.repository';
@@ -36,11 +36,11 @@ export class ServiceCategory {
   }
 
   public async findAll({
-    attribute,
+    orderBy,
     direction,
-  }: ISelectOrderCategoryDTO): Promise<EntityCategory[]> {
-    const order: IOrderCategoryDTO = {
-      [attribute || 'name']: direction || 'ASC',
+  }: ISelectOrderDTO): Promise<EntityCategory[]> {
+    const order: IOrderByDTO<EntityCategory> = {
+      [orderBy || 'name']: direction || 'ASC',
     };
 
     return findAll({ repository: this.categoryRepository, order });

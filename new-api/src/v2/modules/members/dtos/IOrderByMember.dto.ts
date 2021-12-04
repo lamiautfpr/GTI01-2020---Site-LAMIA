@@ -1,44 +1,50 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { EntityAreaExpertise } from '../../typeorm/entities/areaExpertise.entity';
+import { EntityMember } from '../typeorm/entities/member.entity';
 
 type IDirection = 'ASC' | 'DESC';
-type IAttributes = 'name' | 'createdAt';
 
-type IOrderAreaExpertiseDTO = {
-  [K in keyof EntityAreaExpertise]?: IDirection;
+type IOrderByMember = {
+  [K in keyof EntityMember]?: IDirection;
 };
 
-const AttributesOrderAreaExpertise = ['name', 'createAt'];
-const DirectionsOrderAreaExpertise = ['ASC', 'DESC'];
+const orderByMemberEnum = [
+  'name',
+  'email',
+  'login',
+  'patent',
+  'quoteName',
+  'createAt',
+];
+const DirectionsOrderMemberEnum = ['ASC', 'DESC'];
 
-export class ISelectOrderAreaExpertiseDTO {
+export class ISelectOrderMemberDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  @IsIn(AttributesOrderAreaExpertise)
+  @IsIn(orderByMemberEnum)
   @ApiProperty({
     type: String,
     required: false,
     description: 'Attribute that will be ordered',
-    enum: AttributesOrderAreaExpertise,
+    enum: orderByMemberEnum,
     default: 'name',
   })
-  attribute?: IAttributes;
+  orderBy?: string;
 
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  @IsIn(DirectionsOrderAreaExpertise)
+  @IsIn(DirectionsOrderMemberEnum)
   @ApiProperty({
     type: String,
     required: false,
     description:
       'Direction of the listing, whether it is increasing or decreasing',
-    enum: DirectionsOrderAreaExpertise,
+    enum: DirectionsOrderMemberEnum,
     default: 'ASC',
   })
   direction?: IDirection;
 }
 
-export default IOrderAreaExpertiseDTO;
+export default IOrderByMember;

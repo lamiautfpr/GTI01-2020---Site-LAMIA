@@ -1,9 +1,9 @@
+import IOrderByDTO, {
+  ISelectOrderDTO,
+} from '@modules/shared/dtos/IOrderBy.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreatePatentDTO } from '../dtos/Patent/ICreatePatent.dto';
-import IOrderPatentDTO, {
-  ISelectOrderPatentDTO,
-} from '../dtos/Patent/IOrderPatent.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
 import IRepositoryPatent from '../repositories/IRepositoryPatent';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
@@ -39,11 +39,11 @@ export class ServicePatent {
   }
 
   public async findAll({
-    attribute,
+    orderBy,
     direction,
-  }: ISelectOrderPatentDTO): Promise<EntityPatent[]> {
-    const order: IOrderPatentDTO = {
-      [attribute || 'name']: direction || 'ASC',
+  }: ISelectOrderDTO): Promise<EntityPatent[]> {
+    const order: IOrderByDTO<EntityPatent> = {
+      [orderBy || 'name']: direction || 'ASC',
     };
 
     return findAll({ repository: this.patentRepository, order });

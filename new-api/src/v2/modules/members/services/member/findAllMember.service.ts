@@ -1,10 +1,10 @@
 import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import IOrderMember from '../../dtos/IOrderMember.dto';
+import IOrderByMember from '../../dtos/IOrderByMember.dto';
 
 interface IRequest {
   repository: IRepositoryMember;
-  order?: IOrderMember;
+  order?: IOrderByMember;
 }
 
 const findAll = async ({

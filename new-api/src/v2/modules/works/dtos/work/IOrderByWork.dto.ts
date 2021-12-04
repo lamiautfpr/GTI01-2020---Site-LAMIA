@@ -4,28 +4,34 @@ import { EntityWork } from '../../typeorm/entities/work.entity';
 import IPaginationWorkDTO from './IPaginationWork.dto';
 
 type IDirection = 'ASC' | 'DESC';
-type IAttributes = 'name' | 'createdAt';
 
-type IOrderWorkDTO = {
+type IOrderByWork = {
   [K in keyof EntityWork]?: IDirection;
 };
 
-const AttributesOrderWork = ['name', 'createAt'];
+const orderByWorkEnum = [
+  'title',
+  'internalCode',
+  'slug',
+  'startDate',
+  'endDate',
+  'createAt',
+];
 const DirectionsOrderWork = ['ASC', 'DESC'];
 
 export class ISelectOrderWorkDTO extends IPaginationWorkDTO {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  @IsIn(AttributesOrderWork)
+  @IsIn(orderByWorkEnum)
   @ApiProperty({
     type: String,
     required: false,
     description: 'Attribute that will be ordered',
-    enum: AttributesOrderWork,
-    default: 'name',
+    enum: orderByWorkEnum,
+    default: orderByWorkEnum[0],
   })
-  attribute?: IAttributes;
+  orderBy?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -42,4 +48,4 @@ export class ISelectOrderWorkDTO extends IPaginationWorkDTO {
   direction?: IDirection;
 }
 
-export default IOrderWorkDTO;
+export default IOrderByWork;

@@ -1,5 +1,5 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import ICreateTypeDTO from '@modules/works/dtos/type/ICreateType.dto';
-import IOrderTypeDTO from '@modules/works/dtos/type/IOrderType.dto';
 import IRepositoryType from '@modules/works/repositories/IRepositoryType';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { EntityType } from '../entities/type.entity';
@@ -25,7 +25,7 @@ export class RepositoryType
 
   // Método para retornar todos os dados, em forma de um array
   public async findAll(
-    order?: IOrderTypeDTO,
+    order?: IOrderByDTO<EntityType>,
   ): Promise<EntityType[] | undefined> {
     return this.ormRepository.find({ order, relations: ['works'] });
   }

@@ -1,15 +1,15 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
+import IOrderWorkDTO from '@modules/works/dtos/work/IOrderByWork.dto';
 import IPaginationWorkDTO, {
   IPaginationReponseDTO,
   IPaginationWorkReponseDTO,
 } from '@modules/works/dtos/work/IPaginationWork.dto';
 import IRepositoryWork from '@modules/works/repositories/IRepositoryWork';
-import { EntityWork } from '@modules/works/typeorm/entities/work.entity';
 import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
-import IOrderTypeDTO from '../../dtos/type/IOrderType.dto';
 
 interface IRequest {
   repository: IRepositoryWork;
-  order?: IOrderTypeDTO;
+  order?: IOrderWorkDTO;
   pagination: IPaginationWorkDTO;
 }
 

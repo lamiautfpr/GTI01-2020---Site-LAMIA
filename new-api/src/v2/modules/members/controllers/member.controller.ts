@@ -41,7 +41,7 @@ import Errors from 'v2/utils/Errors';
 import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
-import { ISelectOrderMemberDTO } from '../dtos/IOrderMember.dto';
+import { ISelectOrderMemberDTO } from '../dtos/IOrderByMember.dto';
 import { IParamsIdDTO } from '../dtos/IParamsId.dto';
 import { IUpdateAvatarMemberBasicDataDTO } from '../dtos/IUpdateAvatarMember.dto';
 import { IUpdateMemberBasicDataDTO } from '../dtos/IUpdateMember.dto';

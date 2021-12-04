@@ -1,5 +1,6 @@
 import { apiConfig } from '@config/api';
 import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
+import { ISelectOrderDTO } from '@modules/shared/dtos/IOrderBy.dto';
 import {
   Body,
   Controller,
@@ -29,7 +30,6 @@ import Errors from 'v2/utils/Errors';
 import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import ICreateAreaExpertiseBasicDTO from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
-import { ISelectOrderAreaExpertiseDTO } from '../dtos/areaExpertise/IOrderAreaExpertise.dto';
 import { ServiceAreaExpertise } from '../services/areaExpertise.service';
 import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 
@@ -60,7 +60,7 @@ export class ControllerAreaExpertise {
   }
   @ApiOperation({ summary: 'Create Expertise Areas' })
   @ApiQuery({
-    type: ISelectOrderAreaExpertiseDTO,
+    type: ISelectOrderDTO,
   })
   @ApiResponse({
     status: 200,
@@ -75,7 +75,7 @@ export class ControllerAreaExpertise {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
-  findAll(@Query() order: ISelectOrderAreaExpertiseDTO) {
+  findAll(@Query() order: ISelectOrderDTO) {
     return this.serviceAreaExpertise.findAll(order);
   }
 }

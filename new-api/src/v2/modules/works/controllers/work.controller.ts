@@ -33,7 +33,7 @@ import Errors from 'v2/utils/Errors';
 import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import ICreateWorkBasicDTO from '../dtos/work/ICreateWork.dto';
-import { ISelectOrderWorkDTO } from '../dtos/work/IOrderWork.dto';
+import { ISelectOrderWorkDTO } from '../dtos/work/IOrderByWork.dto';
 import { IPaginationWorkReponseDTO } from '../dtos/work/IPaginationWork.dto';
 import { ServiceWork } from '../services/work.service';
 import { EntityWork } from '../typeorm/entities/work.entity';

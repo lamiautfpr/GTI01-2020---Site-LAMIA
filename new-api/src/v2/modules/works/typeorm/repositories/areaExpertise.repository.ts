@@ -8,7 +8,7 @@ import { EntityAreaExpertise } from '../entities/areaExpertise.entity';
 
 // DTO
 import ICreateAreaExpertiseDTO from '@modules/works/dtos/areaExpertise/ICreateAreaExpertise.dto';
-import IOrderAreaExpertiseDTO from '@modules/works/dtos/areaExpertise/IOrderAreaExpertise.dto';
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 
 @EntityRepository(EntityAreaExpertise)
 export class RepositoryAreaExpertise
@@ -31,7 +31,7 @@ export class RepositoryAreaExpertise
 
   // Método para retornar todos os dados, em forma de um array
   public async findAll(
-    order?: IOrderAreaExpertiseDTO,
+    order?: IOrderByDTO<EntityAreaExpertise>,
   ): Promise<EntityAreaExpertise[] | undefined> {
     return this.ormRepository.find({ order, relations: ['works'] });
   }

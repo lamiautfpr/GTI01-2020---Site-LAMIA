@@ -1,5 +1,5 @@
 import ICreateWorkDTO from '../dtos/work/ICreateWork.dto';
-import IOrderWorkDTO from '../dtos/work/IOrderWork.dto';
+import IOrderWorkDTO from '../dtos/work/IOrderByWork.dto';
 import { IPaginationDTO } from '../dtos/work/IPaginationWork.dto';
 import { EntityWork } from '../typeorm/entities/work.entity';
 

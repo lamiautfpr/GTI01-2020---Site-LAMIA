@@ -1,5 +1,5 @@
 import ICreateWorkDTO from '@modules/works/dtos/work/ICreateWork.dto';
-import IOrderWorkDTO from '@modules/works/dtos/work/IOrderWork.dto';
+import IOrderWorkDTO from '@modules/works/dtos/work/IOrderByWork.dto';
 import { IPaginationDTO } from '@modules/works/dtos/work/IPaginationWork.dto';
 import IRepositoryWork from '@modules/works/repositories/IRepositoryWork';
 import { EntityRepository, getRepository, Repository } from 'typeorm';

@@ -1,6 +1,6 @@
 import { EntityRepository, getRepository, Like, Repository } from 'typeorm';
 import ICreateMemberDTO from '../../dtos/ICreateMember.dto';
-import IOrderMember from '../../dtos/IOrderMember.dto';
+import IOrderByMember from '../../dtos/IOrderByMember.dto';
 import IRepositoryMember from '../../repositories/IRepositoryMember';
 import { EntityMember } from '../entities/member.entity';
 
@@ -48,7 +48,7 @@ export class RepositoryMember
 
   public async findByLikeName(
     name: string,
-    order?: IOrderMember,
+    order?: IOrderByMember,
   ): Promise<EntityMember[] | undefined> {
     return this.ormRepository.find({
       where: { name: Like(`%${name}%`) },
@@ -58,7 +58,7 @@ export class RepositoryMember
   }
 
   public async findAll(
-    order?: IOrderMember,
+    order?: IOrderByMember,
   ): Promise<EntityMember[] | undefined> {
     return this.ormRepository.find({ order, relations: ['works'] });
   }

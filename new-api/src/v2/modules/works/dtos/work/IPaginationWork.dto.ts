@@ -20,9 +20,9 @@ export default class IPaginationWorkDTO {
   @ApiProperty({
     type: 'integer',
     description: 'Quantity items that witll return per page',
-    example: 5,
-    default: 5,
-    minimum: 5,
+    example: 3,
+    default: 3,
+    minimum: 3,
   })
   @IsInt()
   @Type(() => Number)

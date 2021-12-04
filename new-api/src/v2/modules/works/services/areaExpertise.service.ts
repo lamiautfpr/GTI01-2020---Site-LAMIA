@@ -1,11 +1,11 @@
 import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import { ServiceMember } from '@modules/members/services/member.service';
+import IOrderByDTO, {
+  ISelectOrderDTO,
+} from '@modules/shared/dtos/IOrderBy.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
-import IOrderAreaExpertiseDTO, {
-  ISelectOrderAreaExpertiseDTO,
-} from '../dtos/areaExpertise/IOrderAreaExpertise.dto';
 import IRepositoryAreaExpertise from '../repositories/IRepositoryAreaExpertise';
 import { EntityAreaExpertise } from '../typeorm/entities/areaExpertise.entity';
 import { RepositoryAreaExpertise } from '../typeorm/repositories/areaExpertise.repository';
@@ -37,11 +37,11 @@ export class ServiceAreaExpertise {
   }
 
   public async findAll({
-    attribute,
+    orderBy,
     direction,
-  }: ISelectOrderAreaExpertiseDTO): Promise<EntityAreaExpertise[]> {
-    const order: IOrderAreaExpertiseDTO = {
-      [attribute || 'name']: direction || 'ASC',
+  }: ISelectOrderDTO): Promise<EntityAreaExpertise[]> {
+    const order: IOrderByDTO<EntityAreaExpertise> = {
+      [orderBy || 'name']: direction || 'ASC',
     };
 
     return findAll({ repository: this.repositoryAreaExpertise, order });

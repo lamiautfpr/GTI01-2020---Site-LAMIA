@@ -1,5 +1,5 @@
 import ICreateMemberDTO from '../dtos/ICreateMember.dto';
-import IOrderMember from '../dtos/IOrderMember.dto';
+import IOrderByMember from '../dtos/IOrderByMember.dto';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
 export default interface IRepositoryMember {
@@ -10,9 +10,9 @@ export default interface IRepositoryMember {
   findByLogin(login: string): Promise<EntityMember | undefined>;
   findByLikeName(
     name: string,
-    order?: IOrderMember,
+    order?: IOrderByMember,
   ): Promise<EntityMember[] | undefined>;
-  findAll(order?: IOrderMember): Promise<EntityMember[] | undefined>;
+  findAll(order?: IOrderByMember): Promise<EntityMember[] | undefined>;
   countLogin(login: string): Promise<[EntityMember[], number]>;
   removeById(id: string): Promise<void>;
 }

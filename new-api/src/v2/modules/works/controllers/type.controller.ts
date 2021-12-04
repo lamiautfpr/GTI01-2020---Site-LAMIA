@@ -1,5 +1,6 @@
 import { apiConfig } from '@config/api';
 import { JwtAuthGuard } from '@modules/members/guard/jwtAuth.guard';
+import { ISelectOrderDTO } from '@modules/shared/dtos/IOrderBy.dto';
 import {
   Body,
   Controller,
@@ -31,7 +32,6 @@ import Errors from 'v2/utils/Errors';
 import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
-import { ISelectOrderTypeDTO } from '../dtos/type/IOrderType.dto';
 import { ServiceType } from '../services/type.service';
 import { EntityType } from '../typeorm/entities/type.entity';
 
@@ -65,7 +65,7 @@ export class ControllerType {
 
   @ApiOperation({ summary: "Find all Works's Types" })
   @ApiQuery({
-    type: ISelectOrderTypeDTO,
+    type: ISelectOrderDTO,
   })
   @ApiResponse({
     status: 200,
@@ -80,7 +80,7 @@ export class ControllerType {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
-  findAll(@Query() order: ISelectOrderTypeDTO) {
+  findAll(@Query() order: ISelectOrderDTO) {
     return this.serviceType.findAll(order);
   }
 }

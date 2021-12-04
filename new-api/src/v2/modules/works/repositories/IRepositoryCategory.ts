@@ -1,5 +1,5 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import ICreateCategoryDTO from '../dtos/category/ICreateCategory.dto';
-import IOrderCategoryDTO from '../dtos/category/IOrderCategory.dto';
 import { EntityCategory } from '../typeorm/entities/category.entity';
 
 export default interface IRepositoryCategory {
@@ -7,5 +7,7 @@ export default interface IRepositoryCategory {
 
   findByName(name: string): Promise<EntityCategory | undefined>;
 
-  findAll(order?: IOrderCategoryDTO): Promise<EntityCategory[] | undefined>;
+  findAll(
+    order?: IOrderByDTO<EntityCategory>,
+  ): Promise<EntityCategory[] | undefined>;
 }

@@ -1,10 +1,10 @@
 import { ServiceMember } from '@modules/members/services/member.service';
+import IOrderByDTO, {
+  ISelectOrderDTO,
+} from '@modules/shared/dtos/IOrderBy.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateTypeDTO } from '../dtos/type/ICreateType.dto';
-import IOrderTypeDTO, {
-  ISelectOrderTypeDTO,
-} from '../dtos/type/IOrderType.dto';
 import IRepositoryType from '../repositories/IRepositoryType';
 import { EntityType } from '../typeorm/entities/type.entity';
 import { RepositoryType } from '../typeorm/repositories/type.repository';
@@ -36,11 +36,11 @@ export class ServiceType {
   }
 
   public async findAll({
-    attribute,
+    orderBy,
     direction,
-  }: ISelectOrderTypeDTO): Promise<EntityType[]> {
-    const order: IOrderTypeDTO = {
-      [attribute || 'name']: direction || 'ASC',
+  }: ISelectOrderDTO): Promise<EntityType[]> {
+    const order: IOrderByDTO<EntityType> = {
+      [orderBy || 'name']: direction || 'ASC',
     };
 
     return findAll({ repository: this.repositoryType, order });

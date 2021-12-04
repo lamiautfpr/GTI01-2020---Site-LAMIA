@@ -30,7 +30,7 @@ import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { apiConfig } from '../../../config/api';
 import ICreatePatentBasicDataDTO from '../dtos/Patent/ICreatePatent.dto';
-import { ISelectOrderPatentDTO } from '../dtos/Patent/IOrderPatent.dto';
+import { ISelectOrderDTO } from '../../shared/dtos/IOrderBy.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServicePatent } from '../services/patent.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
@@ -65,7 +65,7 @@ export class ControllerPatent {
 
   @ApiOperation({ summary: "Find all Members's Patents" })
   @ApiQuery({
-    type: ISelectOrderPatentDTO,
+    type: ISelectOrderDTO,
   })
   @ApiResponse({
     status: 200,
@@ -80,7 +80,7 @@ export class ControllerPatent {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
   @Get()
-  findAll(@Query() order: ISelectOrderPatentDTO) {
+  findAll(@Query() order: ISelectOrderDTO) {
     return this.servicePatent.findAll(order);
   }
 }

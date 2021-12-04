@@ -1,5 +1,5 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import ICreateTypeDTO from '../dtos/type/ICreateType.dto';
-import IOrderTypeDTO from '../dtos/type/IOrderType.dto';
 import { EntityType } from '../typeorm/entities/type.entity';
 
 export default interface IRepositoryType {
@@ -7,5 +7,5 @@ export default interface IRepositoryType {
 
   findByName(name: string): Promise<EntityType | undefined>;
 
-  findAll(order?: IOrderTypeDTO): Promise<EntityType[] | undefined>;
+  findAll(order?: IOrderByDTO<EntityType>): Promise<EntityType[] | undefined>;
 }

@@ -1,11 +1,11 @@
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
-import IOrderTypeDTO from '../../dtos/type/IOrderType.dto';
 import IRepositoryType from '../../repositories/IRepositoryType';
 import { EntityType } from '../../typeorm/entities/type.entity';
 
 interface IRequest {
   repository: IRepositoryType;
-  order?: IOrderTypeDTO;
+  order?: IOrderByDTO<EntityType>;
 }
 
 const findAll = async ({

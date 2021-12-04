@@ -1,12 +1,8 @@
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import ICreateCategoryDTO from '@modules/works/dtos/category/ICreateCategory.dto';
-
 import IFindCategoryDTO from '@modules/works/dtos/category/IFindCategory.dto';
-
-import IOrderCategoryDTO from '@modules/works/dtos/category/IOrderCategory.dto';
-
 import IRepositoryCategory from '@modules/works/repositories/IRepositoryCategory';
-
+import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { EntityCategory } from '../entities/category.entity';
 
 @EntityRepository(EntityCategory)
@@ -41,13 +37,15 @@ export class RepositoryCategory
     });
   }
 
-  public async findAll(order?: IOrderCategoryDTO): Promise<EntityCategory[]> {
+  public async findAll(
+    order?: IOrderByDTO<EntityCategory>,
+  ): Promise<EntityCategory[]> {
     return this.ormRepository.find({ order, relations: ['works'] });
   }
 
   public async findByWhere(
     where: IFindCategoryDTO,
-    order?: IOrderCategoryDTO,
+    order?: IOrderByDTO<EntityCategory>,
   ): Promise<EntityCategory[]> {
     return this.ormRepository.find({ order, where, relations: ['works'] });
   }

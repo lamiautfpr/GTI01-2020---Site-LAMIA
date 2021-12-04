@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import ICreateMemberDTO from '../../dtos/ICreateMember.dto';
-import IOrderMember from '../../dtos/IOrderMember.dto';
+import IOrderByMember from '../../dtos/IOrderByMember.dto';
 import IRepositoryMember from '../../repositories/IRepositoryMember';
 
 export class FakeRepositoryMember implements IRepositoryMember {
@@ -41,13 +41,13 @@ export class FakeRepositoryMember implements IRepositoryMember {
 
   public async findByLikeName(
     name: string,
-    order?: IOrderMember,
+    order?: IOrderByMember,
   ): Promise<EntityMember[] | undefined> {
     return this.members.filter((member) => member.name === name);
   }
 
   public async findAll(
-    order?: IOrderMember,
+    order?: IOrderByMember,
   ): Promise<EntityMember[] | undefined> {
     return this.members;
   }
