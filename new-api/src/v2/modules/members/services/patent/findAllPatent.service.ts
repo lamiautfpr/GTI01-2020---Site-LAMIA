@@ -17,7 +17,7 @@ const findAll = async ({
   if (patents.length <= 0) {
     throw new NoContentExcepetion();
   }
-  return patents;
+  return patents.filter((patent) => patent.name !== 'Administrador');
 };
 
 export default findAll;

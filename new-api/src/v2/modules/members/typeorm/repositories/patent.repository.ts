@@ -62,7 +62,10 @@ export class RepositoryPatent
   public async findAll(
     order?: IOrderByDTO<EntityPatent>,
   ): Promise<EntityPatent[] | undefined> {
-    return this.ormRepository.find({ order, relations: ['members'] });
+    return this.ormRepository.find({
+      order,
+      relations: ['members'],
+    });
   }
 
   public async findByWhere(

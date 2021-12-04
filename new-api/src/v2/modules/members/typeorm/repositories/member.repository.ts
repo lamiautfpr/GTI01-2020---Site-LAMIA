@@ -40,10 +40,16 @@ export class RepositoryMember
   }
 
   public async findByLogin(login: string): Promise<EntityMember | undefined> {
-    return this.ormRepository.findOne({
-      where: { login },
-      relations: ['works'],
-    });
+    const members = await this.ormRepository
+      .createQueryBuilder('member')
+      .leftJoinAndSelect('member.patent', 'patent')
+      .leftJoinAndSelect('member.works', 'work')
+      .leftJoinAndSelect('work.types', 'type')
+      .leftJoinAndSelect('work.areaExpertise', 'areaExpertise')
+      .leftJoinAndSelect('work.categories', 'categories')
+      .where('member.login = :login', { login });
+
+    return members.getOne();
   }
 
   public async findByLikeName(
