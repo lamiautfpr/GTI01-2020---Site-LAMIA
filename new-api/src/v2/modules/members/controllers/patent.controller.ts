@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
   Request,
@@ -19,6 +20,7 @@ import {
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
+  ApiNotFoundResponse,
   ApiOperation,
   ApiQuery,
   ApiResponse,
@@ -29,8 +31,9 @@ import Errors from 'v2/utils/Errors';
 import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
 import { ClassSerializerInterceptorPromise } from 'v2/utils/Interceptors/ClassSerializerInterceptorPromise';
 import { apiConfig } from '../../../config/api';
-import ICreatePatentBasicDataDTO from '../dtos/Patent/ICreatePatent.dto';
 import { ISelectOrderDTO } from '../../shared/dtos/IOrderBy.dto';
+import ICreatePatentBasicDataDTO from '../dtos/Patent/ICreatePatent.dto';
+import IFindPatentByNameDTO from '../dtos/Patent/IFindPatentByName.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServicePatent } from '../services/patent.service';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
@@ -82,5 +85,20 @@ export class ControllerPatent {
   @Get()
   findAll(@Query() order: ISelectOrderDTO) {
     return this.servicePatent.findAll(order);
+  }
+
+  @ApiOperation({ summary: "Find Mmembers's Patent By name" })
+  @ApiResponse({
+    status: 200,
+    description: 'Found patent and its members',
+    type: EntityPatent,
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiNotFoundResponse(Errors.NotFound)
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @UsePipes(new ValidationPipe())
+  @Get(':name')
+  findOneByName(@Param() params: IFindPatentByNameDTO) {
+    return this.servicePatent.findOneByName(params.name);
   }
 }

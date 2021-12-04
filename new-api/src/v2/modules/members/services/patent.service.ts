@@ -9,7 +9,7 @@ import IRepositoryPatent from '../repositories/IRepositoryPatent';
 import { EntityPatent } from '../typeorm/entities/patent.entity';
 import { RepositoryMember } from '../typeorm/repositories/member.repository';
 import { RepositoryPatent } from '../typeorm/repositories/patent.repository';
-import { create, findAll } from './patent';
+import { create, findAll, findOnePatentByName } from './patent';
 
 @Injectable()
 export class ServicePatent {
@@ -47,5 +47,9 @@ export class ServicePatent {
     };
 
     return findAll({ repository: this.patentRepository, order });
+  }
+
+  public async findOneByName(name: string): Promise<EntityPatent> {
+    return findOnePatentByName({ repository: this.patentRepository, name });
   }
 }

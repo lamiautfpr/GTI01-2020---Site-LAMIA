@@ -30,8 +30,22 @@ export class RepositoryPatent
     return this.ormRepository.findOne(id);
   }
 
+  //TODO: Update relation
   public async findByName(name: string): Promise<EntityPatent | undefined> {
-    return this.ormRepository.findOne({ where: { name } });
+    const patent = await this.ormRepository.findOne({
+      where: { name },
+      relations: ['members'],
+    });
+
+    const membersWithoutPatent = patent.members.map((member) => {
+      delete member.patent;
+
+      return member;
+    });
+
+    patent.members = membersWithoutPatent;
+
+    return patent;
   }
 
   public async findAll(
