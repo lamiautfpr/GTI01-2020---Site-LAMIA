@@ -28,7 +28,7 @@ const resetPassword = async ({
 
   if (!process.env.PASSWORD_DEFAULT_MEMBERS) {
     throw new UnprocessableEntityException([
-      'Password default members not defined',
+      "Member's default password not defined",
     ]);
   }
 
