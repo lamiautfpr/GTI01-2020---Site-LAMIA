@@ -120,6 +120,38 @@ export class IUpdateMemberBasicDataDTO {
   newPassword: string;
 }
 
+export class IUpdatePatentMemberRequestDTO {
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
+  @IsUUID()
+  @ApiProperty({
+    description: "New member's patent",
+    example: 'cac74bdb-a088-4c58-8fb6-ca11fa076d6d',
+  })
+  newPatentId: string;
+}
+
+export class IUpdatePatentMemberDTO {
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
+  @IsUUID()
+  newPatentId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
+  @IsUUID()
+  loggedMemberId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
+  @IsUUID()
+  updatedMemberLogin: string;
+}
+
 export class IUpdateMemberDTO {
   @IsDefined()
   newMemberData: IUpdateMemberBasicDataDTO;

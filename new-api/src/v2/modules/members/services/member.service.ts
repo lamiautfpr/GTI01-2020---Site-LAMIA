@@ -1,4 +1,9 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
@@ -8,7 +13,10 @@ import IOrderByMember, {
   ISelectOrderMemberDTO,
 } from '../dtos/IOrderByMember.dto';
 import { IUpdateAvatarMemberDTO } from '../dtos/IUpdateAvatarMember.dto';
-import { IUpdateMemberDTO } from '../dtos/IUpdateMember.dto';
+import {
+  IUpdateMemberDTO,
+  IUpdatePatentMemberDTO,
+} from '../dtos/IUpdateMember.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
 import IRepositoryPatent from '../repositories/IRepositoryPatent';
 import { EntityMember } from '../typeorm/entities/member.entity';
@@ -68,6 +76,43 @@ export class ServiceMember {
       id: idMember,
       fileName,
       storageProvider: this.storageProvider,
+    });
+  }
+
+  public async updatePatentMember({
+    loggedMemberId,
+    newPatentId,
+    updatedMemberLogin,
+  }: IUpdatePatentMemberDTO): Promise<EntityMember> {
+    const loggedMember = await this.memberRepository.findById(loggedMemberId);
+
+    if (!loggedMember) {
+      throw new UnauthorizedException(['Member not found']);
+    }
+
+    const updatedMember = await this.memberRepository.findByLogin(
+      updatedMemberLogin,
+    );
+
+    if (!updatedMember) {
+      throw new NotFoundException([
+        `Not found member with login "${updatedMemberLogin}""`,
+      ]);
+    }
+
+    const newPatent = await this.patentRepository.findById(newPatentId);
+
+    if (!newPatent) {
+      throw new NotFoundException([
+        `Not found patent with id "${newPatentId}""`,
+      ]);
+    }
+
+    return memberServices.updatePatent({
+      loggedMember,
+      newPatent,
+      updatedMember,
+      repository: this.memberRepository,
     });
   }
 

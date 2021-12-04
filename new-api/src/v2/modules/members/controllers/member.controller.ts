@@ -45,7 +45,11 @@ import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import { ISelectOrderMemberDTO } from '../dtos/IOrderByMember.dto';
 import { IParamsIdDTO } from '../dtos/IParamsId.dto';
 import { IUpdateAvatarMemberBasicDataDTO } from '../dtos/IUpdateAvatarMember.dto';
-import { IUpdateMemberBasicDataDTO } from '../dtos/IUpdateMember.dto';
+import {
+  IUpdateMemberBasicDataDTO,
+  IUpdatePatentMemberDTO,
+  IUpdatePatentMemberRequestDTO,
+} from '../dtos/IUpdateMember.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import { ServiceMember } from '../services/member.service';
 import { EntityMember } from '../typeorm/entities/member.entity';
@@ -93,7 +97,7 @@ export class ControllerMember {
     });
   }
 
-  @ApiOperation({ summary: 'updateAvatar' })
+  @ApiOperation({ summary: "update member's avatar" })
   @ApiOkResponse({
     description: 'Updated Success',
     type: EntityMember,
@@ -131,6 +135,32 @@ export class ControllerMember {
     return this.serviceMember.updateAvatarMember({
       idMember: req.user.userId,
       fileName: avatar.filename,
+    });
+  }
+
+  @ApiOperation({ summary: "Update member's patent" })
+  @ApiOkResponse({
+    description: 'Updated Success',
+    type: EntityMember,
+  })
+  @ApiBadRequestResponse(Errors.BadRequest)
+  @ApiForbiddenResponse(Errors.Forbidden)
+  @ApiInternalServerErrorResponse(Errors.InternalServer)
+  @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @ApiUnauthorizedResponse(Errors.NotFound)
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @UsePipes(new ValidationPipe())
+  @Patch('/:login/patent')
+  updatePatent(
+    @Request() req: any,
+    @Body() body: IUpdatePatentMemberRequestDTO,
+    @Param('login') login: string,
+  ) {
+    return this.serviceMember.updatePatentMember({
+      loggedMemberId: req.user.userId,
+      newPatentId: body.newPatentId,
+      updatedMemberLogin: login,
     });
   }
 
