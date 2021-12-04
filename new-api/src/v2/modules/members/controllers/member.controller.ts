@@ -1,5 +1,5 @@
 import { apiConfig } from '@config/api';
-import uploadConfig from '@config/upload';
+import uploadConfig, { AllowedImagesType } from '@config/upload';
 import {
   Body,
   Controller,
@@ -23,6 +23,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
+  ApiBody,
   ApiConflictResponse,
   ApiConsumes,
   ApiCreatedResponse,
@@ -98,6 +99,20 @@ export class ControllerMember {
     type: EntityMember,
   })
   @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        avatar: {
+          type: 'string',
+          format: 'binary',
+          description: `Member's avatar. *Types accepted:* **${AllowedImagesType.join(
+            '**; **',
+          )}**`,
+        },
+      },
+    },
+  })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiForbiddenResponse(Errors.Forbidden)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
@@ -106,7 +121,7 @@ export class ControllerMember {
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('avatar', uploadConfig.multer))
-  @Patch()
+  @Patch('/avatar')
   updateAvatar(
     @Request() req: any,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
