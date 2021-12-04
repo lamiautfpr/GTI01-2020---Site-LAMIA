@@ -9,6 +9,7 @@ import { apiConfig } from '@config/api';
 import { INestApplication } from '@nestjs/common';
 
 const middlewares = (app: INestApplication): void => {
+  app.enableCors();
   app.use(apiConfig.pathFileStatic, express.static(uploadConfig.uploadsFolder));
   Swagger(app);
 };
