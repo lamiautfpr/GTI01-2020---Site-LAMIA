@@ -22,7 +22,7 @@ export class insertAreaExpertiseDefaultAreaExpertise1632045459487
         updateAt: new Date(),
       },
       {
-        id: '86f4321d-f23c-433321135-d6d23c312e14',
+        id: 'eace27d3-cfdd-4e6c-a845-1267fab8bc93',
         name: 'Tecnologia e Sociais',
         description:
           'São as áreas do LAMIA dedicadas ao desenvolvimento de tecnologias e softwares em parceria com outros grupos, laboratórios e projetos de pesquisa em diversas áreas do conhecimento e a execução de projetos com impacto social através do uso de ciência e tecnologias computacionais para benefício da comunidade externa e população em geral.',
