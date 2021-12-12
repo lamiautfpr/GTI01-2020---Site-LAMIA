@@ -19,7 +19,7 @@ services:
       context: "."
       dockerfile: Dockerfile.dev
     container_name: api-portal_lamia
-    command: yarn start:dev
+    command: yarn start:debug
     env_file:
       - .env
     environment:
@@ -28,6 +28,7 @@ services:
       STORAGE_DRIVER: disk
     ports:
       - "${PORT_API}:3333"
+      - "9229:9229"
     networks:
       - network-portal_lamia
     depends_on:
@@ -40,3 +41,4 @@ volumes:
 
 networks:
   network-portal_lamia:
+    driver: bridge
