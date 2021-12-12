@@ -29,6 +29,7 @@ export class FakeRepositoryType implements IRepositoryType {
   }
 
   public async findAll(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     order?: IOrderByDTO<EntityType>,
   ): Promise<EntityType[] | undefined> {
     return this.types;

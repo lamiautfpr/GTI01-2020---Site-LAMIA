@@ -1,4 +1,3 @@
-import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
 import IOrderWorkDTO from '@modules/works/dtos/work/IOrderByWork.dto';
 import IPaginationWorkDTO, {
   IPaginationReponseDTO,

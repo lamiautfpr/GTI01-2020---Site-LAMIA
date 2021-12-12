@@ -21,7 +21,8 @@ export class FakeRepositoryCategory implements IRepositoryCategory {
   }
 
   public async findAll(
-    order?: IOrderByDTO<EntityCategory>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _order?: IOrderByDTO<EntityCategory>,
   ): Promise<EntityCategory[] | undefined> {
     return this.categories;
   }

@@ -47,7 +47,6 @@ import { IParamsIdDTO } from '../dtos/IParamsId.dto';
 import { IUpdateAvatarMemberBasicDataDTO } from '../dtos/IUpdateAvatarMember.dto';
 import {
   IUpdateMemberBasicDataDTO,
-  IUpdatePatentMemberDTO,
   IUpdatePatentMemberRequestDTO,
 } from '../dtos/IUpdateMember.dto';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';

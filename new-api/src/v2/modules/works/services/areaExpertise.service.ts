@@ -1,4 +1,3 @@
-import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import { ServiceMember } from '@modules/members/services/member.service';
 import IOrderByDTO, {
   ISelectOrderDTO,
