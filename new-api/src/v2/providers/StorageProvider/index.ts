@@ -2,6 +2,7 @@ import uploadConfig from '@config/upload';
 import { Provider } from '@nestjs/common';
 import DiskStorageProvider from './implementations/DiskStorage.provider';
 
+// TODO: Tipar o objeto de configuração
 const providers = {
   disk: DiskStorageProvider,
 };
