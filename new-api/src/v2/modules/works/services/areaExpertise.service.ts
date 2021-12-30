@@ -2,7 +2,11 @@ import { ServiceMember } from '@modules/members/services/member.service';
 import IOrderByDTO, {
   ISelectOrderDTO,
 } from '@modules/shared/dtos/IOrderBy.dto';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICreateAreaExpertiseDTO } from '../dtos/areaExpertise/ICreateAreaExpertise.dto';
 import IRepositoryAreaExpertise from '../repositories/IRepositoryAreaExpertise';
@@ -22,10 +26,15 @@ export class ServiceAreaExpertise {
     newExpertiseAreaData,
     idMember,
   }: ICreateAreaExpertiseDTO): Promise<EntityAreaExpertise> {
-    const member = await this.serviceMember.findById(idMember);
+    let member;
 
-    if (!member) {
-      throw new UnauthorizedException(['I need to be logged in']);
+    try {
+      member = await this.serviceMember.findById(idMember);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new UnauthorizedException(['I need to be logged in']);
+      }
+      throw error;
     }
 
     return create({

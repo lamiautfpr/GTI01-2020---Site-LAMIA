@@ -11,10 +11,10 @@ const findById = async ({
   repository,
   id,
 }: IRequest): Promise<EntityMember> => {
-  const member = repository.findById(id);
+  const member = await repository.findById(id);
 
   if (!member) {
-    throw new NotFoundException('Member not exist');
+    throw new NotFoundException([`Not found member with id "${id}"`]);
   }
 
   return member;
