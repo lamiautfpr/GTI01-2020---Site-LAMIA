@@ -173,6 +173,9 @@ export class ControllerMember {
     type: EntityMember,
     isArray: true,
   })
+  @ApiNoContentResponse({
+    description: 'No Members Content',
+  })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @UsePipes(new ValidationPipe())
