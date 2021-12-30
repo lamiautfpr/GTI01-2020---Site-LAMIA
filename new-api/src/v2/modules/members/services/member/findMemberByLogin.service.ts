@@ -14,7 +14,7 @@ const findByLogin = async ({
   const member = await repository.findByLogin(login);
 
   if (!member) {
-    throw new NotFoundException('Not found Member');
+    throw new NotFoundException([`Not found member with loggin "${login}"`]);
   }
 
   return member;

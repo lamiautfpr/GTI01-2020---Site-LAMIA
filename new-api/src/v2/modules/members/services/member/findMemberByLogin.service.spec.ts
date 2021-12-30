@@ -15,7 +15,7 @@ let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
 
-describe('Find Member by ID  - SERVICES', () => {
+describe('Find Member by LOGGIN  - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
@@ -28,32 +28,32 @@ describe('Find Member by ID  - SERVICES', () => {
   });
 
   describe('successful cases', () => {
-    it('should return a member when member id exist', async () => {
+    it('should return a member when member login exist', async () => {
       const member = await MembersMock.giveAMeAValidMember({
         patentName: 'ADMINISTRATOR',
         fakeRepositoryMember,
         fakeRepositoryPatent,
       });
 
-      const result = await serviceMember.findById(member.id);
+      const result = await serviceMember.findByLogin(member.login);
 
       expect(result).toBeInstanceOf(EntityMember);
-      expect(result.id).toBe(member.id);
+      expect(member.login).toBe(member.login);
     });
 
-    it('should return NOT_FOUNT when no member id exists', async () => {
+    it('should return NOT_FOUNT when no member login exists', async () => {
       let error;
-      const uuidMocked = 'uuid not exist';
+      const logginMocked = 'loggin not exist';
 
       try {
-        await serviceMember.findById(uuidMocked);
+        await serviceMember.findByLogin(logginMocked);
       } catch (err) {
         error = err;
       }
 
       expect(error).toBeInstanceOf(NotFoundException);
       expect(error.response.message).toStrictEqual([
-        `Not found member with id "${uuidMocked}"`,
+        `Not found member with loggin "${logginMocked}"`,
       ]);
     });
   });
