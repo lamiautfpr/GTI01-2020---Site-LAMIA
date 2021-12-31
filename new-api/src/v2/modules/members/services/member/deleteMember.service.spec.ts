@@ -1,0 +1,174 @@
+import MembersMock from '@modules/members/mocks/member.mock';
+import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
+import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
+import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
+import {
+  ForbiddenException,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
+import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ServiceMember } from '../member.service';
+
+let fakeRepositoryPatent: FakeRepositoryPatent;
+let fakeRepositoryMember: FakeRepositoryMember;
+
+let iHashProvider: IHashProvider;
+let iStorageProver: IStorageProvider;
+
+let serviceMember: ServiceMember;
+
+describe('Delete Member  - SERVICES', () => {
+  beforeEach(() => {
+    fakeRepositoryPatent = new FakeRepositoryPatent();
+    fakeRepositoryMember = new FakeRepositoryMember();
+    serviceMember = new ServiceMember(
+      fakeRepositoryMember,
+      fakeRepositoryPatent,
+      iHashProvider,
+      iStorageProver,
+    );
+  });
+
+  describe('successful cases', () => {
+    it('should delete the member when member id exist and member logged in is ADMINISTRATOR', async () => {
+      const memberLoggedIn = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const memberToDelete = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      await serviceMember.removeById({
+        idMemberLogged: memberLoggedIn.id,
+        idMemberToDelete: memberToDelete.id,
+      });
+
+      const memberDeleted = await fakeRepositoryMember.findById(
+        memberToDelete.id,
+      );
+
+      expect(memberDeleted).toBe(undefined);
+    });
+
+    it('should delete the member when member id exist and member logged in is ADVISOR', async () => {
+      const memberLoggedIn = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADVISOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const memberToDelete = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      await serviceMember.removeById({
+        idMemberLogged: memberLoggedIn.id,
+        idMemberToDelete: memberToDelete.id,
+      });
+
+      const memberDeleted = await fakeRepositoryMember.findById(
+        memberToDelete.id,
+      );
+
+      expect(memberDeleted).toBe(undefined);
+    });
+
+    it('should delete the member when member id exist and member logged in is COORDINATOR', async () => {
+      const memberLoggedIn = await MembersMock.giveAMeAValidMember({
+        patentName: 'COORDINATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const memberToDelete = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      await serviceMember.removeById({
+        idMemberLogged: memberLoggedIn.id,
+        idMemberToDelete: memberToDelete.id,
+      });
+
+      const memberDeleted = await fakeRepositoryMember.findById(
+        memberToDelete.id,
+      );
+
+      expect(memberDeleted).toBe(undefined);
+    });
+  });
+
+  describe('failure cases', () => {
+    it('Should return UNAUTHORIZED when not the member logged in exists', async () => {
+      const memberToDelete = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      let error;
+
+      try {
+        await serviceMember.removeById({
+          idMemberLogged: 'No member exist',
+          idMemberToDelete: memberToDelete.id,
+        });
+      } catch (err) {
+        error = err;
+      }
+
+      const memberNoDeleted = await fakeRepositoryMember.findById(
+        memberToDelete.id,
+      );
+
+      expect(memberNoDeleted).toBeInstanceOf(EntityMember);
+      expect(error).toBeInstanceOf(UnauthorizedException);
+      expect(error.response.message).toStrictEqual([`You aren't valid member`]);
+    });
+
+    it('Should return FORBIDDEN when the member that is logged in is different from: ADMINISTRATOR; ADVISOR; COORDINATOR', async () => {
+      const memberLoggedIn = await MembersMock.giveAMeAValidMember({
+        patentName: 'Patent without permission',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const memberToDelete = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      let error;
+
+      try {
+        await serviceMember.removeById({
+          idMemberLogged: memberLoggedIn.id,
+          idMemberToDelete: memberToDelete.id,
+        });
+      } catch (err) {
+        error = err;
+      }
+
+      const memberNoDeleted = await fakeRepositoryMember.findById(
+        memberToDelete.id,
+      );
+
+      expect(memberNoDeleted).toBeInstanceOf(EntityMember);
+      expect(error).toBeInstanceOf(ForbiddenException);
+      expect(error.response.message).toStrictEqual([
+        `Your patent not have permission for deleting a member`,
+      ]);
+    });
+  });
+});

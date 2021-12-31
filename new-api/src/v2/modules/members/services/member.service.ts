@@ -148,10 +148,15 @@ export class ServiceMember {
     idMemberLogged,
     idMemberToDelete,
   }: IDeleteMemberDTO): Promise<void> {
-    const member = await this.memberRepository.findById(idMemberLogged);
+    let member: EntityMember | undefined;
 
-    if (!member) {
-      throw new UnauthorizedException(['I need to be logged in']);
+    try {
+      member = await this.findById(idMemberLogged);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new UnauthorizedException(["You aren't valid member"]);
+      }
+      throw error;
     }
 
     await memberServices.remove({
