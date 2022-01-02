@@ -18,7 +18,7 @@ const create = async ({
 }: IRequest): Promise<EntityWork> => {
   if (!hasCreatePermission(member.patent.id)) {
     throw new ForbiddenException([
-      'Your patent not have permission for creating a new work',
+      "Your patent don't have permission for creating a new work",
     ]);
   }
 

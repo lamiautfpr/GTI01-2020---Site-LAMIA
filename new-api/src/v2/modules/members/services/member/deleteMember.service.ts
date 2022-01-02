@@ -16,7 +16,7 @@ const deleteById = async ({
 }: IRequest): Promise<void> => {
   if (!hasDeletePermission(member.patent.id)) {
     throw new ForbiddenException([
-      'Your patent not have permission for deleting a member',
+      "Your patent don't have permission for deleting a member",
     ]);
   }
 

@@ -43,7 +43,10 @@ export class ServiceMember {
   public async createMember(
     data: ICreateMemberBasicDataDTO,
   ): Promise<EntityMember> {
+    const memberLogged = await this.getMemberLoggedIn(data.idMemberLogged);
+
     return memberServices.create({
+      memberLogged,
       data: data,
       repositoryMember: this.memberRepository,
       repositoryPatent: this.patentRepository,
@@ -100,7 +103,7 @@ export class ServiceMember {
 
     if (!newPatent) {
       throw new NotFoundException([
-        `Not found patent with id "${newPatentId}""`,
+        `Not found patent with id "${newPatentId}"`,
       ]);
     }
 

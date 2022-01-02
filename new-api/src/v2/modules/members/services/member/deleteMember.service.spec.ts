@@ -165,7 +165,7 @@ describe('Delete Member  - SERVICES', () => {
       expect(memberNoDeleted).toBeInstanceOf(EntityMember);
       expect(error).toBeInstanceOf(ForbiddenException);
       expect(error.response.message).toStrictEqual([
-        `Your patent not have permission for deleting a member`,
+        `Your patent don't have permission for deleting a member`,
       ]);
     });
   });

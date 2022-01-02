@@ -73,8 +73,11 @@ export class ControllerMember {
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Post()
-  create(@Body() data: ICreateMemberBasicDataDTO) {
-    return this.serviceMember.createMember(data);
+  create(@Body() data: ICreateMemberBasicDataDTO, @Request() req: any) {
+    return this.serviceMember.createMember({
+      ...data,
+      idMemberLogged: req.user.userId,
+    });
   }
 
   @ApiOperation({ summary: 'updateInfo' })
