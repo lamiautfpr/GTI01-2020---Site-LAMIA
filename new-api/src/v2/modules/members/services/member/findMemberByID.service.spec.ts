@@ -40,7 +40,8 @@ describe('Find Member by ID  - SERVICES', () => {
       expect(result).toBeInstanceOf(EntityMember);
       expect(result.id).toBe(member.id);
     });
-
+  });
+  describe('failure cases', () => {
     it('should return NOT_FOUNT when no member id exists', async () => {
       let error;
       const uuidMocked = 'uuid not exist';

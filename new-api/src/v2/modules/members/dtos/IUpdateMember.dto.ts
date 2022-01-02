@@ -143,7 +143,7 @@ export class IUpdatePatentMemberDTO {
   @IsNotEmpty()
   @IsDefined()
   @IsUUID()
-  loggedMemberId: string;
+  idMemberLogged: string;
 
   @IsString()
   @IsNotEmpty()

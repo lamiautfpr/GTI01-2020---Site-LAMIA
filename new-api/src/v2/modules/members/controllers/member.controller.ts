@@ -157,7 +157,7 @@ export class ControllerMember {
     @Param('login') login: string,
   ) {
     return this.serviceMember.updatePatentMember({
-      loggedMemberId: req.user.userId,
+      idMemberLogged: req.user.userId,
       newPatentId: body.newPatentId,
       updatedMemberLogin: login,
     });

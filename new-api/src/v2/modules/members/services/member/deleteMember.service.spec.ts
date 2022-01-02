@@ -2,11 +2,7 @@ import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import {
-  ForbiddenException,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceMember } from '../member.service';
@@ -133,7 +129,9 @@ describe('Delete Member  - SERVICES', () => {
 
       expect(memberNoDeleted).toBeInstanceOf(EntityMember);
       expect(error).toBeInstanceOf(UnauthorizedException);
-      expect(error.response.message).toStrictEqual([`You aren't valid member`]);
+      expect(error.response.message).toStrictEqual([
+        `It should be logged in with a valid member`,
+      ]);
     });
 
     it('Should return FORBIDDEN when the member that is logged in is different from: ADMINISTRATOR; ADVISOR; COORDINATOR', async () => {

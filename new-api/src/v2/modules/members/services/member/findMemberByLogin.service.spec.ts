@@ -40,7 +40,8 @@ describe('Find Member by LOGGIN  - SERVICES', () => {
       expect(result).toBeInstanceOf(EntityMember);
       expect(member.login).toBe(member.login);
     });
-
+  });
+  describe('failure cases', () => {
     it('should return NOT_FOUNT when no member login exists', async () => {
       let error;
       const logginMocked = 'loggin not exist';

@@ -80,15 +80,11 @@ export class ServiceMember {
   }
 
   public async updatePatentMember({
-    loggedMemberId,
+    idMemberLogged,
     newPatentId,
     updatedMemberLogin,
   }: IUpdatePatentMemberDTO): Promise<EntityMember> {
-    const loggedMember = await this.memberRepository.findById(loggedMemberId);
-
-    if (!loggedMember) {
-      throw new UnauthorizedException(['I need to be logged in']);
-    }
+    const loggedMember = await this.getMemberLoggedIn(idMemberLogged);
 
     const updatedMember = await this.memberRepository.findByLogin(
       updatedMemberLogin,
@@ -148,21 +144,30 @@ export class ServiceMember {
     idMemberLogged,
     idMemberToDelete,
   }: IDeleteMemberDTO): Promise<void> {
-    let member: EntityMember | undefined;
-
-    try {
-      member = await this.findById(idMemberLogged);
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw new UnauthorizedException(["You aren't valid member"]);
-      }
-      throw error;
-    }
+    const member = await this.getMemberLoggedIn(idMemberLogged);
 
     await memberServices.remove({
       repository: this.memberRepository,
       idMemberToDelete,
       member,
     });
+  }
+
+  private async getMemberLoggedIn(
+    idMemberLogged: string,
+  ): Promise<EntityMember> {
+    let memberLogged: EntityMember | undefined = undefined;
+
+    try {
+      memberLogged = await this.findById(idMemberLogged);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new UnauthorizedException([
+          'It should be logged in with a valid member',
+        ]);
+      }
+      throw error;
+    }
+    return memberLogged;
   }
 }
