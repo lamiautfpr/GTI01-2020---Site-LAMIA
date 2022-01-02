@@ -8,6 +8,7 @@ import {
   ForbiddenException,
   UnauthorizedException,
 } from '@nestjs/common';
+import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceAreaExpertise } from '../areaExpertise.service';
@@ -16,7 +17,7 @@ let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryExpertiseArea: FakeRepositoryAreaExpertise;
 
-let iHashProvider: IHashProvider;
+let fakeHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
@@ -26,11 +27,12 @@ describe('Create ExpertiseArea - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+    fakeHashProvider = new FakeHashProvider();
     fakeRepositoryExpertiseArea = new FakeRepositoryAreaExpertise();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
-      iHashProvider,
+      fakeHashProvider,
       iStorageProver,
     );
 

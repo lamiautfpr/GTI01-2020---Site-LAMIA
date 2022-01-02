@@ -8,6 +8,7 @@ import {
   ForbiddenException,
   UnauthorizedException,
 } from '@nestjs/common';
+import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceType } from '../type.service';
@@ -16,7 +17,7 @@ let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryType: FakeRepositoryType;
 
-let iHashProvider: IHashProvider;
+let fakeHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
@@ -26,11 +27,13 @@ describe('Create Type - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+
+    fakeHashProvider = new FakeHashProvider();
     fakeRepositoryType = new FakeRepositoryType();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
-      iHashProvider,
+      fakeHashProvider,
       iStorageProver,
     );
 

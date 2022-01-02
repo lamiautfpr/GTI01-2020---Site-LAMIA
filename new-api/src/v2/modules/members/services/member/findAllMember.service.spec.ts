@@ -1,6 +1,7 @@
 import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
+import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
@@ -9,7 +10,7 @@ import { ServiceMember } from '../member.service';
 let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 
-let iHashProvider: IHashProvider;
+let fakeHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
@@ -18,10 +19,11 @@ describe('Find all Members - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+    fakeHashProvider = new FakeHashProvider();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
-      iHashProvider,
+      fakeHashProvider,
       iStorageProver,
     );
   });

@@ -3,6 +3,7 @@ import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { NotFoundException } from '@nestjs/common';
+import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceMember } from '../member.service';
@@ -10,7 +11,7 @@ import { ServiceMember } from '../member.service';
 let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 
-let iHashProvider: IHashProvider;
+let fakeHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
@@ -19,10 +20,11 @@ describe('Find Member by ID  - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+    fakeHashProvider = new FakeHashProvider();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
-      iHashProvider,
+      fakeHashProvider,
       iStorageProver,
     );
   });

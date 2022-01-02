@@ -8,6 +8,7 @@ import {
   ForbiddenException,
   UnauthorizedException,
 } from '@nestjs/common';
+import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceCategory } from '../category.service';
@@ -16,7 +17,7 @@ let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryCategory: FakeRepositoryCategory;
 
-let iHashProvider: IHashProvider;
+let fakeHashProvider: IHashProvider;
 let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
@@ -26,11 +27,12 @@ describe('Create Category - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+    fakeHashProvider = new FakeHashProvider();
     fakeRepositoryCategory = new FakeRepositoryCategory();
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
-      iHashProvider,
+      fakeHashProvider,
       iStorageProver,
     );
 

@@ -13,11 +13,16 @@ import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceMember } from '../member.service';
 
+jest.mock('@providers/HashProvider/implementations/fakes/FakeHashProvider');
+
 let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 
-let fakeHashProvider: IHashProvider;
-let fakeStorageProver: IStorageProvider;
+const FakeHashProviderMock = FakeHashProvider as jest.Mock<FakeHashProvider>;
+
+let fakeHashProviderMock: IHashProvider;
+
+let iStorageProver: IStorageProvider;
 
 let serviceMember: ServiceMember;
 
@@ -25,12 +30,14 @@ describe('Create Member  - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
-    fakeHashProvider = new FakeHashProvider();
+
+    fakeHashProviderMock = new FakeHashProviderMock() as jest.Mocked<FakeHashProvider>;
+
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
-      fakeHashProvider,
-      fakeStorageProver,
+      fakeHashProviderMock,
+      iStorageProver,
     );
   });
 
@@ -63,6 +70,7 @@ describe('Create Member  - SERVICES', () => {
       expect(memberCreated.name).toBe(data.name);
       expect(memberCreated.login).toBe(data.email.split('@')[0]);
       expect(memberCreated.patent.name).toBe(validPatentMocked.name);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(1);
     });
 
     it('should create a new member when basic datas is valid and the member logged in is ADVISOR', async () => {
@@ -93,6 +101,7 @@ describe('Create Member  - SERVICES', () => {
       expect(memberCreated.name).toBe(data.name);
       expect(memberCreated.login).toBe(data.email.split('@')[0]);
       expect(memberCreated.patent.name).toBe(validPatentMocked.name);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(1);
     });
 
     it('should create a new member when basic datas is valid and the member logged in is COORDINATOR', async () => {
@@ -123,6 +132,7 @@ describe('Create Member  - SERVICES', () => {
       expect(memberCreated.name).toBe(data.name);
       expect(memberCreated.login).toBe(data.email.split('@')[0]);
       expect(memberCreated.patent.name).toBe(validPatentMocked.name);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(1);
     });
 
     it('should create a new member when basic datas is valid but the email prefix already exists and the member logged in is ADMINISTRATOR', async () => {
@@ -160,6 +170,7 @@ describe('Create Member  - SERVICES', () => {
       expect(memberCreated.name).toBe(data.name);
       expect(memberCreated.login).toBe(`${data.email.split('@')[0]}_1`);
       expect(memberCreated.patent.name).toBe(validPatentMocked.name);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -192,6 +203,7 @@ describe('Create Member  - SERVICES', () => {
       expect(error.response.message).toStrictEqual([
         `It should be logged in with a valid member`,
       ]);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(0);
     });
 
     it('Should return FORBIDDEN when the member that is logged in is different from: ADMINISTRATOR; ADVISOR; COORDINATOR', async () => {
@@ -227,6 +239,7 @@ describe('Create Member  - SERVICES', () => {
       expect(error.response.message).toStrictEqual([
         `Your patent don't have permission for creating a new member`,
       ]);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(0);
     });
 
     it("Should return CONFLICT when the member's mail already exists", async () => {
@@ -271,6 +284,7 @@ describe('Create Member  - SERVICES', () => {
       expect(error.response.message).toStrictEqual([
         `The email "${email}" already exists`,
       ]);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(0);
     });
 
     it("Should return BAD_REQUEST when the patent's id doesn't exist", async () => {
@@ -304,6 +318,7 @@ describe('Create Member  - SERVICES', () => {
       expect(error.response.message).toStrictEqual([
         `Not found patent with id "${patentId}"`,
       ]);
+      expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(0);
     });
   });
 });
