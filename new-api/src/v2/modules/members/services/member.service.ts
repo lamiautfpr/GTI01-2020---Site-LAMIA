@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Inject,
   Injectable,
   NotFoundException,
@@ -95,19 +96,19 @@ export class ServiceMember {
 
     if (!updatedMember) {
       throw new NotFoundException([
-        `Not found member with login "${updatedMemberLogin}""`,
+        `Not found member with login "${updatedMemberLogin}"`,
       ]);
     }
 
     const newPatent = await this.patentRepository.findById(newPatentId);
 
     if (!newPatent) {
-      throw new NotFoundException([
+      throw new BadRequestException([
         `Not found patent with id "${newPatentId}"`,
       ]);
     }
 
-    return memberServices.updatePatent({
+    return await memberServices.updatePatent({
       loggedMember,
       newPatent,
       updatedMember,

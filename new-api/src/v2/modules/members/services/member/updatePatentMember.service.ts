@@ -19,11 +19,13 @@ const updatePatent = async ({
 }: IRequest): Promise<EntityMember> => {
   if (!hasCreatePermission(loggedMember.patent.id)) {
     throw new ForbiddenException([
-      "don'tYour patent don't have permission for updating patent of the member",
+      "Your patent don't have permission for updating patent of the member",
     ]);
   }
 
-  return repository.updateSave({ ...updatedMember, patent: newPatent });
+  updatedMember.patent = newPatent;
+
+  return repository.updateSave(updatedMember);
 };
 
 export default updatePatent;
