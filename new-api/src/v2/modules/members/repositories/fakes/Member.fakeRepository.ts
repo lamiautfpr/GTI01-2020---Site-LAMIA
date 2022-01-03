@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import IFindConflictDTO from '@modules/members/dtos/IFindConflict.dto';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
+import { InternalServerErrorException } from '@nestjs/common';
 import ICreateMemberDTO from '../../dtos/ICreateMember.dto';
 import IOrderByMember from '../../dtos/IOrderByMember.dto';
 import IRepositoryMember from '../../repositories/IRepositoryMember';
@@ -37,6 +39,26 @@ export class FakeRepositoryMember implements IRepositoryMember {
 
   public async findByLogin(login: string): Promise<EntityMember | undefined> {
     return this.members.find((member) => member.login === login);
+  }
+
+  public async findConflict(
+    uniqueDatas: Partial<IFindConflictDTO>,
+  ): Promise<EntityMember | undefined> {
+    if (Object.keys(uniqueDatas).length === 0) {
+      throw new InternalServerErrorException([
+        'It should define  at least one attribute de uniqueDatas: email, login, linkedin, lattes, gitHub, quoteName',
+      ]);
+    }
+
+    return this.members.find(
+      (member) =>
+        (uniqueDatas.email && member.email === uniqueDatas.email) ||
+        (uniqueDatas.login && member.login === uniqueDatas.login) ||
+        (uniqueDatas.linkedin && member.linkedin === uniqueDatas.linkedin) ||
+        (uniqueDatas.lattes && member.lattes === uniqueDatas.lattes) ||
+        (uniqueDatas.gitHub && member.gitHub === uniqueDatas.gitHub) ||
+        (uniqueDatas.quoteName && member.quoteName === uniqueDatas.quoteName),
+    );
   }
 
   public async findByLikeName(

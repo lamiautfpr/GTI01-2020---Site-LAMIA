@@ -59,11 +59,11 @@ export class ServiceMember {
     idMember,
     newMemberData,
   }: IUpdateMemberDTO): Promise<EntityMember> {
+    const loggedMember = await this.getMemberLoggedIn(idMember);
+
     const member = await memberServices.update({
-      newMemberData: {
-        ...newMemberData,
-        id: idMember,
-      },
+      newMemberData,
+      loggedMember,
       repository: this.memberRepository,
       hashProvider: this.hashProvider,
     });

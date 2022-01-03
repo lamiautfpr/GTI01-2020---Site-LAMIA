@@ -1,4 +1,5 @@
 import ICreateMemberDTO from '../dtos/ICreateMember.dto';
+import IFindConflictDTO from '../dtos/IFindConflict.dto';
 import IOrderByMember from '../dtos/IOrderByMember.dto';
 import { EntityMember } from '../typeorm/entities/member.entity';
 
@@ -8,6 +9,9 @@ export default interface IRepositoryMember {
   findById(id: string): Promise<EntityMember | undefined>;
   findByEmail(email: string): Promise<EntityMember | undefined>;
   findByLogin(login: string): Promise<EntityMember | undefined>;
+  findConflict(
+    uniqueDatas: Partial<IFindConflictDTO>,
+  ): Promise<EntityMember | undefined>;
   findByLikeName(
     name: string,
     order?: IOrderByMember,
