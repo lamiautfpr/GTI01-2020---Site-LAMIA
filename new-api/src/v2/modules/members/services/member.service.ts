@@ -75,9 +75,11 @@ export class ServiceMember {
     idMember,
     fileName,
   }: IUpdateAvatarMemberDTO): Promise<EntityMember> {
+    const loggedMember = await this.getMemberLoggedIn(idMember);
+
     return memberServices.updateAvatar({
       repository: this.memberRepository,
-      id: idMember,
+      loggedMember,
       fileName,
       storageProvider: this.storageProvider,
     });

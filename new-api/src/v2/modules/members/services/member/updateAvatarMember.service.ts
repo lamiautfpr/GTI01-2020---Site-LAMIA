@@ -6,41 +6,37 @@ import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider
 
 interface IRequest {
   repository: IRepositoryMember;
-  id: string;
+  loggedMember: EntityMember;
   storageProvider: IStorageProvider;
   fileName: string;
 }
 
 const updateAvatar = async ({
   repository,
-  id,
+  loggedMember,
   storageProvider,
   fileName,
 }: IRequest): Promise<EntityMember> => {
-  const member = await repository.findById(id);
   const targetFolder = TARGET_FOLDER.MEMBERS;
 
-  if (!member) {
-    throw new UnauthorizedException();
-  }
-
-  if (member.avatar) {
+  if (loggedMember.avatar) {
     await storageProvider.deleteFile({
-      fileName: member.avatar,
+      fileName: loggedMember.avatar,
       targetFolder,
     });
   } else {
-    member.avatar = fileName;
+    loggedMember.avatar = fileName;
     await repository.updateSave({
-      ...member,
+      ...loggedMember,
       avatar: fileName,
     });
   }
 
-  const memberWithNewAvatar = await repository.updateSave({
-    ...member,
+  Object.assign(loggedMember, {
     avatar: fileName,
   });
+
+  const memberWithNewAvatar = await repository.updateSave(loggedMember);
 
   await storageProvider.saveFile({
     fileName,
