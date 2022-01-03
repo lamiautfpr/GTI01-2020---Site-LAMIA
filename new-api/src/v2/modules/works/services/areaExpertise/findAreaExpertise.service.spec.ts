@@ -4,6 +4,7 @@ import { ServiceMember } from '@modules/members/services/member.service';
 import { FakeRepositoryAreaExpertise } from '@modules/works/repositories/fakes/AreaExpertise.fakeRepository';
 import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
 import { ServiceAreaExpertise } from '../areaExpertise.service';
@@ -13,7 +14,7 @@ let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryAreaExpertise: FakeRepositoryAreaExpertise;
 
 let fakeHashProvider: IHashProvider;
-let iStorageProver: IStorageProvider;
+let fakeStorageProvider: IStorageProvider;
 
 let serviceMember: ServiceMember;
 let serviceAreaExpertise: ServiceAreaExpertise;
@@ -22,13 +23,16 @@ describe('Find all Categories - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
-    fakeHashProvider = new FakeHashProvider();
     fakeRepositoryAreaExpertise = new FakeRepositoryAreaExpertise();
+
+    fakeHashProvider = new FakeHashProvider();
+    fakeStorageProvider = new FakeStorageProvider();
+
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
       fakeHashProvider,
-      iStorageProver,
+      fakeStorageProvider,
     );
 
     serviceAreaExpertise = new ServiceAreaExpertise(

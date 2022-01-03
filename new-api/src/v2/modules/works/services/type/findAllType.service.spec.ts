@@ -4,6 +4,7 @@ import { ServiceMember } from '@modules/members/services/member.service';
 import { FakeRepositoryType } from '@modules/works/repositories/fakes/Type.fakeRepository';
 import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
 import { ServiceType } from '../type.service';
@@ -13,7 +14,7 @@ let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryType: FakeRepositoryType;
 
 let fakeHashProvider: IHashProvider;
-let iStorageProver: IStorageProvider;
+let fakeStorageProvider: IStorageProvider;
 
 let serviceMember: ServiceMember;
 let serviceType: ServiceType;
@@ -22,13 +23,16 @@ describe('Find all Types - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
-    fakeHashProvider = new FakeHashProvider();
     fakeRepositoryType = new FakeRepositoryType();
+
+    fakeHashProvider = new FakeHashProvider();
+    fakeStorageProvider = new FakeStorageProvider();
+
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
       fakeHashProvider,
-      iStorageProver,
+      fakeStorageProvider,
     );
 
     serviceType = new ServiceType(fakeRepositoryType, serviceMember);

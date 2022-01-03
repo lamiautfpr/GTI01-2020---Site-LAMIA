@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceAreaExpertise } from '../areaExpertise.service';
 
@@ -18,7 +19,7 @@ let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryExpertiseArea: FakeRepositoryAreaExpertise;
 
 let fakeHashProvider: IHashProvider;
-let iStorageProver: IStorageProvider;
+let fakeStorageProvider: IStorageProvider;
 
 let serviceMember: ServiceMember;
 let serviceExpertiseArea: ServiceAreaExpertise;
@@ -27,13 +28,16 @@ describe('Create ExpertiseArea - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
-    fakeHashProvider = new FakeHashProvider();
     fakeRepositoryExpertiseArea = new FakeRepositoryAreaExpertise();
+
+    fakeHashProvider = new FakeHashProvider();
+    fakeStorageProvider = new FakeStorageProvider();
+
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
       fakeHashProvider,
-      iStorageProver,
+      fakeStorageProvider,
     );
 
     serviceExpertiseArea = new ServiceAreaExpertise(

@@ -1,6 +1,5 @@
 import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import { UnauthorizedException } from '@nestjs/common';
 import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 

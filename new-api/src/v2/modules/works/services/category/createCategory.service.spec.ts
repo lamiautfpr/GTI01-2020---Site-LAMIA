@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ServiceCategory } from '../category.service';
 
@@ -18,7 +19,7 @@ let fakeRepositoryMember: FakeRepositoryMember;
 let fakeRepositoryCategory: FakeRepositoryCategory;
 
 let fakeHashProvider: IHashProvider;
-let iStorageProver: IStorageProvider;
+let fakeStorageProvider: IStorageProvider;
 
 let serviceMember: ServiceMember;
 let serviceCategory: ServiceCategory;
@@ -27,13 +28,16 @@ describe('Create Category - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
-    fakeHashProvider = new FakeHashProvider();
     fakeRepositoryCategory = new FakeRepositoryCategory();
+
+    fakeHashProvider = new FakeHashProvider();
+    fakeStorageProvider = new FakeStorageProvider();
+
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
       fakeHashProvider,
-      iStorageProver,
+      fakeStorageProvider,
     );
 
     serviceCategory = new ServiceCategory(

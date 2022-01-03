@@ -2,12 +2,7 @@ import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import {
-  BadRequestException,
-  ForbiddenException,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { UnauthorizedException } from '@nestjs/common';
 import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
@@ -25,7 +20,7 @@ let fakeRepositoryMember: FakeRepositoryMember;
 const FakeStorageProviderMock = FakeStorageProvider as jest.Mock<FakeStorageProvider>;
 
 let fakeHashProvider: IHashProvider;
-let fakeStorageProviderMock: jest.Mocked<IStorageProvider>;
+let fakeStorageProvider: jest.Mocked<IStorageProvider>;
 
 let serviceMember: ServiceMember;
 
@@ -35,13 +30,13 @@ describe("Update Member's avatar  - SERVICES", () => {
     fakeRepositoryMember = new FakeRepositoryMember();
 
     fakeHashProvider = new FakeHashProvider();
-    fakeStorageProviderMock = new FakeStorageProviderMock() as jest.Mocked<FakeStorageProvider>;
+    fakeStorageProvider = new FakeStorageProviderMock() as jest.Mocked<FakeStorageProvider>;
 
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
       fakeHashProvider,
-      fakeStorageProviderMock,
+      fakeStorageProvider,
     );
   });
 
@@ -64,12 +59,12 @@ describe("Update Member's avatar  - SERVICES", () => {
       expect(memberUpdated.id).toBe(memberLoggedIn.id);
       expect(memberUpdated.avatar).toBe(fileName);
 
-      expect(fakeStorageProviderMock.saveFile).toHaveBeenCalledTimes(1);
-      expect(fakeStorageProviderMock.saveFile).toHaveBeenNthCalledWith(1, {
+      expect(fakeStorageProvider.saveFile).toHaveBeenCalledTimes(1);
+      expect(fakeStorageProvider.saveFile).toHaveBeenNthCalledWith(1, {
         fileName,
         targetFolder: TARGET_FOLDER.MEMBERS,
       });
-      expect(fakeStorageProviderMock.deleteFile).toHaveBeenCalledTimes(0);
+      expect(fakeStorageProvider.deleteFile).toHaveBeenCalledTimes(0);
     });
 
     it("Should update the member's avatar when member logged in exists and he already have avatar", async () => {
@@ -98,13 +93,13 @@ describe("Update Member's avatar  - SERVICES", () => {
       expect(memberUpdated.id).toBe(memberLoggedIn.id);
       expect(memberUpdated.avatar).toBe(fileName);
 
-      expect(fakeStorageProviderMock.saveFile).toHaveBeenCalledTimes(1);
-      expect(fakeStorageProviderMock.saveFile).toHaveBeenNthCalledWith(1, {
+      expect(fakeStorageProvider.saveFile).toHaveBeenCalledTimes(1);
+      expect(fakeStorageProvider.saveFile).toHaveBeenNthCalledWith(1, {
         fileName,
         targetFolder: TARGET_FOLDER.MEMBERS,
       });
-      expect(fakeStorageProviderMock.deleteFile).toHaveBeenCalledTimes(1);
-      expect(fakeStorageProviderMock.deleteFile).toHaveBeenNthCalledWith(1, {
+      expect(fakeStorageProvider.deleteFile).toHaveBeenCalledTimes(1);
+      expect(fakeStorageProvider.deleteFile).toHaveBeenNthCalledWith(1, {
         fileName: oldFileName,
         targetFolder: TARGET_FOLDER.MEMBERS,
       });
@@ -133,8 +128,8 @@ describe("Update Member's avatar  - SERVICES", () => {
         `It should be logged in with a valid member`,
       ]);
 
-      expect(fakeStorageProviderMock.deleteFile).toHaveBeenCalledTimes(0);
-      expect(fakeStorageProviderMock.saveFile).toHaveBeenCalledTimes(0);
+      expect(fakeStorageProvider.deleteFile).toHaveBeenCalledTimes(0);
+      expect(fakeStorageProvider.saveFile).toHaveBeenCalledTimes(0);
     });
   });
 });
