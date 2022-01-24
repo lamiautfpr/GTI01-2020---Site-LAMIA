@@ -83,14 +83,16 @@ export class ServiceAuth {
       oldToken,
     );
 
+    const messagesError = ['oldToken is not valid'];
+
     if (!isValidToken) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(messagesError);
     }
 
     const member = await this.memberRepository.findByLogin(isValidToken.login);
 
     if (!member) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(messagesError);
     }
 
     const newToken = (await this.login(member)).auth;
