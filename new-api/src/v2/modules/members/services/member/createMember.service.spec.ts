@@ -12,6 +12,7 @@ import FakeHashProvider from '@providers/HashProvider/implementations/fakes/Fake
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ServiceMember } from '../member.service';
 
@@ -240,7 +241,7 @@ describe('Create Member  - SERVICES', () => {
       expect(membersNoCreated).toBe(undefined);
       expect(error).toBeInstanceOf(ForbiddenException);
       expect(error.response.message).toStrictEqual([
-        `Your patent don't have permission for creating a new member`,
+        ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_CREATE_MEMBER,
       ]);
       expect(fakeHashProviderMock.generateHash).toHaveBeenCalledTimes(0);
     });

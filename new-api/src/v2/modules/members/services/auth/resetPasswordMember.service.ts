@@ -6,6 +6,7 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest {
   repository: IRepositoryMember;
@@ -22,7 +23,7 @@ const resetPassword = async ({
 }: IRequest): Promise<EntityMember> => {
   if (!hasCreatePermission(loggedMember.patent.id)) {
     throw new ForbiddenException([
-      "Your patent don't have permission for updating patent of the member",
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_UPDATE_MEMBER,
     ]);
   }
 

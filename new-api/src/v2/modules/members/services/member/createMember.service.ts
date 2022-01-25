@@ -9,6 +9,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest {
   memberLogged: EntityMember;
@@ -27,7 +28,7 @@ const create = async ({
 }: IRequest): Promise<EntityMember> => {
   if (!hasDeletePermission(memberLogged.patent.id)) {
     throw new ForbiddenException([
-      "Your patent don't have permission for creating a new member",
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_CREATE_MEMBER,
     ]);
   }
 

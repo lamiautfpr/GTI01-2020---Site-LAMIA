@@ -3,6 +3,7 @@ import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_
 import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
 import { ConflictException, ForbiddenException } from '@nestjs/common';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest extends ICreatePatentServiceDTO {
   repository: IRepositoryPatent;
@@ -15,7 +16,7 @@ const create = async ({
 }: IRequest): Promise<EntityPatent> => {
   if (!hasCreatePermission(member.patent.id)) {
     throw new ForbiddenException([
-      "Your patent don't have permission for creating a new patent",
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_CREATE_PATENT,
     ]);
   }
 

@@ -14,6 +14,7 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiBody,
+  ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
@@ -71,6 +72,7 @@ export class ControllerAuthMember {
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @ApiNotFoundResponse(Errors.NotFound)
+  @ApiForbiddenResponse(Errors.Forbidden)
   @ApiNoContentResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Updated Success',

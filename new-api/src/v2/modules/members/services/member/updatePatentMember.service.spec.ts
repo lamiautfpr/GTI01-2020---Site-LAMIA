@@ -12,6 +12,7 @@ import FakeHashProvider from '@providers/HashProvider/implementations/fakes/Fake
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 import { ERRORS_NOT_FOUND } from '@utils/Errors/NotFound';
 import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ServiceMember } from '../member.service';
@@ -206,7 +207,7 @@ describe("Update Member's patent  - SERVICES", () => {
       expect(memberToUpdate).toMatchObject(memberThatShouldHaveBeenUpdated);
       expect(error).toBeInstanceOf(ForbiddenException);
       expect(error.response.message).toStrictEqual([
-        `Your patent don't have permission for updating patent of the member`,
+        ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_UPDATE_MEMBER,
       ]);
     });
 

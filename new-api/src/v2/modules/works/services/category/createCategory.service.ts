@@ -4,6 +4,7 @@ import ICreateCategoryDTO from '@modules/works/dtos/category/ICreateCategory.dto
 import IRepositoryCategory from '@modules/works/repositories/IRepositoryCategory';
 import { EntityCategory } from '@modules/works/typeorm/entities/category.entity';
 import { ConflictException, ForbiddenException } from '@nestjs/common';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest {
   newCategoryData: ICreateCategoryDTO;
@@ -18,7 +19,7 @@ const create = async ({
 }: IRequest): Promise<EntityCategory> => {
   if (!hasCreatePermission(member.patent.id)) {
     throw new ForbiddenException([
-      "Your patent don't have permission for creating a new patent",
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_CREATE_CATEGORY,
     ]);
   }
 
