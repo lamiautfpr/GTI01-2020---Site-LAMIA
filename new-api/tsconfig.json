@@ -14,7 +14,8 @@
     "paths": {
 			"@modules/*": ["./v2/modules/*"],
 			"@config/*": ["./v2/config/*"],
-			"@providers/*": ["./v2/providers/*"]
+			"@providers/*": ["./v2/providers/*"],
+			"@utils/*": ["./v2/utils/*"]
 		}
   }
 }

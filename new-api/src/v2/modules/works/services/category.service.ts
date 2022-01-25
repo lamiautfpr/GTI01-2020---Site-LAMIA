@@ -8,6 +8,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ICreateCategoryDTO } from '../dtos/category/ICreateCategory.dto';
 import IRepositoryCategory from '../repositories/IRepositoryCategory';
 import { EntityCategory } from '../typeorm/entities/category.entity';
@@ -32,7 +33,9 @@ export class ServiceCategory {
       member = await this.serviceMember.findById(idMember);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw new UnauthorizedException(['I need to be logged in']);
+        throw new UnauthorizedException([
+          ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+        ]);
       }
       throw error;
     }

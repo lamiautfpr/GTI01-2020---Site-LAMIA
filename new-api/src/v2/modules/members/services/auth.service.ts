@@ -7,6 +7,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { IResetPasswordMemberDTO } from '../dtos/auth/IResetPasswordMember.dto';
 import { ILoginDTO } from '../dtos/ILogin.dto';
 import IPayloadTokenDTO from '../dtos/IPayloadToken.dto';
@@ -83,7 +84,7 @@ export class ServiceAuth {
       oldToken,
     );
 
-    const messagesError = ['oldToken is not valid'];
+    const messagesError = [ERRORS_UNAUTHORIZED.OLD_TOKEN_INVALID];
 
     if (!isValidToken) {
       throw new UnauthorizedException(messagesError);
@@ -114,7 +115,9 @@ export class ServiceAuth {
     const loggedMember = await this.memberRepository.findById(loggedMemberId);
 
     if (!loggedMember) {
-      throw new UnauthorizedException(['I need to be logged in']);
+      throw new UnauthorizedException([
+        ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+      ]);
     }
 
     const updatedMember = await this.memberRepository.findByLogin(

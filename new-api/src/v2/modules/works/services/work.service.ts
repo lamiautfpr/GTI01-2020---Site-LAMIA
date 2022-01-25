@@ -1,6 +1,7 @@
 import { ServiceMember } from '@modules/members/services/member.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ICreateWorkDTO } from '../dtos/work/ICreateWork.dto';
 import IOrderWorkDTO, {
   ISelectOrderWorkDTO,
@@ -27,7 +28,9 @@ export class ServiceWork {
     const member = await this.serviceMember.findById(idMember);
 
     if (!member) {
-      throw new UnauthorizedException(['I need to be logged in']);
+      throw new UnauthorizedException([
+        ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+      ]);
     }
 
     return create({

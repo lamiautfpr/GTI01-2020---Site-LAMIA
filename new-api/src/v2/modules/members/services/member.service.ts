@@ -8,6 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import IDeleteMemberDTO from '../dtos/IDeleteMember.dto';
 import IOrderByMember, {
@@ -169,7 +170,7 @@ export class ServiceMember {
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new UnauthorizedException([
-          'It should be logged in with a valid member',
+          ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
         ]);
       }
       throw error;

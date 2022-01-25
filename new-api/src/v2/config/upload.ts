@@ -1,4 +1,5 @@
 import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { diskStorage, Options } from 'multer';
 import { resolve } from 'path';
 import { apiConfig } from './api';
@@ -39,7 +40,9 @@ export default {
         const member = request.user as { userId: string };
 
         if (!member) {
-          throw new UnauthorizedException(['I need to be logged in']);
+          throw new UnauthorizedException([
+            ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+          ]);
         }
 
         const fileName = `${Date.now()}-${member.userId}.jpg`;

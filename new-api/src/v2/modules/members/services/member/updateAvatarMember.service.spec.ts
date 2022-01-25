@@ -8,6 +8,7 @@ import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import TARGET_FOLDER from '@providers/StorageProvider/enums/targetFolder.enum';
 import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ServiceMember } from '../member.service';
 
 jest.mock(
@@ -125,7 +126,7 @@ describe("Update Member's avatar  - SERVICES", () => {
       expect(memberNoUpdated).toBe(undefined);
       expect(error).toBeInstanceOf(UnauthorizedException);
       expect(error.response.message).toStrictEqual([
-        `It should be logged in with a valid member`,
+        ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
       ]);
 
       expect(fakeStorageProvider.deleteFile).toHaveBeenCalledTimes(0);

@@ -12,6 +12,7 @@ import FakeHashProvider from '@providers/HashProvider/implementations/fakes/Fake
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ServiceMember } from '../member.service';
 
 let fakeRepositoryPatent: FakeRepositoryPatent;
@@ -161,7 +162,7 @@ describe("Update Member's patent  - SERVICES", () => {
       expect(memberToUpdate).toMatchObject(memberThatShouldHaveBeenUpdated);
       expect(error).toBeInstanceOf(UnauthorizedException);
       expect(error.response.message).toStrictEqual([
-        `It should be logged in with a valid member`,
+        ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
       ]);
     });
 
