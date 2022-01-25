@@ -16,6 +16,7 @@ import {
   ApiBody,
   ApiInternalServerErrorResponse,
   ApiNoContentResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -69,6 +70,7 @@ export class ControllerAuthMember {
   @ApiOperation({ summary: "reset member's password to default" })
   @ApiInternalServerErrorResponse(Errors.InternalServer)
   @ApiUnauthorizedResponse(Errors.Unauthorized)
+  @ApiNotFoundResponse(Errors.NotFound)
   @ApiNoContentResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Updated Success',

@@ -12,6 +12,7 @@ import FakeHashProvider from '@providers/HashProvider/implementations/fakes/Fake
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_NOT_FOUND } from '@utils/Errors/NotFound';
 import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ServiceMember } from '../member.service';
 
@@ -237,7 +238,7 @@ describe("Update Member's patent  - SERVICES", () => {
       expect(memberUpdated).toBe(undefined);
       expect(error).toBeInstanceOf(NotFoundException);
       expect(error.response.message).toStrictEqual([
-        `Not found member with login "${updatedMemberLogin}"`,
+        `${ERRORS_NOT_FOUND.NOT_FOUND_LOGIN} "${updatedMemberLogin}"`,
       ]);
     });
 

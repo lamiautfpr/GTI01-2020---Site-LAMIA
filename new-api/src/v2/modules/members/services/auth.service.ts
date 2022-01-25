@@ -7,6 +7,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { ERRORS_NOT_FOUND } from '@utils/Errors/NotFound';
 import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { IResetPasswordMemberDTO } from '../dtos/auth/IResetPasswordMember.dto';
 import { ILoginDTO } from '../dtos/ILogin.dto';
@@ -126,7 +127,7 @@ export class ServiceAuth {
 
     if (!updatedMember) {
       throw new NotFoundException([
-        `Not found member with login "${updatedMemberLogin}""`,
+        `${ERRORS_NOT_FOUND.NOT_FOUND_LOGIN} "${updatedMemberLogin}"`,
       ]);
     }
 

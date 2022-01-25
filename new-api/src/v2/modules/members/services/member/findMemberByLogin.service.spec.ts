@@ -7,6 +7,7 @@ import FakeHashProvider from '@providers/HashProvider/implementations/fakes/Fake
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_NOT_FOUND } from '@utils/Errors/NotFound';
 import { ServiceMember } from '../member.service';
 
 let fakeRepositoryPatent: FakeRepositoryPatent;
@@ -60,7 +61,7 @@ describe('Find Member by LOGGIN  - SERVICES', () => {
 
       expect(error).toBeInstanceOf(NotFoundException);
       expect(error.response.message).toStrictEqual([
-        `Not found member with loggin "${logginMocked}"`,
+        `${ERRORS_NOT_FOUND.NOT_FOUND_LOGIN} "${logginMocked}"`,
       ]);
     });
   });
