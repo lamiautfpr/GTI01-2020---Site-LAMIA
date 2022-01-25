@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
+import { ERRORS_UNPROCESSABLE_ENTITY } from '@utils/Errors/UnprocessableEntity';
 
 interface IRequest {
   repository: IRepositoryMember;
@@ -29,7 +30,7 @@ const resetPassword = async ({
 
   if (!process.env.PASSWORD_DEFAULT_MEMBERS) {
     throw new UnprocessableEntityException([
-      "Member's default password not defined",
+      ERRORS_UNPROCESSABLE_ENTITY.DEFAULT_PASSWORD_NOT_DEFINED,
     ]);
   }
 

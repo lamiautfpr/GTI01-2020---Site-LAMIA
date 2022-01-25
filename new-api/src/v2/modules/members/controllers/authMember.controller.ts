@@ -22,6 +22,7 @@ import {
   ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
+  ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 import Errors from 'v2/utils/Errors';
 import { AllExceptionsFilter } from 'v2/utils/Interceptors/all-exceptions.filter';
@@ -73,6 +74,7 @@ export class ControllerAuthMember {
   @ApiUnauthorizedResponse(Errors.Unauthorized)
   @ApiNotFoundResponse(Errors.NotFound)
   @ApiForbiddenResponse(Errors.Forbidden)
+  @ApiUnprocessableEntityResponse(Errors.UnprocessableEntity)
   @ApiNoContentResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Updated Success',
