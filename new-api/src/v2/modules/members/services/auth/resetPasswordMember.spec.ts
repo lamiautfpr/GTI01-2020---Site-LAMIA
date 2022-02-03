@@ -1,16 +1,20 @@
 import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
+import { FakeRefreshTokenRepository } from '@modules/members/repositories/fakes/RefreshToken.fakeRepository';
+import {
+  ForbiddenException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
-import { ServiceMember } from '../member.service';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
+import { ERRORS_UNPROCESSABLE_ENTITY } from '@utils/Errors/UnprocessableEntity';
 import { ServiceAuth } from '../auth.service';
-import { IResetPasswordMemberDTO } from '@modules/members/dtos/auth/IResetPasswordMember.dto';
-import { FakeRefreshTokenRepository } from '@modules/members/repositories/fakes/RefreshToken.fakeRepository';
-import { JwtService } from '@nestjs/jwt';
-import auth from '@config/auth';
-import { ForbiddenException } from '@nestjs/common';
+import { ServiceMember } from '../member.service';
 
 jest.mock('@providers/HashProvider/implementations/fakes/FakeHashProvider');
 
@@ -27,8 +31,11 @@ let fakeRepositoryPatent: FakeRepositoryPatent;
 
 describe('ResetPasswordMember - Service', () => {
   beforeEach(() => {
+    fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
+
     fakeHashProviderMock = new FakeHashProvider();
+
     serviceMember = new ServiceMember(
       fakeRepositoryMember,
       fakeRepositoryPatent,
@@ -38,22 +45,19 @@ describe('ResetPasswordMember - Service', () => {
   });
 
   describe('Failure cases', () => {
-    it('When user does not have permission to update member', async () => {
+    it('Should return FORBIDEN when to patent not have permission', async () => {
+      let error;
       const memberLoggedIn = await MembersMock.giveAMeAValidMember({
         patentName: 'NOVATO',
         fakeRepositoryMember,
         fakeRepositoryPatent,
       });
 
-      const data = {
-        email: 'test@gmail.com',
-        name: 'Teste authentication',
-        patentId: '35fa6ebd-a450-4a40-b433-5ad52e0be0b2',
-      };
-
-      const member = await serviceMember.createMember({
-        ...data,
-        idMemberLogged: memberLoggedIn.id,
+      const memberToUpdate = await MembersMock.giveAMeAValidMember({
+        patentName: 'NOVATO',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+        login: 'memberToUpdateLogin',
       });
 
       const auth = new ServiceAuth(
@@ -63,9 +67,57 @@ describe('ResetPasswordMember - Service', () => {
         serviceJwt,
       );
 
-      const refreshToken = auth.refreshToken(member.id);
+      try {
+        await auth.resetPassword({
+          loggedMemberId: memberLoggedIn.id,
+          updatedMemberLogin: memberToUpdate.login,
+        });
+      } catch (err) {
+        error = err;
+      }
 
-      expect(refreshToken).toThrowError(ForbiddenException);
+      expect(error).toBeInstanceOf(ForbiddenException);
+      expect(error.response.message).toStrictEqual([
+        `${ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_UPDATE_MEMBER}`,
+      ]);
+    });
+
+    it('Should return UNPROCESSABLE when password not defined', async () => {
+      delete process.env.PASSWORD_DEFAULT_MEMBERS;
+      let error;
+      const memberLoggedIn = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADMINISTRATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const memberToUpdate = await MembersMock.giveAMeAValidMember({
+        patentName: 'NOVATO',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+        login: 'memberToUpdateLogin',
+      });
+
+      const auth = new ServiceAuth(
+        fakeRepositoryMember,
+        fakeRefreshTokenRepository,
+        fakeHashProviderMock,
+        serviceJwt,
+      );
+
+      try {
+        await auth.resetPassword({
+          loggedMemberId: memberLoggedIn.id,
+          updatedMemberLogin: memberToUpdate.login,
+        });
+      } catch (err) {
+        error = err;
+      }
+
+      expect(error).toBeInstanceOf(UnprocessableEntityException);
+      expect(error.response.message).toStrictEqual([
+        `${ERRORS_UNPROCESSABLE_ENTITY.DEFAULT_PASSWORD_NOT_DEFINED}`,
+      ]);
     });
 
     // it('When is password not default defined', async () => {
