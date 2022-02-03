@@ -14,7 +14,7 @@ const findOnePatentByName = async ({
   const patent = await repository.findByName(name);
 
   if (!patent) {
-    throw new NotFoundException([`Not found patent with name "${name}""`]);
+    throw new NotFoundException([`Not found patent with name "${name}"`]);
   }
   return patent;
 };
