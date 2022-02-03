@@ -1,6 +1,7 @@
 import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { ForbiddenException } from '@nestjs/common';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 import ICreateWorkDTO from '../../dtos/work/ICreateWork.dto';
 import IRepositoryWork from '../../repositories/IRepositoryWork';
 import { EntityWork } from '../../typeorm/entities/work.entity';
@@ -18,7 +19,7 @@ const create = async ({
 }: IRequest): Promise<EntityWork> => {
   if (!hasCreatePermission(member.patent.id)) {
     throw new ForbiddenException([
-      'Your patent not have permission for creating a new work',
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_CREATE_WORK,
     ]);
   }
 

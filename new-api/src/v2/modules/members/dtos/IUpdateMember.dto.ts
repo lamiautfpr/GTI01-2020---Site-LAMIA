@@ -106,7 +106,7 @@ export class IUpdateMemberBasicDataDTO {
   @MinLength(8)
   @ValidateIf((obj) => !!obj.newPassword)
   @IsDefined()
-  oldPassword: string;
+  oldPassword?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -117,7 +117,7 @@ export class IUpdateMemberBasicDataDTO {
   })
   @ValidateIf((obj) => !!obj.oldPassword)
   @IsDefined()
-  newPassword: string;
+  newPassword?: string;
 }
 
 export class IUpdatePatentMemberRequestDTO {
@@ -143,7 +143,7 @@ export class IUpdatePatentMemberDTO {
   @IsNotEmpty()
   @IsDefined()
   @IsUUID()
-  loggedMemberId: string;
+  idMemberLogged: string;
 
   @IsString()
   @IsNotEmpty()

@@ -1,30 +1,49 @@
 import { ICreateMemberBasicDataDTO } from '@modules/members/dtos/ICreateMember.dto';
+import { hasDeletePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
 import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
 import IRepositoryPatent from '@modules/members/repositories/IRepositoryPatent';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  ForbiddenException,
+} from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest {
+  memberLogged: EntityMember;
   data: ICreateMemberBasicDataDTO;
   repositoryMember: IRepositoryMember;
   repositoryPatent: IRepositoryPatent;
   hashProvider: IHashProvider;
 }
 
-const create = async (params: IRequest): Promise<EntityMember> => {
-  const { repositoryMember, repositoryPatent, hashProvider, data } = params;
+const create = async ({
+  repositoryMember,
+  repositoryPatent,
+  hashProvider,
+  data,
+  memberLogged,
+}: IRequest): Promise<EntityMember> => {
+  if (!hasDeletePermission(memberLogged.patent.id)) {
+    throw new ForbiddenException([
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_CREATE_MEMBER,
+    ]);
+  }
 
   const emailExists = await repositoryMember.findByEmail(data.email);
 
   if (emailExists) {
-    throw new ConflictException('Email already exists');
+    throw new ConflictException([`The email "${data.email}" already exists`]);
   }
 
   const patent = await repositoryPatent.findById(data.patentId);
 
   if (!patent) {
-    throw new BadRequestException('Patent not found');
+    throw new BadRequestException([
+      `Not found patent with id "${data.patentId}"`,
+    ]);
   }
 
   const login = await createLogin(data.email, repositoryMember);
@@ -49,6 +68,7 @@ const createLogin = async (
   let login = preLogin;
   const [members, quantity] = await repositoryMember.countLogin(login);
 
+  // TODO: It should refactor this code
   if (quantity > 0) {
     let existsLogin: EntityMember | undefined;
     let count = quantity;

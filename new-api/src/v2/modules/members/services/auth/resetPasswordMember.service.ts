@@ -6,6 +6,8 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
+import { ERRORS_UNPROCESSABLE_ENTITY } from '@utils/Errors/UnprocessableEntity';
 
 interface IRequest {
   repository: IRepositoryMember;
@@ -22,13 +24,13 @@ const resetPassword = async ({
 }: IRequest): Promise<EntityMember> => {
   if (!hasCreatePermission(loggedMember.patent.id)) {
     throw new ForbiddenException([
-      'Your patent not have permission for updating patent of the member',
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_UPDATE_MEMBER,
     ]);
   }
 
   if (!process.env.PASSWORD_DEFAULT_MEMBERS) {
     throw new UnprocessableEntityException([
-      "Member's default password not defined",
+      ERRORS_UNPROCESSABLE_ENTITY.DEFAULT_PASSWORD_NOT_DEFINED,
     ]);
   }
 

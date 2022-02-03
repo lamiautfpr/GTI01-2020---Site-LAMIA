@@ -3,6 +3,7 @@ import IOrderByDTO, {
 } from '@modules/shared/dtos/IOrderBy.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ICreatePatentDTO } from '../dtos/Patent/ICreatePatent.dto';
 import IRepositoryMember from '../repositories/IRepositoryMember';
 import IRepositoryPatent from '../repositories/IRepositoryPatent';
@@ -28,7 +29,9 @@ export class ServicePatent {
     const member = await this.memberRepository.findById(idMember);
 
     if (!member) {
-      throw new UnauthorizedException(['I need to be logged in']);
+      throw new UnauthorizedException([
+        ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+      ]);
     }
 
     return services.create({

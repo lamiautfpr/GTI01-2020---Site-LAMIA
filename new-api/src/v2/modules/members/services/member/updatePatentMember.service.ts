@@ -3,6 +3,7 @@ import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { EntityPatent } from '@modules/members/typeorm/entities/patent.entity';
 import { ForbiddenException } from '@nestjs/common';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest {
   repository: IRepositoryMember;
@@ -19,11 +20,13 @@ const updatePatent = async ({
 }: IRequest): Promise<EntityMember> => {
   if (!hasCreatePermission(loggedMember.patent.id)) {
     throw new ForbiddenException([
-      'Your patent not have permission for updating patent of the member',
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_UPDATE_MEMBER,
     ]);
   }
 
-  return repository.updateSave({ ...updatedMember, patent: newPatent });
+  updatedMember.patent = newPatent;
+
+  return repository.updateSave(updatedMember);
 };
 
 export default updatePatent;

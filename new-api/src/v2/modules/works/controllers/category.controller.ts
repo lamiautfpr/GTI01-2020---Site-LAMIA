@@ -43,7 +43,7 @@ import { EntityCategory } from '../typeorm/entities/category.entity';
 @UseInterceptors(ClassSerializerInterceptorPromise)
 @Controller(`${apiConfig.version}/works/categories`)
 export class ControllerCategory {
-  constructor(private readonly ServiceCategory: ServiceCategory) {}
+  constructor(private readonly serviceCategory: ServiceCategory) {}
 
   @ApiOperation({ summary: "Create Works's Categories" })
   @ApiCreatedResponse({
@@ -60,7 +60,7 @@ export class ControllerCategory {
   @UsePipes(new ValidationPipe())
   @Post()
   create(@Body() data: ICreateCategoryBasicDTO, @Req() request: any) {
-    return this.ServiceCategory.createCategory({
+    return this.serviceCategory.createCategory({
       newCategoryData: data,
       idMember: request.user.userId,
     });
@@ -84,7 +84,7 @@ export class ControllerCategory {
   @UsePipes(new ValidationPipe())
   @Get()
   findAll(@Query() order: ISelectOrderDTO) {
-    return this.ServiceCategory.findAll(order);
+    return this.serviceCategory.findAll(order);
   }
 
   @ApiOperation({ summary: "Find works's categories by name" })
@@ -99,6 +99,6 @@ export class ControllerCategory {
   @UsePipes(new ValidationPipe())
   @Get(':name')
   findOneByName(@Param() params: IFindOneCategoryByName) {
-    return this.ServiceCategory.findOneByName(params.name);
+    return this.serviceCategory.findOneByName(params.name);
   }
 }

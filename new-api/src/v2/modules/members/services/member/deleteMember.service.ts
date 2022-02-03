@@ -3,6 +3,7 @@ import { hasDeletePermission } from '@modules/members/enums/CREATION_PERMISSION_
 import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { ForbiddenException } from '@nestjs/common';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest extends Omit<IDeleteMemberDTO, 'idMemberLogged'> {
   repository: IRepositoryMember;
@@ -16,7 +17,7 @@ const deleteById = async ({
 }: IRequest): Promise<void> => {
   if (!hasDeletePermission(member.patent.id)) {
     throw new ForbiddenException([
-      'Your patent not have permission for deleting a member',
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_DELETE_MEMBER,
     ]);
   }
 

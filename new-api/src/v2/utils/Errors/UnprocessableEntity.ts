@@ -1,13 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export enum ERRORS_UNAUTHORIZED {
-  UNAUTHORIZED = 'Unauthorized',
-  YOU_NEED_TO_BE_LOGGED_IN = 'You must be logged in with a valid member',
-  OLD_TOKEN_INVALID = 'oldToken is not valid',
-  LOGIN_OR_EMAIL_INVALID = 'Login/Email or password is incorrect',
+export enum ERRORS_UNPROCESSABLE_ENTITY {
+  UNPROCESSABLE_ENTITY = 'Unprocessable Entity',
+  DEFAULT_PASSWORD_NOT_DEFINED = "Member's default password not defined",
 }
 
-export class Unauthorized {
+export class UnprocessableEntity {
   @ApiProperty({
     type: 'string',
     description: 'Date and time the request was made',
@@ -24,14 +22,14 @@ export class Unauthorized {
   @ApiProperty({
     type: 'string',
     description: 'HTTP status code number',
-    default: '401',
+    default: '422',
   })
   statusCode: number;
 
   @ApiProperty({
     type: 'string',
     description: 'HTTP status code name',
-    default: 'UNAUTHORIZED',
+    default: 'UNPROCESSABLE ENTITY',
   })
   errorMessage: string;
 
@@ -46,14 +44,14 @@ export class Unauthorized {
     type: 'string',
     description: 'errors or error found',
     enum: [
-      ERRORS_UNAUTHORIZED.UNAUTHORIZED,
-      Object.values(ERRORS_UNAUTHORIZED).splice(1),
+      ERRORS_UNPROCESSABLE_ENTITY.UNPROCESSABLE_ENTITY,
+      Object.values(ERRORS_UNPROCESSABLE_ENTITY).splice(1),
     ],
   })
   errors: string | string[];
 }
 
 export default {
-  description: 'UNAUTHORIZED',
-  type: Unauthorized,
+  description: 'UNPROCESSABLE ENTITY',
+  type: UnprocessableEntity,
 };

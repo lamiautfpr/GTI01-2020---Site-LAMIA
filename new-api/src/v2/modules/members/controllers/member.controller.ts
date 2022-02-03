@@ -73,8 +73,11 @@ export class ControllerMember {
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Post()
-  create(@Body() data: ICreateMemberBasicDataDTO) {
-    return this.serviceMember.createMember(data);
+  create(@Body() data: ICreateMemberBasicDataDTO, @Request() req: any) {
+    return this.serviceMember.createMember({
+      ...data,
+      idMemberLogged: req.user.userId,
+    });
   }
 
   @ApiOperation({ summary: 'updateInfo' })
@@ -157,7 +160,7 @@ export class ControllerMember {
     @Param('login') login: string,
   ) {
     return this.serviceMember.updatePatentMember({
-      loggedMemberId: req.user.userId,
+      idMemberLogged: req.user.userId,
       newPatentId: body.newPatentId,
       updatedMemberLogin: login,
     });
@@ -172,6 +175,9 @@ export class ControllerMember {
     description: 'List of  members',
     type: EntityMember,
     isArray: true,
+  })
+  @ApiNoContentResponse({
+    description: 'No Members Content',
   })
   @ApiBadRequestResponse(Errors.BadRequest)
   @ApiInternalServerErrorResponse(Errors.InternalServer)

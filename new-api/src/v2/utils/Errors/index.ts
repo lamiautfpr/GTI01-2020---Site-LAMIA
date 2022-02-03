@@ -4,6 +4,7 @@ import Forbidden from './Forbidden';
 import InternalServer from './InternalServer';
 import NotFound from './NotFound';
 import Unauthorized from './Unauthorized';
+import UnprocessableEntity from './UnprocessableEntity';
 
 export default {
   BadRequest,
@@ -12,4 +13,5 @@ export default {
   InternalServer,
   NotFound,
   Unauthorized,
+  UnprocessableEntity,
 };

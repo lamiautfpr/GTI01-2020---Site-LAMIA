@@ -1,29 +1,25 @@
+import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
-import { ServiceMember } from '@modules/members/services/member.service';
-import { FakeRepositoryAreaExpertise } from '@modules/works/repositories/fakes/AreaExpertise.fakeRepository';
 import FakeHashProvider from '@providers/HashProvider/implementations/fakes/FakeHashProvider';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import FakeStorageProvider from '@providers/StorageProvider/implementations/fakes/FakeStorage.provider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
-import { ServiceAreaExpertise } from '../areaExpertise.service';
+import { ServiceMember } from '../member.service';
 
 let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
-let fakeRepositoryAreaExpertise: FakeRepositoryAreaExpertise;
 
 let fakeHashProvider: IHashProvider;
 let fakeStorageProvider: IStorageProvider;
 
 let serviceMember: ServiceMember;
-let serviceAreaExpertise: ServiceAreaExpertise;
 
-describe('Find all Categories - SERVICES', () => {
+describe('Find all Members - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
-    fakeRepositoryAreaExpertise = new FakeRepositoryAreaExpertise();
 
     fakeHashProvider = new FakeHashProvider();
     fakeStorageProvider = new FakeStorageProvider();
@@ -34,30 +30,31 @@ describe('Find all Categories - SERVICES', () => {
       fakeHashProvider,
       fakeStorageProvider,
     );
-
-    serviceAreaExpertise = new ServiceAreaExpertise(
-      fakeRepositoryAreaExpertise,
-      serviceMember,
-    );
   });
+
   describe('successful cases', () => {
-    it('should return a list of expertise areas when expertise areas exist', async () => {
-      await fakeRepositoryAreaExpertise.createSave({
-        name: 'AreaExpertise Mocked 1',
-      });
-      await fakeRepositoryAreaExpertise.createSave({
-        name: 'AreaExpertise Mocked 2',
+    it('should return a list of members when at least one members exist', async () => {
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'COORDINATOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
       });
 
-      const result = await serviceAreaExpertise.findAll({});
+      const member2 = await MembersMock.giveAMeAValidMember({
+        patentName: 'ADVISOR',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+      });
+
+      const result = await serviceMember.findAll({});
 
       expect(result.length).toBe(2);
-      expect(result[0].name).toBe('AreaExpertise Mocked 1');
-      expect(result[1].name).toBe('AreaExpertise Mocked 2');
+      expect(result[0].patent).toBe(member.patent);
+      expect(result[1].patent).toBe(member2.patent);
     });
 
-    it('should return NO_CONTENT when there no expertise area exists', async () => {
-      await expect(serviceAreaExpertise.findAll({})).rejects.toBeInstanceOf(
+    it('should return NO_CONTENT when no patent exists', async () => {
+      await expect(serviceMember.findAll({})).rejects.toBeInstanceOf(
         NoContentException,
       );
     });

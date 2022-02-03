@@ -7,6 +7,8 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
+import { ERRORS_NOT_FOUND } from '@utils/Errors/NotFound';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { IResetPasswordMemberDTO } from '../dtos/auth/IResetPasswordMember.dto';
 import { ILoginDTO } from '../dtos/ILogin.dto';
 import IPayloadTokenDTO from '../dtos/IPayloadToken.dto';
@@ -83,14 +85,16 @@ export class ServiceAuth {
       oldToken,
     );
 
+    const messagesError = [ERRORS_UNAUTHORIZED.OLD_TOKEN_INVALID];
+
     if (!isValidToken) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(messagesError);
     }
 
     const member = await this.memberRepository.findByLogin(isValidToken.login);
 
     if (!member) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(messagesError);
     }
 
     const newToken = (await this.login(member)).auth;
@@ -112,7 +116,9 @@ export class ServiceAuth {
     const loggedMember = await this.memberRepository.findById(loggedMemberId);
 
     if (!loggedMember) {
-      throw new UnauthorizedException(['I need to be logged in']);
+      throw new UnauthorizedException([
+        ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+      ]);
     }
 
     const updatedMember = await this.memberRepository.findByLogin(
@@ -121,7 +127,7 @@ export class ServiceAuth {
 
     if (!updatedMember) {
       throw new NotFoundException([
-        `Not found member with login "${updatedMemberLogin}""`,
+        `${ERRORS_NOT_FOUND.NOT_FOUND_LOGIN} "${updatedMemberLogin}"`,
       ]);
     }
 

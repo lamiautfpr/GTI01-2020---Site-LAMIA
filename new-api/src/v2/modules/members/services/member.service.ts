@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Inject,
   Injectable,
   NotFoundException,
@@ -7,6 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ICreateMemberBasicDataDTO } from '../dtos/ICreateMember.dto';
 import IDeleteMemberDTO from '../dtos/IDeleteMember.dto';
 import IOrderByMember, {
@@ -43,7 +45,10 @@ export class ServiceMember {
   public async createMember(
     data: ICreateMemberBasicDataDTO,
   ): Promise<EntityMember> {
+    const memberLogged = await this.getMemberLoggedIn(data.idMemberLogged);
+
     return memberServices.create({
+      memberLogged,
       data: data,
       repositoryMember: this.memberRepository,
       repositoryPatent: this.patentRepository,
@@ -55,11 +60,11 @@ export class ServiceMember {
     idMember,
     newMemberData,
   }: IUpdateMemberDTO): Promise<EntityMember> {
+    const loggedMember = await this.getMemberLoggedIn(idMember);
+
     const member = await memberServices.update({
-      newMemberData: {
-        ...newMemberData,
-        id: idMember,
-      },
+      newMemberData,
+      loggedMember,
       repository: this.memberRepository,
       hashProvider: this.hashProvider,
     });
@@ -71,24 +76,22 @@ export class ServiceMember {
     idMember,
     fileName,
   }: IUpdateAvatarMemberDTO): Promise<EntityMember> {
+    const loggedMember = await this.getMemberLoggedIn(idMember);
+
     return memberServices.updateAvatar({
       repository: this.memberRepository,
-      id: idMember,
+      loggedMember,
       fileName,
       storageProvider: this.storageProvider,
     });
   }
 
   public async updatePatentMember({
-    loggedMemberId,
+    idMemberLogged,
     newPatentId,
     updatedMemberLogin,
   }: IUpdatePatentMemberDTO): Promise<EntityMember> {
-    const loggedMember = await this.memberRepository.findById(loggedMemberId);
-
-    if (!loggedMember) {
-      throw new UnauthorizedException(['I need to be logged in']);
-    }
+    const loggedMember = await this.getMemberLoggedIn(idMemberLogged);
 
     const updatedMember = await this.memberRepository.findByLogin(
       updatedMemberLogin,
@@ -96,19 +99,19 @@ export class ServiceMember {
 
     if (!updatedMember) {
       throw new NotFoundException([
-        `Not found member with login "${updatedMemberLogin}""`,
+        `Not found member with login "${updatedMemberLogin}"`,
       ]);
     }
 
     const newPatent = await this.patentRepository.findById(newPatentId);
 
     if (!newPatent) {
-      throw new NotFoundException([
-        `Not found patent with id "${newPatentId}""`,
+      throw new BadRequestException([
+        `Not found patent with id "${newPatentId}"`,
       ]);
     }
 
-    return memberServices.updatePatent({
+    return await memberServices.updatePatent({
       loggedMember,
       newPatent,
       updatedMember,
@@ -148,16 +151,30 @@ export class ServiceMember {
     idMemberLogged,
     idMemberToDelete,
   }: IDeleteMemberDTO): Promise<void> {
-    const member = await this.memberRepository.findById(idMemberLogged);
-
-    if (!member) {
-      throw new UnauthorizedException(['I need to be logged in']);
-    }
+    const member = await this.getMemberLoggedIn(idMemberLogged);
 
     await memberServices.remove({
       repository: this.memberRepository,
       idMemberToDelete,
       member,
     });
+  }
+
+  private async getMemberLoggedIn(
+    idMemberLogged: string,
+  ): Promise<EntityMember> {
+    let memberLogged: EntityMember | undefined = undefined;
+
+    try {
+      memberLogged = await this.findById(idMemberLogged);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new UnauthorizedException([
+          ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+        ]);
+      }
+      throw error;
+    }
+    return memberLogged;
   }
 }

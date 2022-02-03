@@ -4,6 +4,7 @@ import IRepositoryType from '../../repositories/IRepositoryType';
 import { EntityType } from '../../typeorm/entities/type.entity';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import { hasCreatePermission } from '@modules/members/enums/CREATION_PERMISSION_PATENTS';
+import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
 
 interface IRequest {
   newTypeData: ICreateTypeDTO;
@@ -18,7 +19,7 @@ const create = async ({
 }: IRequest): Promise<EntityType> => {
   if (!hasCreatePermission(member.patent.id)) {
     throw new ForbiddenException([
-      'Your patent not have permission for creating a new patent',
+      ERRORS_FORBIDDEN.PATENT_DONT_HAVE_PERMISSION_FOR_CREATE_TYPE,
     ]);
   }
 

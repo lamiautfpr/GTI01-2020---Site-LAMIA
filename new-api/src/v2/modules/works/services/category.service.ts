@@ -2,8 +2,13 @@ import { ServiceMember } from '@modules/members/services/member.service';
 import IOrderByDTO, {
   ISelectOrderDTO,
 } from '@modules/shared/dtos/IOrderBy.dto';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ICreateCategoryDTO } from '../dtos/category/ICreateCategory.dto';
 import IRepositoryCategory from '../repositories/IRepositoryCategory';
 import { EntityCategory } from '../typeorm/entities/category.entity';
@@ -22,10 +27,17 @@ export class ServiceCategory {
     newCategoryData,
     idMember,
   }: ICreateCategoryDTO): Promise<EntityCategory> {
-    const member = await this.serviceMember.findById(idMember);
+    let member;
 
-    if (!member) {
-      throw new UnauthorizedException(['I need to be logged in']);
+    try {
+      member = await this.serviceMember.findById(idMember);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new UnauthorizedException([
+          ERRORS_UNAUTHORIZED.YOU_NEED_TO_BE_LOGGED_IN,
+        ]);
+      }
+      throw error;
     }
 
     return services.create({

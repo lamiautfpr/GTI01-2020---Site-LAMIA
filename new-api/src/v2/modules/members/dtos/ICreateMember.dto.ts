@@ -37,6 +37,12 @@ export class ICreateMemberBasicDataDTO {
     example: '2bac045b-7109-473f-af2a-32234b067694',
   })
   patentId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
+  @IsUUID()
+  idMemberLogged: string;
 }
 
 export default class ICreateMemberDTO {

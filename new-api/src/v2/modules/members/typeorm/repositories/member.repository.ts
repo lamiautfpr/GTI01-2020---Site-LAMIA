@@ -1,3 +1,5 @@
+import IFindConflictDTO from '@modules/members/dtos/IFindConflict.dto';
+import { InternalServerErrorException } from '@nestjs/common';
 import { EntityRepository, getRepository, Like, Repository } from 'typeorm';
 import ICreateMemberDTO from '../../dtos/ICreateMember.dto';
 import IOrderByMember from '../../dtos/IOrderByMember.dto';
@@ -50,6 +52,18 @@ export class RepositoryMember
       .where('member.login = :login', { login });
 
     return members.getOne();
+  }
+
+  public async findConflict(
+    uniqueDatas: Partial<IFindConflictDTO>,
+  ): Promise<EntityMember | undefined> {
+    if (Object.keys(uniqueDatas).length === 0) {
+      throw new InternalServerErrorException([
+        'It should define  at least one attribute de uniqueDatas: email, login, linkedin, lattes, gitHub, quoteName',
+      ]);
+    }
+
+    return this.ormRepository.findOne({ where: { ...uniqueDatas } });
   }
 
   public async findByLikeName(

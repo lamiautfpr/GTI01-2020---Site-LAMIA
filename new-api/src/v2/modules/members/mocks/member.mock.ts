@@ -4,6 +4,10 @@ import { EntityMember } from '../typeorm/entities/member.entity';
 
 interface IGiveAMeAValidMember {
   patentName: string;
+  email?: string;
+  login?: string;
+  name?: string;
+  password?: string;
   fakeRepositoryPatent: FakeRepositoryPatent;
   fakeRepositoryMember: FakeRepositoryMember;
 }
@@ -11,6 +15,10 @@ interface IGiveAMeAValidMember {
 export default class MembersMock {
   static async giveAMeAValidMember({
     patentName,
+    email,
+    login,
+    name,
+    password,
     fakeRepositoryPatent,
     fakeRepositoryMember,
   }: IGiveAMeAValidMember): Promise<EntityMember> {
@@ -19,10 +27,10 @@ export default class MembersMock {
     });
 
     return fakeRepositoryMember.createSave({
-      email: 'user.mock@test.com',
-      login: 'user.mock',
-      name: 'User Mock',
-      password: 'fake password',
+      email: email || 'user.mock@test.com',
+      login: login || 'user.mock',
+      name: name || 'User Mock',
+      password: password || 'fake password',
       patent,
     });
   }
