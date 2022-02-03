@@ -7,7 +7,7 @@ let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 let servicePatent: ServicePatent;
 
-describe('Create Patient - SERVICES', () => {
+describe('Find All Patient - SERVICES', () => {
   beforeEach(() => {
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRepositoryMember = new FakeRepositoryMember();
