@@ -20,4 +20,9 @@ export class EntityRefreshToken extends BasicEntity {
     default: true,
   })
   status: boolean;
+
+  constructor(data?: Partial<EntityRefreshToken>) {
+    super();
+    Object.assign(this, data);
+  }
 }

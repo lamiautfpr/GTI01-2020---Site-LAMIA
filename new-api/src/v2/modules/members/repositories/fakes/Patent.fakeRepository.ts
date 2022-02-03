@@ -19,6 +19,8 @@ export class FakeRepositoryPatent implements IRepositoryPatent {
 
     if (getKeys(CREATION_PERMISSION_PATENTS).includes(data.name)) {
       patent.id = CREATION_PERMISSION_PATENTS[data.name];
+    } else {
+      patent.id = '85c9fbbb-d180-4dfb-b789-016981a02418';
     }
 
     this.patents.push(patent);
