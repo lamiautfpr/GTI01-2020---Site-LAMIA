@@ -15,5 +15,83 @@
     "typeorm",
     "UTFPR",
     "verificar"
-  ]
+  ],
+
+  // Configurando ESLINT
+  "editor.formatOnSave": true,
+  "[javascript]":{
+    "editor.codeActionsOnSave":{
+      "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascriptreact]":{
+    "editor.codeActionsOnSave":{
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescript]":{
+    "editor.codeActionsOnSave":{
+      "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]":{
+    "editor.codeActionsOnSave":{
+      "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Atualizando Visual de pastas Usando Material-Icon-Theme
+  "material-icon-theme.folders.associations": {
+    "infra": "app",
+    "entities": "class",
+    "schemas": "class",
+    "typeorm": "database",
+    "repositories": "mappings",
+    "http": "container",
+    "implementations": "core",
+    "dtos": "typescript",
+    "enuns": "typescript",
+    "fakes": "mock",
+    "websockets": "pipe",
+    "protos": "pipe",
+    "grpc": "pipe",
+    "UseCases": "controller",
+    "types": "typescript",
+    "interfaces": "typescript",
+    "modules": "generator",
+    "migrations": "database",
+    "enums": "json"
+  },
+
+  "material-icon-theme.files.associations": {
+    "ormconfig.json": "database",
+    "ormconfig-exemple.json": "database",
+    "tsconfig.json": "tune",
+    "*.proto": "3d",
+    "*.env-exemplo": "tune",
+    ".env-docker-composer": "tune",
+    "*.controller.ts": "nest-controller",
+    "*.module.ts": "nest-module",
+    "*.service.ts": "nest-service",
+    "*.middleware.ts": "nest-middleware",
+    "*.filter.ts": "nest-filter",
+    "*.pipe.ts": "nest-pipe",
+    "*.gateway.ts": "nest-gateway",
+    "*.decorator.ts": "nest-decorator",
+    "*.guard.ts": "nest-guard",
+    "*.interceptor.ts": "nest-guard",
+    "*.resolver.ts": "graphql",
+    "*.input.ts": "graphql",
+    "*.return.ts": "graphql",
+    "docker-compose.hmg.yml": "docker",
+    ".env.prd": "tune",
+    ".env.dev": "tune",
+    ".env-example": "tune",
+    ".env.hmg": "tune",
+    "swagger.json": "Yaml"
+  },
+
 }
