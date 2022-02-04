@@ -6,11 +6,12 @@
 - Run `git commit` to init creating commit message
 - Select the type that the edit fits. **To help:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) | [Commitlint: concepts-commit-conventions](https://commitlint.js.org/#/concepts-commit-conventions).
 - Add the scope. _What is the scope of this change (e.g. component or file name): (press enter to skip)_.
-- Add the subject. _Write a short, imperative tense description of the change (max 87 chars)_
-- Add the body. _IProvide a longer description of the change: (press enter to skip)_
-- Add the break change. _Are there any breaking changes?_
-- Add Add open issues affected. _Does this change affect any open issues?_
-- `ctrl+X` to leave `nano` and to save commit message.
+- Add the subject. _Write a short, imperative tense description of the change (max 87 chars)_.
+- Add the body. _IProvide a longer description of the change: (press enter to skip)_.
+- Add the break change. _Are there any breaking changes?_.
+- Add Add open issues affected. _Does this change affect any open issues?_.
+- `ctrl+X` to leave _nano_ and to save commit message.
+- Done! :)
 
 ## How do I add a new environment variable?
 
