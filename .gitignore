@@ -1,8 +1,47 @@
-# dependencies
+# compiled output
+/dist
 /node_modules
 
-.env
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# TMP FILES
 tmp/*
-!tmp/uploads
-tmp/uploads/*
+tmp/upload/members/*
+tmp/upload/works/*
+tmp/upload/news/*
+!tmp/upload/members/.gitKeep
+!tmp/upload/works/.gitKeep
+!tmp/upload/news/.gitKeep
+
+# ENVIRONMENT VARIABLES
+.env
+ormconfig.json
