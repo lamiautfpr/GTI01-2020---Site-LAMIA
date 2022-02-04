@@ -11,7 +11,7 @@
 - Add the break change. _Are there any breaking changes?_.
 - Add Add open issues affected. _Does this change affect any open issues?_.
 - `ctrl+X` to leave _nano_ and to save commit message.
-- Done!! :)
+- Done! :)
 
 ## How do I add a new environment variable?
 
