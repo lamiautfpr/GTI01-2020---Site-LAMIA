@@ -1,5 +1,9 @@
 # F.A.Q.
 
+## How do I a new commit?
+
+- Run `git add ...` to add a files stage.
+
 ## How do I add a new environment variable?
 
 Update the `src/types/env.d.ts` and the `.env.sample` with the new environment variable.
