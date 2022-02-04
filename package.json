@@ -11,7 +11,7 @@
   "lint-staged": {
     "*.ts": [
       "yarn lint",
-      "yarn format",
+      "cross-env CI=true yarn test --bail --findRelatedTests",
       "git add"
     ]
   },
@@ -76,6 +76,7 @@
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "7.2.0",
     "eslint-plugin-prettier": "^3.1.4",

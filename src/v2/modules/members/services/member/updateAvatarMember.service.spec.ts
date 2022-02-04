@@ -65,6 +65,7 @@ describe("Update Member's avatar  - SERVICES", () => {
         fileName,
         targetFolder: TARGET_FOLDER.MEMBERS,
       });
+
       expect(fakeStorageProvider.deleteFile).toHaveBeenCalledTimes(0);
     });
 
