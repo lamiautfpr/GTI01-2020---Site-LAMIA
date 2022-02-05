@@ -38,6 +38,15 @@ export class RepositoryPatent
       order: { name: 'ASC' },
     });
 
+    if (!patent) {
+      return undefined;
+    }
+
+    /**
+     * This "if" is to find Coordenador when find Orientador.
+     * Because all Coordenador is an Orientador.
+     * The Coordenadores must return before the Orientadores.
+     */
     if (name === 'Orientador') {
       const { members } = await this.ormRepository.findOne({
         where: { name: 'Coordenador' },
@@ -48,13 +57,13 @@ export class RepositoryPatent
       patent.members = [...members, ...patent.members];
     }
 
-    const membersWithoutPatent = patent.members.map((member) => {
+    /**
+     * To avoid redundancy, the patent attribute is removed.
+     */
+    patent.members = patent.members.map((member) => {
       delete member.patent;
-
       return member;
     });
-
-    patent.members = membersWithoutPatent;
 
     return patent;
   }
