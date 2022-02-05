@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import MembersMock from '@modules/members/mocks/member.mock';
 import { FakeRepositoryMember } from '@modules/members/repositories/fakes/Member.fakeRepository';
 import { FakeRepositoryPatent } from '@modules/members/repositories/fakes/Patent.fakeRepository';
@@ -11,13 +12,11 @@ import FakeHashProvider from '@providers/HashProvider/implementations/fakes/Fake
 import IHashProvider from '@providers/HashProvider/models/IHashProvider';
 import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider';
 import { ERRORS_FORBIDDEN } from '@utils/Errors/Forbidden';
-import { ERRORS_UNAUTHORIZED } from '@utils/Errors/Unauthorized';
 import { ERRORS_UNPROCESSABLE_ENTITY } from '@utils/Errors/UnprocessableEntity';
 import { ServiceAuth } from '../auth.service';
 import { ServiceMember } from '../member.service';
 
 jest.mock('@providers/HashProvider/implementations/fakes/FakeHashProvider');
-
 let fakeRepositoryMember: FakeRepositoryMember;
 
 const FakeHashProviderMock = FakeHashProvider as jest.Mock<FakeHashProvider>;
@@ -46,7 +45,7 @@ describe('ResetPasswordMember - Service', () => {
 
   describe('Failure cases', () => {
     it('Should return FORBIDEN when to patent not have permission', async () => {
-      let error;
+      let error: any;
       const memberLoggedIn = await MembersMock.giveAMeAValidMember({
         patentName: 'NOVATO',
         fakeRepositoryMember,
@@ -119,9 +118,5 @@ describe('ResetPasswordMember - Service', () => {
         `${ERRORS_UNPROCESSABLE_ENTITY.DEFAULT_PASSWORD_NOT_DEFINED}`,
       ]);
     });
-
-    // it('When is password not default defined', async () => {
-
-    // });
   });
 });
