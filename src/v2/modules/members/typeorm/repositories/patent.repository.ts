@@ -1,5 +1,5 @@
 import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { EntityRepository, getRepository, Raw, Repository } from 'typeorm';
 import ICreatePatentDTO from '../../dtos/Patent/ICreatePatent.dto';
 import IFindPatentDTO from '../../dtos/Patent/IFindPatent.dto';
 import IRepositoryPatent from '../../repositories/IRepositoryPatent';
@@ -33,28 +33,15 @@ export class RepositoryPatent
   //TODO: Update relation
   public async findByName(name: string): Promise<EntityPatent | undefined> {
     const patent = await this.ormRepository.findOne({
-      where: { name },
+      where: {
+        name: Raw((alias) => `LOWER(${alias}) = '${name.toLocaleLowerCase()}'`),
+      },
       relations: ['members'],
       order: { name: 'ASC' },
     });
 
     if (!patent) {
       return undefined;
-    }
-
-    /**
-     * This "if" is to find Coordenador when find Orientador.
-     * Because all Coordenador is an Orientador.
-     * The Coordenadores must return before the Orientadores.
-     */
-    if (name === 'Orientador') {
-      const { members } = await this.ormRepository.findOne({
-        where: { name: 'Coordenador' },
-        relations: ['members'],
-        order: { name: 'ASC' },
-      });
-
-      patent.members = [...members, ...patent.members];
     }
 
     /**

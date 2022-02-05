@@ -41,6 +41,7 @@ export class RepositoryMember
     });
   }
 
+  //TODO Add LOWER() in where
   public async findByLogin(login: string): Promise<EntityMember | undefined> {
     const members = await this.ormRepository
       .createQueryBuilder('member')
