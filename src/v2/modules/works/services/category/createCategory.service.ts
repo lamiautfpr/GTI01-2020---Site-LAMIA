@@ -26,7 +26,9 @@ const create = async ({
   const categoryExists = await repository.findByName(newCategoryData.name);
 
   if (categoryExists) {
-    throw new ConflictException(['Category already exists']);
+    throw new ConflictException([
+      ` The category "${categoryExists.name}" already exists`,
+    ]);
   }
 
   return repository.createSave(newCategoryData);

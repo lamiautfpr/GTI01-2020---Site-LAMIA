@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum ERRORS_BAD_REQUEST {
-  BAD_REQUEST = 'BAD_REQUEST',
+  BAD_REQUEST = 'BAD REQUEST',
 }
 
 export class BadRequest {
@@ -28,7 +28,7 @@ export class BadRequest {
   @ApiProperty({
     type: 'string',
     description: 'HTTP status code name',
-    default: 'BAD_REQUEST',
+    default: 'BAD REQUEST',
   })
   errorMessage: string;
 
@@ -43,6 +43,7 @@ export class BadRequest {
     type: 'string',
     description: 'List of the attributes on payload that caused the error',
     example: [
+      '<attribute> <validation>',
       'name should not be null or undefined',
       'name should not be empty',
       'name must be a string',
@@ -54,6 +55,6 @@ export class BadRequest {
 }
 
 export default {
-  description: 'BAD_REQUEST',
+  description: 'Bad Request - Payload/Params is not valid',
   type: BadRequest,
 };
