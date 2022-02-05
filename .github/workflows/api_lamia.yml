@@ -1,8 +1,16 @@
 name: 'API LAMIA'
 on:
+  push:
+    branches:
+      - hml
+    paths:
+      - "./**"
+
   pull_request:
     branches: 
       - hml
+    paths:
+      - "./**"
 
 jobs:
   docker:
@@ -19,7 +27,7 @@ jobs:
       - if: github.event_name == 'pull_request'
         name: Generate build number
         id: buildnumber
-        uses: einaregilsson/build-number
+        uses: einaregilsson/build-number@v3
         with:
           token: ${{ secrets.github_token }}
 
