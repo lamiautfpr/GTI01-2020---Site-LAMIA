@@ -3,7 +3,7 @@ import remove from './deleteMember.service';
 import findAll from './findAllMember.service';
 import findByLogin from './findMemberByLogin.service';
 import findById from './findMemberByID.service';
-import update from './updateMember.service';
+import updateProfileMember from './updateProfileMember.service';
 import updateAvatar from './updateAvatarMember.service';
 import updatePatent from './updatePatentMember.service';
 
@@ -13,7 +13,7 @@ export {
   findAll,
   findByLogin,
   findById,
-  update,
+  updateProfileMember,
   updateAvatar,
   updatePatent,
 };

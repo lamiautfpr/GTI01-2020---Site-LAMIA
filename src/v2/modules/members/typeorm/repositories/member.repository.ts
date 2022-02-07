@@ -41,7 +41,6 @@ export class RepositoryMember
     });
   }
 
-  //TODO Add LOWER() in where
   public async findByLogin(login: string): Promise<EntityMember | undefined> {
     const members = await this.ormRepository
       .createQueryBuilder('member')
@@ -50,7 +49,7 @@ export class RepositoryMember
       .leftJoinAndSelect('work.types', 'type')
       .leftJoinAndSelect('work.areaExpertise', 'areaExpertise')
       .leftJoinAndSelect('work.categories', 'categories')
-      .where('member.login = :login', { login });
+      .where('LOWER(member.login) = LOWER(:login)', { login });
 
     return members.getOne();
   }

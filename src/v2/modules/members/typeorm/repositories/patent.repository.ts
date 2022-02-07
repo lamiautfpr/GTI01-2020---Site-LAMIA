@@ -30,7 +30,6 @@ export class RepositoryPatent
     return this.ormRepository.findOne(id);
   }
 
-  //TODO: Update relation
   public async findByName(name: string): Promise<EntityPatent | undefined> {
     const patent = await this.ormRepository.findOne({
       where: {
