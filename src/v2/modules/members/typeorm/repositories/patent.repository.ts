@@ -1,5 +1,5 @@
 import IOrderByDTO from '@modules/shared/dtos/IOrderBy.dto';
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { EntityRepository, getRepository, Raw, Repository } from 'typeorm';
 import ICreatePatentDTO from '../../dtos/Patent/ICreatePatent.dto';
 import IFindPatentDTO from '../../dtos/Patent/IFindPatent.dto';
 import IRepositoryPatent from '../../repositories/IRepositoryPatent';
@@ -30,31 +30,26 @@ export class RepositoryPatent
     return this.ormRepository.findOne(id);
   }
 
-  //TODO: Update relation
   public async findByName(name: string): Promise<EntityPatent | undefined> {
     const patent = await this.ormRepository.findOne({
-      where: { name },
+      where: {
+        name: Raw((alias) => `LOWER(${alias}) = '${name.toLocaleLowerCase()}'`),
+      },
       relations: ['members'],
       order: { name: 'ASC' },
     });
 
-    if (name === 'Orientador') {
-      const { members } = await this.ormRepository.findOne({
-        where: { name: 'Coordenador' },
-        relations: ['members'],
-        order: { name: 'ASC' },
-      });
-
-      patent.members = [...members, ...patent.members];
+    if (!patent) {
+      return undefined;
     }
 
-    const membersWithoutPatent = patent.members.map((member) => {
+    /**
+     * To avoid redundancy, the patent attribute is removed.
+     */
+    patent.members = patent.members.map((member) => {
       delete member.patent;
-
       return member;
     });
-
-    patent.members = membersWithoutPatent;
 
     return patent;
   }

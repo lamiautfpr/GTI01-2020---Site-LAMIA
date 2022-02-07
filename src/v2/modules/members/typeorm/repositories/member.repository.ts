@@ -49,7 +49,7 @@ export class RepositoryMember
       .leftJoinAndSelect('work.types', 'type')
       .leftJoinAndSelect('work.areaExpertise', 'areaExpertise')
       .leftJoinAndSelect('work.categories', 'categories')
-      .where('member.login = :login', { login });
+      .where('LOWER(member.login) = LOWER(:login)', { login });
 
     return members.getOne();
   }

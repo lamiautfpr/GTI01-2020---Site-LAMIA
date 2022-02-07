@@ -62,7 +62,7 @@ describe('Update Member  - SERVICES', () => {
         description: 'description updated',
       };
 
-      const memberUpdated = await serviceMember.updateMember({
+      const memberUpdated = await serviceMember.updateProfileMember({
         newMemberData,
         idMember: memberLoggedIn.id,
       });
@@ -105,7 +105,7 @@ describe('Update Member  - SERVICES', () => {
         newPassword: 'new password',
       };
 
-      const memberUpdated = await serviceMember.updateMember({
+      const memberUpdated = await serviceMember.updateProfileMember({
         newMemberData,
         idMember: memberLoggedIn.id,
       });
@@ -145,7 +145,7 @@ describe('Update Member  - SERVICES', () => {
       let memberNoUpdated = undefined;
 
       try {
-        memberNoUpdated = await serviceMember.updateMember({
+        memberNoUpdated = await serviceMember.updateProfileMember({
           newMemberData,
           idMember: "id member doesn't exists",
         });
@@ -198,7 +198,7 @@ describe('Update Member  - SERVICES', () => {
       let error;
       let membersNoUpdated = undefined;
       try {
-        membersNoUpdated = await serviceMember.updateMember({
+        membersNoUpdated = await serviceMember.updateProfileMember({
           idMember: memberLoggedIn.id,
           newMemberData,
         });
@@ -272,7 +272,7 @@ describe('Update Member  - SERVICES', () => {
       let membersNoUpdated = undefined;
 
       try {
-        membersNoUpdated = await serviceMember.updateMember({
+        membersNoUpdated = await serviceMember.updateProfileMember({
           idMember: memberLoggedIn.id,
           newMemberData,
         });

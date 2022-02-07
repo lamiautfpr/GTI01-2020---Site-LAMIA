@@ -1,7 +1,7 @@
 import IRepositoryMember from '@modules/members/repositories/IRepositoryMember';
 import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import IOrderByMember from '../../dtos/IOrderByMember.dto';
-import NoContentExcepetion from '../../../../utils/Exceptions/NoContent.exception';
+import NoContentException from '../../../../utils/Exceptions/NoContent.exception';
 
 interface IRequest {
   repository: IRepositoryMember;
@@ -12,12 +12,12 @@ const findAll = async ({
   repository,
   order,
 }: IRequest): Promise<EntityMember[]> => {
-  const memebers = await repository.findAll(order);
+  const members = await repository.findAll(order);
 
-  if (memebers.length <= 0) {
-    throw new NoContentExcepetion();
+  if (members.length <= 0) {
+    throw new NoContentException();
   }
-  return memebers;
+  return members;
 };
 
 export default findAll;

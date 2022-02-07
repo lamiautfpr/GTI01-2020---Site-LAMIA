@@ -56,13 +56,13 @@ export class ServiceMember {
     });
   }
 
-  public async updateMember({
+  public async updateProfileMember({
     idMember,
     newMemberData,
   }: IUpdateMemberDTO): Promise<EntityMember> {
     const loggedMember = await this.getMemberLoggedIn(idMember);
 
-    const member = await memberServices.update({
+    const member = await memberServices.updateProfileMember({
       newMemberData,
       loggedMember,
       repository: this.memberRepository,

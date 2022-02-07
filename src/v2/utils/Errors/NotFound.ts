@@ -49,6 +49,7 @@ export class NotFound {
     description: 'errors or error found',
     enum: [
       ERRORS_NOT_FOUND.NOT_FOUND,
+      'Not found <object> with <attribute> "<param>"',
       Object.values(ERRORS_NOT_FOUND).splice(1),
     ],
   })

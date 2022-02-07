@@ -60,7 +60,7 @@ import { EntityMember } from '../typeorm/entities/member.entity';
 export class ControllerMember {
   constructor(private readonly serviceMember: ServiceMember) {}
 
-  @ApiOperation({ summary: 'create' })
+  @ApiOperation({ summary: 'Create a new Member' })
   @ApiCreatedResponse({
     description: 'Created Success',
     type: EntityMember,
@@ -80,7 +80,7 @@ export class ControllerMember {
     });
   }
 
-  @ApiOperation({ summary: 'updateInfo' })
+  @ApiOperation({ summary: 'Update your info' })
   @ApiOkResponse({
     description: 'Updated Success',
     type: EntityMember,
@@ -92,14 +92,14 @@ export class ControllerMember {
   @ApiBearerAuth()
   @UsePipes(new ValidationPipe())
   @Put()
-  update(@Request() req: any, @Body() data: IUpdateMemberBasicDataDTO) {
-    return this.serviceMember.updateMember({
+  updateProfile(@Request() req: any, @Body() data: IUpdateMemberBasicDataDTO) {
+    return this.serviceMember.updateProfileMember({
       idMember: req.user.userId,
       newMemberData: data,
     });
   }
 
-  @ApiOperation({ summary: "update member's avatar" })
+  @ApiOperation({ summary: 'update your avatar' })
   @ApiOkResponse({
     description: 'Updated Success',
     type: EntityMember,
@@ -166,7 +166,7 @@ export class ControllerMember {
     });
   }
 
-  @ApiOperation({ summary: 'findAll' })
+  @ApiOperation({ summary: 'findAll members' })
   @ApiQuery({
     type: ISelectOrderMemberDTO,
   })
@@ -187,7 +187,7 @@ export class ControllerMember {
     return this.serviceMember.findAll(order);
   }
 
-  @ApiOperation({ summary: 'findOne' })
+  @ApiOperation({ summary: 'find one member by login' })
   @ApiResponse({
     status: 200,
     description: 'find member',
@@ -201,7 +201,7 @@ export class ControllerMember {
     return this.serviceMember.findByLogin(login);
   }
 
-  @ApiOperation({ summary: 'delete' })
+  @ApiOperation({ summary: 'delete a member by id' })
   @ApiNoContentResponse({
     status: 204,
     description: 'Deleted Success',

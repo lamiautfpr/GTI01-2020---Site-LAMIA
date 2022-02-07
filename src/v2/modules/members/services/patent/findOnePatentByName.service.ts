@@ -19,6 +19,18 @@ const findOnePatentByName = async ({
       `${ERRORS_NOT_FOUND.NOT_FOUND_PATENT_NAME} "${name}"`,
     ]);
   }
+
+  /**
+   * This "if" is to find Coordenador when find Orientador.
+   * Because all Coordenador is an Orientador.
+   * The Coordenadores must return before the Orientadores.
+   */
+  if (name === 'Orientador') {
+    const { members } = await repository.findByName('Coordenador');
+
+    patent.members = [...members, ...patent.members];
+  }
+
   return patent;
 };
 
