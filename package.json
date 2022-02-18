@@ -38,6 +38,7 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@nestjs/axios": "^0.0.5",
     "@nestjs/common": "^7.5.1",
     "@nestjs/config": "^0.6.3",
     "@nestjs/core": "^7.5.1",
@@ -45,6 +46,7 @@
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.5.1",
     "@nestjs/swagger": "^4.8.0",
+    "@nestjs/terminus": "^8.0.4",
     "@nestjs/typeorm": "^7.1.5",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
@@ -72,7 +74,7 @@
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.15",
     "@types/multer": "^1.4.5",
-    "@types/node": "^14.14.6",
+    "@types/node": "^16.6.1",
     "@types/passport-jwt": "^3.0.5",
     "@types/passport-local": "^1.0.33",
     "@types/supertest": "^2.0.10",
