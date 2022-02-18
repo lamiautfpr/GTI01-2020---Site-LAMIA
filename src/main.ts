@@ -19,6 +19,6 @@ async function bootstrap() {
 
   middlewares(app);
 
-  await app.listen(process.env.PORT);
+  await app.listen(process.env.PORT || 3333);
 }
 bootstrap();
