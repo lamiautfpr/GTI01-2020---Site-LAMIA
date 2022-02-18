@@ -26,7 +26,9 @@ const create = async ({
   const typeExists = await repository.findByName(newTypeData.name);
 
   if (typeExists) {
-    throw new ConflictException('Type already exists');
+    throw new ConflictException([
+      ` The type "${typeExists.name}" already exists`,
+    ]);
   }
 
   return repository.createSave(newTypeData);

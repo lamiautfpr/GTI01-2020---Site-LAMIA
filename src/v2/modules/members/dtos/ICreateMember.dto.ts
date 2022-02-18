@@ -38,10 +38,6 @@ export class ICreateMemberBasicDataDTO {
   })
   patentId: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @IsDefined()
-  @IsUUID()
   idMemberLogged: string;
 }
 

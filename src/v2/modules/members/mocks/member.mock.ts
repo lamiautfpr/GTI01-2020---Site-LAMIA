@@ -26,12 +26,17 @@ export default class MembersMock {
       name: patentName,
     });
 
-    return fakeRepositoryMember.createSave({
+    const fakeMember = await fakeRepositoryMember.createSave({
       email: email || 'user.mock@test.com',
       login: login || 'user.mock',
       name: name || 'User Mock',
       password: password || 'fake password',
       patent,
     });
+
+    (patent.members = [...(patent.members || []), fakeMember]),
+      await fakeRepositoryPatent.updateSave(patent);
+
+    return fakeMember;
   }
 }

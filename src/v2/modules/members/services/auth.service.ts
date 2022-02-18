@@ -81,7 +81,6 @@ export class ServiceAuth {
   }
 
   async refreshToken(oldToken: string): Promise<IAuthResponse> {
-    console.log(this.refreshTokenRepository);
     const isValidToken = await this.refreshTokenRepository.findValidByHash(
       oldToken,
     );

@@ -1,27 +1,57 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+export enum ERRORS_CONFLICT {
+  CONFLICT = 'CONFLICT',
+}
+
 export class Conflict {
   @ApiProperty({
-    default: 409,
-    description: 'HTTP Status Code',
+    type: 'string',
+    description: 'Date and time the request was made',
+    example: '2022-01-24T23:34:16.687Z',
   })
-  statusCode: 409;
+  timeStamp: string;
 
   @ApiProperty({
-    example: ['attributes already exists'],
-    description: ' Error messages',
-    isArray: true,
+    type: 'string',
+    description: 'Path the request was made',
   })
-  message: string[];
+  path: string;
 
   @ApiProperty({
-    default: 'Conflict',
-    description: 'Type Error',
+    type: 'string',
+    description: 'HTTP status code number',
+    default: '409',
   })
-  error: 'Conflict';
+  statusCode: number;
+
+  @ApiProperty({
+    type: 'string',
+    description: 'HTTP status code name',
+    default: 'CONFLICT',
+  })
+  errorMessage: string;
+
+  @ApiProperty({
+    type: 'string',
+    description: 'Method the request was made',
+    enum: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  })
+  method: string;
+
+  @ApiProperty({
+    type: 'string',
+    description: 'errors or error found',
+    example: [
+      `The <attribute> "<data>" already exists`,
+      `The email "joe.doe@utfpr.edu.br" already exists`,
+      `The patent "Orientador" already exists`,
+    ],
+  })
+  errors: string | string[];
 }
 
 export default {
-  description: 'Conflict - Exists data',
+  description: 'Conflict - Data already exists',
   type: Conflict,
 };

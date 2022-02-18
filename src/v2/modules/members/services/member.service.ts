@@ -28,6 +28,7 @@ import * as memberServices from './member';
 
 @Injectable()
 export class ServiceMember {
+  [x: string]: any;
   constructor(
     @InjectRepository(RepositoryMember)
     private readonly memberRepository: IRepositoryMember,
@@ -56,13 +57,13 @@ export class ServiceMember {
     });
   }
 
-  public async updateMember({
+  public async updateProfileMember({
     idMember,
     newMemberData,
   }: IUpdateMemberDTO): Promise<EntityMember> {
     const loggedMember = await this.getMemberLoggedIn(idMember);
 
-    const member = await memberServices.update({
+    const member = await memberServices.updateProfileMember({
       newMemberData,
       loggedMember,
       repository: this.memberRepository,

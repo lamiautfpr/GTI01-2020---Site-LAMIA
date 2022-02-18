@@ -60,6 +60,11 @@ const create = async ({
   });
 };
 
+/**
+ * To login, the email prefix is used (before the @).
+ * It is necessary to verify if the login exists due to
+ * the possibility of updating it and different domains.
+ */
 const createLogin = async (
   email: string,
   repositoryMember: IRepositoryMember,
@@ -68,7 +73,6 @@ const createLogin = async (
   let login = preLogin;
   const [members, quantity] = await repositoryMember.countLogin(login);
 
-  // TODO: It should refactor this code
   if (quantity > 0) {
     let existsLogin: EntityMember | undefined;
     let count = quantity;

@@ -23,7 +23,9 @@ const create = async ({
   const patentExists = await repository.findByName(newPatentData.name);
 
   if (patentExists) {
-    throw new ConflictException(['Patent already exists']);
+    throw new ConflictException([
+      `The patent "${patentExists.name}" already exists`,
+    ]);
   }
 
   return repository.createSave(newPatentData);

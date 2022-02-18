@@ -30,7 +30,6 @@ export class FakeRepositoryPatent implements IRepositoryPatent {
     const index = this.patents.findIndex((patent) => patent.id === data.id);
 
     this.patents[index] = data;
-
     return this.patents[index];
   }
 

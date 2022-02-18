@@ -28,7 +28,9 @@ const create = async ({
   );
 
   if (expertiseAreaExists) {
-    throw new ConflictException(['Expertise Area already exists']);
+    throw new ConflictException([
+      ` The expertise area "${expertiseAreaExists.name}" already exists`,
+    ]);
   }
 
   return repository.createSave(newExpertiseAreaData);
