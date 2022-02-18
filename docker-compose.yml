@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   postgres_pl:
     container_name: postgres_pl
@@ -11,12 +11,12 @@ services:
       POSTGRES_USER: ${TYPEORM_USERNAME}
       POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
     ports:
-      - "5433:5432"
+      - '5433:5432'
     networks:
       - network-portal_lamia
   api-portal_lamia:
     build:
-      context: "."
+      context: '.'
       dockerfile: Dockerfile.dev
     container_name: api-portal_lamia
     command: yarn start:debug
@@ -27,8 +27,8 @@ services:
       TYPEORM_HOST: postgres_pl
       STORAGE_DRIVER: disk
     ports:
-      - "${PORT_API}:3333"
-      - "9229:9229"
+      - '${PORT}:3333'
+      - '9229:9229'
     networks:
       - network-portal_lamia
     depends_on:
