@@ -66,7 +66,6 @@ describe('ResetPasswordMember - Service', () => {
         fakeRepositoryPatent,
         login: 'memberToUpdateLogin',
       });
-
       const auth = new ServiceAuth(
         fakeRepositoryMember,
         fakeRefreshTokenRepository,

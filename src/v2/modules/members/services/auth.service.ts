@@ -57,6 +57,7 @@ export class ServiceAuth {
       login: member.login,
       patent: member.patent.name,
     };
+
     const hash = this.jwtService.sign(payload);
 
     const existValidToken = await this.refreshTokenRepository.findValidByLogin(
@@ -90,13 +91,11 @@ export class ServiceAuth {
     if (!isValidToken) {
       throw new UnauthorizedException(messagesError);
     }
-
     const member = await this.memberRepository.findByLogin(isValidToken.login);
 
     if (!member) {
       throw new UnauthorizedException(messagesError);
     }
-
     const newToken = (await this.login(member)).auth;
 
     return newToken;

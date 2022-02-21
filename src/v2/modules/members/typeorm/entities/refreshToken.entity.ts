@@ -17,7 +17,7 @@ export class EntityRefreshToken extends BasicEntity {
 
   @Column({
     type: Boolean,
-    default: true,
+    length: 254,
   })
   status: boolean;
 

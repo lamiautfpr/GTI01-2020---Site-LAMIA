@@ -43,7 +43,7 @@ export class FakeRefreshTokenRepository implements IRepositoryRefreshToken {
   }
   public async findValidByHash(login: string): Promise<EntityRefreshToken> {
     return this.tokens.find(
-      (token) => token.login === login && token.status == true,
+      (token) => token.login === login /** && token.status === true*/,
     );
   }
 }
