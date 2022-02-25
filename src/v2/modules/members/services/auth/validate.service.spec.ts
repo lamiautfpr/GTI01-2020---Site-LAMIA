@@ -1,5 +1,4 @@
-import { ERRORS_UNAUTHORIZED } from './../../../../utils/Errors/Unauthorized';
-import { UnauthorizedException } from '@nestjs/common';
+import { EntityMember } from '@modules/members/typeorm/entities/member.entity';
 import ICreateRefreshTokenDTO from '@modules/members/dtos/ICreateRefreshToken.dto';
 import { ServicePatent } from './../patent.service';
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -14,12 +13,14 @@ import IStorageProvider from '@providers/StorageProvider/models/IStorageProvider
 import { ServiceMember } from '../member.service';
 import { ServiceAuth } from './../auth.service';
 import IPayloadTokenDTO from '@modules/members/dtos/IPayloadToken.dto';
+import { ILoginDTO } from '@modules/members/dtos/ILogin.dto';
+import auth from '@config/auth';
 
 jest.mock('@providers/HashProvider/implementations/fakes/FakeHashProvider');
 
 const FakeHashProviderMock = FakeHashProvider as jest.Mock<FakeHashProvider>;
+let fakeHashProviderMock: jest.Mocked<FakeHashProvider>;
 let fakeRefreshTokenRepository: FakeRefreshTokenRepository;
-let fakeHashProviderMock: IHashProvider;
 let fakeStorageProvider: IStorageProvider;
 let serviceMember: ServiceMember;
 let servicePatent: ServicePatent;
@@ -28,12 +29,11 @@ let serviceJwt: JwtService;
 let fakeRepositoryPatent: FakeRepositoryPatent;
 let fakeRepositoryMember: FakeRepositoryMember;
 
-describe('RefreshTokenRepository - Service', () => {
+describe('Validate - Service', () => {
   beforeEach(() => {
     fakeRepositoryMember = new FakeRepositoryMember();
     fakeRepositoryPatent = new FakeRepositoryPatent();
     fakeRefreshTokenRepository = new FakeRefreshTokenRepository();
-    fakeHashProviderMock = new FakeHashProvider();
 
     fakeHashProviderMock = new FakeHashProviderMock() as jest.Mocked<FakeHashProvider>;
 
@@ -46,41 +46,17 @@ describe('RefreshTokenRepository - Service', () => {
     serviceJwt = new JwtService({});
     process.env.PASSWORD_DEFAULT_MEMBERS = 'mockedPassword';
   });
-
   describe('Failure cases', () => {
-    it('Should return UNAUTHORIZED when to token invalid', async () => {
-      let error: any;
-
-      const serviceAuth = new ServiceAuth(
-        fakeRepositoryMember,
-        fakeRefreshTokenRepository,
-        fakeHashProviderMock,
-        serviceJwt,
-      );
-
-      try {
-        await serviceAuth.refreshToken('mock');
-      } catch (e) {
-        error = e;
-      }
-
-      expect(error).toBeInstanceOf(UnauthorizedException);
-      expect(error.response.message).toStrictEqual([
-        `${ERRORS_UNAUTHORIZED.OLD_TOKEN_INVALID}`,
-      ]);
-    });
-
-    it('Should UNAUTHORIZED token member', async () => {
-      let error: any;
+    it('Should HASH save and HASH member not compare', async () => {
       const token =
         'e1yJhbGciOiJIUzI1NiIsInR5cCI6IkpX23213VCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
-      const serviceAuth = new ServiceAuth(
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'NOVATO',
         fakeRepositoryMember,
-        fakeRefreshTokenRepository,
-        fakeHashProviderMock,
-        serviceJwt,
-      );
+        fakeRepositoryPatent,
+        login: 'memberToUpdateLogin',
+      });
 
       const data: ICreateRefreshTokenDTO = {
         hash: token,
@@ -89,16 +65,58 @@ describe('RefreshTokenRepository - Service', () => {
 
       await fakeRefreshTokenRepository.createSave(data);
 
-      try {
-        await serviceAuth.refreshToken(data.login);
-      } catch (err) {
-        error = err;
-      }
+      serviceAuth = new ServiceAuth(
+        fakeRepositoryMember,
+        fakeRefreshTokenRepository,
+        fakeHashProviderMock,
+        serviceJwt,
+      );
 
-      expect(error).toBeInstanceOf(UnauthorizedException);
-      expect(error.response.message).toStrictEqual([
-        `${ERRORS_UNAUTHORIZED.OLD_TOKEN_INVALID}`,
-      ]);
+      const memberLogin: ILoginDTO = {
+        username: member.email,
+        password: 'mockedPassword',
+      };
+
+      const resultValidate = await serviceAuth.validate(memberLogin);
+
+      expect(resultValidate).toStrictEqual(null);
+    });
+
+    it('Should be returned when the hash matches', async () => {
+      fakeHashProviderMock.compareHash.mockResolvedValueOnce(true);
+
+      const token =
+        'e1yJhbGciOiJIUzI1NiIsInR5cCI6IkpX23213VCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'NOVATO',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+        login: 'memberToUpdateLogin',
+      });
+
+      const data: ICreateRefreshTokenDTO = {
+        hash: token,
+        login: 'mock',
+      };
+
+      await fakeRefreshTokenRepository.createSave(data);
+
+      serviceAuth = new ServiceAuth(
+        fakeRepositoryMember,
+        fakeRefreshTokenRepository,
+        fakeHashProviderMock,
+        serviceJwt,
+      );
+
+      const memberLogin: ILoginDTO = {
+        username: member.email,
+        password: 'fake password',
+      };
+
+      const resolveMember = await serviceAuth.validate(memberLogin);
+
+      expect(resolveMember).toBeInstanceOf(EntityMember);
     });
   });
 });
