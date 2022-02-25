@@ -16,8 +16,8 @@ export class EntityRefreshToken extends BasicEntity {
   login: string;
 
   @Column({
-    type: Boolean,
-    length: 254,
+    type: 'boolean',
+    default: true,
   })
   status: boolean;
 

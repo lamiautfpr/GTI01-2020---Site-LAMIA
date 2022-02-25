@@ -12,7 +12,7 @@ export class FakeRefreshTokenRepository implements IRepositoryRefreshToken {
   public async createSave(
     data: ICreateRefreshTokenDto,
   ): Promise<EntityRefreshToken> {
-    const token = new EntityRefreshToken(data);
+    const token = new EntityRefreshToken({ ...data, status: true });
 
     this.tokens.push(token);
 
@@ -43,7 +43,7 @@ export class FakeRefreshTokenRepository implements IRepositoryRefreshToken {
   }
   public async findValidByHash(login: string): Promise<EntityRefreshToken> {
     return this.tokens.find(
-      (token) => token.login === login /** && token.status === true*/,
+      (token) => token.login === login && token.status === true,
     );
   }
 }
