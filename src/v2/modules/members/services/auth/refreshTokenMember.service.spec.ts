@@ -100,5 +100,34 @@ describe('RefreshTokenRepository - Service', () => {
         `${ERRORS_UNAUTHORIZED.OLD_TOKEN_INVALID}`,
       ]);
     });
+    it('Should return member', async () => {
+      let error: any;
+      const token =
+        'e1yJhbGciOiJIUzI1NiIsInR5cCI6IkpX23213VCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+      const member = await MembersMock.giveAMeAValidMember({
+        patentName: 'NOVATO',
+        fakeRepositoryMember,
+        fakeRepositoryPatent,
+        login: 'memberToUpdateLogin',
+      });
+
+      const serviceAuth = new ServiceAuth(
+        fakeRepositoryMember,
+        fakeRefreshTokenRepository,
+        fakeHashProviderMock,
+        serviceJwt,
+      );
+
+      const data: ICreateRefreshTokenDTO = {
+        hash: token,
+        login: member.login,
+      };
+
+      await fakeRefreshTokenRepository.createSave(data);
+
+      // Where breaking here
+      await serviceAuth.refreshToken(member.login);
+    });
   });
 });
