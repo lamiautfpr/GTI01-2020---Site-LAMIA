@@ -1,5 +1,5 @@
 
-name: ${{ secrets.DOCKER_HUB_LASTNAME }}
+name: Pipeline
 on:
   push:
     branches: ['*']
