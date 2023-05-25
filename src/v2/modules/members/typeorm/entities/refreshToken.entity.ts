@@ -16,8 +16,13 @@ export class EntityRefreshToken extends BasicEntity {
   login: string;
 
   @Column({
-    type: Boolean,
+    type: 'boolean',
     default: true,
   })
   status: boolean;
+
+  constructor(data?: Partial<EntityRefreshToken>) {
+    super();
+    Object.assign(this, data);
+  }
 }
