@@ -28,6 +28,7 @@ import * as memberServices from './member';
 
 @Injectable()
 export class ServiceMember {
+  [x: string]: any;
   constructor(
     @InjectRepository(RepositoryMember)
     private readonly memberRepository: IRepositoryMember,
