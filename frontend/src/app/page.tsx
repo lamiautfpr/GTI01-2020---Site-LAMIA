@@ -215,8 +215,62 @@ const Home = () => {
 							/>
 						</div>
 					</Section>
+
 					<Section title="Área de Atuação">
-						<></>
+						<div className="flex gap-6 items-center justify-center">
+							<div className="w-sm h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+								<Image
+									src="/images/icon-data_science.svg"
+									width={60}
+									height={60}
+									alt="Data Science"
+								/>
+								<h5 className="mt-6 mb-11 text-xl leading-8 font-bold text-primary-900">
+									Ciência de Dados
+								</h5>
+								<p className="text-base leading-7 font-normal text-black-900 text-center">
+									A ciência de dados é um campo interdisciplinar que usa
+									algoritmos, procedimentos e processos para examinar grandes
+									quantidades de dados a fim de descobrir padrões ocultos, gerar
+									insights e direcionar a tomada de decisões.
+								</p>
+							</div>
+							<div className="w-sm h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+								<Image
+									src="/images/icon-computer_vision.svg"
+									width={60}
+									height={60}
+									alt="Computer Vision"
+								/>
+								<h5 className="mt-6 mb-11 text-xl leading-8 font-bold text-primary-900">
+									Visão Computacional
+								</h5>
+								<p className="text-base leading-7 font-normal text-black-900 text-center">
+									Visão Computacional é um campo que permite que computadores e
+									sistemas obtenham informações significativas a partir de
+									imagens digitais, vídeos e outras entradas visuais. Como base
+									nessas informações, é possível tomar ações ou fazer
+									recomendações.
+								</p>
+							</div>
+							<div className="w-sm h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+								<Image
+									src="/images/icon-educational_technologies.svg"
+									width={60}
+									height={60}
+									alt="Educational Technologiese"
+								/>
+								<h5 className="mt-6 mb-11 text-xl leading-8 font-bold text-primary-900">
+									Tecnologias Educacionais
+								</h5>
+								<p className="text-base leading-7 font-normal text-black-900 text-center">
+									Tecnologias Educacionais é um campo onde são exploradas
+									tecnologias mais modernas de sistemas web e jogos digitais
+									para criação de plataformas e ferramentas que auxiliem no
+									processo de ensino aprendizagem de forma inovadora.
+								</p>
+							</div>
+						</div>
 					</Section>
 					<Section title="Orientadores">
 						<></>
