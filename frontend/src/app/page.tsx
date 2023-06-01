@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import partners from './api/partners.json';
 import Link from 'next/link';
+import { MdOutlinePlace, MdMailOutline, MdSmartphone } from 'react-icons/md';
 
 const Cover = () => {
 	return (
@@ -362,6 +363,108 @@ const Home = () => {
 					</Section>
 				</main>
 			</div>
+			<footer className="mt-10 w-full flex items-center justify-center h-96 bg-black-100">
+				<main className="flex gap-10 flex-col w-full max-w-6xl px-1">
+					<div className="flex gap-10 justify-between">
+						<Image
+							src="/images/icon-logo_name.svg"
+							width={217}
+							height={94}
+							alt="Logo LAMIA"
+						/>
+						<div className="flex flex-col gap-4 max-w-[15rem] justify-start items-start">
+							<h6 className="text-xl leading-8 font-bold text-black-900">
+								Contato
+							</h6>
+							<div className="flex gap-2">
+								<MdOutlinePlace className="shrink w-[50px] h-[24px]" />
+								<p className=" text-sm leading-6 font-normal text-black-900">
+									Prolongamento da Rua Cerejeira, s/n Bairro - São Luiz, Santa
+									Helena - PR, 85892-000
+								</p>
+							</div>
+							<div className="flex gap-2">
+								<MdMailOutline className="shrink w-[50px] h-[24px]" />
+								<Link
+									href="mail:lamia-sh@utfpr.edu.br"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									lamia-sh@utfpr.edu.br
+								</Link>
+							</div>
+							<div className="flex gap-2">
+								<MdSmartphone className="shrink w-[50px] h-[24px]" />
+								<Link
+									href="tel:45998357976"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									(45) 99835-7976
+								</Link>
+							</div>
+						</div>
+
+						<div className="flex flex-col gap-4 max-w-[15rem]">
+							<h6 className="text-xl leading-8 font-bold text-black-900">
+								Social
+							</h6>
+							<div className="flex gap-4">
+								<Link
+									href="https://www.facebook.com/lamiautfpr2"
+									target="_blank"
+								>
+									<Image
+										src="/images/icon-facebook.svg"
+										width={24}
+										height={24}
+										alt="Facebook icon"
+									/>
+								</Link>
+								<Link
+									href="https://www.instagram.com/lamiautfpr/"
+									target="_blank"
+								>
+									<Image
+										src="/images/icon-instagram.svg"
+										width={24}
+										height={24}
+										alt="Instagram icon"
+									/>
+								</Link>
+								<Link href="https://twitter.com/lamiautfpr" target="_blank">
+									<Image
+										src="/images/icon-twitter.svg"
+										width={24}
+										height={24}
+										alt="Twitter icon"
+									/>
+								</Link>
+								<Link href="https://github.com/lamiautfpr" target="_blank">
+									<Image
+										src="/images/icon-github.svg"
+										width={24}
+										height={24}
+										alt="Github icon"
+									/>
+								</Link>
+								<Link
+									href="https://www.linkedin.com/in/lamiautfpr/"
+									target="_blank"
+								>
+									<Image
+										src="/images/icon-linkedin.svg"
+										width={24}
+										height={24}
+										alt="Linkedin icon"
+									/>
+								</Link>
+							</div>
+						</div>
+					</div>
+					<span className="flex items-center justify-center text-base leading-7 font-normal text-black-900">
+						© 2023 LAMIA. Todos os direitos reservados
+					</span>
+				</main>
+			</footer>
 		</>
 	);
 };
