@@ -1,0 +1,56 @@
+[
+  {
+    "path": "CEIA.png",
+    "width": 263,
+    "height": 90,
+    "alt": "CEIA - Centro de excelência em Inteligência Artificial"
+  },
+  {
+    "path": "SRI.png",
+    "width": 245,
+    "height": 98,
+    "alt": "SRI - Oeste em Desenvolvimento"
+  },
+  {
+    "path": "Iguassu_valley.png",
+    "width": 130,
+    "height": 98,
+    "alt": "Iguassu Valley"
+  },
+  {
+    "path": "cilia.png",
+    "width": 162,
+    "height": 96,
+    "alt": "Cilia"
+  },
+  {
+    "path": "SWA.png",
+    "width": 130,
+    "height": 98,
+    "alt": "SWA - Sistemas"
+  },
+  {
+    "path": "iguassu_it.png",
+    "width": 130,
+    "height": 98,
+    "alt": "Iguassu IT"
+  },
+  {
+    "path": "ABIPIR.png",
+    "width": 130,
+    "height": 98,
+    "alt": "ABIPIR - Associação Brasil Internacional de Inventores, Cientistas e empreendedores Inovadores"
+  },
+  {
+    "path": "google.png",
+    "width": 91,
+    "height": 91,
+    "alt": "Google"
+  },
+  {
+    "path": "Acisa.png",
+    "width": 130,
+    "height": 98,
+    "alt": "Acisa"
+  }
+]

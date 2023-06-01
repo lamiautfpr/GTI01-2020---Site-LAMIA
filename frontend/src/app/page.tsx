@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import partners from './api/partners.json';
+import Link from 'next/link';
 
 const Cover = () => {
 	return (
@@ -19,14 +21,19 @@ const Cover = () => {
 interface ISectionProps {
 	title: string;
 	children: React.ReactNode;
+	hasDivider?: boolean;
 }
 
-const Section: React.FC<ISectionProps> = ({ title, children }) => {
+const Section: React.FC<ISectionProps> = ({
+	title,
+	children,
+	hasDivider = true,
+}) => {
 	return (
 		<section className="flex flex-col w-full mb-10">
 			<h2 className="text-4xl font-medium text-primary-900 mb-10">{title}</h2>
 			{children}
-			<hr className="border bg-black-200 mt-10" />
+			{hasDivider && <hr className="border bg-black-200 mt-10" />}
 		</section>
 	);
 };
@@ -218,7 +225,7 @@ const Home = () => {
 
 					<Section title="Área de Atuação">
 						<div className="flex gap-6 items-center justify-center">
-							<div className="w-sm h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+							<div className="w-sm h-fit min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
 								<Image
 									src="/images/icon-data_science.svg"
 									width={60}
@@ -235,7 +242,7 @@ const Home = () => {
 									insights e direcionar a tomada de decisões.
 								</p>
 							</div>
-							<div className="w-sm h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+							<div className="w-sm h-fit min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
 								<Image
 									src="/images/icon-computer_vision.svg"
 									width={60}
@@ -253,7 +260,7 @@ const Home = () => {
 									recomendações.
 								</p>
 							</div>
-							<div className="w-sm h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+							<div className="w-sm h-fit min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
 								<Image
 									src="/images/icon-educational_technologies.svg"
 									width={60}
@@ -333,8 +340,25 @@ const Home = () => {
 							</div>
 						</div>
 					</Section>
-					<Section title="Parceiros">
-						<></>
+
+					<Section title="Parceiros" hasDivider={false}>
+						<div className="flex gap-4 flex-wrap items-center justify-start">
+							{partners.map((partner) => (
+								<Image
+									key={partner.path}
+									src={`/images/partners/${partner.path}`}
+									width={partner.width}
+									height={partner.height}
+									alt={partner.alt}
+								/>
+							))}
+							<Link
+								href="mail:lamia-sh@utfpr.edu.br"
+								className="w-32 text-base leading-7 font-bold items-center text-center text-secondary-900 duration-200 hover:bg-secondary-900 hover:text-white rounded-lg"
+							>
+								Seja um parceiro
+							</Link>
+						</div>
 					</Section>
 				</main>
 			</div>
