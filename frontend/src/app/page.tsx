@@ -24,9 +24,8 @@ interface ISectionProps {
 const Section: React.FC<ISectionProps> = ({ title, children }) => {
 	return (
 		<section className="flex flex-col w-full mb-10">
-			<h2 className="text-4xl font-medium text-primary-900 mb-4">{title}</h2>
+			<h2 className="text-4xl font-medium text-primary-900 mb-10">{title}</h2>
 			{children}
-
 			<hr className="border bg-black-200 mt-10" />
 		</section>
 	);
@@ -159,8 +158,62 @@ const Home = () => {
 							</div>
 						</div>
 					</Section>
+
 					<Section title="História e Missão">
-						<></>
+						<div className="flex gap-16 items-center justify-center">
+							<p className="max-w-lg text-base leading-7 font-normal text-black-900">
+								O LAMIA foi fundado no final do ano de 2019 pelo professor Dr.
+								Thiago França Naves com um pequeno grupo de alunos do curso de
+								Ciência da Computação. Em 2020 o LAMIA iniciou execução de
+								projetos utilizando Inteligência Artificial no combate a
+								pandemia de COVID-19 e na construção de produtos para empresas
+								parceiras, consolidando-se nos próximos anos com o perfil de
+								atuação orientada a projetos com o mercado e organizações
+								público e privadas.
+							</p>
+							<Image
+								src="/images/icon-logo_full.svg"
+								width={400}
+								height={264}
+								alt="Logo LAMIA completo"
+								className="-mt-20"
+							/>
+						</div>
+						<div className="flex gap-16 items-center justify-center my-1">
+							<Image
+								src="/images/icon-connections.svg"
+								width={400}
+								height={264}
+								alt="Conexões LAMIA"
+							/>
+							<p className="max-w-lg text-base leading-7 font-normal text-black-900">
+								A missão do LAMIA é liderar o desenvolvimento de pesquisadores e
+								profissionais em Inteligência Artificial que irão guiar o país
+								na direção da inovação através da produção de conhecimento
+								científico, soluções customizadas e produtos para a indústria
+								brasileira e mundial.
+							</p>
+						</div>
+						<div className="flex gap-16 items-center justify-center">
+							<p className="max-w-lg text-base leading-7 font-normal text-black-900">
+								O LAMIA possui experiência na execução de projetos de P&D em
+								parceria com empresas, para desenvolvimento de produtos de
+								inteligência artificial que podem alavancar o modelo de negócio
+								através da automação de áreas e tarefas chave internas das
+								mesmas. Somos parceiros do Centro de Excêlencia em I.A (CEIA)
+								credenciado como unidade EMBRAPII, que permite que projetos de
+								P&D com empresas brasileiras possam ser construídos utilizando
+								de contrapartida financeira não reembolsáveis da EMBRAPII.
+								Estamos sempre disponíveis a receber e negociar propostas de
+								projetos com empresas interessadas.
+							</p>
+							<Image
+								src="/images/icon-labs.svg"
+								width={352}
+								height={352}
+								alt="Laboratório LAMIA"
+							/>
+						</div>
 					</Section>
 					<Section title="Área de Atuação">
 						<></>
