@@ -272,8 +272,66 @@ const Home = () => {
 							</div>
 						</div>
 					</Section>
+
 					<Section title="Orientadores">
-						<></>
+						<div className="flex justify-between gap-6">
+							<div className="flex flex-col w-80">
+								<Image
+									src="/images/avatar-thiago.png"
+									width={328}
+									height={192}
+									alt="Avatar Thiago"
+									className="mb-2"
+								/>
+								<h5 className="mb-4 text-xl leading-8 font-bold text-primary-900">
+									Thiago França Naves
+								</h5>
+								<p className="mb-4 text-sm leading-5 font-normal text-black-700">
+									Coordenador do LAMIA e docente no curso de Ciência da
+									Computação da UTFPR Santa Helena. Conduz pesquisas nas áreas
+									de Ciência de Dados e Visão Computacional e trabalha junto a
+									incubadoras no desenvolvimento de empresas de base
+									tecnológicas e startups.
+								</p>
+							</div>
+							<div className="flex flex-col w-80">
+								<Image
+									src="/images/avatar-arlete.png"
+									width={328}
+									height={192}
+									alt="Avatar Arlete"
+									className="mb-2"
+								/>
+								<h5 className="mb-4 text-xl leading-8 font-bold text-primary-900">
+									Arlete Beuren
+								</h5>
+								<p className="mb-4 text-sm leading-5 font-normal text-black-700">
+									Orientadora do LAMIA e docente no Curso de Ciência da
+									Computação da UTFPR. Interesse de pesquisas nas áreas de Visão
+									Computacional/Processamento de Imagens/Reconhecimento de
+									Padrões/Big Data/Computação Gráfica/Realidade
+									Virtual/Desenvolvimento Web.
+								</p>
+							</div>
+							<div className="flex flex-col w-80">
+								<Image
+									src="/images/avatar-brilhador.png"
+									width={328}
+									height={192}
+									alt="Avatar Brilhador"
+									className="mb-2"
+								/>
+								<h5 className="mb-4 text-xl leading-8 font-bold text-primary-900">
+									Anderson Brilhador
+								</h5>
+								<p className="mb-4 text-sm leading-5 font-normal text-black-700">
+									Orientador do LAMIA e docente no curso de Ciência da
+									Computação da UTFPR Santa Helena. Desenvolve pesquisas nas
+									seguintes áreas: Computer Vision, Data Science, Data Mining,
+									Machine Learning e Deep Learning.
+								</p>
+							</div>
+						</div>
 					</Section>
 					<Section title="Parceiros">
 						<></>
