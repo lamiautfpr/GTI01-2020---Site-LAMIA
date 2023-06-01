@@ -159,10 +159,18 @@ const Home = () => {
 							</div>
 						</div>
 					</Section>
-					<Section title="História e Missão" />
-					<Section title="Área de Atuação" />
-					<Section title="Orientadores" />
-					<Section title="Parceiros" />
+					<Section title="História e Missão">
+						<></>
+					</Section>
+					<Section title="Área de Atuação">
+						<></>
+					</Section>
+					<Section title="Orientadores">
+						<></>
+					</Section>
+					<Section title="Parceiros">
+						<></>
+					</Section>
 				</main>
 			</div>
 		</>
