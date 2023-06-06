@@ -44,18 +44,33 @@ const Home = () => {
 		<>
 			<Cover />
 			<div className="w-full flex items-center justify-center">
-				<main className="flex flex-col min-h-screen w-full  max-w-6xl px-1">
+				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-6xl px-1">
 					<Section title="História e Missão">
 						<div className="flex gap-16 items-center justify-center">
-							<p className="max-w-lg text-base leading-7 font-normal text-black-900">
-								O LAMIA foi fundado no final do ano de 2019 pelo professor Dr.
-								Thiago França Naves com um pequeno grupo de alunos do curso de
-								Ciência da Computação. Em 2020 o LAMIA iniciou execução de
-								projetos utilizando Inteligência Artificial no combate a
-								pandemia de COVID-19 e na construção de produtos para empresas
-								parceiras, consolidando-se nos próximos anos com o perfil de
-								atuação orientada a projetos com o mercado e organizações
-								público e privadas.
+							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+								<Link
+									href="https://docs.google.com/document/d/1JEfJ-gSrrJPPyxORf4BHEs8qLDszS1PTaV14I6ydx7s/edit?usp=sharing"
+									target="_blank"
+									className="text-secondary-900 hover:font-bold duration-120"
+								>
+									Fundado
+								</Link>{' '}
+								no final de 2019 pelo professor Dr. Thiago França Naves na UTFPR
+								do campus Santa Helena, o LAMIA iniciou sua trajetória com a
+								execução de{' '}
+								<Link
+									href="https://github.com/lamiautfpr"
+									target="_blank"
+									className="text-secondary-900 hover:font-bold duration-120"
+								>
+									projetos
+								</Link>{' '}
+								utilizando Inteligência Artificial para construção de
+								tecnologias e produtos para demandas de órgãos públicos e
+								empresas. Nos anos seguintes, consolidou o perfil de atuação
+								orientada a projetos de PD&I, com objetivo de gerar resultados
+								de impacto nas organizações parceiras através de produtos de I.A
+								construídos e validados em conjunto.
 							</p>
 							<Image
 								src="/images/icon-logo_full.svg"
@@ -67,17 +82,35 @@ const Home = () => {
 						</div>
 						<div className="flex gap-16 items-center justify-center my-1">
 							<Image
-								src="/images/icon-connections.svg"
-								width={400}
-								height={264}
-								alt="Conexões LAMIA"
+								src="/images/icon-labs.svg"
+								width={352}
+								height={352}
+								alt="Laboratório LAMIA"
 							/>
-							<p className="max-w-lg text-base leading-7 font-normal text-black-900">
-								A missão do LAMIA é liderar o desenvolvimento de pesquisadores e
-								profissionais em Inteligência Artificial que irão guiar o país
-								na direção da inovação através da produção de conhecimento
-								científico, soluções customizadas e produtos para a indústria
-								brasileira e mundial.
+							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+								A missão do LAMIA é{' '}
+								<Link
+									href="https://www.linkedin.com/in/lamiautfpr/"
+									target="_blank"
+									className="text-secondary-900 hover:font-bold duration-120"
+								>
+									liderar
+								</Link>{' '}
+								o desenvolvimento de pesquisadores e profissionais em
+								Inteligência Artificial que irão guiar o país na direção da
+								inovação através da produção de conhecimento científico,
+								soluções customizadas e produtos para a indústria brasileira e
+								mundial. Estamos sempre a procura de novos talentos para
+								ingressar em nosso modelo presencial ou remoto e{' '}
+								<Link
+									href="https://forms.gle/yCAMx1eB2Q6ULJPK6"
+									target="_blank"
+									className="text-secondary-900 hover:font-bold duration-120"
+								>
+									trabalhar conosco
+								</Link>
+								, aprendendo na prática as últimas tecnologias de I.A e
+								trabalhando em projetos reais aplicados.
 							</p>
 						</div>
 						<div className="flex gap-16 items-center justify-center">
@@ -93,12 +126,6 @@ const Home = () => {
 								Estamos sempre disponíveis a receber e negociar propostas de
 								projetos com empresas interessadas.
 							</p>
-							<Image
-								src="/images/icon-labs.svg"
-								width={352}
-								height={352}
-								alt="Laboratório LAMIA"
-							/>
 						</div>
 					</Section>
 
