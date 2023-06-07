@@ -32,7 +32,9 @@ const Section: React.FC<ISectionProps> = ({
 }) => {
 	return (
 		<section className="flex flex-col w-full mb-10">
-			<h2 className="text-4xl font-medium text-primary-900 mb-10">{title}</h2>
+			<h2 className="text-4xl font-medium text-primary-900 mb-10 max-md:text-center">
+				{title}
+			</h2>
 			{children}
 			{hasDivider && <hr className="border bg-black-200 mt-10" />}
 		</section>
@@ -47,7 +49,7 @@ const Home = () => {
 				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-6xl px-4">
 					<Section title="História e Missão">
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
-							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900 order-2 md:order-1">
+							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
 								<Link
 									href="https://docs.google.com/document/d/1JEfJ-gSrrJPPyxORf4BHEs8qLDszS1PTaV14I6ydx7s/edit?usp=sharing"
 									target="_blank"
@@ -77,7 +79,7 @@ const Home = () => {
 								width={400}
 								height={264}
 								alt="Logo LAMIA completo"
-								className="order-1"
+								className="max-md:hidden"
 							/>
 						</div>
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between my-8">
@@ -161,7 +163,7 @@ const Home = () => {
 
 					<Section title="Área de Atuação">
 						<div className="flex flex-col lg:flex-row gap-6 items-center justify-center">
-							<div className="w-sm h-auto min-h-96 min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px]">
+							<div className="w-sm flex-0 h-[25rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110">
 								<Image
 									src="/images/icon-data_science.svg"
 									width={60}
@@ -178,7 +180,7 @@ const Home = () => {
 									insights e direcionar a tomada de decisões.
 								</p>
 							</div>
-							<div className="w-sm h-auto min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px]">
+							<div className="w-sm flex-0 h-[30rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110">
 								<Image
 									src="/images/icon-computer_vision.svg"
 									width={60}
@@ -196,7 +198,7 @@ const Home = () => {
 									recomendações.
 								</p>
 							</div>
-							<div className="w-sm h-auto min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px]">
+							<div className="w-sm flex-0 h-[25rem] max-md:h-auto hover:h-[25.5rem] flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110">
 								<Image
 									src="/images/icon-educational_technologies.svg"
 									width={60}
