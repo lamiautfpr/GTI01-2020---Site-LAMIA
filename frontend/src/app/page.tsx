@@ -160,8 +160,8 @@ const Home = () => {
 					</Section>
 
 					<Section title="Área de Atuação">
-						<div className="flex flex-col  md:flex-row gap-6 items-center justify-center">
-							<div className="w-sm h-96 min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+						<div className="flex flex-col lg:flex-row gap-6 items-center justify-center">
+							<div className="w-sm h-auto min-h-96 min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px]">
 								<Image
 									src="/images/icon-data_science.svg"
 									width={60}
@@ -178,7 +178,7 @@ const Home = () => {
 									insights e direcionar a tomada de decisões.
 								</p>
 							</div>
-							<div className="w-sm h-auto min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+							<div className="w-sm h-auto min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px]">
 								<Image
 									src="/images/icon-computer_vision.svg"
 									width={60}
@@ -196,7 +196,7 @@ const Home = () => {
 									recomendações.
 								</p>
 							</div>
-							<div className="w-sm h-96 min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
+							<div className="w-sm h-auto min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px]">
 								<Image
 									src="/images/icon-educational_technologies.svg"
 									width={60}
@@ -215,6 +215,7 @@ const Home = () => {
 							</div>
 						</div>
 					</Section>
+
 					{/* 
 					<Section title="Orientadores">
 						<div className="flex justify-between gap-6">
