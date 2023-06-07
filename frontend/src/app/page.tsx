@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import partners from './api/partners.json';
 import Link from 'next/link';
-import { MdOutlinePlace, MdMailOutline, MdSmartphone } from 'react-icons/md';
+// import { MdMailOutline, MdOutlinePlace, MdSmartphone } from 'react-icons/md';
+// import partners from './api/partners.json';
 
 const Cover = () => {
 	return (
@@ -44,10 +44,10 @@ const Home = () => {
 		<>
 			<Cover />
 			<div className="w-full flex items-center justify-center">
-				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-6xl px-1">
+				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-6xl px-4">
 					<Section title="História e Missão">
-						<div className="flex gap-16 items-center justify-center">
-							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
+							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900 order-2 md:order-1">
 								<Link
 									href="https://docs.google.com/document/d/1JEfJ-gSrrJPPyxORf4BHEs8qLDszS1PTaV14I6ydx7s/edit?usp=sharing"
 									target="_blank"
@@ -77,10 +77,10 @@ const Home = () => {
 								width={400}
 								height={264}
 								alt="Logo LAMIA completo"
-								className="-mt-20"
+								className="order-1"
 							/>
 						</div>
-						<div className="flex gap-16 items-center justify-center my-1">
+						<div className="flex flex-col md:flex-row gap-8 items-center justify-between my-8">
 							<Image
 								src="/images/icon-labs.svg"
 								width={352}
@@ -113,23 +113,53 @@ const Home = () => {
 								trabalhando em projetos reais aplicados.
 							</p>
 						</div>
-						<div className="flex gap-16 items-center justify-center">
-							<p className="max-w-lg text-base leading-7 font-normal text-black-900">
-								O LAMIA possui experiência na execução de projetos de P&D em
-								parceria com empresas, para desenvolvimento de produtos de
-								inteligência artificial que podem alavancar o modelo de negócio
-								através da automação de áreas e tarefas chave internas das
-								mesmas. Somos parceiros do Centro de Excêlencia em I.A (CEIA)
-								credenciado como unidade EMBRAPII, que permite que projetos de
-								P&D com empresas brasileiras possam ser construídos utilizando
-								de contrapartida financeira não reembolsáveis da EMBRAPII.
-								Estamos sempre disponíveis a receber e negociar propostas de
-								projetos com empresas interessadas.
+						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
+							<p className="max-w-lg text-base leading-7 text-justify font-normal text-black-900 order-2 md:order-1">
+								O{' '}
+								<Link
+									href="https://www.instagram.com/lamiautfpr/"
+									target="_blank"
+									className="text-secondary-900 hover:font-bold duration-120"
+								>
+									LAMIA
+								</Link>{' '}
+								possui experiência na execução de projetos de P&D em parceria
+								com empresas, para desenvolvimento de produtos de inteligência
+								artificial que podem alavancar o modelo de negócio através da
+								automação de áreas e tarefas chave internas das mesmas. Somos
+								parceiros do Centro de Excêlencia em I.A (CEIA) credenciado como
+								unidade{' '}
+								<Link
+									href="https://embrapii.org.br/"
+									target="_blank"
+									className="text-secondary-900 font-bold hover:font-bold duration-120"
+								>
+									EMBRAPII
+								</Link>{' '}
+								, que permite que projetos de P&D com empresas brasileiras
+								possam ser construídos utilizando de contrapartida financeira
+								não reembolsáveis da EMBRAPII. Estamos sempre disponíveis a
+								receber e negociar{' '}
+								<Link
+									href="https://api.whatsapp.com/send?phone=5545998357976"
+									target="_blank"
+									className="text-secondary-900 hover:font-bold duration-120"
+								>
+									propostas
+								</Link>{' '}
+								de projetos com empresas interessadas.
 							</p>
+							<Image
+								src="/images/awards.svg"
+								width={276}
+								height={339}
+								alt="Premio do LAMIA"
+								className="order-1"
+							/>
 						</div>
 					</Section>
 
-					<Section title="Área de Atuação">
+					{/* <Section title="Área de Atuação">
 						<div className="flex gap-6 items-center justify-center">
 							<div className="w-sm h-fit min-h-96 flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4">
 								<Image
@@ -265,10 +295,10 @@ const Home = () => {
 								Seja um parceiro
 							</Link>
 						</div>
-					</Section>
+					</Section> */}
 				</main>
 			</div>
-			<footer className="mt-10 w-full flex items-center justify-center h-96 bg-black-100">
+			{/* <footer className="mt-10 w-full flex items-center justify-center h-96 bg-black-100">
 				<main className="flex gap-10 flex-col w-full max-w-6xl px-1">
 					<div className="flex gap-10 justify-between">
 						<Image
@@ -369,7 +399,7 @@ const Home = () => {
 						© 2023 LAMIA. Todos os direitos reservados
 					</span>
 				</main>
-			</footer>
+			</footer> */}
 		</>
 	);
 };
