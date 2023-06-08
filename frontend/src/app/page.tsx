@@ -218,21 +218,20 @@ const Home = () => {
 						</div>
 					</Section>
 
-					{/* 
 					<Section title="Orientadores">
-						<div className="flex justify-between gap-6">
-							<div className="flex flex-col w-80">
+						<div className="flex flex-col md:flex-row justify-center gap-6 ">
+							<div className="flex flex-col w-80 drop-shadow-xl max-md:w-full">
 								<Image
 									src="/images/avatar-thiago.png"
 									width={328}
 									height={192}
 									alt="Avatar Thiago"
-									className="mb-2"
+									className="mb-2 max-md:w-full"
 								/>
-								<h5 className="mb-4 text-xl leading-8 font-bold text-primary-900">
-									Thiago França Naves
+								<h5 className="mb-4 text-xl max-md:text-center leading-8 font-bold text-primary-900 ">
+									Thiago Naves
 								</h5>
-								<p className="mb-4 text-sm leading-5 font-normal text-black-700">
+								<p className="mb-4 text-sm max-md:text-justify leading-5 font-normal text-black-700">
 									Coordenador do LAMIA e docente no curso de Ciência da
 									Computação da UTFPR Santa Helena. Conduz pesquisas nas áreas
 									de Ciência de Dados e Visão Computacional e trabalha junto a
@@ -240,18 +239,18 @@ const Home = () => {
 									tecnológicas e startups.
 								</p>
 							</div>
-							<div className="flex flex-col w-80">
+							<div className="flex flex-col w-80 drop-shadow-xl  max-md:w-full">
 								<Image
 									src="/images/avatar-arlete.png"
 									width={328}
 									height={192}
 									alt="Avatar Arlete"
-									className="mb-2"
+									className="mb-2  max-md:w-full"
 								/>
-								<h5 className="mb-4 text-xl leading-8 font-bold text-primary-900">
+								<h5 className="mb-4 text-xl max-md:text-center leading-8 font-bold text-primary-900">
 									Arlete Beuren
 								</h5>
-								<p className="mb-4 text-sm leading-5 font-normal text-black-700">
+								<p className="mb-4 text-sm max-md:text-justify leading-5 font-normal text-black-700">
 									Orientadora do LAMIA e docente no Curso de Ciência da
 									Computação da UTFPR. Interesse de pesquisas nas áreas de Visão
 									Computacional/Processamento de Imagens/Reconhecimento de
@@ -259,18 +258,18 @@ const Home = () => {
 									Virtual/Desenvolvimento Web.
 								</p>
 							</div>
-							<div className="flex flex-col w-80">
+							<div className="flex flex-col w-80 drop-shadow-xl  max-md:w-full">
 								<Image
 									src="/images/avatar-brilhador.png"
 									width={328}
 									height={192}
 									alt="Avatar Brilhador"
-									className="mb-2"
+									className="mb-2  max-md:w-full"
 								/>
-								<h5 className="mb-4 text-xl leading-8 font-bold text-primary-900">
+								<h5 className="mb-4 text-xl max-md:text-center leading-8 font-bold text-primary-900">
 									Anderson Brilhador
 								</h5>
-								<p className="mb-4 text-sm leading-5 font-normal text-black-700">
+								<p className="mb-4 text-sm max-md:text-justify leading-5 font-normal text-black-700">
 									Orientador do LAMIA e docente no curso de Ciência da
 									Computação da UTFPR Santa Helena. Desenvolve pesquisas nas
 									seguintes áreas: Computer Vision, Data Science, Data Mining,
@@ -280,7 +279,7 @@ const Home = () => {
 						</div>
 					</Section>
 
-					<Section title="Parceiros" hasDivider={false}>
+					{/* <Section title="Parceiros" hasDivider={false}>
 						<div className="flex gap-4 flex-wrap items-center justify-start">
 							{partners.map((partner) => (
 								<Image
