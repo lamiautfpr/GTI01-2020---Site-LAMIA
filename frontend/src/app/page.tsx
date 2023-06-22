@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 // import { MdMailOutline, MdOutlinePlace, MdSmartphone } from 'react-icons/md';
-// import partners from './api/partners.json';
+import partners from './api/partners.json';
 
 const Cover = () => {
 	return (
@@ -46,7 +46,7 @@ const Home = () => {
 		<>
 			<Cover />
 			<div className="w-full flex items-center justify-center">
-				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-6xl px-4">
+				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-7xl px-4">
 					<Section title="História e Missão">
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
 							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
@@ -279,10 +279,11 @@ const Home = () => {
 						</div>
 					</Section>
 
-					{/* <Section title="Parceiros" hasDivider={false}>
-						<div className="flex gap-4 flex-wrap items-center justify-start">
+					<Section title="Parceiros" hasDivider={false}>
+						<div className="flex gap-4 flex-wrap items-center justify-start  max-sm:justify-center">
 							{partners.map((partner) => (
 								<Image
+									className="max-sm:max-w-[7rem]"
 									key={partner.path}
 									src={`/images/partners/${partner.path}`}
 									width={partner.width}
@@ -290,14 +291,8 @@ const Home = () => {
 									alt={partner.alt}
 								/>
 							))}
-							<Link
-								href="mail:lamia-sh@utfpr.edu.br"
-								className="w-32 text-base leading-7 font-bold items-center text-center text-secondary-900 duration-200 hover:bg-secondary-900 hover:text-white rounded-lg"
-							>
-								Seja um parceiro
-							</Link>
 						</div>
-					</Section> */}
+					</Section>
 				</main>
 			</div>
 			{/* <footer className="mt-10 w-full flex items-center justify-center h-96 bg-black-100">
