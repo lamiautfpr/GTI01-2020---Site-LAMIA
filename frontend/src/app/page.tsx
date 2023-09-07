@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 // import { MdMailOutline, MdOutlinePlace, MdSmartphone } from 'react-icons/md';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
 import partners from './api/partners.json';
 
 const Cover = () => {
 	return (
-		<div className="h-screen flex items-center flex-col justify-center p-1">
+		<div className="h-1/2 flex items-center flex-col justify-center p-1">
 			<h1 className="text-center text-7xl font-bold text-primary-900 mb-4">
 				LAMIA
 			</h1>
@@ -279,7 +280,87 @@ const Home = () => {
 						</div>
 					</Section>
 
-					<Section title="Parceiros" hasDivider={false}>
+					<Section
+						title="Benéficos de colaborar com o LAMIA"
+						hasDivider={false}
+					>
+						<div className="flex justify-between gap-6 items-start">
+							<div className="flex flex-col flex-1">
+								<h3 className="uppercase text-secondary-600 font-bold text-2xl mb-5 text-center">
+									Participação Financeira
+								</h3>
+								<div className="">
+									<div className="flex items-center">
+										<div className="h-[150px] w-[60px] flex items-center justify-center bg-primary-500">
+											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px]">
+												1/3
+											</span>
+										</div>
+										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
+											EMBRAPII
+										</span>
+									</div>
+									<div className="flex items-center">
+										<div className="h-[300px] w-[60px] flex items-center justify-center bg-primary-900">
+											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px] min-h-[100px]">
+												2/3
+											</span>
+										</div>
+										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
+											SEBRAE/Empresas <br />+ <br /> Unidades EMPRAPII
+										</span>
+									</div>
+								</div>
+							</div>
+							<ul className="h-full flex flex-col gap-5 max-w-lg justify-between">
+								<li className="flex gap-4 items-start">
+									<BsFillCheckCircleFill
+										size={24}
+										className="text-secondary-600 flex-shrink-0"
+									/>
+									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+										<span className="font-bold">Experiência comprovada:</span>{' '}
+										Conte com nossa experiência na execução bem-sucedida de
+										projetos de Pesquisa, Desenvolvimento e Inovação (PD&I) em
+										parceria com empresas de diversos setores.
+									</p>
+								</li>
+								<li className="flex gap-4 items-start">
+									<BsFillCheckCircleFill
+										size={24}
+										className="text-secondary-600 flex-shrink-0"
+									/>
+									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+										<span className="font-bold">
+											Oportunidades para empresas:
+										</span>{' '}
+										Como parceiros do Centro de Excelência em Inteligência
+										Artificial (CEIA), somos credenciados como uma unidade
+										EMBRAPII. Isso significa que você poderá contar com
+										contrapartidas financeiras não reembolsáveis da EMBRAPII
+										para impulsionar seus projetos de PD&I.
+									</p>
+								</li>
+								<li className="flex gap-4 items-start">
+									<BsFillCheckCircleFill
+										size={24}
+										className="text-secondary-600 flex-shrink-0"
+									/>
+									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+										<span className="font-bold">
+											Acesso às últimas tecnologias:
+										</span>{' '}
+										Trabalhe lado a lado com nossos pesquisadores e
+										profissionais, aprendendo na prática as mais recentes
+										tecnologias de Inteligência Artificial e aplicando-as em
+										projetos reais.
+									</p>
+								</li>
+							</ul>
+						</div>
+						<h3 className="text-3xl font-normal text-primary-900 mb-3 mt-14">
+							Empresas parceiras
+						</h3>
 						<div className="flex gap-4 flex-wrap items-center justify-start  max-sm:justify-center">
 							{partners.map((partner) => (
 								<Image
