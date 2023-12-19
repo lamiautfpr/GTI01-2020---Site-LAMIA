@@ -31,7 +31,7 @@ const Section: React.FC<ISectionProps> = ({
 	hasDivider = true,
 }) => {
 	return (
-		<section className="flex flex-col w-full mb-10">
+		<section className="flex flex-col w-full mb-10" id={title}>
 			<h2 className="text-4xl font-medium text-primary-900 mb-10 max-md:text-center">
 				{title}
 			</h2>
@@ -279,7 +279,7 @@ const Home = () => {
 						</div>
 					</Section>
 
-					<Section title="Parceiros" hasDivider={false}>
+					<Section title="Empresas parceiras" hasDivider={false}>
 						<div className="flex gap-4 flex-wrap items-center justify-start  max-sm:justify-center">
 							{partners.map((partner) => (
 								<Image
@@ -295,28 +295,40 @@ const Home = () => {
 					</Section>
 				</main>
 			</div>
-			{/* <footer className="mt-10 w-full flex items-center justify-center h-96 bg-black-100">
-				<main className="flex gap-10 flex-col w-full max-w-6xl px-1">
-					<div className="flex gap-10 justify-between">
-						<Image
-							src="/images/icon-logo_name.svg"
-							width={217}
-							height={94}
-							alt="Logo LAMIA"
-						/>
-						<div className="flex flex-col gap-4 max-w-[15rem] justify-start items-start">
+			<footer className="mt-10 w-full flex items-center justify-center py-12 bg-black-100">
+				<div className="flex gap-10 flex-col w-full max-w-6xl px-1">
+					<div className="flex max-md:flex-col max-md:items-center gap-10 justify-between">
+						<div className="max-md:px-6">
+							<Image
+								src="/images/icon-logo_name.svg"
+								width={217}
+								height={94}
+								alt="Logo LAMIA"
+							/>
+						</div>
+						<div className="flex flex-col max-md:px-6 gap-4 md:max-w-[15rem] justify-start items-start">
 							<h6 className="text-xl leading-8 font-bold text-black-900">
 								Contato
 							</h6>
 							<div className="flex gap-2">
-								<MdOutlinePlace className="shrink w-[50px] h-[24px]" />
-								<p className=" text-sm leading-6 font-normal text-black-900">
+								<Image
+									src="/images/icon-location.svg"
+									width={24}
+									height={24}
+									alt="Location icon"
+								/>
+								<p className="text-sm leading-6 font-normal text-black-900">
 									Prolongamento da Rua Cerejeira, s/n Bairro - São Luiz, Santa
 									Helena - PR, 85892-000
 								</p>
 							</div>
 							<div className="flex gap-2">
-								<MdMailOutline className="shrink w-[50px] h-[24px]" />
+								<Image
+									src="/images/icon-email.svg"
+									width={24}
+									height={24}
+									alt="E-mail icon"
+								/>
 								<Link
 									href="mail:lamia-sh@utfpr.edu.br"
 									className="text-sm leading-6 font-normal text-black-900"
@@ -325,7 +337,12 @@ const Home = () => {
 								</Link>
 							</div>
 							<div className="flex gap-2">
-								<MdSmartphone className="shrink w-[50px] h-[24px]" />
+								<Image
+									src="/images/icon-telephone.svg"
+									width={24}
+									height={24}
+									alt="Telefone icon"
+								/>
 								<Link
 									href="tel:45998357976"
 									className="text-sm leading-6 font-normal text-black-900"
@@ -335,14 +352,77 @@ const Home = () => {
 							</div>
 						</div>
 
-						<div className="flex flex-col gap-4 max-w-[15rem]">
+						<div className="flex flex-col max-md:px-6 gap-4 md:max-w-[15rem] justify-start items-start">
+							<h6 className="text-xl leading-8 font-bold text-black-900">
+								Navegação
+							</h6>
+							<div className="flex gap-2">
+								<Link
+									href="#"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									Nossos números
+								</Link>
+							</div>
+							<div className="flex gap-2">
+								<Link
+									href="#"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									Depoimentos
+								</Link>
+							</div>
+							<div className="flex gap-2">
+								<Link
+									href="#História e Missão"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									História e Missão
+								</Link>
+							</div>
+							<div className="flex gap-2">
+								<Link
+									href="#Área de Atuação"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									Áreas de Atuação
+								</Link>
+							</div>
+							<div className="flex gap-2">
+								<Link
+									href="#Orientadores"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									Orientadores
+								</Link>
+							</div>
+							<div className="flex gap-2">
+								<Link
+									href="#"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									Benefícios para as empresas
+								</Link>
+							</div>
+							<div className="flex gap-2">
+								<Link
+									href="#Empresas parceiras"
+									className="text-sm leading-6 font-normal text-black-900"
+								>
+									Empresas parceiras
+								</Link>
+							</div>
+						</div>
+
+						<div className="flex flex-col max-md:px-6 max-md:w-full gap-4 md:max-w-[15rem]">
 							<h6 className="text-xl leading-8 font-bold text-black-900">
 								Social
 							</h6>
-							<div className="flex gap-4">
+							<div className="flex gap-5">
 								<Link
 									href="https://www.facebook.com/lamiautfpr2"
 									target="_blank"
+									className="hover:scale-150 duration-300 scale-125"
 								>
 									<Image
 										src="/images/icon-facebook.svg"
@@ -354,6 +434,7 @@ const Home = () => {
 								<Link
 									href="https://www.instagram.com/lamiautfpr/"
 									target="_blank"
+									className="hover:scale-150 duration-300 scale-125"
 								>
 									<Image
 										src="/images/icon-instagram.svg"
@@ -362,15 +443,11 @@ const Home = () => {
 										alt="Instagram icon"
 									/>
 								</Link>
-								<Link href="https://twitter.com/lamiautfpr" target="_blank">
-									<Image
-										src="/images/icon-twitter.svg"
-										width={24}
-										height={24}
-										alt="Twitter icon"
-									/>
-								</Link>
-								<Link href="https://github.com/lamiautfpr" target="_blank">
+								<Link
+									href="https://github.com/lamiautfpr"
+									target="_blank"
+									className="hover:scale-150 duration-300 scale-125"
+								>
 									<Image
 										src="/images/icon-github.svg"
 										width={24}
@@ -381,6 +458,7 @@ const Home = () => {
 								<Link
 									href="https://www.linkedin.com/in/lamiautfpr/"
 									target="_blank"
+									className="hover:scale-150 duration-300 scale-125"
 								>
 									<Image
 										src="/images/icon-linkedin.svg"
@@ -392,11 +470,13 @@ const Home = () => {
 							</div>
 						</div>
 					</div>
-					<span className="flex items-center justify-center text-base leading-7 font-normal text-black-900">
-						© 2023 LAMIA. Todos os direitos reservados
-					</span>
-				</main>
-			</footer> */}
+					<div className="mt-10 border-t py-4">
+						<span className="flex items-center justify-center text-base leading-7 font-normal text-black-900">
+							© 2024 LAMIA. Todos os direitos reservados
+						</span>
+					</div>
+				</div>
+			</footer>
 		</>
 	);
 };
