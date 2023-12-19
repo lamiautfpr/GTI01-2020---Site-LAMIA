@@ -352,7 +352,7 @@ const Home = () => {
 							</div>
 						</div>
 
-						<div className="flex flex-col max-md:px-6 gap-4 md:max-w-[15rem] justify-start items-start">
+						<div className="flex flex-col max-md:px-6 max-md:w-full gap-4 md:max-w-[15rem] justify-start items-start">
 							<h6 className="text-xl leading-8 font-bold text-black-900">
 								Navegação
 							</h6>
