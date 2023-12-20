@@ -279,6 +279,92 @@ const Home = () => {
 						</div>
 					</Section>
 
+					<Section title="Benefícios para empresas ao desenvolver projetos de PD&I com o LAMIA">
+						<div className="flex max-md:flex-col justify-between gap-6 items-center">
+							<div className="flex flex-col flex-1 max-md:w-full">
+								<h3 className="uppercase text-secondary-600 font-bold text-2xl mb-5 text-center">
+									COParticipação Financeira
+								</h3>
+								<div className="">
+									<div className="flex items-center">
+										<div className="h-[150px] w-[60px] flex items-center justify-center bg-primary-500">
+											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px]">
+												1/3
+											</span>
+										</div>
+										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
+											EMBRAPII
+										</span>
+									</div>
+									<div className="flex items-center">
+										<div className="h-[300px] w-[60px] flex items-center justify-center bg-primary-900">
+											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px] min-h-[100px]">
+												2/3
+											</span>
+										</div>
+										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
+											SEBRAE/Empresas <br />+ <br /> Unidades EMPRAPII
+										</span>
+									</div>
+								</div>
+							</div>
+							<ul className="h-full flex flex-col gap-5 max-w-lg mr-6">
+								<li className="flex gap-4 items-start">
+									<Image
+										src="/images/icon-check.svg"
+										width={24}
+										height={24}
+										alt="Check icon"
+										className="pt-2"
+									/>
+									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+										<span className="font-bold">Experiência comprovada:</span>{' '}
+										Conte com nossa experiência na execução bem-sucedida de
+										projetos de Pesquisa, Desenvolvimento e Inovação (PD&I) em
+										parceria com empresas de diversos setores.
+									</p>
+								</li>
+								<li className="flex gap-4 items-start">
+									<Image
+										src="/images/icon-check.svg"
+										width={24}
+										height={24}
+										alt="Check icon"
+										className="pt-2"
+									/>
+									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+										<span className="font-bold">
+											Oportunidades para empresas:
+										</span>{' '}
+										Como parceiros do Centro de Excelência em Inteligência
+										Artificial (CEIA), somos credenciados como uma unidade
+										EMBRAPII. Isso significa que você poderá contar com
+										contrapartidas financeiras não reembolsáveis da EMBRAPII
+										para impulsionar seus projetos de PD&I.
+									</p>
+								</li>
+								<li className="flex gap-4 items-start">
+									<Image
+										src="/images/icon-check.svg"
+										width={24}
+										height={24}
+										alt="Check icon"
+										className="pt-2"
+									/>
+									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+										<span className="font-bold">
+											Acesso às últimas tecnologias:
+										</span>{' '}
+										Trabalhe lado a lado com nossos pesquisadores e
+										profissionais, aprendendo na prática as mais recentes
+										tecnologias de Inteligência Artificial e aplicando-as em
+										projetos reais.
+									</p>
+								</li>
+							</ul>
+						</div>
+					</Section>
+
 					<Section title="Empresas parceiras" hasDivider={false}>
 						<div className="flex gap-4 flex-wrap items-center justify-start  max-sm:justify-center">
 							{partners.map((partner) => (
