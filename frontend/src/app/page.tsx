@@ -366,10 +366,10 @@ const Home = () => {
 					</Section>
 
 					<Section title="Empresas parceiras" hasDivider={false}>
-						<div className="flex gap-4 flex-wrap items-center justify-start  max-sm:justify-center">
+						<div className="flex gap-4 flex-wrap items-center justify-center max-sm:justify-center">
 							{partners.map((partner) => (
 								<Image
-									className="max-sm:max-w-[7rem]"
+									className="max-sm:max-w-[7rem] hover:scale-110 duration-300 mx-2"
 									key={partner.path}
 									src={`/images/partners/${partner.path}`}
 									width={partner.width}
@@ -377,6 +377,28 @@ const Home = () => {
 									alt={partner.alt}
 								/>
 							))}
+						</div>
+						<div className="flex max-md:flex-col justify-between items-center mt-5 max-md:mt-20">
+							<div className="flex flex-col flex-1 md:min-w-[500px] max-md:w-full ">
+								<p className="uppercase text-secondary-600 font-bold text-xl mb-5 text-justify">
+									Este é o momento perfeito para se juntar a nós!
+								</p>
+								<p className="text-base leading-7 font-normal text-black-900 text-justify">
+									Entre em contato conosco hoje mesmo para explorar as
+									possibilidades e discutir como podemos colaborar para
+									impulsionar o seu sucesso por meio da IA. Juntos, vamos moldar
+									o futuro da inovação.
+								</p>
+							</div>
+							<div className="flex justify-center w-full max-md:mt-10">
+								<Link
+									href="https://api.whatsapp.com/send?phone=5545998357976"
+									target="_blank"
+									className="flex bg-primary-900 w-[466px] h-[60px] rounded-lg font-bold text-white text-base justify-center items-center"
+								>
+									Entre em contato agora mesmo!
+								</Link>
+							</div>
 						</div>
 					</Section>
 				</main>

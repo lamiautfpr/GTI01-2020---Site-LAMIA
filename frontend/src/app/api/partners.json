@@ -12,10 +12,16 @@
     "alt": "SRI - Oeste em Desenvolvimento"
   },
   {
-    "path": "Iguassu_valley.png",
+    "path": "Iguassu_valley2.png",
     "width": 130,
     "height": 98,
     "alt": "Iguassu Valley"
+  },
+  {
+    "path": "iguassu_it.png",
+    "width": 130,
+    "height": 98,
+    "alt": "Iguassu IT"
   },
   {
     "path": "cilia.png",
@@ -24,15 +30,27 @@
     "alt": "Cilia"
   },
   {
-    "path": "SWA.png",
-    "width": 130,
-    "height": 98,
-    "alt": "SWA - Sistemas"
+    "path": "alfaCon.png",
+    "width": 162,
+    "height": 83,
+    "alt": "AlfaCon - Concursos Públicos"
   },
   {
-    "path": "iguassu_it.png",
-    "width": 130,
-    "height": 98,
-    "alt": "Iguassu IT"
+    "path": "b2ml2.png",
+    "width": 162,
+    "height": 83,
+    "alt": "B2ML"
+  },
+  {
+    "path": "logit2.png",
+    "width": 162,
+    "height": 96,
+    "alt": "Logit"
+  },
+  {
+    "path": "Newf.png",
+    "width": 162,
+    "height": 96,
+    "alt": "NewF"
   }
 ]
