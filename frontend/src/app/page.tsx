@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 // import { MdMailOutline, MdOutlinePlace, MdSmartphone } from 'react-icons/md';
+import { BiSolidQuoteAltLeft } from 'react-icons/bi';
 import partners from './api/partners.json';
 import { ComponentProps } from 'react';
 
@@ -22,7 +23,6 @@ const Cover = () => {
 
 interface ISectionProps extends ComponentProps<'section'> {
 	title: string;
-	children: React.ReactNode;
 	hasDivider?: boolean;
 }
 
@@ -53,6 +53,119 @@ const Home = () => {
 			<Cover />
 			<div className="w-full flex items-center justify-center">
 				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-7xl px-4">
+					<Section title="Depoimentos">
+						<div className="w-full flex flex-col lg:flex-row gap-6 items-center justify-center">
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110">
+								<div className="flex gap-2 star">
+									<BiSolidQuoteAltLeft
+										size={40}
+										className="shrink-0 text-secondary-900"
+									/>
+									<p className="text-lg leading-7 font-normal text-black-900 text-justify">
+										Your ongoing assistance has certainly been of significant
+										and direct benefit to us in terms of User Experience as well
+										as website functionality Your”
+									</p>
+								</div>
+								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
+									<div className="max-md:order-2  flex flex-1 gap-2 justify-start items-center w-full">
+										<Image
+											src="http://github.com/XavierJece.png"
+											width={80}
+											height={80}
+											alt="Avatar Thiago"
+											className="rounded-full"
+										/>
+										<div className="flex flex-col gap-1 justify-center items-baseline">
+											<span className="text-lg font-bold leading-7 text-primary-900">
+												First Last
+											</span>
+											<span className="text-base leading-7 font-normal text-black-900">
+												Partnerships & Project Marketing Services
+											</span>
+										</div>
+									</div>
+									<span className="max-md:order-1 text-base leading-7 font-normal text-black-900">
+										January 29, 2021
+									</span>
+								</div>
+							</div>
+
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110">
+								<div className="flex gap-2 star">
+									<BiSolidQuoteAltLeft
+										size={40}
+										className="shrink-0 text-secondary-900"
+									/>
+									<p className="text-lg leading-7 font-normal text-black-900 text-justify">
+										Your ongoing assistance has certainly been of significant
+										and direct benefit to us in terms of User Experience as well
+										as website functionality Your ongoing assistance has
+										certainly been of significant and direct benefit to us in
+										terms of.”
+									</p>
+								</div>
+								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
+									<div className="max-md:order-2  flex flex-1 gap-2 justify-start items-center w-full">
+										<Image
+											src="http://github.com/XavierJece.png"
+											width={80}
+											height={80}
+											alt="Avatar Thiago"
+											className="rounded-full"
+										/>
+										<div className="flex flex-col gap-1 justify-center items-baseline">
+											<span className="text-lg font-bold leading-7 text-primary-900">
+												First Last
+											</span>
+											<span className="text-base leading-7 font-normal text-black-900">
+												Partnerships & Project Marketing Services
+											</span>
+										</div>
+									</div>
+									<span className="max-md:order-1 text-base leading-7 font-normal text-black-900">
+										January 29, 2021
+									</span>
+								</div>
+							</div>
+
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110">
+								<div className="flex gap-2 star">
+									<BiSolidQuoteAltLeft
+										size={40}
+										className="shrink-0 text-secondary-900"
+									/>
+									<p className="text-lg leading-7 font-normal text-black-900 text-justify">
+										Your ongoing assistance has certainly been of significant
+										and direct benefit to us.”
+									</p>
+								</div>
+								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
+									<div className="max-md:order-2  flex flex-1 gap-2 justify-start items-center w-full">
+										<Image
+											src="http://github.com/XavierJece.png"
+											width={80}
+											height={80}
+											alt="Avatar Thiago"
+											className="rounded-full"
+										/>
+										<div className="flex flex-col gap-1 justify-center items-baseline">
+											<span className="text-lg font-bold leading-7 text-primary-900">
+												First Last
+											</span>
+											<span className="text-base leading-7 font-normal text-black-900">
+												Partnerships & Project Marketing Services
+											</span>
+										</div>
+									</div>
+									<span className="max-md:order-1 text-base leading-7 font-normal text-black-900">
+										January 29, 2021
+									</span>
+								</div>
+							</div>
+						</div>
+					</Section>
+
 					<Section title="História e Missão">
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
 							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
@@ -483,7 +596,7 @@ const Home = () => {
 							</div>
 							<div className="flex gap-2">
 								<a
-									href="#"
+									href="#Depoimentos"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Depoimentos
