@@ -53,6 +53,51 @@ const Home = () => {
 			<Cover />
 			<div className="w-full flex items-center justify-center">
 				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-7xl px-4">
+					<Section title="Nossos números">
+						<div className="flex flex-col justify-center gap-7">
+							<div className="flex max-md:flex-col justify-between max-md:justify-center border-b-2 border-b-primary-700 max-md:border-0">
+								<div className="flex max-md:flex-col gap-6 max-md:gap-0 items-end max-md:items-start border-r-2 border-r-primary-700 pr-10 max-md:border-0">
+									<p className="text-secondary-900 font-extrabold text-8xl max-md:text-7xl mb-6 max-md:mb-2">
+										+10
+									</p>
+									<p className="text-primary-900 font-bold text-xl max-md:text-lg mb-6">
+										Projetos de PD&I executados com sucesso.
+									</p>
+								</div>
+								<div className="flex max-md:flex-col gap-6 max-md:gap-0 items-end max-md:items-start ml-10 max-md:ml-0">
+									<p className="text-secondary-900 font-extrabold text-8xl max-md:text-7xl mb-6 max-md:mb-2">
+										+15
+									</p>
+									<p className="text-primary-900 font-bold text-xl max-md:text-lg mb-6">
+										Propriedades Intelectuais geradas em parceria com o mercado.
+									</p>
+								</div>
+							</div>
+							<div className="flex max-md:flex-col gap-6 w-full items-end max-md:items-start mb-6">
+								<p className="text-secondary-900 font-extrabold">
+									<span className="text-7xl">+</span>
+									<span className="text-4xl max-md:text-2xl">R$</span>
+									<span className="text-8xl">6</span>
+									<span className="pl-5 text-6xl max-md:text-4xl max-md:pl-2">
+										MILHÕES
+									</span>
+								</p>
+								<p className="text-primary-900 font-bold text-3xl max-md:text-2xl">
+									em contratos com empresas para desenvolvimento de produtos de
+									IA.
+								</p>
+							</div>
+							<div className="flex max-md:flex-col gap-6 w-full items-end max-md:items-start">
+								<p className="text-secondary-900 font-extrabold text-8xl">
+									+100
+								</p>
+								<p className="text-primary-900 font-bold text-3xl max-md:text-2xl">
+									alunos, professores e profissionais do mercado de tecnologia.
+								</p>
+							</div>
+						</div>
+					</Section>
+
 					<Section title="História e Missão">
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
 							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
@@ -475,7 +520,7 @@ const Home = () => {
 							</h6>
 							<div className="flex gap-2">
 								<a
-									href="#"
+									href="#Nossos números"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Nossos números
