@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 // import { MdMailOutline, MdOutlinePlace, MdSmartphone } from 'react-icons/md';
 import partners from './api/partners.json';
+import { ComponentProps } from 'react';
 
 const Cover = () => {
 	return (
@@ -19,7 +20,7 @@ const Cover = () => {
 	);
 };
 
-interface ISectionProps {
+interface ISectionProps extends ComponentProps<'section'> {
 	title: string;
 	children: React.ReactNode;
 	hasDivider?: boolean;
@@ -29,9 +30,14 @@ const Section: React.FC<ISectionProps> = ({
 	title,
 	children,
 	hasDivider = true,
+	...rest
 }) => {
 	return (
-		<section className="flex flex-col w-full mb-10" id={title}>
+		<section
+			className="flex flex-col w-full mb-10"
+			id={rest.id || title}
+			{...rest}
+		>
 			<h2 className="text-4xl font-medium text-primary-900 mb-10 max-md:text-center">
 				{title}
 			</h2>
@@ -279,7 +285,10 @@ const Home = () => {
 						</div>
 					</Section>
 
-					<Section title="Benefícios para empresas ao desenvolver projetos de PD&I com o LAMIA">
+					<Section
+						title="Benefícios para empresas ao desenvolver projetos de PD&I com o LAMIA"
+						id="Benefícios para empresas"
+					>
 						<div className="flex max-md:flex-col justify-between gap-6 items-center">
 							<div className="flex flex-col flex-1 max-md:w-full">
 								<h3 className="uppercase text-secondary-600 font-bold text-2xl mb-5 text-center">
@@ -465,60 +474,60 @@ const Home = () => {
 								Navegação
 							</h6>
 							<div className="flex gap-2">
-								<Link
+								<a
 									href="#"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Nossos números
-								</Link>
+								</a>
 							</div>
 							<div className="flex gap-2">
-								<Link
+								<a
 									href="#"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Depoimentos
-								</Link>
+								</a>
 							</div>
 							<div className="flex gap-2">
-								<Link
+								<a
 									href="#História e Missão"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									História e Missão
-								</Link>
+								</a>
 							</div>
 							<div className="flex gap-2">
-								<Link
+								<a
 									href="#Área de Atuação"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Áreas de Atuação
-								</Link>
+								</a>
 							</div>
 							<div className="flex gap-2">
-								<Link
+								<a
 									href="#Orientadores"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Orientadores
-								</Link>
+								</a>
 							</div>
 							<div className="flex gap-2">
-								<Link
-									href="#"
+								<a
+									href="#Benefícios para empresas"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Benefícios para as empresas
-								</Link>
+								</a>
 							</div>
 							<div className="flex gap-2">
-								<Link
+								<a
 									href="#Empresas parceiras"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
 									Empresas parceiras
-								</Link>
+								</a>
 							</div>
 						</div>
 
