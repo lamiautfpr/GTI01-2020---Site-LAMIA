@@ -99,7 +99,7 @@ const Home = () => {
 					</Section>
 					<Section title="Depoimentos">
 						<div className="w-full flex flex-col lg:flex-row gap-6 items-center justify-center">
-							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110">
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
 								<div className="flex gap-2 star">
 									<BiSolidQuoteAltLeft
 										size={40}
@@ -135,7 +135,7 @@ const Home = () => {
 								</div>
 							</div>
 
-							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110">
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
 								<div className="flex gap-2 star">
 									<BiSolidQuoteAltLeft
 										size={40}
@@ -173,7 +173,7 @@ const Home = () => {
 								</div>
 							</div>
 
-							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110">
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
 								<div className="flex gap-2 star">
 									<BiSolidQuoteAltLeft
 										size={40}
@@ -216,7 +216,7 @@ const Home = () => {
 								<Link
 									href="https://docs.google.com/document/d/1JEfJ-gSrrJPPyxORf4BHEs8qLDszS1PTaV14I6ydx7s/edit?usp=sharing"
 									target="_blank"
-									className="text-secondary-900 hover:font-bold duration-120"
+									className="text-secondary-900 font-bold"
 								>
 									Fundado
 								</Link>{' '}
@@ -226,7 +226,7 @@ const Home = () => {
 								<Link
 									href="https://github.com/lamiautfpr"
 									target="_blank"
-									className="text-secondary-900 hover:font-bold duration-120"
+									className="text-secondary-900 font-bold"
 								>
 									projetos
 								</Link>{' '}
@@ -257,7 +257,7 @@ const Home = () => {
 								<Link
 									href="https://www.linkedin.com/in/lamiautfpr/"
 									target="_blank"
-									className="text-secondary-900 hover:font-bold duration-120"
+									className="text-secondary-900 font-bold"
 								>
 									liderar
 								</Link>{' '}
@@ -270,7 +270,7 @@ const Home = () => {
 								<Link
 									href="https://forms.gle/yCAMx1eB2Q6ULJPK6"
 									target="_blank"
-									className="text-secondary-900 hover:font-bold duration-120"
+									className="text-secondary-900 font-bold"
 								>
 									trabalhar conosco
 								</Link>
@@ -284,7 +284,7 @@ const Home = () => {
 								<Link
 									href="https://www.instagram.com/lamiautfpr/"
 									target="_blank"
-									className="text-secondary-900 hover:font-bold duration-120"
+									className="text-secondary-900 font-bold"
 								>
 									LAMIA
 								</Link>{' '}
@@ -297,7 +297,7 @@ const Home = () => {
 								<Link
 									href="https://embrapii.org.br/"
 									target="_blank"
-									className="text-secondary-900 font-bold hover:font-bold duration-120"
+									className="text-secondary-900 font-bold"
 								>
 									EMBRAPII
 								</Link>{' '}
@@ -308,7 +308,7 @@ const Home = () => {
 								<Link
 									href="https://api.whatsapp.com/send?phone=5545998357976"
 									target="_blank"
-									className="text-secondary-900 hover:font-bold duration-120"
+									className="text-secondary-900 font-bold"
 								>
 									propostas
 								</Link>{' '}
@@ -326,7 +326,7 @@ const Home = () => {
 
 					<Section title="Área de Atuação">
 						<div className="flex flex-col lg:flex-row gap-6 items-center justify-center">
-							<div className="w-sm flex-0 h-[25rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110">
+							<div className="w-sm flex-0 h-[25rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110 max-sm:hover:scale-105">
 								<Image
 									src="/images/icon-data_science.svg"
 									width={60}
@@ -343,7 +343,7 @@ const Home = () => {
 									insights e direcionar a tomada de decisões.
 								</p>
 							</div>
-							<div className="w-sm flex-0 h-[30rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110">
+							<div className="w-sm flex-0 h-[30rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110 max-sm:hover:scale-105">
 								<Image
 									src="/images/icon-computer_vision.svg"
 									width={60}
@@ -351,17 +351,18 @@ const Home = () => {
 									alt="Computer Vision"
 								/>
 								<h5 className="mt-6 mb-11 text-xl leading-8 font-bold text-primary-900">
-									Visão Computacional
+									Aprendizado de Máquina
 								</h5>
 								<p className="text-base leading-7 font-normal text-black-900 text-center">
-									Visão Computacional é um campo que permite que computadores e
-									sistemas obtenham informações significativas a partir de
-									imagens digitais, vídeos e outras entradas visuais. Como base
-									nessas informações, é possível tomar ações ou fazer
-									recomendações.
+									Aprendizado de Máquina permite que os computadores usem os
+									dados existentes para prever futuros comportamentos,
+									resultados e tendências, criando sistemas de IA que podem
+									identificar padrões e criar associações a partir da
+									experiência com os dados. É uma das maiores áreas dentro da
+									Inteligência Artificial.
 								</p>
 							</div>
-							<div className="w-sm flex-0 h-[25rem] max-md:h-auto hover:h-[25.5rem] flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110">
+							<div className="w-sm flex-0 h-[25rem] max-md:h-auto hover:h-[25.5rem] flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110 max-sm:hover:scale-105">
 								<Image
 									src="/images/icon-educational_technologies.svg"
 									width={60}
@@ -485,9 +486,9 @@ const Home = () => {
 									/>
 									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
 										<span className="font-bold">Experiência comprovada:</span>{' '}
-										Conte com nossa experiência na execução bem-sucedida de
-										projetos de Pesquisa, Desenvolvimento e Inovação (PD&I) em
-										parceria com empresas de diversos setores.
+										Conte com nossa experiência na execução bem-sucedida de mais
+										de 30 projetos de Pesquisa, Desenvolvimento e Inovação
+										(PD&I) em parceria com empresas de diversos setores.
 									</p>
 								</li>
 								<li className="flex gap-4 items-start">
@@ -503,10 +504,10 @@ const Home = () => {
 											Oportunidades para empresas:
 										</span>{' '}
 										Como parceiros do Centro de Excelência em Inteligência
-										Artificial (CEIA), somos credenciados como uma unidade
-										EMBRAPII. Isso significa que você poderá contar com
-										contrapartidas financeiras não reembolsáveis da EMBRAPII
-										para impulsionar seus projetos de PD&I.
+										Artificial (CEIA), uma unidade EMBRAPI, sua empresa poderá
+										contar com contrapartidas financeiras não reembolsáveis,
+										para impulsionar seus projetos de PD&I que irão resultar em
+										novos produtos de IA para seu negócio.
 									</p>
 								</li>
 								<li className="flex gap-4 items-start">
@@ -558,9 +559,9 @@ const Home = () => {
 							</div>
 							<div className="flex justify-center w-full max-md:mt-10">
 								<Link
-									href="https://api.whatsapp.com/send?phone=5545998357976"
+									href="https://linktr.ee/lamiautfpr"
 									target="_blank"
-									className="flex bg-primary-900 w-[466px] h-[60px] rounded-lg font-bold text-white text-base justify-center items-center"
+									className="flex bg-primary-900 w-[466px] h-[60px] rounded-lg font-bold text-white text-base justify-center items-center hover:scale-105 duration-300"
 								>
 									Entre em contato agora mesmo!
 								</Link>
