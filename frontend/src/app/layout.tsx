@@ -1,7 +1,10 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({
+	subsets: ['latin'],
+	variable: '--font-montserrat',
+});
 
 export const metadata = {
 	title: 'PORTAL LAMIA',
@@ -15,8 +18,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html className="scroll-smooth" lang="pt-br">
-			<body className={inter.className}>{children}</body>
+		<html className={`${montserrat.variable} scroll-smooth`} lang="pt-br">
+			<body className={montserrat.className}>{children}</body>
 		</html>
 	);
 }

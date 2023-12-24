@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-// import { MdMailOutline, MdOutlinePlace, MdSmartphone } from 'react-icons/md';
 import { BiSolidQuoteAltLeft } from 'react-icons/bi';
 import partners from './api/partners.json';
 import { ComponentProps } from 'react';
 
 const Cover = () => {
 	return (
-		<div className="h-screen flex items-center flex-col justify-center p-1">
+		<div
+			className="flex items-center flex-col justify-center p-1"
+			style={{ height: 'calc(100vh - 50vh)' }}
+		>
 			<h1 className="text-center text-7xl font-bold text-primary-900 mb-4">
 				LAMIA
 			</h1>
@@ -33,12 +35,8 @@ const Section: React.FC<ISectionProps> = ({
 	...rest
 }) => {
 	return (
-		<section
-			className="flex flex-col w-full mb-10"
-			id={rest.id || title}
-			{...rest}
-		>
-			<h2 className="text-4xl font-medium text-primary-900 mb-10 max-md:text-center">
+		<section className="flex flex-col w-full mb-10" {...rest}>
+			<h2 className="text-3xl md:text-5xl font-medium text-primary-900 mb-10 max-md:text-center">
 				{title}
 			</h2>
 			{children}
@@ -53,6 +51,82 @@ const Home = () => {
 			<Cover />
 			<div className="w-full flex items-center justify-center">
 				<main className="flex flex-col gap-8 min-h-screen w-full  max-w-7xl px-4">
+					<Section
+						title="Quer desenvolver pesquisa ou produtos de I.A?"
+						id="EntreEmContato"
+					>
+						<div className="flex max-md:flex-col justify-between gap-6 items-center">
+							<div className="flex flex-col gap-8 flex-1 max-md:w-full">
+								<h3 className="text-secondary-600 font-bold text-2xl ax-w-lg">
+									O LAMIA é o local ideal, seja você pesquisador ou empresa.
+									<br />
+									Somos especialistas em:
+								</h3>
+								<ul className="h-full flex flex-col gap-5 max-w-lg mr-6">
+									<li className="flex gap-4 items-start">
+										<Image
+											src="/images/icon-check.svg"
+											width={24}
+											height={24}
+											alt="Check icon"
+											className="pt-2"
+										/>
+										<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+											<span className="font-bold">
+												Inteligência Artificial -
+											</span>{' '}
+											Desenvolvemos pesquisa base e geramos produtos de I.A
+											junto com empresas e entidades
+										</p>
+									</li>
+									<li className="flex gap-4 items-start">
+										<Image
+											src="/images/icon-check.svg"
+											width={24}
+											height={24}
+											alt="Check icon"
+											className="pt-2"
+										/>
+										<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+											<span className="font-bold">Equipes Qualificadas -</span>{' '}
+											Treinamos alunos e temos uma base de colaboradores do
+											mercado para times nos projetos
+										</p>
+									</li>
+									<li className="flex gap-4 items-start">
+										<Image
+											src="/images/icon-check.svg"
+											width={24}
+											height={24}
+											alt="Check icon"
+											className="pt-2"
+										/>
+										<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
+											<span className="font-bold">Embrapii -</span> Somos
+											multiplicadores do modelo de projetos Embrapii com
+											contrapartida financeira não reembolsável com empresas,
+											através do nosso parceiro CEIA da UFG.
+										</p>
+									</li>
+								</ul>
+								<Link
+									href="https://api.whatsapp.com/send?phone=5545998357976&text=Quero começar uma parceria com o LAMIA!!"
+									target="_blank"
+									className="flex bg-primary-900 w-full md:w-3/4 h-[60px] rounded-lg font-bold text-white text-base justify-center items-center"
+								>
+									Entre em contato conosco!
+								</Link>
+							</div>
+							<Image
+								src="/images/icon-logo_full.svg"
+								width={400 * 1.25}
+								height={264 * 1.25}
+								alt="Logo LAMIA completo"
+								className="max-md:hidden"
+							/>
+						</div>
+					</Section>
+
 					<Section title="Nossos números">
 						<div className="flex flex-col justify-center gap-7">
 							<div className="flex max-md:flex-col justify-between max-md:justify-center border-b-2 border-b-primary-700 max-md:border-0">
@@ -97,6 +171,7 @@ const Home = () => {
 							</div>
 						</div>
 					</Section>
+
 					<Section title="Depoimentos">
 						<div className="w-full flex flex-col lg:flex-row gap-6 items-center justify-center">
 							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110">
@@ -441,96 +516,6 @@ const Home = () => {
 							</div>
 						</div>
 					</Section>
-
-					<Section
-						title="Benefícios para empresas ao desenvolver projetos de PD&I com o LAMIA"
-						id="Benefícios para empresas"
-					>
-						<div className="flex max-md:flex-col justify-between gap-6 items-center">
-							<div className="flex flex-col flex-1 max-md:w-full">
-								<h3 className="uppercase text-secondary-600 font-bold text-2xl mb-5 text-center">
-									COParticipação Financeira
-								</h3>
-								<div className="">
-									<div className="flex items-center">
-										<div className="h-[150px] w-[60px] flex items-center justify-center bg-primary-500">
-											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px]">
-												1/3
-											</span>
-										</div>
-										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
-											EMBRAPII
-										</span>
-									</div>
-									<div className="flex items-center">
-										<div className="h-[300px] w-[60px] flex items-center justify-center bg-primary-900">
-											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px] min-h-[100px]">
-												2/3
-											</span>
-										</div>
-										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
-											SEBRAE/Empresas <br />+ <br /> Unidades EMPRAPII
-										</span>
-									</div>
-								</div>
-							</div>
-							<ul className="h-full flex flex-col gap-5 max-w-lg mr-6">
-								<li className="flex gap-4 items-start">
-									<Image
-										src="/images/icon-check.svg"
-										width={24}
-										height={24}
-										alt="Check icon"
-										className="pt-2"
-									/>
-									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
-										<span className="font-bold">Experiência comprovada:</span>{' '}
-										Conte com nossa experiência na execução bem-sucedida de
-										projetos de Pesquisa, Desenvolvimento e Inovação (PD&I) em
-										parceria com empresas de diversos setores.
-									</p>
-								</li>
-								<li className="flex gap-4 items-start">
-									<Image
-										src="/images/icon-check.svg"
-										width={24}
-										height={24}
-										alt="Check icon"
-										className="pt-2"
-									/>
-									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
-										<span className="font-bold">
-											Oportunidades para empresas:
-										</span>{' '}
-										Como parceiros do Centro de Excelência em Inteligência
-										Artificial (CEIA), somos credenciados como uma unidade
-										EMBRAPII. Isso significa que você poderá contar com
-										contrapartidas financeiras não reembolsáveis da EMBRAPII
-										para impulsionar seus projetos de PD&I.
-									</p>
-								</li>
-								<li className="flex gap-4 items-start">
-									<Image
-										src="/images/icon-check.svg"
-										width={24}
-										height={24}
-										alt="Check icon"
-										className="pt-2"
-									/>
-									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
-										<span className="font-bold">
-											Acesso às últimas tecnologias:
-										</span>{' '}
-										Trabalhe lado a lado com nossos pesquisadores e
-										profissionais, aprendendo na prática as mais recentes
-										tecnologias de Inteligência Artificial e aplicando-as em
-										projetos reais.
-									</p>
-								</li>
-							</ul>
-						</div>
-					</Section>
-
 					<Section title="Empresas parceiras" hasDivider={false}>
 						<div className="flex gap-4 flex-wrap items-center justify-center max-sm:justify-center">
 							{partners.map((partner) => (
@@ -556,19 +541,11 @@ const Home = () => {
 									o futuro da inovação.
 								</p>
 							</div>
-							<div className="flex justify-center w-full max-md:mt-10">
-								<Link
-									href="https://api.whatsapp.com/send?phone=5545998357976"
-									target="_blank"
-									className="flex bg-primary-900 w-[466px] h-[60px] rounded-lg font-bold text-white text-base justify-center items-center"
-								>
-									Entre em contato agora mesmo!
-								</Link>
-							</div>
 						</div>
 					</Section>
 				</main>
 			</div>
+
 			<footer className="mt-10 w-full flex items-center justify-center py-12 bg-black-100">
 				<div className="flex gap-10 flex-col w-full max-w-6xl px-1">
 					<div className="flex max-md:flex-col max-md:items-center gap-10 justify-between">
@@ -581,10 +558,8 @@ const Home = () => {
 							/>
 						</div>
 						<div className="flex flex-col max-md:px-6 gap-4 md:max-w-[15rem] justify-start items-start">
-							<h6 className="text-xl leading-8 font-bold text-black-900">
+							<div className="text-xl leading-8 font-bold text-black-900">
 								Contato
-							</h6>
-							<div className="flex gap-2">
 								<Image
 									src="/images/icon-location.svg"
 									width={24}
@@ -630,64 +605,49 @@ const Home = () => {
 							<h6 className="text-xl leading-8 font-bold text-black-900">
 								Navegação
 							</h6>
-							<div className="flex gap-2">
-								<a
-									href="#Nossos números"
-									className="text-sm leading-6 font-normal text-black-900"
-								>
-									Nossos números
-								</a>
-							</div>
-							<div className="flex gap-2">
-								<a
-									href="#Depoimentos"
-									className="text-sm leading-6 font-normal text-black-900"
-								>
-									Depoimentos
-								</a>
-							</div>
-							<div className="flex gap-2">
-								<a
-									href="#História e Missão"
-									className="text-sm leading-6 font-normal text-black-900"
-								>
-									História e Missão
-								</a>
-							</div>
-							<div className="flex gap-2">
-								<a
-									href="#Área de Atuação"
-									className="text-sm leading-6 font-normal text-black-900"
-								>
-									Áreas de Atuação
-								</a>
-							</div>
-							<div className="flex gap-2">
-								<a
-									href="#Orientadores"
-									className="text-sm leading-6 font-normal text-black-900"
-								>
-									Orientadores
-								</a>
-							</div>
-							<div className="flex gap-2">
-								<a
-									href="#Benefícios para empresas"
-									className="text-sm leading-6 font-normal text-black-900"
-								>
-									Benefícios para as empresas
-								</a>
-							</div>
-							<div className="flex gap-2">
-								<a
-									href="#Empresas parceiras"
-									className="text-sm leading-6 font-normal text-black-900"
-								>
-									Empresas parceiras
-								</a>
-							</div>
+							<a
+								href="#EntreEmContato"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								Benefícios para as empresas
+							</a>
+							<a
+								href="#Nossos números"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								Nossos números
+							</a>
+							<a
+								href="#Depoimentos"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								Depoimentos
+							</a>
+							<a
+								href="#História e Missão"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								História e Missão
+							</a>
+							<a
+								href="#Área de Atuação"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								Áreas de Atuação
+							</a>
+							<a
+								href="#Orientadores"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								Orientadores
+							</a>
+							<a
+								href="#Empresas parceiras"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								Empresas parceiras
+							</a>
 						</div>
-
 						<div className="flex flex-col max-md:px-6 max-md:w-full gap-4 md:max-w-[15rem]">
 							<h6 className="text-xl leading-8 font-bold text-black-900">
 								Social
@@ -744,6 +704,7 @@ const Home = () => {
 							</div>
 						</div>
 					</div>
+
 					<div className="mt-10 border-t py-4">
 						<span className="flex items-center justify-center text-base leading-7 font-normal text-black-900">
 							© 2024 LAMIA. Todos os direitos reservados

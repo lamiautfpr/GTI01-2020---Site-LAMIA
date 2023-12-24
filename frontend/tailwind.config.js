@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -47,7 +48,10 @@ module.exports = {
         600: '#67D9E8',
         900: '#02C0D8',
        }
-      }
+      },
+      fontFamily: {
+        sans: '--font-montserrat',
+      },
     },
   },
   plugins: [],
