@@ -181,32 +181,76 @@ const Home = () => {
 										className="shrink-0 text-secondary-900"
 									/>
 									<p className="text-lg leading-7 font-normal text-black-900 text-justify">
-										Your ongoing assistance has certainly been of significant
-										and direct benefit to us in terms of User Experience as well
-										as website functionality Your”
+										Trabalhar com o LAMIA tem sido ótimo, estamos no 3º ano de
+										trabalho em conjunto. Os alunos possuem uma base de
+										conhecimento logo no início, o rápido aprendizado de
+										conteúdos novos foi algo que nos ajudou bastante nessa
+										parceria.”
 									</p>
 								</div>
 								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
 									<div className="max-md:order-2  flex flex-1 gap-2 justify-start items-center w-full">
 										<Image
-											src="http://github.com/XavierJece.png"
+											src="/images/Dep-GabrielHorikava.png"
 											width={80}
 											height={80}
-											alt="Avatar Thiago"
+											alt="Imagem do Gabriel Horikava"
 											className="rounded-full"
 										/>
 										<div className="flex flex-col gap-1 justify-center items-baseline">
 											<span className="text-lg font-bold leading-7 text-primary-900">
-												First Last
+												Gabriel Horikava
 											</span>
 											<span className="text-base leading-7 font-normal text-black-900">
-												Partnerships & Project Marketing Services
+												Head de I.A na Cilia Tecnologia
 											</span>
 										</div>
 									</div>
-									<span className="max-md:order-1 text-base leading-7 font-normal text-black-900">
-										January 29, 2021
-									</span>
+								</div>
+							</div>
+
+							<div className="w-sm w- max-w-[690px] md:min-w-[450px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
+								<div className="flex gap-2 star">
+									<BiSolidQuoteAltLeft
+										size={40}
+										className="shrink-0 text-secondary-900"
+									/>
+									<div>
+										<p className="text-lg leading-7 font-normal text-black-900 text-justify">
+											O LAMIA da UTFPR é um centro nacional de excelência em
+											pesquisa aplicada em IA. Para o AlfaCon trouxeram acesso a
+											pesquisadores especialistas uma área super demandada
+											mundialmente e impacto em nossos projetos de aplicar IA em
+											Educação.
+										</p>
+										<p className="text-lg leading-7 font-normal text-black-900 text-justify">
+											A Academia e Setor Produtivo operam com velocidades
+											diferentes, mas o LAMIA soube entender essa diferença e
+											leva muito a sério a visão de negócios como demandante da
+											ciência e pesquisa aplicada
+										</p>
+									</div>
+								</div>
+								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
+									<div className="max-md:order-2  flex flex-1 gap-2 justify-start items-center w-full">
+										<Image
+											src="/images/Dep-JadsonSiqueira.png"
+											width={80}
+											height={80}
+											alt="Imagem do Jadson Siqueira"
+											className="rounded-full"
+										/>
+										<div className="flex flex-col gap-1 justify-center items-baseline">
+											<span className="text-lg font-bold leading-7 text-primary-900">
+												Jadson Siqueira
+											</span>
+											<span className="text-base leading-7 font-normal text-black-900">
+												CTO & CMO da AlfaCon Concursos Públicos
+												<br />
+												Presidente do SRI Iguassu Valley
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 
@@ -217,69 +261,29 @@ const Home = () => {
 										className="shrink-0 text-secondary-900"
 									/>
 									<p className="text-lg leading-7 font-normal text-black-900 text-justify">
-										Your ongoing assistance has certainly been of significant
-										and direct benefit to us in terms of User Experience as well
-										as website functionality Your ongoing assistance has
-										certainly been of significant and direct benefit to us in
-										terms of.”
+										Estou adorando trabalhar com o pessoal do LAMIA, eles tem um
+										formato prático e concreto de trabalho, o que é essencial
+										neste mundo de inovações tecnológicas
 									</p>
 								</div>
 								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
 									<div className="max-md:order-2  flex flex-1 gap-2 justify-start items-center w-full">
 										<Image
-											src="http://github.com/XavierJece.png"
+											src="/images/Dep-RamonOliveira.png"
 											width={80}
 											height={80}
-											alt="Avatar Thiago"
+											alt="Imagem do Ramon Oliveira"
 											className="rounded-full"
 										/>
 										<div className="flex flex-col gap-1 justify-center items-baseline">
 											<span className="text-lg font-bold leading-7 text-primary-900">
-												First Last
+												Ramon Oliveira
 											</span>
 											<span className="text-base leading-7 font-normal text-black-900">
-												Partnerships & Project Marketing Services
+												CEO da Logito - Logística Inteligente
 											</span>
 										</div>
 									</div>
-									<span className="max-md:order-1 text-base leading-7 font-normal text-black-900">
-										January 29, 2021
-									</span>
-								</div>
-							</div>
-
-							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
-								<div className="flex gap-2 star">
-									<BiSolidQuoteAltLeft
-										size={40}
-										className="shrink-0 text-secondary-900"
-									/>
-									<p className="text-lg leading-7 font-normal text-black-900 text-justify">
-										Your ongoing assistance has certainly been of significant
-										and direct benefit to us.”
-									</p>
-								</div>
-								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
-									<div className="max-md:order-2  flex flex-1 gap-2 justify-start items-center w-full">
-										<Image
-											src="http://github.com/XavierJece.png"
-											width={80}
-											height={80}
-											alt="Avatar Thiago"
-											className="rounded-full"
-										/>
-										<div className="flex flex-col gap-1 justify-center items-baseline">
-											<span className="text-lg font-bold leading-7 text-primary-900">
-												First Last
-											</span>
-											<span className="text-base leading-7 font-normal text-black-900">
-												Partnerships & Project Marketing Services
-											</span>
-										</div>
-									</div>
-									<span className="max-md:order-1 text-base leading-7 font-normal text-black-900">
-										January 29, 2021
-									</span>
 								</div>
 							</div>
 						</div>
