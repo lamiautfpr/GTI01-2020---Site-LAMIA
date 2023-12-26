@@ -57,7 +57,7 @@ const Home = () => {
 					>
 						<div className="flex max-md:flex-col justify-between gap-6 items-center">
 							<div className="flex flex-col gap-8 flex-1 max-md:w-full">
-								<h3 className="text-secondary-600 font-bold text-2xl ax-w-lg">
+								<h3 className="text-secondary-600 font-bold text-xl ax-w-lg">
 									O LAMIA é o local ideal, seja você pesquisador ou empresa.
 									<br />
 									Somos especialistas em:
@@ -75,8 +75,8 @@ const Home = () => {
 											<span className="font-bold">
 												Inteligência Artificial -
 											</span>{' '}
-											Desenvolvemos pesquisa base e geramos produtos de I.A
-											junto com empresas e entidades
+											Desenvolvemos pesquisa base e geramos produtos de I.A em
+											conjunto com empresas e entidades.
 										</p>
 									</li>
 									<li className="flex gap-4 items-start">
@@ -90,7 +90,8 @@ const Home = () => {
 										<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
 											<span className="font-bold">Equipes Qualificadas -</span>{' '}
 											Treinamos alunos e temos uma base de colaboradores do
-											mercado para times nos projetos
+											mercado para formação e gestão de times dentro dos
+											projetos.
 										</p>
 									</li>
 									<li className="flex gap-4 items-start">
@@ -110,29 +111,29 @@ const Home = () => {
 									</li>
 								</ul>
 								<Link
-									href="https://api.whatsapp.com/send?phone=554598269880&text=Quero começar uma parceria com o LAMIA!!"
+									href="https://linktr.ee/lamiautfpr"
 									target="_blank"
-									className="flex bg-primary-900 w-full md:w-3/4 h-[60px] rounded-lg font-bold text-white text-base justify-center items-center"
+									className="flex bg-primary-900 w-full md:w-3/4 h-[60px] rounded-lg font-bold text-white text-base justify-center items-center hover:scale-105 duration-300"
 								>
 									Entre em contato conosco!
 								</Link>
 							</div>
 							<Image
-								src="/images/icon-logo_full.svg"
-								width={400 * 1.25}
-								height={264 * 1.25}
+								src="/images/icon-novaLogo.png"
+								width={508 * 0.75}
+								height={491 * 0.75}
 								alt="Logo LAMIA completo"
-								className="max-md:hidden"
+								className="max-md:hidden pr-8"
 							/>
 						</div>
 					</Section>
 
-					<Section title="Nossos números">
+					<Section title="Nossos números" id="nossosNumeros">
 						<div className="flex flex-col justify-center gap-7">
 							<div className="flex max-md:flex-col justify-between max-md:justify-center border-b-2 border-b-primary-700 max-md:border-0">
 								<div className="flex max-md:flex-col gap-6 max-md:gap-0 items-end max-md:items-start border-r-2 border-r-primary-700 pr-10 max-md:border-0">
 									<p className="text-secondary-900 font-extrabold text-8xl max-md:text-7xl mb-6 max-md:mb-2">
-										+10
+										+7
 									</p>
 									<p className="text-primary-900 font-bold text-xl max-md:text-lg mb-6">
 										Projetos de PD&I executados com sucesso.
@@ -140,7 +141,7 @@ const Home = () => {
 								</div>
 								<div className="flex max-md:flex-col gap-6 max-md:gap-0 items-end max-md:items-start ml-10 max-md:ml-0">
 									<p className="text-secondary-900 font-extrabold text-8xl max-md:text-7xl mb-6 max-md:mb-2">
-										+15
+										+10
 									</p>
 									<p className="text-primary-900 font-bold text-xl max-md:text-lg mb-6">
 										Propriedades Intelectuais geradas em parceria com o mercado.
@@ -157,8 +158,8 @@ const Home = () => {
 									</span>
 								</p>
 								<p className="text-primary-900 font-bold text-3xl max-md:text-2xl">
-									em contratos com empresas para desenvolvimento de produtos de
-									IA.
+									em contratos de PD&I com empresas para desenvolvimento de
+									produtos de IA.
 								</p>
 							</div>
 							<div className="flex max-md:flex-col gap-6 w-full items-end max-md:items-start">
@@ -166,15 +167,15 @@ const Home = () => {
 									+100
 								</p>
 								<p className="text-primary-900 font-bold text-3xl max-md:text-2xl">
-									alunos, professores e profissionais do mercado de tecnologia.
+									alunos, doutores e profissionais do mercado de tecnologia.
 								</p>
 							</div>
 						</div>
 					</Section>
 
-					<Section title="Depoimentos">
+					<Section title="Depoimentos" id="Depoimentos">
 						<div className="w-full flex flex-col lg:flex-row gap-6 items-center justify-center">
-							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] h-[25rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-300 hover:scale-105 max-sm:hover:scale-105">
 								<div className="flex gap-2 star">
 									<BiSolidQuoteAltLeft
 										size={40}
@@ -185,7 +186,7 @@ const Home = () => {
 										trabalho em conjunto. Os alunos possuem uma base de
 										conhecimento logo no início, o rápido aprendizado de
 										conteúdos novos foi algo que nos ajudou bastante nessa
-										parceria.”
+										parceria.
 									</p>
 								</div>
 								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
@@ -209,7 +210,7 @@ const Home = () => {
 								</div>
 							</div>
 
-							<div className="w-sm w- max-w-[690px] md:min-w-[450px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
+							<div className="w-sm w- max-w-[690px] md:min-w-[450px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-300 hover:scale-105 max-sm:hover:scale-105">
 								<div className="flex gap-2 star">
 									<BiSolidQuoteAltLeft
 										size={40}
@@ -227,7 +228,7 @@ const Home = () => {
 											A Academia e Setor Produtivo operam com velocidades
 											diferentes, mas o LAMIA soube entender essa diferença e
 											leva muito a sério a visão de negócios como demandante da
-											ciência e pesquisa aplicada
+											ciência e pesquisa aplicada.
 										</p>
 									</div>
 								</div>
@@ -245,7 +246,7 @@ const Home = () => {
 												Jadson Siqueira
 											</span>
 											<span className="text-base leading-7 font-normal text-black-900">
-												CTO & CMO da AlfaCon Concursos Públicos
+												CTO & CMO da AlfaCon Concursos Públicos;
 												<br />
 												Presidente do SRI Iguassu Valley
 											</span>
@@ -254,7 +255,7 @@ const Home = () => {
 								</div>
 							</div>
 
-							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-150 hover:scale-110 max-sm:hover:scale-105">
+							<div className="w-sm max-w-[640px] md:min-w-[400px] flex-0 min-h-[18rem] h-[25rem] max-md:h-auto flex flex-col gap-5 items-center justify-between rounded-lg border-primary-900 border-x-2 bg-black-100 pt-8 px-4 pb-4 duration-300 hover:scale-105 max-sm:hover:scale-105">
 								<div className="flex gap-2 star">
 									<BiSolidQuoteAltLeft
 										size={40}
@@ -263,7 +264,7 @@ const Home = () => {
 									<p className="text-lg leading-7 font-normal text-black-900 text-justify">
 										Estou adorando trabalhar com o pessoal do LAMIA, eles tem um
 										formato prático e concreto de trabalho, o que é essencial
-										neste mundo de inovações tecnológicas
+										neste mundo de inovações tecnológicas.
 									</p>
 								</div>
 								<div className="flex max-md:flex-col gap-2 justify-between items-center max-md:items-end w-full">
@@ -289,7 +290,7 @@ const Home = () => {
 						</div>
 					</Section>
 
-					<Section title="História e Missão">
+					<Section title="História e Missão" id="História e Missão">
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
 							<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900 order-2 md:order-1">
 								<Link
@@ -353,8 +354,8 @@ const Home = () => {
 								>
 									trabalhar conosco
 								</Link>
-								, aprendendo na prática as últimas tecnologias de I.A e
-								trabalhando em projetos reais aplicados.
+								, em projetos reais aplicados com empresas e entidades públicas
+								parceiras, integrando as equipes de colaboradores dentro destes.
 							</p>
 						</div>
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
@@ -367,31 +368,39 @@ const Home = () => {
 								>
 									LAMIA
 								</Link>{' '}
-								possui experiência na execução de projetos de P&D em parceria
-								com empresas, para desenvolvimento de produtos de inteligência
-								artificial que podem alavancar o modelo de negócio através da
-								automação de áreas e tarefas chave internas das mesmas. Somos
-								parceiros do Centro de Excêlencia em I.A (CEIA) credenciado como
-								unidade{' '}
+								possui experiência na execução de projetos de PD&I em parceria
+								com empresas e entidades públicas, para desenvolvimento de
+								produtos de inteligência artificial que alavancam seus modelos
+								de negócio através da automação de áreas e tarefas internas
+								essenciais das mesmas. Somos parceiros do Centro de Excêlencia
+								em I.A (
+								<Link
+									href="https://ceia.ufg.br/"
+									target="_blank"
+									className="text-secondary-900 font-bold"
+								>
+									CEIA
+								</Link>
+								) credenciado como unidade{' '}
 								<Link
 									href="https://embrapii.org.br/"
 									target="_blank"
 									className="text-secondary-900 font-bold"
 								>
 									EMBRAPII
-								</Link>{' '}
-								, que permite que projetos de P&D com empresas brasileiras
-								possam ser construídos utilizando de contrapartida financeira
-								não reembolsáveis da EMBRAPII. Estamos sempre disponíveis a
-								receber e negociar{' '}
+								</Link>
+								, que permite que projetos de PD&I com empresas brasileiras
+								possam ser construídos utilizando de contrapartidas financeiras
+								não reembolsáveis da EMBRAPII e do{' '}
 								<Link
-									href="https://api.whatsapp.com/send?phone=554598269880&text=Olá Thiago tudo bem? Estou interessado em fazer parcerias com o LAMIA!"
+									href="https://sebrae.com.br/sites/PortalSebrae"
 									target="_blank"
 									className="text-secondary-900 font-bold"
 								>
-									propostas
-								</Link>{' '}
-								de projetos com empresas interessadas.
+									SEBRAE
+								</Link>
+								. Estamos sempre disponíveis a receber e discutir propostas de
+								projetos em parceiria com empresas e entidades interessadas.
 							</p>
 							<Image
 								src="/images/embrapii.png"
@@ -425,13 +434,21 @@ const Home = () => {
 									</div>
 									<div className="flex items-center">
 										<div className="h-[300px] w-[60px] flex items-center justify-center bg-primary-900">
-											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px] min-h-[100px]">
+											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px] min-h-[133px]">
 												2/3
 											</span>
 										</div>
 										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
-											SEBRAE/Empresas <br />+ <br /> Unidades EMPRAPII
+											Empresa e <br /> SEBRAE* <br />+ <br /> Unidades EMPRAPII
 										</span>
+									</div>
+									<div className="font-medium text-xs mt-4">
+										<p>
+											<span className="font-extrabold">*</span>A contrapartida
+											financeira do SEBRAE está condicionada ao atendimento de
+											critérios específicos de faturamento e porte registrado no
+											CNPJ por parte da empresa.
+										</p>
 									</div>
 								</div>
 							</div>
@@ -447,8 +464,8 @@ const Home = () => {
 									<p className="max-w-lg text-base text-justify leading-7 font-normal text-black-900">
 										<span className="font-bold">Experiência comprovada:</span>{' '}
 										Conte com nossa experiência na execução bem-sucedida de mais
-										de 30 projetos de Pesquisa, Desenvolvimento e Inovação
-										(PD&I) em parceria com empresas de diversos setores.
+										de 7 projetos de Pesquisa, Desenvolvimento e Inovação (PD&I)
+										em parceria com empresas de diversos setores.
 									</p>
 								</li>
 								<li className="flex gap-4 items-start">
@@ -482,19 +499,20 @@ const Home = () => {
 										<span className="font-bold">
 											Acesso às últimas tecnologias:
 										</span>{' '}
-										Trabalhe lado a lado com nossos pesquisadores e
-										profissionais, aprendendo na prática as mais recentes
-										tecnologias de Inteligência Artificial e aplicando-as em
-										projetos reais.
+										Os colaboradores de sua empresa irão trabalhar lado a lado
+										com nossos pesquisadores e profissionais, desenvolvendo
+										novas habilidades e dominando as mais recentes tecnologias
+										de Inteligência Artificial, de forma customizada para o seu
+										produto e modelo de negócio.
 									</p>
 								</li>
 							</ul>
 						</div>
 					</Section>
 
-					<Section title="Área de Atuação">
+					<Section title="Áreas de Atuação" id="areasAtuacao">
 						<div className="flex flex-col lg:flex-row gap-6 items-center justify-center">
-							<div className="w-sm flex-0 h-[25rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110 max-sm:hover:scale-105">
+							<div className="w-sm flex-0 h-[25rem] min-w-[400px] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-300 hover:scale-105">
 								<Image
 									src="/images/icon-data_science.svg"
 									width={60}
@@ -511,7 +529,7 @@ const Home = () => {
 									insights e direcionar a tomada de decisões.
 								</p>
 							</div>
-							<div className="w-sm flex-0 h-[30rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110 max-sm:hover:scale-105">
+							<div className="w-sm flex-0 h-[30rem] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-300 hover:scale-105">
 								<Image
 									src="/images/icon-computer_vision.svg"
 									width={60}
@@ -530,7 +548,7 @@ const Home = () => {
 									Inteligência Artificial.
 								</p>
 							</div>
-							<div className="w-sm flex-0 h-[25rem] max-md:h-auto hover:h-[25.5rem] flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-150 hover:scale-110 max-sm:hover:scale-105">
+							<div className="w-sm flex-0 h-[25rem] min-w-[400px] max-md:h-auto flex flex-col items-center justify-center rounded-lg bg-black-100 pt-8 px-4 pb-4 max-w-[640px] duration-300 hover:scale-105">
 								<Image
 									src="/images/icon-educational_technologies.svg"
 									width={60}
@@ -538,19 +556,21 @@ const Home = () => {
 									alt="Educational Technologiese"
 								/>
 								<h5 className="mt-6 mb-8 text-xl leading-8 font-bold text-primary-900">
-									Tecnologias Educacionais
+									Tecnologias Imersivas
 								</h5>
 								<p className="text-base leading-7 font-normal text-black-900 text-center">
-									Tecnologias Educacionais é um campo onde são exploradas
-									tecnologias mais modernas de sistemas web e jogos digitais
-									para criação de plataformas e ferramentas que auxiliem no
-									processo de ensino aprendizagem de forma inovadora.
+									Tecnologias Imersivas são um campo onde são exploradas
+									soluções para simular ambientes reais dentro de um universo
+									virtual. O LAMIA utiliza tecnologias Web e Jogos Digitais para
+									criação de ferramentas que auxiliem nos processos de controle,
+									automação e treinamento dentro de indústrias e entidades
+									públicas.
 								</p>
 							</div>
 						</div>
 					</Section>
 
-					<Section title="Orientadores">
+					<Section title="Orientadores" id="Orientadores">
 						<div className="flex flex-col md:flex-row justify-center gap-6 ">
 							<div className="flex flex-col w-80 drop-shadow-xl max-md:w-full">
 								<Image
@@ -611,7 +631,11 @@ const Home = () => {
 						</div>
 					</Section>
 
-					<Section title="Empresas parceiras" hasDivider={false}>
+					<Section
+						title="Empresas parceiras"
+						hasDivider={false}
+						id="Empresas parceiras"
+					>
 						<div className="flex gap-4 flex-wrap items-center justify-center max-sm:justify-center">
 							{partners.map((partner) => (
 								<Image
@@ -630,10 +654,12 @@ const Home = () => {
 									Este é o momento perfeito para se juntar a nós!
 								</p>
 								<p className="text-base leading-7 font-normal text-black-900 text-justify">
-									Entre em contato conosco hoje mesmo para explorar as
-									possibilidades e discutir como podemos colaborar para
-									impulsionar o seu sucesso por meio da IA. Juntos, vamos moldar
-									o futuro da inovação.
+									Entre em contato conosco para explorar as possibilidades de
+									I.A e discutir como podemos colaborar para impulsionar sua
+									carreira como pesquisador/colaborador ou como podemos
+									alavancar o sucesso da sua empresa/entidade pública por meio
+									de produtos de I.A. Juntos, vamos moldar o futuro da inovação
+									no Brasil.
 								</p>
 							</div>
 							<div className="flex justify-center w-full max-md:mt-10">
@@ -642,7 +668,7 @@ const Home = () => {
 									target="_blank"
 									className="flex bg-primary-900 w-[466px] h-[60px] rounded-lg font-bold text-white text-base justify-center items-center hover:scale-105 duration-300"
 								>
-									Entre em contato agora mesmo!
+									Entre em contato conosco!
 								</Link>
 							</div>
 						</div>
@@ -664,16 +690,24 @@ const Home = () => {
 						<div className="flex flex-col max-md:px-6 gap-4 md:max-w-[15rem] justify-start items-start">
 							<div className="text-xl leading-8 font-bold text-black-900">
 								Contato
-								<Image
-									src="/images/icon-location.svg"
-									width={24}
-									height={24}
-									alt="Location icon"
-								/>
-								<p className="text-sm leading-6 font-normal text-black-900">
-									Prolongamento da Rua Cerejeira, s/n Bairro - São Luiz, Santa
-									Helena - PR, 85892-000
-								</p>
+								<div className="flex gap-2 items-start mt-4">
+									<Image
+										src="/images/icon-location.svg"
+										width={24}
+										height={24}
+										alt="Location icon"
+									/>
+									<Link
+										href="https://maps.app.goo.gl/9LXeXigLikrYpQ3r6"
+										className="text-sm leading-6 font-normal text-black-900"
+										target="_blank"
+									>
+										UTFPR Santa Helena <br />
+										Bloco L - LAMIA <br />
+										Santa Helena - PR <br />
+										85892-000
+									</Link>
+								</div>
 							</div>
 							<div className="flex gap-2">
 								<Image
@@ -685,6 +719,7 @@ const Home = () => {
 								<Link
 									href="mail:lamia-sh@utfpr.edu.br"
 									className="text-sm leading-6 font-normal text-black-900"
+									target="_blank"
 								>
 									lamia-sh@utfpr.edu.br
 								</Link>
@@ -700,7 +735,7 @@ const Home = () => {
 									href="tel:45998357976"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
-									(45) 99835-7976
+									(45) 99826-9880
 								</Link>
 							</div>
 						</div>
@@ -716,7 +751,7 @@ const Home = () => {
 								Benefícios para as empresas
 							</a>
 							<a
-								href="#Nossos números"
+								href="#nossosNumeros"
 								className="text-sm leading-6 font-normal text-black-900"
 							>
 								Nossos números
@@ -734,7 +769,13 @@ const Home = () => {
 								História e Missão
 							</a>
 							<a
-								href="#Área de Atuação"
+								href="#Benefícios para empresas"
+								className="text-sm leading-6 font-normal text-black-900"
+							>
+								Modelo EMBRAPII
+							</a>
+							<a
+								href="#areasAtuacao"
 								className="text-sm leading-6 font-normal text-black-900"
 							>
 								Áreas de Atuação
