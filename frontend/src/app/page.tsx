@@ -434,12 +434,14 @@ const Home = () => {
 									</div>
 									<div className="flex items-center">
 										<div className="h-[300px] w-[60px] flex items-center justify-center bg-primary-900">
-											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px] min-h-[133px]">
+											<span className="text-white font-bold text-2xl border-l-2 border-b-2 border-black-300 p-[1px] min-h-[196px]">
 												2/3
 											</span>
 										</div>
 										<span className="font-bold text-2xl border-b-2 border-black-300 p-[1px] text-center min-w-[calc(80%-60px)] -mx-[10px]">
-											Empresa e <br /> SEBRAE* <br />+ <br /> Unidades EMPRAPII
+											Empresa e <br /> SEBRAE* <br />+ <br /> Unidade CEIA{' '}
+											<br />+<br />
+											LAMIA
 										</span>
 									</div>
 									<div className="font-medium text-xs mt-4">
@@ -678,8 +680,8 @@ const Home = () => {
 
 			<footer className="mt-10 w-full flex items-center justify-center py-12 bg-black-100">
 				<div className="flex gap-10 flex-col w-full max-w-6xl px-1">
-					<div className="flex max-md:flex-col max-md:items-center gap-10 justify-between">
-						<div className="max-md:px-6">
+					<div className="flex max-md:flex-col max-md:items-start gap-10 justify-between">
+						<div className="max-md:flex max-md:justify-center max-md:px-6 max-md:w-full">
 							<Image
 								src="/images/icon-logo_name.svg"
 								width={217}
