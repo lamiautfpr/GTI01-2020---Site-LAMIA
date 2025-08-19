@@ -403,7 +403,7 @@ const Home = () => {
 								projetos em parceiria com empresas e entidades interessadas.
 							</p>
 							<Image
-								src="/images/embrapii.png"
+								src="/images/sei-sicite.png"
 								width={500}
 								height={250}
 								alt="Premio do LAMIA"
