@@ -359,56 +359,60 @@ const Home = () => {
 							</p>
 						</div>
 						<div className="flex flex-col md:flex-row gap-8 items-center justify-between">
-							<p className="max-w-lg text-base leading-7 text-justify font-normal text-black-900 order-2 md:order-1">
-								O{' '}
-								<Link
-									href="https://www.instagram.com/lamiautfpr/"
-									target="_blank"
-									className="text-secondary-900 font-bold"
-								>
-									LAMIA
-								</Link>{' '}
-								possui experiência na execução de projetos de PD&I em parceria
-								com empresas e entidades públicas, para desenvolvimento de
-								produtos de inteligência artificial que alavancam seus modelos
-								de negócio através da automação de áreas e tarefas internas
-								essenciais das mesmas. Somos parceiros do Centro de Excêlencia
-								em I.A (
-								<Link
-									href="https://ceia.ufg.br/"
-									target="_blank"
-									className="text-secondary-900 font-bold"
-								>
-									CEIA
-								</Link>
-								) credenciado como unidade{' '}
-								<Link
-									href="https://embrapii.org.br/"
-									target="_blank"
-									className="text-secondary-900 font-bold"
-								>
-									EMBRAPII
-								</Link>
-								, que permite que projetos de PD&I com empresas brasileiras
-								possam ser construídos utilizando de contrapartidas financeiras
-								não reembolsáveis da EMBRAPII e do{' '}
-								<Link
-									href="https://sebrae.com.br/sites/PortalSebrae"
-									target="_blank"
-									className="text-secondary-900 font-bold"
-								>
-									SEBRAE
-								</Link>
-								. Estamos sempre disponíveis a receber e discutir propostas de
-								projetos em parceiria com empresas e entidades interessadas.
-							</p>
-							<Image
-								src="/images/embrapii.png"
-								width={500}
-								height={250}
-								alt="Premio do LAMIA"
-								className="order-1"
-							/>
+							<div className="w-full">
+								<p className="max-w-lg text-base leading-7 text-justify font-normal text-black-900 order-1 md:order-2">
+									O{' '}
+									<Link
+										href="https://www.instagram.com/lamiautfpr/"
+										target="_blank"
+										className="text-secondary-900 font-bold"
+									>
+										LAMIA
+									</Link>{' '}
+									possui experiência na execução de projetos de PD&I em parceria
+									com empresas e entidades públicas, para desenvolvimento de
+									produtos de inteligência artificial que alavancam seus modelos
+									de negócio através da automação de áreas e tarefas internas
+									essenciais das mesmas. Somos parceiros do Centro de Excêlencia
+									em I.A (
+									<Link
+										href="https://ceia.ufg.br/"
+										target="_blank"
+										className="text-secondary-900 font-bold"
+									>
+										CEIA
+									</Link>
+									) credenciado como unidade{' '}
+									<Link
+										href="https://embrapii.org.br/"
+										target="_blank"
+										className="text-secondary-900 font-bold"
+									>
+										EMBRAPII
+									</Link>
+									, que permite que projetos de PD&I com empresas brasileiras
+									possam ser construídos utilizando de contrapartidas
+									financeiras não reembolsáveis da EMBRAPII e do{' '}
+									<Link
+										href="https://sebrae.com.br/sites/PortalSebrae"
+										target="_blank"
+										className="text-secondary-900 font-bold"
+									>
+										SEBRAE
+									</Link>
+									. Estamos sempre disponíveis a receber e discutir propostas de
+									projetos em parceiria com empresas e entidades interessadas.
+								</p>
+							</div>
+							<div className="flex justify-center w-full">
+								<Image
+									src="/images/premio-embrapi.png"
+									width={240}
+									height={240}
+									alt="Premio do LAMIA"
+									className="order-2 md:order-1"
+								/>
+							</div>
 						</div>
 					</Section>
 
