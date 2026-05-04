@@ -1,6 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { ComponentProps } from 'react';
+import { ComponentProps, useState } from 'react';
 import { BiSolidQuoteAltLeft } from 'react-icons/bi';
 import partners from './api/partners.json';
 
@@ -45,7 +47,277 @@ const Section: React.FC<ISectionProps> = ({
 	);
 };
 
+const advisors = [
+	{
+		name: 'Thiago Naves',
+		image: '/images/avatar-thiago.png',
+		alt: 'Avatar Thiago',
+		description:
+			'Coordenador Geral do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Conduz pesquisas nas áreas de Ciência de Dados e Visão Computacional e trabalha junto a incubadoras no desenvolvimento de empresas de base tecnológicas e startups.',
+	},
+	{
+		name: 'Arlete Beuren',
+		image: '/images/avatar-arlete.png',
+		alt: 'Avatar Arlete',
+		description:
+			'Coordenadora Operacional do LAMIA e docente no Curso de Ciência da Computação da UTFPR. Interesse de pesquisas nas áreas de Visão Computacional/Processamento de Imagens/Reconhecimento de Padrões/Big Data/Computação Gráfica/Realidade Virtual/Desenvolvimento Web.',
+	},
+	{
+		name: 'Anderson Brilhador',
+		image: '/images/avatar-brilhador.png',
+		alt: 'Avatar Brilhador',
+		description:
+			'Orientador do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Desenvolve pesquisas nas seguintes áreas: Computer Vision, Data Science, Data Mining, Machine Learning e Deep Learning.',
+	},
+	{
+		name: 'Prof. Franck',
+		image: '/images/foto-1.jpg',
+		alt: 'Foto do Prof. Franck',
+		description:
+			'Coordenador Educacional do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Desenvolve pesquisas nas áreas de Linguagem Natural com Grandes Modelos de Linguagem, Reconhecimento de Padrões e Redes de Petri.',
+	},
+	{
+		name: 'Prof. Fernando',
+		image: '/images/foto-2.png',
+		alt: 'Foto do Prof. Fernando',
+		description:
+			'Coordenador científico do LAMIA e docente no curso de Sistemas de Informação na UTFPR Londrina. Desenvolve pesquisas na área de computação aplicada e tem experiência na gestão de incubadora e desenvolvimento de empresas de base tecnológica.',
+	},
+	{
+		name: 'Prof. Jorge',
+		image: '/images/foto-3.jpg',
+		alt: 'Foto do Prof. Jorge',
+		description:
+			'Docente no Curso de Ciência da Computação da UTFPR - Medianeira. Interesse de pesquisas nas áreas de Linguagem Natural com Grandes Modelos de Linguagem, Visão Computacional/Processamento de Imagens/Reconhecimento de Padrões e Realidade Virtual.',
+	},
+	{
+		name: 'Prof. Igor',
+		image: '/images/foto-4.png',
+		alt: 'Foto do Prof. Igor',
+		description:
+			'Docente no curso de Ciência da Computação da UTFPR Campo Mourão e colaborador do LAMIA como coordenador de times e projetos. Bolsista Produtividade da Fundação Araucária. Conduz pesquisas nas áreas de IA Generativa aplicada, Ciência de Dados e Visão Computacional, bem como Aplicação de IA em Engenharia de Software. Trabalha junto a incubadoras no desenvolvimento de empresas de base tecnológicas e startups.',
+	},
+	{
+		name: 'Prof. Reginaldo',
+		image: '/images/foto-5.png',
+		alt: 'Foto do Prof. Reginaldo',
+		description:
+			'Orientador do LAMIA e docente no curso de Ciência da Computação da UTFPR Campo Mourão. Desenvolve pesquisas em Engenharia de Software, Ecologia e Biodiversidade.',
+	},
+	{
+		name: 'Prof. Ivanilton',
+		image: '/images/foto-6.png',
+		alt: 'Foto do Prof. Ivanilton',
+		description:
+			'Professor Titular no curso de Ciência da Computação da UTFPR Campo Mourão e pesquisador associado ao CCDSSIA. Conduz pesquisas e lidera projetos de inovação tecnológica nas áreas de Inteligência Artificial, Smart Tags (RFID/BLE), Sistemas de Rastreabilidade e Computação Verde.',
+	},
+];
+
+interface IContactButtonProps {
+	onClick: () => void;
+	className?: string;
+}
+
+const ContactButton: React.FC<IContactButtonProps> = ({
+	onClick,
+	className = '',
+}) => {
+	return (
+		<button
+			type="button"
+			onClick={onClick}
+			className={`flex bg-primary-900 h-[60px] rounded-lg font-bold text-white text-base justify-center items-center hover:scale-105 duration-300 ${className}`}
+		>
+			Entre em contato conosco!
+		</button>
+	);
+};
+
+interface IContactModalProps {
+	isOpen: boolean;
+	onClose: () => void;
+}
+
+const ContactModal: React.FC<IContactModalProps> = ({ isOpen, onClose }) => {
+	if (!isOpen) {
+		return null;
+	}
+
+	return (
+		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black-900/60 px-4 py-8">
+			<div className="relative w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+				<div className="bg-primary-900 px-6 py-5 text-white">
+					<button
+						type="button"
+						onClick={onClose}
+						className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-2xl leading-none hover:bg-white/25"
+						aria-label="Fechar modal de contato"
+					>
+						×
+					</button>
+					<p className="text-sm font-bold uppercase tracking-wide text-secondary-200">
+						Fale com o LAMIA
+					</p>
+					<h3 className="mt-2 pr-10 text-2xl font-bold leading-8">
+						Vamos conversar sobre pesquisa, projetos e parcerias em I.A.
+					</h3>
+				</div>
+
+				<div className="grid gap-4 p-6 md:grid-cols-2">
+					<Link
+						href="mailto:lamia-sh@utfpr.edu.br"
+						className="flex gap-3 rounded-xl border border-black-200 bg-black-100 p-4 duration-300 hover:border-primary-900 hover:bg-primary-100"
+					>
+						<Image
+							src="/images/icon-email.svg"
+							width={28}
+							height={28}
+							alt="E-mail icon"
+							className="h-7 w-7 shrink-0"
+						/>
+						<span>
+							<strong className="block text-base text-primary-900">
+								E-mail
+							</strong>
+							<span className="text-sm leading-6 text-black-900">
+								lamia-sh@utfpr.edu.br
+							</span>
+						</span>
+					</Link>
+					<Link
+						href="tel:+5545991018140"
+						className="flex gap-3 rounded-xl border border-black-200 bg-black-100 p-4 duration-300 hover:border-primary-900 hover:bg-primary-100"
+					>
+						<Image
+							src="/images/icon-telephone.svg"
+							width={28}
+							height={28}
+							alt="Telefone icon"
+							className="h-7 w-7 shrink-0"
+						/>
+						<span>
+							<strong className="block text-base text-primary-900">
+								Telefone
+							</strong>
+							<span className="text-sm leading-6 text-black-900">
+								+55 45 99101-8140
+							</span>
+						</span>
+					</Link>
+					<Link
+						href="https://maps.app.goo.gl/9LXeXigLikrYpQ3r6"
+						target="_blank"
+						className="flex gap-3 rounded-xl border border-black-200 bg-black-100 p-4 duration-300 hover:border-primary-900 hover:bg-primary-100 md:col-span-2"
+					>
+						<Image
+							src="/images/icon-location.svg"
+							width={28}
+							height={28}
+							alt="Location icon"
+							className="h-7 w-7 shrink-0"
+						/>
+						<span>
+							<strong className="block text-base text-primary-900">
+								Endereço
+							</strong>
+							<span className="text-sm leading-6 text-black-900">
+								UTFPR Santa Helena, Bloco L - LAMIA, Santa Helena - PR,
+								85892-000
+							</span>
+						</span>
+					</Link>
+				</div>
+
+				<div className="flex flex-col gap-4 border-t border-black-200 px-6 py-5 md:flex-row md:items-center md:justify-between">
+					<p className="text-sm leading-6 text-black-900">
+						Acompanhe também os canais oficiais do laboratório.
+					</p>
+					<div className="flex gap-5">
+						<Link href="https://www.facebook.com/lamiautfpr2" target="_blank">
+							<Image
+								src="/images/icon-facebook.svg"
+								width={24}
+								height={24}
+								alt="Facebook icon"
+							/>
+						</Link>
+						<Link href="https://www.instagram.com/lamiautfpr/" target="_blank">
+							<Image
+								src="/images/icon-instagram.svg"
+								width={24}
+								height={24}
+								alt="Instagram icon"
+							/>
+						</Link>
+						<Link href="https://github.com/lamiautfpr" target="_blank">
+							<Image
+								src="/images/icon-github.svg"
+								width={24}
+								height={24}
+								alt="Github icon"
+							/>
+						</Link>
+						<Link
+							href="https://www.linkedin.com/in/lamiautfpr/"
+							target="_blank"
+						>
+							<Image
+								src="/images/icon-linkedin.svg"
+								width={24}
+								height={24}
+								alt="Linkedin icon"
+							/>
+						</Link>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+const AdvisorsCarousel = () => {
+	return (
+		<div className="w-full max-w-full overflow-hidden rounded-3xl border border-black-200 bg-white p-3 shadow-xl shadow-black-200/70 sm:p-5">
+			<div className="relative">
+				<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent max-sm:hidden" />
+				<div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-white to-transparent max-sm:hidden" />
+
+				<div className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-color:#00679A_#ECECEC] [scrollbar-width:thin] sm:gap-5">
+					{advisors.map((advisor) => (
+						<article
+							key={advisor.name}
+							className="grid w-[88%] max-w-[58rem] flex-none snap-center gap-4 rounded-2xl bg-gradient-to-br from-primary-100 via-white to-black-100 p-4 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[34rem] sm:p-6 lg:w-[52rem] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center"
+						>
+							<div className="relative h-64 overflow-hidden rounded-2xl bg-white shadow-inner sm:h-72 lg:h-80">
+								<div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,102,0,0.16),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(2,192,216,0.18),transparent_30%)]" />
+								<Image
+									src={advisor.image}
+									width={520}
+									height={380}
+									alt={advisor.alt}
+									className="relative h-full w-full object-contain p-5"
+								/>
+							</div>
+
+							<div className="min-w-0">
+								<h3 className="break-words text-3xl font-bold leading-tight text-primary-900 sm:text-4xl">
+									{advisor.name}
+								</h3>
+								<p className="mt-4 text-base leading-7 text-black-900">
+									{advisor.description}
+								</p>
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</div>
+	);
+};
+
 const Home = () => {
+	const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
 	return (
 		<>
 			<Cover />
@@ -110,13 +382,10 @@ const Home = () => {
 										</p>
 									</li>
 								</ul>
-								<Link
-									href="https://linktr.ee/lamiautfpr"
-									target="_blank"
-									className="flex bg-primary-900 w-full md:w-3/4 h-[60px] rounded-lg font-bold text-white text-base justify-center items-center hover:scale-105 duration-300"
-								>
-									Entre em contato conosco!
-								</Link>
+								<ContactButton
+									onClick={() => setIsContactModalOpen(true)}
+									className="w-full md:w-3/4"
+								/>
 							</div>
 							<Image
 								src="/images/icon-novaLogo.png"
@@ -577,64 +846,7 @@ const Home = () => {
 					</Section>
 
 					<Section title="Orientadores" id="Orientadores">
-						<div className="flex flex-col md:flex-row justify-center gap-6 ">
-							<div className="flex flex-col w-80 drop-shadow-xl max-md:w-full">
-								<Image
-									src="/images/avatar-thiago.png"
-									width={328}
-									height={192}
-									alt="Avatar Thiago"
-									className="mb-2 max-md:w-full"
-								/>
-								<h5 className="mb-4 text-xl max-md:text-center leading-8 font-bold text-primary-900 ">
-									Thiago Naves
-								</h5>
-								<p className="mb-4 text-sm max-md:text-justify leading-5 font-normal text-black-700">
-									Coordenador do LAMIA e docente no curso de Ciência da
-									Computação da UTFPR Santa Helena. Conduz pesquisas nas áreas
-									de Ciência de Dados e Visão Computacional e trabalha junto a
-									incubadoras no desenvolvimento de empresas de base
-									tecnológicas e startups.
-								</p>
-							</div>
-							<div className="flex flex-col w-80 drop-shadow-xl  max-md:w-full">
-								<Image
-									src="/images/avatar-arlete.png"
-									width={328}
-									height={192}
-									alt="Avatar Arlete"
-									className="mb-2  max-md:w-full"
-								/>
-								<h5 className="mb-4 text-xl max-md:text-center leading-8 font-bold text-primary-900">
-									Arlete Beuren
-								</h5>
-								<p className="mb-4 text-sm max-md:text-justify leading-5 font-normal text-black-700">
-									Orientadora do LAMIA e docente no Curso de Ciência da
-									Computação da UTFPR. Interesse de pesquisas nas áreas de Visão
-									Computacional/Processamento de Imagens/Reconhecimento de
-									Padrões/Big Data/Computação Gráfica/Realidade
-									Virtual/Desenvolvimento Web.
-								</p>
-							</div>
-							<div className="flex flex-col w-80 drop-shadow-xl  max-md:w-full">
-								<Image
-									src="/images/avatar-brilhador.png"
-									width={328}
-									height={192}
-									alt="Avatar Brilhador"
-									className="mb-2  max-md:w-full"
-								/>
-								<h5 className="mb-4 text-xl max-md:text-center leading-8 font-bold text-primary-900">
-									Anderson Brilhador
-								</h5>
-								<p className="mb-4 text-sm max-md:text-justify leading-5 font-normal text-black-700">
-									Orientador do LAMIA e docente no curso de Ciência da
-									Computação da UTFPR Santa Helena. Desenvolve pesquisas nas
-									seguintes áreas: Computer Vision, Data Science, Data Mining,
-									Machine Learning e Deep Learning.
-								</p>
-							</div>
-						</div>
+						<AdvisorsCarousel />
 					</Section>
 
 					<Section
@@ -669,13 +881,10 @@ const Home = () => {
 								</p>
 							</div>
 							<div className="flex justify-center w-full max-md:mt-10">
-								<Link
-									href="https://linktr.ee/lamiautfpr"
-									target="_blank"
-									className="flex bg-primary-900 w-[466px] h-[60px] rounded-lg font-bold text-white text-base justify-center items-center hover:scale-105 duration-300"
-								>
-									Entre em contato conosco!
-								</Link>
+								<ContactButton
+									onClick={() => setIsContactModalOpen(true)}
+									className="w-full max-w-[466px]"
+								/>
 							</div>
 						</div>
 					</Section>
@@ -723,7 +932,7 @@ const Home = () => {
 									alt="E-mail icon"
 								/>
 								<Link
-									href="mail:lamia-sh@utfpr.edu.br"
+									href="mailto:lamia-sh@utfpr.edu.br"
 									className="text-sm leading-6 font-normal text-black-900"
 									target="_blank"
 								>
@@ -738,10 +947,10 @@ const Home = () => {
 									alt="Telefone icon"
 								/>
 								<Link
-									href="tel:45998357976"
+									href="tel:+5545991018140"
 									className="text-sm leading-6 font-normal text-black-900"
 								>
-									(45) 99826-9880
+									+55 45 99101-8140
 								</Link>
 							</div>
 						</div>
@@ -863,6 +1072,10 @@ const Home = () => {
 					</div>
 				</div>
 			</footer>
+			<ContactModal
+				isOpen={isContactModalOpen}
+				onClose={() => setIsContactModalOpen(false)}
+			/>
 		</>
 	);
 };
