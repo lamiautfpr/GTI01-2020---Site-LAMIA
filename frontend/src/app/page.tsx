@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, useEffect, useRef, useState } from 'react';
 import { BiSolidQuoteAltLeft } from 'react-icons/bi';
 import partners from './api/partners.json';
 
@@ -276,26 +276,91 @@ const ContactModal: React.FC<IContactModalProps> = ({ isOpen, onClose }) => {
 };
 
 const AdvisorsCarousel = () => {
+	const scrollRef = useRef<HTMLDivElement>(null);
+	const indexRef = useRef(0);
+	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+	const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const isPausedRef = useRef(false);
+
+	const getNearestIndex = () => {
+		const container = scrollRef.current;
+		if (!container) return indexRef.current;
+		const cards = container.querySelectorAll<HTMLElement>('article');
+		const center = container.scrollLeft + container.clientWidth / 2;
+		let best = 0;
+		let bestDist = Infinity;
+		cards.forEach((card, i) => {
+			const dist = Math.abs(card.offsetLeft + card.clientWidth / 2 - center);
+			if (dist < bestDist) { bestDist = dist; best = i; }
+		});
+		return best;
+	};
+
+	const goTo = (index: number) => {
+		indexRef.current = index;
+		const cards = scrollRef.current?.querySelectorAll<HTMLElement>('article');
+		cards?.[index]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+	};
+
+	const stopInterval = () => {
+		if (intervalRef.current) clearInterval(intervalRef.current);
+	};
+
+	const startInterval = () => {
+		stopInterval();
+		intervalRef.current = setInterval(() => {
+			goTo((indexRef.current + 1) % advisors.length);
+		}, 4000);
+	};
+
+	const pauseAndResume = () => {
+		stopInterval();
+		isPausedRef.current = true;
+		if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+		resumeTimeoutRef.current = setTimeout(() => {
+			indexRef.current = getNearestIndex();
+			isPausedRef.current = false;
+			startInterval();
+		}, 1500);
+	};
+
+	useEffect(() => {
+		startInterval();
+		return () => {
+			stopInterval();
+			if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+		};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
-		<div className="w-full max-w-full overflow-hidden rounded-3xl border border-black-200 bg-white p-3 shadow-xl shadow-black-200/70 sm:p-5">
+		<div
+			className="w-full max-w-full overflow-hidden rounded-3xl border border-black-200 bg-white p-3 shadow-xl shadow-black-200/70 sm:p-5"
+			onMouseEnter={stopInterval}
+			onMouseLeave={() => { if (!isPausedRef.current) startInterval(); }}
+		>
 			<div className="relative">
 				<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent max-sm:hidden" />
 				<div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-white to-transparent max-sm:hidden" />
 
-				<div className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-color:#00679A_#ECECEC] [scrollbar-width:thin] sm:gap-5">
+				<div
+					ref={scrollRef}
+					onScroll={pauseAndResume}
+					className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-color:#00679A_#ECECEC] [scrollbar-width:thin] sm:gap-5"
+				>
 					{advisors.map((advisor) => (
 						<article
 							key={advisor.name}
-							className="grid w-[88%] max-w-[58rem] flex-none snap-center gap-4 rounded-2xl bg-gradient-to-br from-primary-100 via-white to-black-100 p-4 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[34rem] sm:p-6 lg:w-[52rem] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center"
+							className="grid w-[88%] max-w-[64rem] flex-none snap-center gap-4 rounded-2xl bg-gradient-to-br from-primary-100 via-white to-black-100 p-4 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[38rem] sm:p-6 lg:w-[58rem] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center"
 						>
-							<div className="relative h-64 overflow-hidden rounded-2xl bg-white shadow-inner sm:h-72 lg:h-80">
+							<div className="relative h-80 overflow-hidden rounded-2xl bg-white shadow-inner sm:h-88 lg:h-[26rem]">
 								<div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,102,0,0.16),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(2,192,216,0.18),transparent_30%)]" />
 								<Image
 									src={advisor.image}
 									width={520}
-									height={380}
+									height={440}
 									alt={advisor.alt}
-									className="relative h-full w-full object-contain p-5"
+									className="relative h-full w-full object-contain"
 								/>
 							</div>
 
