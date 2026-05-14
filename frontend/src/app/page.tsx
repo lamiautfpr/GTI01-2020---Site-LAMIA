@@ -279,6 +279,22 @@ const AdvisorsCarousel = () => {
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const indexRef = useRef(0);
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+	const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const isPausedRef = useRef(false);
+
+	const getNearestIndex = () => {
+		const container = scrollRef.current;
+		if (!container) return indexRef.current;
+		const cards = container.querySelectorAll<HTMLElement>('article');
+		const center = container.scrollLeft + container.clientWidth / 2;
+		let best = 0;
+		let bestDist = Infinity;
+		cards.forEach((card, i) => {
+			const dist = Math.abs(card.offsetLeft + card.clientWidth / 2 - center);
+			if (dist < bestDist) { bestDist = dist; best = i; }
+		});
+		return best;
+	};
 
 	const goTo = (index: number) => {
 		indexRef.current = index;
@@ -286,28 +302,42 @@ const AdvisorsCarousel = () => {
 		cards?.[index]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 	};
 
-	const stop = () => {
+	const stopInterval = () => {
 		if (intervalRef.current) clearInterval(intervalRef.current);
 	};
 
-	const start = () => {
-		stop();
+	const startInterval = () => {
+		stopInterval();
 		intervalRef.current = setInterval(() => {
 			goTo((indexRef.current + 1) % advisors.length);
 		}, 4000);
 	};
 
+	const pauseAndResume = () => {
+		stopInterval();
+		isPausedRef.current = true;
+		if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+		resumeTimeoutRef.current = setTimeout(() => {
+			indexRef.current = getNearestIndex();
+			isPausedRef.current = false;
+			startInterval();
+		}, 1500);
+	};
+
 	useEffect(() => {
-		start();
-		return stop;
+		startInterval();
+		return () => {
+			stopInterval();
+			if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+		};
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
 		<div
 			className="w-full max-w-full overflow-hidden rounded-3xl border border-black-200 bg-white p-3 shadow-xl shadow-black-200/70 sm:p-5"
-			onMouseEnter={stop}
-			onMouseLeave={start}
+			onMouseEnter={stopInterval}
+			onMouseLeave={() => { if (!isPausedRef.current) startInterval(); }}
 		>
 			<div className="relative">
 				<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent max-sm:hidden" />
@@ -315,6 +345,7 @@ const AdvisorsCarousel = () => {
 
 				<div
 					ref={scrollRef}
+					onScroll={pauseAndResume}
 					className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-color:#00679A_#ECECEC] [scrollbar-width:thin] sm:gap-5"
 				>
 					{advisors.map((advisor) => (
