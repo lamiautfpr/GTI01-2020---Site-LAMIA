@@ -95,7 +95,7 @@ const advisors = [
 		name: 'Franck Benito',
 		role: 'Coordenador Educacional - UTFPR Santa Helena',
 		title: 'NLP com LLMs e Reconhecimento de Padrões',
-		image: '/images/foto-9.png',
+		image: '/images/foto-9.jpg',
 		alt: 'Foto do Prof. Franck',
 		objectPosition: 'object-top',
 		description:
@@ -125,7 +125,7 @@ const advisors = [
 		name: 'Igor Wiese',
 		role: 'Coordenador de Times - UTFPR Campo Mourão',
 		title: 'IA Generativa, Ciência de Dados e Eng. de Software',
-		image: '/images/foto-4.jpg',
+		image: '/images/foto-4.png',
 		alt: 'Foto do Prof. Igor',
 		objectPosition: 'object-top',
 		description:
