@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ComponentProps, useEffect, useRef, useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import { BiSolidQuoteAltLeft } from 'react-icons/bi';
 import partners from './api/partners.json';
 
@@ -47,69 +47,109 @@ const Section: React.FC<ISectionProps> = ({
 	);
 };
 
+// Gradientes LAMIA para os chips — combinações das cores da marca (azul, laranja, ciano)
+const advisorChipGradients = [
+	'bg-gradient-to-r from-primary-900 to-tertiary-900',
+	'bg-gradient-to-r from-tertiary-900 to-secondary-900',
+	'bg-gradient-to-r from-secondary-900 to-primary-900',
+	'bg-gradient-to-r from-primary-700 to-tertiary-600',
+	'bg-gradient-to-r from-secondary-600 to-primary-800',
+	'bg-gradient-to-r from-tertiary-600 to-secondary-600',
+	'bg-gradient-to-r from-primary-900 to-secondary-600',
+	'bg-gradient-to-r from-tertiary-900 to-primary-700',
+	'bg-gradient-to-r from-secondary-900 to-tertiary-600',
+];
+
 const advisors = [
 	{
 		name: 'Thiago Naves',
-		image: '/images/avatar-thiago.png',
-		alt: 'Avatar Thiago',
+		role: 'Coordenador Geral - UTFPR Santa Helena',
+		title: 'Liderança em Ciência de Dados e Visão Computacional',
+		image: '/images/foto-1.png',
+		alt: 'Foto do Thiago Naves',
+		objectPosition: 'object-top',
 		description:
 			'Coordenador Geral do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Conduz pesquisas nas áreas de Ciência de Dados e Visão Computacional e trabalha junto a incubadoras no desenvolvimento de empresas de base tecnológicas e startups.',
 	},
 	{
 		name: 'Arlete Beuren',
-		image: '/images/avatar-arlete.png',
-		alt: 'Avatar Arlete',
+		role: 'Coordenadora Operacional - UTFPR Santa Helena',
+		title: 'Visão Computacional e Processamento de Imagens',
+		image: '/images/foto-8.png',
+		alt: 'Foto da Arlete Beuren',
+		objectPosition: 'object-top',
 		description:
-			'Coordenadora Operacional do LAMIA e docente no Curso de Ciência da Computação da UTFPR. Interesse de pesquisas nas áreas de Visão Computacional/Processamento de Imagens/Reconhecimento de Padrões/Big Data/Computação Gráfica/Realidade Virtual/Desenvolvimento Web.',
+			'Coordenadora Operacional do LAMIA e docente no Curso de Ciência da Computação da UTFPR. Interesse de pesquisas nas áreas de Visão Computacional, Processamento de Imagens, Reconhecimento de Padrões, Big Data, Computação Gráfica e Realidade Virtual.',
 	},
 	{
 		name: 'Anderson Brilhador',
-		image: '/images/avatar-brilhador.png',
-		alt: 'Avatar Brilhador',
+		role: 'Orientador - UTFPR Santa Helena',
+		title: 'Machine Learning, Deep Learning e Data Science',
+		image: '/images/foto-7.png',
+		alt: 'Foto do Anderson Brilhador',
+		objectPosition: 'object-top',
 		description:
-			'Orientador do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Desenvolve pesquisas nas seguintes áreas: Computer Vision, Data Science, Data Mining, Machine Learning e Deep Learning.',
+			'Orientador do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Desenvolve pesquisas nas áreas de Computer Vision, Data Science, Data Mining, Machine Learning e Deep Learning.',
 	},
 	{
-		name: 'Prof. Franck',
-		image: '/images/foto-1.jpg',
+		name: 'Franck Benito',
+		role: 'Coordenador Educacional - UTFPR Santa Helena',
+		title: 'NLP com LLMs e Reconhecimento de Padrões',
+		image: '/images/foto-9.png',
 		alt: 'Foto do Prof. Franck',
+		objectPosition: 'object-top',
 		description:
 			'Coordenador Educacional do LAMIA e docente no curso de Ciência da Computação da UTFPR Santa Helena. Desenvolve pesquisas nas áreas de Linguagem Natural com Grandes Modelos de Linguagem, Reconhecimento de Padrões e Redes de Petri.',
 	},
 	{
-		name: 'Prof. Fernando',
+		name: 'Fernando Campos',
+		role: 'Coordenador Científico - UTFPR Londrina',
+		title: 'Computação Aplicada e Gestão de Inovação',
 		image: '/images/foto-2.png',
 		alt: 'Foto do Prof. Fernando',
+		objectPosition: 'object-center',
 		description:
 			'Coordenador científico do LAMIA e docente no curso de Sistemas de Informação na UTFPR Londrina. Desenvolve pesquisas na área de computação aplicada e tem experiência na gestão de incubadora e desenvolvimento de empresas de base tecnológica.',
 	},
 	{
-		name: 'Prof. Jorge',
+		name: 'Jorge Aikes',
+		role: 'Orientador - UTFPR Medianeira',
+		title: 'NLP, Visão Computacional e Realidade Virtual',
 		image: '/images/foto-3.jpg',
 		alt: 'Foto do Prof. Jorge',
+		objectPosition: 'object-top',
 		description:
-			'Docente no Curso de Ciência da Computação da UTFPR - Medianeira. Interesse de pesquisas nas áreas de Linguagem Natural com Grandes Modelos de Linguagem, Visão Computacional/Processamento de Imagens/Reconhecimento de Padrões e Realidade Virtual.',
+			'Docente no Curso de Ciência da Computação da UTFPR Medianeira. Interesse de pesquisas nas áreas de Linguagem Natural com Grandes Modelos de Linguagem, Visão Computacional, Processamento de Imagens, Reconhecimento de Padrões e Realidade Virtual.',
 	},
 	{
-		name: 'Prof. Igor',
-		image: '/images/foto-4.png',
+		name: 'Igor Wiese',
+		role: 'Coordenador de Times - UTFPR Campo Mourão',
+		title: 'IA Generativa, Ciência de Dados e Eng. de Software',
+		image: '/images/foto-4.jpg',
 		alt: 'Foto do Prof. Igor',
+		objectPosition: 'object-top',
 		description:
-			'Docente no curso de Ciência da Computação da UTFPR Campo Mourão e colaborador do LAMIA como coordenador de times e projetos. Bolsista Produtividade da Fundação Araucária. Conduz pesquisas nas áreas de IA Generativa aplicada, Ciência de Dados e Visão Computacional, bem como Aplicação de IA em Engenharia de Software. Trabalha junto a incubadoras no desenvolvimento de empresas de base tecnológicas e startups.',
+			'Docente na UTFPR Campo Mourão e coordenador de times no LAMIA. Bolsista Produtividade da Fundação Araucária. Conduz pesquisas em IA Generativa aplicada, Ciência de Dados, Visão Computacional e Aplicação de IA em Engenharia de Software.',
 	},
 	{
-		name: 'Prof. Reginaldo',
+		name: 'Reginaldo Ré',
+		role: 'Orientador - UTFPR Campo Mourão',
+		title: 'Engenharia de Software e Ecologia Computacional',
 		image: '/images/foto-5.png',
 		alt: 'Foto do Prof. Reginaldo',
+		objectPosition: 'object-top',
 		description:
 			'Orientador do LAMIA e docente no curso de Ciência da Computação da UTFPR Campo Mourão. Desenvolve pesquisas em Engenharia de Software, Ecologia e Biodiversidade.',
 	},
 	{
-		name: 'Prof. Ivanilton',
+		name: 'Ivanilton Polato',
+		role: 'Professor Titular - UTFPR Campo Mourão',
+		title: 'IA, Smart Tags e Sistemas de Rastreabilidade',
 		image: '/images/foto-6.png',
 		alt: 'Foto do Prof. Ivanilton',
+		objectPosition: 'object-top',
 		description:
-			'Professor Titular no curso de Ciência da Computação da UTFPR Campo Mourão e pesquisador associado ao CCDSSIA. Conduz pesquisas e lidera projetos de inovação tecnológica nas áreas de Inteligência Artificial, Smart Tags (RFID/BLE), Sistemas de Rastreabilidade e Computação Verde.',
+			'Professor Titular na UTFPR Campo Mourão e pesquisador associado ao CCDSSIA. Lidera projetos de inovação tecnológica nas áreas de Inteligência Artificial, Smart Tags (RFID/BLE), Sistemas de Rastreabilidade e Computação Verde.',
 	},
 ];
 
@@ -276,105 +316,62 @@ const ContactModal: React.FC<IContactModalProps> = ({ isOpen, onClose }) => {
 };
 
 const AdvisorsCarousel = () => {
-	const scrollRef = useRef<HTMLDivElement>(null);
-	const indexRef = useRef(0);
-	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-	const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-	const isPausedRef = useRef(false);
-
-	const getNearestIndex = () => {
-		const container = scrollRef.current;
-		if (!container) return indexRef.current;
-		const cards = container.querySelectorAll<HTMLElement>('article');
-		const center = container.scrollLeft + container.clientWidth / 2;
-		let best = 0;
-		let bestDist = Infinity;
-		cards.forEach((card, i) => {
-			const dist = Math.abs(card.offsetLeft + card.clientWidth / 2 - center);
-			if (dist < bestDist) { bestDist = dist; best = i; }
-		});
-		return best;
-	};
-
-	const goTo = (index: number) => {
-		indexRef.current = index;
-		const cards = scrollRef.current?.querySelectorAll<HTMLElement>('article');
-		cards?.[index]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-	};
-
-	const stopInterval = () => {
-		if (intervalRef.current) clearInterval(intervalRef.current);
-	};
-
-	const startInterval = () => {
-		stopInterval();
-		intervalRef.current = setInterval(() => {
-			goTo((indexRef.current + 1) % advisors.length);
-		}, 4000);
-	};
-
-	const pauseAndResume = () => {
-		stopInterval();
-		isPausedRef.current = true;
-		if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
-		resumeTimeoutRef.current = setTimeout(() => {
-			indexRef.current = getNearestIndex();
-			isPausedRef.current = false;
-			startInterval();
-		}, 1500);
-	};
-
-	useEffect(() => {
-		startInterval();
-		return () => {
-			stopInterval();
-			if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
-		};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	return (
-		<div
-			className="w-full max-w-full overflow-hidden rounded-3xl border border-black-200 bg-white p-3 shadow-xl shadow-black-200/70 sm:p-5"
-			onMouseEnter={stopInterval}
-			onMouseLeave={() => { if (!isPausedRef.current) startInterval(); }}
-		>
-			<div className="relative">
-				<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent max-sm:hidden" />
-				<div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-white to-transparent max-sm:hidden" />
+		<div className="w-full flex flex-col gap-8">
+			{/* Intro */}
+			<div className="flex flex-col items-center gap-3 text-center">
+				<div className="flex items-center gap-4">
+					<div className="h-px w-20 bg-gradient-to-r from-transparent via-primary-900 to-transparent" />
+					<span className="text-sm font-semibold uppercase tracking-widest text-primary-700">
+						Corpo Docente
+					</span>
+					<div className="h-px w-20 bg-gradient-to-r from-transparent via-primary-900 to-transparent" />
+				</div>
+				<p className="mx-auto max-w-2xl text-base leading-7 text-black-600">
+					Pesquisadores e professores da UTFPR que orientam os projetos de IA do
+					LAMIA, unindo rigor acadêmico à aplicação prática na indústria.
+				</p>
+			</div>
 
-				<div
-					ref={scrollRef}
-					onScroll={pauseAndResume}
-					className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-color:#00679A_#ECECEC] [scrollbar-width:thin] sm:gap-5"
-				>
-					{advisors.map((advisor) => (
+			{/* Grid 3 × 3 — todos os 9 orientadores */}
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+				{advisors.map((advisor, i) => {
+					const chipGradient = advisorChipGradients[i % advisorChipGradients.length];
+					return (
 						<article
 							key={advisor.name}
-							className="grid w-[88%] max-w-[64rem] flex-none snap-center gap-4 rounded-2xl bg-gradient-to-br from-primary-100 via-white to-black-100 p-4 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[38rem] sm:p-6 lg:w-[58rem] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center"
+							className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
 						>
-							<div className="relative h-80 overflow-hidden rounded-2xl bg-white shadow-inner sm:h-88 lg:h-[26rem]">
-								<div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,102,0,0.16),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(2,192,216,0.18),transparent_30%)]" />
-								<Image
-									src={advisor.image}
-									width={520}
-									height={440}
-									alt={advisor.alt}
-									className="relative h-full w-full object-contain"
-								/>
+							<Image
+								src={advisor.image}
+								fill
+								alt={advisor.alt}
+								sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+								className={`object-cover ${advisor.objectPosition} transition-transform duration-700 ease-out group-hover:scale-105`}
+							/>
+
+							<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+							<div className="absolute top-4 left-4 right-4">
+								<span className={`inline-block px-3 py-1.5 rounded-full text-[11px] font-semibold text-white shadow-lg ${chipGradient}`}>
+									{advisor.role}
+								</span>
 							</div>
 
-							<div className="min-w-0">
-								<h3 className="break-words text-3xl font-bold leading-tight text-primary-900 sm:text-4xl">
+							<div className="absolute bottom-0 left-0 right-0 p-5">
+								<h3 className="text-white text-xl font-bold leading-tight drop-shadow-sm">
 									{advisor.name}
 								</h3>
-								<p className="mt-4 text-base leading-7 text-black-900">
+								<p className="text-white/80 text-sm font-medium mt-1 drop-shadow-sm">
+									{advisor.title}
+								</p>
+								<p className="text-white/65 text-xs leading-relaxed mt-2">
 									{advisor.description}
 								</p>
 							</div>
 						</article>
-					))}
-				</div>
+					);
+				})}
 			</div>
 		</div>
 	);
