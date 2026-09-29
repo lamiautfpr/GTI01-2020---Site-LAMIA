@@ -6,6 +6,10 @@ import { ComponentProps, useState } from 'react';
 import { BiSolidQuoteAltLeft } from 'react-icons/bi';
 import partners from './api/partners.json';
 
+// Liga/desliga os links para a landing do evento (/evento) na home do LAMIA.
+// Deixe false enquanto a página do evento não tiver conteúdo; troque para true para exibir.
+const MOSTRAR_EVENTO = false;
+
 const Cover = () => {
 	return (
 		<div
@@ -21,6 +25,16 @@ const Cover = () => {
 			<p className="text-center text-xl font-normal text-secondary-900">
 				UTFPR Campus Santa Helena
 			</p>
+			{MOSTRAR_EVENTO && (
+				<a
+					href="/evento"
+					className="mt-6 inline-flex items-center gap-3 rounded-full bg-primary-900 px-7 py-3.5 text-base font-bold text-white shadow-lg duration-300 hover:scale-105 hover:bg-primary-700"
+				>
+					<span className="inline-block h-2.5 w-2.5 rounded-full bg-secondary-900 motion-safe:animate-pulse" />
+					Idei.a 2026 · Conheça o evento
+					<span aria-hidden="true">→</span>
+				</a>
+			)}
 		</div>
 	);
 };
@@ -1021,6 +1035,14 @@ const Home = () => {
 							<h6 className="text-xl leading-8 font-bold text-black-900">
 								Navegação
 							</h6>
+							{MOSTRAR_EVENTO && (
+							<a
+								href="/evento"
+								className="text-sm leading-6 font-bold text-primary-900 hover:underline"
+							>
+								Idei.a 2026 · Evento
+							</a>
+							)}
 							<a
 								href="#EntreEmContato"
 								className="text-sm leading-6 font-normal text-black-900"

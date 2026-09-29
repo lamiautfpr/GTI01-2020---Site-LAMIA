@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/evento/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>
+  /* MODO LOCAL — sem servidor. O conteúdo que TODOS os visitantes veem vem do
+     arquivo conteudo.json ao lado desta página: edite no painel, clique em
+     Exportar, substitua o conteudo.json e publique. NÃO preencha "endpoint":
+     deixá-lo vazio é o que mantém o modo local ligado. */
+  window.IDEIA_CONFIG = { tipo: "rest", endpoint: "" };
+</script>
+<title>Idei.a LAMIA 2026 · Opção B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="/evento/dados-ideia.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #D2D7D6; color: #23282F; font-family: Archivo, "Helvetica Neue", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #1272EB; text-decoration: none; }
+  a:hover { color: #0B57B8; }
+  input, select, button { font: inherit; color: inherit; }
+  @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes pop { from { opacity: 0; transform: translateY(20px) scale(.98); } to { opacity: 1; transform: none; } }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes dim { from { opacity: 0; } to { opacity: 1; } }
+  #trilha-convidados { scrollbar-width: none; -ms-overflow-style: none; }
+  #trilha-convidados::-webkit-scrollbar { display: none; }
+</style>
+</helmet>
+
+<div style="overflow-x: clip;">
+  <div style="position: relative; min-height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+    <canvas ref="{{ canvasRef }}" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
+
+    <div style="position: relative; padding: 24px 30px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;">
+      <img src="/evento/assets/idea-logo.png" alt="Idei.a LAMIA 2026" style="height: 44px; width: auto; display: block;" />
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button type="button" onClick="{{ openModal }}" style="background: transparent; color: #23282F; border: 1.5px solid #23282F; padding: 12px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; border-radius: 10px; white-space: nowrap;" style-hover="background: #1272EB; border-color: #1272EB; color: #fff;">Inscreva-se</button>
+      </div>
+    </div>
+
+    <div style="position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; padding: clamp(20px, 4vw, 44px) 30px clamp(30px, 5vw, 58px); max-width: 1340px; margin: 0 auto; width: 100%;">
+      <div style="display: flex; align-items: center; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: #0B57B8; margin-bottom: 22px;">
+        <span style="width: 10px; height: 10px; background: #1272EB; display: block;"></span>
+        1ª edição · Santa Helena · Paraná
+      </div>
+
+      <h1 ref="{{ titleRef }}" style="margin: 0; font-size: clamp(42px, 8.4vw, 132px); font-weight: 900; letter-spacing: -.05em; line-height: .95; text-transform: uppercase;">
+        Inteligência<br />
+        <span style="color: #1272EB;">Artificial</span><br />
+        aplicada à decisão
+      </h1>
+
+      <p ref="{{ ledeRef }}" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; max-width: 40ch; margin: clamp(24px, 3.4vw, 40px) 0 0; color: #3A424C; text-wrap: pretty;">
+        Uma tarde para ver a Inteligência Artificial fora do slide: dentro da fábrica, do escritório e do serviço público. Quem já aplicou conta como foi, e você sai com o próximo passo.
+      </p>
+
+      <div style="margin-top: clamp(30px, 4.4vw, 52px); display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; background: #FDFDFD; box-shadow: 10px 10px 0 rgba(18,114,235,.16); border-radius: 18px; overflow: hidden; max-width: 900px;">
+        <div style="padding: 20px 26px; border-right: 1px solid rgba(35,40,47,.14); flex: 1 1 190px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #3A424C; margin-bottom: 12px;">Data</div>
+          <div style="font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; letter-spacing: -.04em; line-height: .9;">10.11</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #3A424C; margin-top: 8px;">terça · 13h às 17h</div>
+        </div>
+        <div style="padding: 20px 26px; border-right: 1px solid rgba(35,40,47,.14); flex: 1 1 210px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #3A424C; margin-bottom: 12px;">Local</div>
+          <div style="font-size: clamp(22px, 2.5vw, 29px); font-weight: 800; letter-spacing: -.035em; line-height: .95;">Auditório<br />ACISA</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #3A424C; margin-top: 8px;">Santa Helena · PR</div>
+        </div>
+        <div style="padding: 20px 26px; flex: 1 1 200px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #3A424C; margin-bottom: 12px;">Acesso</div>
+            <div style="font-size: clamp(22px, 2.5vw, 29px); font-weight: 800; letter-spacing: -.035em; line-height: .95; color: #1272EB;">Gratuito</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #3A424C; margin-top: 8px;">vagas limitadas</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 26px; display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: stretch; background: #23282F; color: #fff; border-radius: 14px; overflow: hidden;">
+          <div style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); background: #1272EB; padding: 14px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; display: flex; align-items: center;">Faltam</div>
+          <div style="display: flex;">
+            <sc-for list="{{ countdown }}" as="u" hint-placeholder-count="4">
+              <div style="padding: 14px 18px 12px; border-right: 1px solid rgba(253,253,253,.14); text-align: center; min-width: 74px;">
+                <div style="font-size: 32px; font-weight: 800; letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums;">{{ u.value }}</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: #8C9AA8; margin-top: 7px;">{{ u.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <button type="button" onClick="{{ openModal }}" style="background: #1272EB; color: #fff; border: 0; padding: 20px 26px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; border-radius: 10px; display: flex; align-items: center; gap: 14px; white-space: nowrap;" style-hover="background: #23282F;">
+          Garantir minha vaga
+          <span style="width: 9px; height: 9px; background: #fff; display: block;"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: #23282F; color: #fff; overflow: hidden; padding: 15px 0;">
+    <div style="display: flex; width: max-content; animation: marq 36s linear infinite; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase;">
+      <sc-for list="{{ ticker }}" as="t" hint-placeholder-count="14">
+        <span style="padding: 0 24px; display: flex; align-items: center; gap: 24px; white-space: nowrap;">{{ t }}<span style="width: 7px; height: 7px; background: #1272EB; display: block;"></span></span>
+      </sc-for>
+    </div>
+  </div>
+
+  <section id="sobre" style="background: #23282F; color: #fff; padding: clamp(64px, 9vw, 116px) 30px; position: relative; overflow: hidden;">
+    <div style="position: absolute; right: -3%; top: -6%; width: min(38%, 340px); aspect-ratio: 1; opacity: .5; pointer-events: none;">
+      <div style="position: absolute; right: 26%; top: 0; width: 30%; aspect-ratio: 1; background: #1272EB;"></div>
+      <div style="position: absolute; right: 0; top: 34%; width: 20%; aspect-ratio: 1; background-image: radial-gradient(#5BA6F7 1.2px, transparent 1.3px); background-size: 6px 6px;"></div>
+      <div style="position: absolute; right: 40%; top: 44%; width: 16%; aspect-ratio: 1; background: rgba(253,253,253,.16);"></div>
+    </div>
+
+    <div style="position: relative; max-width: 1340px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(30px, 5vw, 70px); align-items: end; margin-bottom: clamp(38px, 5vw, 58px);">
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #5BA6F7; margin-bottom: 22px;">
+            <span style="width: 10px; height: 10px; background: #1272EB; display: block;"></span>
+            Quem realiza
+          </div>
+          <h2 style="margin: 0 0 20px; font-size: clamp(30px, 4.6vw, 58px); font-weight: 900; letter-spacing: -.05em; line-height: .96; text-transform: uppercase; text-wrap: balance;">
+            Um laboratório<br />que virou <span style="color: #5BA6F7;">motor</span>
+          </h2>
+          <p style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.8; margin: 0; color: #C3CCD6; max-width: 46ch; text-wrap: pretty;">
+            Fundado em 2019 na UTFPR Campus Santa Helena, o LAMIA transforma o estado da arte da Inteligência Artificial em produto que roda dentro de empresa e de órgão público. Visão computacional, previsão, linguagem natural e IA generativa saem da pesquisa e entram na operação de quem produz, atende e decide.
+          </p>
+        </div>
+        <div style="display: flex; justify-content: flex-start; align-items: flex-end;">
+          <div style="background: #FDFDFD; border-radius: 18px; padding: 26px 30px; display: flex; align-items: center; justify-content: center;">
+            <img src="/evento/assets/lamia-logo.png" alt="LAMIA" style="width: min(100%, 250px); height: auto; display: block;" />
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: rgba(253,253,253,.16); border-radius: 18px; overflow: hidden;">
+        <sc-for list="{{ numeros }}" as="n" hint-placeholder-count="4">
+          <div style="background: {{ n.bg }}; color: {{ n.fg }}; padding: 28px 24px 30px; min-height: 178px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; transition: background .4s ease;">
+            <div style="font-size: clamp(34px, 4.2vw, 50px); font-weight: 900; letter-spacing: -.055em; line-height: .92;">{{ n.v }}</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.65;">{{ n.k }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="objetivos" style="padding: clamp(60px, 8vw, 104px) 30px; max-width: 1340px; margin: 0 auto;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 38px;">
+      <h2 style="margin: 0; font-size: clamp(30px, 5vw, 62px); font-weight: 900; letter-spacing: -.05em; text-transform: uppercase; line-height: .9;">Por que<br />este encontro?</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(196px, 1fr)); gap: 14px;">
+      <sc-for list="{{ objetivos }}" as="o" hint-placeholder-count="4">
+        <div style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.1); border-radius: 18px; padding: 28px 26px 30px; display: flex; flex-direction: column; gap: 16px; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s cubic-bezier(.2,.8,.2,1), border-color .35s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 18px 38px rgba(18,114,235,.16); border-color: rgba(18,114,235,.45);">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #1272EB;">{{ o.n }}</span>
+          <h3 style="margin: 0; font-size: 21px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; text-wrap: pretty;">{{ o.t }}</h3>
+          <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; line-height: 1.7; color: #3A424C; text-wrap: pretty;">{{ o.d }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="programacao" style="padding: 0 30px clamp(60px, 8vw, 104px); max-width: 1340px; margin: 0 auto;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 22px; flex-wrap: wrap; margin-bottom: 38px;">
+      <h2 style="margin: 0; font-size: clamp(30px, 5vw, 62px); font-weight: 900; letter-spacing: -.05em; text-transform: uppercase; line-height: .9;">Programação</h2>
+    </div>
+    <div style="display: grid; gap: 10px;">
+      <sc-for list="{{ agenda }}" as="a" hint-placeholder-count="5">
+        <div style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.1); border-radius: 16px; padding: 22px 26px; display: flex; align-items: baseline; gap: 14px 26px; flex-wrap: wrap; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s cubic-bezier(.2,.8,.2,1), border-color .35s ease;" style-hover="transform: translateY(-4px); box-shadow: 0 16px 34px rgba(18,114,235,.16); border-color: rgba(18,114,235,.45);">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; color: #1272EB; flex: none;">{{ a.n }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; font-weight: 600; color: #23282F; flex: none; white-space: nowrap;">{{ a.time }}</span>
+          <div style="flex: 1 1 260px; min-width: 0; display: grid; gap: 5px;">
+            <span style="font-size: 20px; font-weight: 700; letter-spacing: -.028em; line-height: 1.25; text-wrap: pretty;">{{ a.title }}</span>
+            <sc-if value="{{ a.temLegenda }}">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.6; color: #3A424C; text-wrap: pretty;">{{ a.legenda }}</span>
+            </sc-if>
+          </div>
+          <sc-if value="{{ a.temNome }}">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: #0B57B8; flex: none;">{{ a.nome }}</span>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-if value="{{ temConvidados }}" hint-placeholder-val="{{ true }}">
+  <section id="convidados" style="padding: clamp(52px, 7vw, 88px) 0 clamp(60px, 8vw, 100px); background: #C9CFCE; border-top: 1px solid rgba(35,40,47,.14); border-bottom: 1px solid rgba(35,40,47,.14); overflow: hidden;">
+    <div style="max-width: 1340px; margin: 0 auto; padding: 0 30px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 34px;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #0B57B8; margin-bottom: 14px;">Quem sobe ao palco</div>
+        <h2 style="margin: 0; font-size: clamp(30px, 5vw, 62px); font-weight: 900; letter-spacing: -.05em; text-transform: uppercase; line-height: .9;">Participação<br />especial</h2>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .1em; color: #3A424C;">arraste para o lado</span>
+        <button type="button" onClick="{{ railPrev }}" aria-label="Anterior" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #23282F; background: transparent; cursor: pointer; font-size: 17px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background .25s ease, color .25s ease;" style-hover="background: #23282F; color: #FDFDFD;">←</button>
+        <button type="button" onClick="{{ railNext }}" aria-label="Próximo" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #23282F; background: transparent; cursor: pointer; font-size: 17px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background .25s ease, color .25s ease;" style-hover="background: #23282F; color: #FDFDFD;">→</button>
+      </div>
+    </div>
+    <div id="trilha-convidados" ref="{{ railRef }}" style="display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px max(30px, calc((100vw - 1340px) / 2)) 10px; cursor: grab; scroll-behavior: smooth;">
+      <sc-for list="{{ convidados }}" as="c" hint-placeholder-count="8">
+        <article style="flex: 0 0 clamp(226px, 24vw, 272px); scroll-snap-align: center; background: #FDFDFD; border: 1px solid rgba(35,40,47,.12); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="position: relative; aspect-ratio: 4 / 5; background: #E4E7E6; display: flex; align-items: center; justify-content: center;">
+            <sc-if value="{{ c.temFoto }}">
+              <div role="img" aria-label="{{ c.nome }}" style="{{ c.fotoStyle }}"></div>
+            </sc-if>
+            <sc-if value="{{ c.semFoto }}" hint-placeholder-val="{{ true }}">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8A9391;">foto</span>
+            </sc-if>
+          </div>
+          <div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #1272EB;">{{ c.formato }}</span>
+            <h3 style="margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15;">{{ c.nome }}</h3>
+            <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.65; color: #3A424C; text-wrap: pretty;">{{ c.cargo }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+  </sc-if>
+
+  <section ref="{{ touchRef }}" style="position: relative; min-height: 210vh; background: #D2D7D6; border-top: 1px solid rgba(35,40,47,.16);">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden;">
+      <div style="position: absolute; left: 0; right: 0; top: clamp(44px, 8vh, 96px); padding: 0 30px; text-align: center; z-index: 2;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #0B57B8; margin-bottom: 14px;">O ponto de contato</div>
+        <h2 style="margin: 0 0 14px; font-size: clamp(30px, 5.4vw, 66px); font-weight: 900; letter-spacing: -.05em; text-transform: uppercase; line-height: .9;">Inteligência que<br />encontra gente</h2>
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: .06em; line-height: 1.7; margin: 0; color: #3A424C;">continue descendo até os dedos se tocarem</p>
+      </div>
+      <img ref="{{ handIaRef }}" src="/evento/assets/mao-ia.svg" alt="" style="position: absolute; left: 50%; top: 58%; width: min(52%, 560px); transform: translate(-235%, -53.4%); pointer-events: none; mask-image: linear-gradient(to left, #000 0 80%, transparent 100%); -webkit-mask-image: linear-gradient(to left, #000 0 80%, transparent 100%);" />
+      <img ref="{{ handHumanRef }}" src="/evento/assets/mao-humana.png" alt="" style="position: absolute; left: 50%; top: 58%; width: min(55%, 580px); transform: translate(135%, -56%); filter: grayscale(1) contrast(1.06); mix-blend-mode: multiply; pointer-events: none; mask-image: linear-gradient(to right, #000 0 72%, transparent 99%); -webkit-mask-image: linear-gradient(to right, #000 0 72%, transparent 99%);" />
+    </div>
+  </section>
+
+  <section id="apoio" style="background: #FDFDFD; padding: clamp(60px, 8vw, 100px) 30px;">
+    <div style="max-width: 1340px; margin: 0 auto; display: grid; gap: clamp(38px, 5vw, 62px);">
+      <div>
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 26px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #23282F; white-space: nowrap;">Realização</span>
+          <span style="flex: 1; height: 1.5px; background: #23282F;"></span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 14px;">
+          <sc-for list="{{ realizacao }}" as="a" hint-placeholder-count="2">
+            <a href="{{ a.href }}" target="_blank" rel="noopener" style="border: 1px solid rgba(35,40,47,.26); border-radius: 14px; min-height: 116px; padding: 16px 18px; display: flex; align-items: center; justify-content: center; transition: border-color .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);" style-hover="border-color: rgba(18,114,235,.5); transform: translateY(-3px);">
+              <div role="img" aria-label="{{ a.nome }}" style="{{ a.logoStyle }}"></div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 26px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #23282F; white-space: nowrap;">Parceria</span>
+          <span style="flex: 1; height: 1.5px; background: #23282F;"></span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 14px;">
+          <sc-for list="{{ parceria }}" as="a" hint-placeholder-count="1">
+            <a href="{{ a.href }}" target="_blank" rel="noopener" style="border: 1px solid rgba(35,40,47,.26); border-radius: 14px; min-height: 116px; padding: 16px 18px; display: flex; align-items: center; justify-content: center; transition: border-color .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);" style-hover="border-color: rgba(18,114,235,.5); transform: translateY(-3px);">
+              <div role="img" aria-label="{{ a.nome }}" style="{{ a.logoStyle }}"></div>
+            </a>
+          </sc-for>
+          <sc-for list="{{ parceiroSlots }}" as="s" hint-placeholder-count="4">
+            <div style="border: 1px dashed rgba(35,40,47,.24); border-radius: 14px; min-height: 116px; display: flex; align-items: center; justify-content: center; transition: border-color .35s ease, background .35s ease, transform .35s cubic-bezier(.2,.8,.2,1);" style-hover="border-color: rgba(18,114,235,.5); background: rgba(18,114,235,.05); transform: translateY(-3px);">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #3A424C;">em breve</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="local" style="position: relative;">
+    <div style="max-width: 1340px; margin: 0 auto; padding: clamp(48px, 6vw, 80px) 30px clamp(28px, 4vw, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px 40px; align-items: end;">
+      <div>
+        <h2 style="margin: 0 0 12px; font-size: clamp(26px, 4vw, 48px); font-weight: 900; letter-spacing: -.05em; text-transform: uppercase; line-height: .92;">Como chegar</h2>
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; line-height: 1.75; margin: 0; color: #3A424C;">Auditório ACISA · Santa Helena, Paraná<br />terça, 10 de novembro · credenciamento às 13h</p>
+      </div>
+      <div style="display: flex; justify-content: flex-start;">
+        <a href="https://www.google.com/maps/search/ACISA+Santa+Helena+PR" target="_blank" rel="noreferrer" style="background: #23282F; color: #fff; padding: 16px 22px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;" style-hover="background: #1272EB; color: #fff;">Abrir no Google Maps</a>
+      </div>
+    </div>
+    <div style="height: clamp(320px, 42vw, 470px); filter: grayscale(.35) contrast(1.04);">
+      <iframe title="Mapa de Santa Helena, PR" src="https://www.openstreetmap.org/export/embed.html?bbox=-54.3700%2C-24.8800%2C-54.2950%2C-24.8380&amp;layer=mapnik&amp;marker=-24.8596%2C-54.3320" style="width: 100%; height: 100%; border: 0; display: block;" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <footer style="background: #23282F; color: #fff; padding: clamp(46px, 6vw, 72px) 30px 30px;">
+    <div style="max-width: 1340px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(30px, 3.6vw, 48px); align-items: start; padding-bottom: 42px; border-bottom: 1px solid rgba(253,253,253,.14);">
+
+        <div style="display: flex; flex-direction: column; gap: 22px;">
+          <div>
+            <div style="font-size: 34px; font-weight: 900; letter-spacing: -.04em; text-transform: uppercase; line-height: 1;">Idei.a</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .14em; color: #8C9AA8; margin-top: 10px;">LAMIA 2026 · 10 NOV · 13H</div>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap;">
+            <div style="background: #FDFDFD; border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; justify-content: center; flex: 1 1 130px;">
+              <img src="/evento/assets/lamia-logo.png" alt="LAMIA" style="width: 100%; max-width: 140px; height: auto; display: block;" />
+            </div>
+            <a href="https://www.lamia.sh.utfpr.edu.br" target="_blank" rel="noreferrer" style="display: flex; align-items: center; background: #FDFDFD; border-radius: 14px; padding: 8px; flex: none; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 14px 30px rgba(18,114,235,.35);">
+              <img src="/evento/assets/qr-lamia.png" alt="QR code para o site do LAMIA" style="width: 92px; height: 92px; display: block;" />
+            </a>
+          </div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.7; color: #C3CCD6;">
+            Aponte a câmera no QR ou acesse<br />
+            <a href="https://www.lamia.sh.utfpr.edu.br" target="_blank" rel="noreferrer" style="color: #fff;" style-hover="color: #5BA6F7;">lamia.sh.utfpr.edu.br</a>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #5BA6F7; margin-bottom: 18px;">Contato</div>
+          <div style="display: grid; gap: 16px;">
+            <div style="display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: start;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5BA6F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 2px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.7; color: #C3CCD6;">UTFPR Santa Helena<br />Bloco L · LAMIA<br />Santa Helena, PR · 85892-000</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: center;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5BA6F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+              <a href="mailto:lamia-sh@utfpr.edu.br" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #fff;" style-hover="color: #5BA6F7;">lamia-sh@utfpr.edu.br</a>
+            </div>
+            <div style="display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: center;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5BA6F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 6.5 3Z"></path></svg>
+              <a href="tel:+5545991018140" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #fff;" style-hover="color: #5BA6F7;">+55 45 99101-8140</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #5BA6F7; margin-bottom: 18px;">Onde nos encontrar</div>
+          <div style="display: grid; gap: 10px;">
+            <sc-for list="{{ redes }}" as="s" hint-placeholder-count="5">
+              <a href="{{ s.url }}" target="_blank" rel="noreferrer" style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; margin: -10px -12px; border-radius: 10px; color: #fff; transition: background .3s ease, color .3s ease;" style-hover="background: rgba(253,253,253,.08); color: #5BA6F7;">
+                <span style="width: 18px; height: 18px; display: block; flex: none;">{{ s.icon }}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">{{ s.label }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-top: 22px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; color: #8C9AA8;">
+        <span>© 2026 LAMIA · UTFPR Campus Santa Helena</span>
+        <span>Inteligência Artificial aplicada à decisão</span>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; right: 18px; bottom: 18px; z-index: 90; width: min(420px, calc(100vw - 36px)); display: flex; justify-content: flex-end; pointer-events: none;">
+      <div style="position: relative; width: 100%; background: #D2D7D6; border: 1px solid rgba(35,40,47,.18); border-radius: 18px; overflow: hidden auto; max-height: min(72vh, 620px); box-shadow: 0 24px 60px rgba(18,22,26,.28); animation: slideIn .3s cubic-bezier(.2,.8,.2,1) both; pointer-events: auto;">
+        <div style="position: sticky; top: 0; z-index: 3; background: #FDFDFD; padding: 24px 26px; display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; border-bottom: 1px solid rgba(35,40,47,.16);">
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: #1272EB; margin-bottom: 8px;">Inscrição · Idei.a LAMIA 2026</div>
+            <div style="font-size: 25px; font-weight: 900; letter-spacing: -.04em; line-height: 1.05; text-transform: uppercase;">{{ modalTitle }}</div>
+          </div>
+          <button type="button" onClick="{{ closeModal }}" aria-label="Fechar" style="background: transparent; border: 1.5px solid rgba(35,40,47,.3); width: 36px; height: 36px; border-radius: 9px; cursor: pointer; font-size: 17px; line-height: 1; flex: none;" style-hover="background: #23282F; color: #fff; border-color: #23282F;">×</button>
+        </div>
+
+        <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+          <div style="padding: 26px; display: grid; gap: 16px;">
+            <label style="display: grid; gap: 7px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #3A424C;">Nome completo *</span>
+              <input type="text" value="{{ form.nome }}" onChange="{{ onNome }}" placeholder="Como deve sair no crachá" style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.25); padding: 13px 14px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; outline: none;" style-focus="border-color: #1272EB; box-shadow: inset 0 0 0 1px #1272EB;" />
+              <sc-if value="{{ err.nome }}" hint-placeholder-val="{{ false }}">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B3301F;">{{ err.nome }}</span>
+              </sc-if>
+            </label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+              <label style="display: grid; gap: 7px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #3A424C;">E-mail *</span>
+                <input type="email" value="{{ form.email }}" onChange="{{ onEmail }}" placeholder="voce@email.com" style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.25); padding: 13px 14px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; outline: none;" style-focus="border-color: #1272EB; box-shadow: inset 0 0 0 1px #1272EB;" />
+                <sc-if value="{{ err.email }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B3301F;">{{ err.email }}</span>
+                </sc-if>
+              </label>
+              <label style="display: grid; gap: 7px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #3A424C;">Telefone *</span>
+                <input type="tel" value="{{ form.telefone }}" onChange="{{ onTelefone }}" placeholder="(45) 99999-9999" style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.25); padding: 13px 14px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; outline: none;" style-focus="border-color: #1272EB; box-shadow: inset 0 0 0 1px #1272EB;" />
+                <sc-if value="{{ err.telefone }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B3301F;">{{ err.telefone }}</span>
+                </sc-if>
+              </label>
+            </div>
+            <label style="display: grid; gap: 7px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #3A424C;">Instituição, empresa ou órgão público *</span>
+              <input type="text" value="{{ form.instituicao }}" onChange="{{ onInst }}" placeholder="Onde você trabalha ou estuda" style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.25); padding: 13px 14px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; outline: none;" style-focus="border-color: #1272EB; box-shadow: inset 0 0 0 1px #1272EB;" />
+              <sc-if value="{{ err.instituicao }}" hint-placeholder-val="{{ false }}">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B3301F;">{{ err.instituicao }}</span>
+              </sc-if>
+            </label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+              <label style="display: grid; gap: 7px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #3A424C;">Cidade *</span>
+                <input type="text" value="{{ form.cidade }}" onChange="{{ onCidade }}" placeholder="Santa Helena, PR" style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.25); padding: 13px 14px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; outline: none;" style-focus="border-color: #1272EB; box-shadow: inset 0 0 0 1px #1272EB;" />
+                <sc-if value="{{ err.cidade }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B3301F;">{{ err.cidade }}</span>
+                </sc-if>
+              </label>
+              <label style="display: grid; gap: 7px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #3A424C;">Como ficou sabendo?</span>
+                <select value="{{ form.origem }}" onChange="{{ onOrigem }}" style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.25); padding: 13px 14px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; outline: none; appearance: none; cursor: pointer;" style-focus="border-color: #1272EB; box-shadow: inset 0 0 0 1px #1272EB;">
+                  <sc-for list="{{ origens }}" as="o" hint-placeholder-count="6">
+                    <option value="{{ o }}">{{ o }}</option>
+                  </sc-for>
+                </select>
+              </label>
+            </div>
+            <label style="display: grid; gap: 7px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #3A424C;">Necessidades de acessibilidade (opcional)</span>
+              <input type="text" value="{{ form.acessibilidade }}" onChange="{{ onAcess }}" placeholder="Ex.: cadeira de rodas, intérprete de Libras" style="background: #FDFDFD; border: 1px solid rgba(35,40,47,.25); padding: 13px 14px; border-radius: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; outline: none;" style-focus="border-color: #1272EB; box-shadow: inset 0 0 0 1px #1272EB;" />
+            </label>
+            <label style="display: flex; gap: 12px; align-items: flex-start; background: #FDFDFD; border: 1px solid rgba(35,40,47,.18); border-radius: 12px; padding: 14px; cursor: pointer;">
+              <input type="checkbox" checked="{{ form.lgpd }}" onChange="{{ onLgpd }}" style="width: 18px; height: 18px; accent-color: #1272EB; margin: 1px 0 0; flex: none;" />
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.6; color: #3A424C;">Autorizo o LAMIA a usar meus dados para a organização do evento e comunicados sobre o Idei.a.</span>
+            </label>
+            <sc-if value="{{ err.lgpd }}" hint-placeholder-val="{{ false }}">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B3301F; margin-top: -8px;">{{ err.lgpd }}</span>
+            </sc-if>
+            <button type="button" onClick="{{ submit }}" style="background: #1272EB; color: #fff; border: 0; padding: 18px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; border-radius: 10px;" style-hover="background: #23282F;">{{ submitLabel }}</button>
+            <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #3A424C; text-align: center;">Inscrição gratuita · vagas limitadas pela capacidade do auditório</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showSuccess }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 32px 26px 30px;">
+            <div style="display: flex; gap: 8px; margin-bottom: 22px;">
+              <span style="width: 26px; height: 26px; background: #1272EB; display: block;"></span>
+              <span style="width: 26px; height: 26px; background: #FDFDFD; display: block;"></span>
+              <span style="width: 26px; height: 26px; background-image: radial-gradient(#1272EB 1.3px, transparent 1.4px); background-size: 6px 6px; display: block;"></span>
+            </div>
+            <h3 style="margin: 0 0 12px; font-size: 26px; font-weight: 900; letter-spacing: -.04em; line-height: 1.05; text-transform: uppercase;">Inscrição confirmada, {{ firstName }}</h3>
+            <p style="margin: 0 0 24px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.7; color: #3A424C; max-width: 46ch; text-wrap: pretty;">Enviamos os detalhes para <strong>{{ form.email }}</strong>. Guarde a data: 10 de novembro, 13h, Auditório ACISA, Santa Helena.</p>
+            <button type="button" onClick="{{ closeModal }}" style="background: #23282F; color: #fff; border: 0; padding: 15px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; border-radius: 10px;" style-hover="background: #1272EB;">Voltar ao site</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sheetsEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://script.google.com/macros/s/AKfycbyTHIBTyepU6d61H7vz2WDBuiZYst1FEX1rS4LSVQnXywRLyuBzzRh3vq5mdiAKZPIU/exec&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Inscrições&quot;}}">
+const logoVals = (a) => Object.assign({}, a, { href: a.link || "#apoio", logoStyle: { width: "100%", height: "72px", backgroundImage: 'url("' + D().assetUrl(a.logo) + '")', backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" } });
+const D = () => window.IdeiaData;
+
+const ADMIN_USER = "lamia";
+const ADMIN_PASS = "ideia2026";
+const ENDPOINT_PADRAO = "https://script.google.com/macros/s/AKfycbyTHIBTyepU6d61H7vz2WDBuiZYst1FEX1rS4LSVQnXywRLyuBzzRh3vq5mdiAKZPIU/exec";
+const ORIGENS = ["Selecione", "Instagram do LAMIA", "Convite da ACISA", "UTFPR / professores", "Indicação de colega", "WhatsApp", "Imprensa local", "Outro"];
+const EMPTY = { nome: "", email: "", telefone: "", instituicao: "", cidade: "", origem: "Selecione", acessibilidade: "", lgpd: true };
+
+class Component extends DCLogic {
+  state = { adminOpen: false, adminAuth: false, authUser: '', authPass: '', authErr: '', admTab: 'convidados', status: '', sync: (window.IdeiaData ? window.IdeiaData.status() : { modo: 'local' }), acAtual: '', acUsuario: '', acNova: '', acRepete: '', acErro: '', now: Date.now(), modalOpen: false, modalManual: false, success: false, sending: false, err: {}, form: Object.assign({}, EMPTY), dados: (window.IdeiaData ? window.IdeiaData.load() : { convidados: [], apoiadores: [], vagasParceria: 4 }) };
+
+  componentDidMount() {
+    this._t = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this._armed = true;
+    this._sync = () => { if (window.IdeiaData) this.setState({ dados: window.IdeiaData.load() }); };
+    window.addEventListener('ideia:dados', this._sync);
+    this._syncState = (ev) => this.setState({ sync: (ev && ev.detail) || window.IdeiaData.status() });
+    window.addEventListener('ideia:sync', this._syncState);
+    window.addEventListener('storage', this._sync);
+    this._sync();
+    this.startGrid();
+    this.startScroll();
+    this._key = (e) => { if (e.key === "Escape") this.setState({ modalOpen: false, modalManual: false }); };
+    window.addEventListener("keydown", this._key);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._t);
+    cancelAnimationFrame(this._raf);
+    window.removeEventListener("scroll", this._onScroll);
+    window.removeEventListener("resize", this._build);
+    window.removeEventListener("keydown", this._key);
+  }
+
+  startGrid() {
+    const cv = this._cv;
+    if (!cv) return;
+    const ctx = cv.getContext("2d");
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const unit = 84;
+    let pts = [], mx = -9999, my = -9999;
+
+    this._build = () => {
+      const w = cv.clientWidth, h = cv.clientHeight;
+      cv.width = w * dpr; cv.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pts = [];
+      const cols = Math.ceil(w / unit) + 1, rows = Math.ceil(h / unit) + 1;
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          const r = Math.random();
+          if (r > 0.2) continue;
+          const kind = r < 0.055 ? "solid" : r < 0.115 ? "white" : "dot";
+          pts.push({ x: i * unit, y: j * unit, ox: 0, oy: 0, kind, s: unit * (0.26 + Math.random() * 0.3), ph: Math.random() * 6.28 });
+        }
+      }
+    };
+
+    window.addEventListener("resize", this._build);
+    cv.parentElement.addEventListener("pointermove", (e) => {
+      const r = cv.getBoundingClientRect();
+      mx = e.clientX - r.left; my = e.clientY - r.top;
+    });
+    cv.parentElement.addEventListener("pointerleave", () => { mx = -9999; my = -9999; });
+    this._build();
+
+    const tile = document.createElement("canvas");
+    tile.width = 6; tile.height = 6;
+    const tctx = tile.getContext("2d");
+    tctx.fillStyle = "#1272EB";
+    tctx.fillRect(0, 0, 2, 2);
+    tctx.fillRect(3, 3, 2, 2);
+    const pat = ctx.createPattern(tile, "repeat");
+
+    const draw = (t) => {
+      const w = cv.clientWidth, h = cv.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      for (const p of pts) {
+        const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy), R = 200;
+        let tx = 0, ty = 0;
+        if (d < R && d > 0.01) { const f = (1 - d / R) * 34; tx = (dx / d) * f; ty = (dy / d) * f; }
+        p.ox += (tx - p.ox) * 0.08;
+        p.oy += (ty - p.oy) * 0.08;
+        const pulse = 0.52 + Math.sin(t / 3000 + p.ph) * 0.12;
+        const x = p.x + p.ox, y = p.y + p.oy;
+        if (p.kind === "solid") { ctx.globalAlpha = pulse * 0.75; ctx.fillStyle = "#1272EB"; ctx.fillRect(x, y, p.s, p.s); }
+        else if (p.kind === "white") { ctx.globalAlpha = pulse; ctx.fillStyle = "#FDFDFD"; ctx.fillRect(x, y, p.s, p.s); }
+        else if (pat) { ctx.globalAlpha = pulse * 0.4; ctx.save(); ctx.translate(x, y); ctx.fillStyle = pat; ctx.fillRect(0, 0, p.s, p.s); ctx.restore(); }
+      }
+      // abre um vazio ao redor do t\u00edtulo: a tipografia nunca disputa com a grade
+      const zones = [this._title, this._lede].filter(Boolean);
+      if (zones.length) {
+        const cr = cv.getBoundingClientRect();
+        const pad = 26;
+        ctx.save();
+        ctx.globalAlpha = 1;
+        ctx.globalCompositeOperation = "destination-out";
+        try { ctx.filter = "blur(26px)"; } catch (err) {}
+        ctx.fillStyle = "#000";
+        for (const el of zones) {
+          const tr = el.getBoundingClientRect();
+          ctx.fillRect(tr.left - cr.left - pad, tr.top - cr.top - pad, tr.width + pad * 2, tr.height + pad * 2);
+        }
+        ctx.restore();
+      }
+      ctx.globalCompositeOperation = "source-over";
+      ctx.globalAlpha = 1;
+      this._raf = requestAnimationFrame(draw);
+    };
+    this._raf = requestAnimationFrame(draw);
+  }
+
+  startScroll() {
+    this._onScroll = () => {
+      const sec = this._touch, a = this._ia, b = this._human;
+      if (!sec || !a || !b || this.state.adminOpen) return;
+      const r = sec.getBoundingClientRect(), vh = window.innerHeight;
+      // o trecho fixo dura (altura da seção - uma tela); o encontro ocupa todo esse curso
+      const curso = Math.max(1, sec.offsetHeight - vh);
+      let p = -r.top / curso;
+      p = Math.max(0, Math.min(1, p));
+      const e = p * p * (3 - 2 * p);
+      a.style.transform = "translate(" + (-235 + e * 134.5) + "%, -53.4%)";
+      b.style.transform = "translate(" + (135 - e * 137) + "%, -56%)";
+
+      // o painel nasce no instante do toque (aberto pelo scroll, não é fixo)
+      if (e > 0.985 && this._armed && !this.state.modalOpen && !this.state.success) {
+        this._armed = false;
+        this.setState({ modalOpen: true, modalManual: false });
+      }
+      // sai ao voltar para cima — só fecha o que o scroll abriu, nunca o aberto pelo botão
+      if (e < 0.7) {
+        this._armed = true;
+        if (this.state.modalOpen && !this.state.success && !this.state.modalManual) this.setState({ modalOpen: false });
+      }
+      // sai também ao passar da seção das mãos
+      if (r.bottom < vh * 0.25 && this.state.modalOpen && !this.state.success && !this.state.modalManual) {
+        this.setState({ modalOpen: false });
+      }
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onScroll();
+  }
+
+  admCommit(next, msg) {
+    this.setState({ dados: next });
+    this._writing = true;
+    const r = D() ? D().save(next) : { ok: false, error: "Armazenamento indisponível" };
+    this._writing = false;
+    this.admFlash(r.ok ? (msg || "Salvo") : r.error);
+  }
+
+  admFlash(msg) {
+    this.setState({ status: msg });
+    clearTimeout(this._admFlash);
+    this._admFlash = setTimeout(() => this.setState({ status: "" }), 2200);
+  }
+
+  admPatch(lista, i, campo, valor, msg) {
+    const d = D().clone(this.state.dados);
+    d[lista][i][campo] = valor;
+    this.admCommit(d, msg);
+  }
+
+  admMove(lista, i, dir) {
+    const d = D().clone(this.state.dados);
+    const j = i + dir;
+    if (j < 0 || j >= d[lista].length) return;
+    const tmp = d[lista][i];
+    d[lista][i] = d[lista][j];
+    d[lista][j] = tmp;
+    this.admCommit(d, "Ordem atualizada");
+  }
+
+  admRemove(lista, i) {
+    const d = D().clone(this.state.dados);
+    d[lista].splice(i, 1);
+    this.admCommit(d, "Item excluído");
+  }
+
+  admTabBtn(id) {
+    const on = this.state.admTab === id;
+    return "background: " + (on ? "#23282F" : "transparent") + "; color: " + (on ? "#FDFDFD" : "#3A424C") +
+      "; border: 0; border-radius: 12px 12px 0 0; padding: 16px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; white-space: nowrap;";
+  }
+
+  tryLogin() {
+    const s = this.state;
+    const cred = (s.dados && s.dados.acesso) || {};
+    const user = (cred.usuario || ADMIN_USER).trim().toLowerCase();
+    const pass = cred.senha || ADMIN_PASS;
+    if (s.authUser.trim().toLowerCase() === user && s.authPass === pass) {
+      this.setState({ adminAuth: true, authPass: '', authErr: '' });
+    } else {
+      this.setState({ authErr: 'Usuário ou senha incorretos.' });
+    }
+  }
+
+  initRail(el) {
+    if (!el || el._dragReady) return;
+    el._dragReady = true;
+    let down = false, startX = 0, startLeft = 0, moved = 0;
+    el.addEventListener("pointerdown", (ev) => {
+      if (ev.target.closest && ev.target.closest("image-slot")) return;
+      down = true; moved = 0; startX = ev.clientX; startLeft = el.scrollLeft;
+      el.style.scrollBehavior = "auto";
+      el.style.cursor = "grabbing";
+    });
+    el.addEventListener("pointermove", (ev) => {
+      if (!down) return;
+      const dx = ev.clientX - startX;
+      if (Math.abs(dx) > 3) { moved = dx; el.setPointerCapture(ev.pointerId); }
+      el.scrollLeft = startLeft - dx;
+    });
+    const up = () => {
+      if (!down) return;
+      down = false;
+      el.style.cursor = "grab";
+      el.style.scrollBehavior = "smooth";
+    };
+    el.addEventListener("pointerup", up);
+    el.addEventListener("pointercancel", up);
+    el.addEventListener("pointerleave", up);
+    el.addEventListener("click", (ev) => { if (Math.abs(moved) > 6) { ev.preventDefault(); ev.stopPropagation(); } }, true);
+  }
+
+  nudgeRail(dir) {
+    const el = this._rail;
+    if (!el) return;
+    const card = el.firstElementChild;
+    const step = card ? card.getBoundingClientRect().width + 14 : 280;
+    el.style.scrollBehavior = "smooth";
+    el.scrollBy({ left: dir * step * 2, behavior: "smooth" });
+  }
+
+  setField(k, v) {
+    this.setState((s) => ({ form: Object.assign({}, s.form, { [k]: v }), err: Object.assign({}, s.err, { [k]: "" }) }));
+  }
+
+  mask(v) {
+    const d = String(v).replace(/\D/g, "").slice(0, 11);
+    if (d.length <= 2) return d.length ? "(" + d : "";
+    if (d.length <= 6) return "(" + d.slice(0, 2) + ") " + d.slice(2);
+    if (d.length <= 10) return "(" + d.slice(0, 2) + ") " + d.slice(2, 6) + "-" + d.slice(6);
+    return "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const d = s.dados || { convidados: [], apoiadores: [] };
+    const conv = d.convidados || [], apo = d.apoiadores || [];
+    const sync = s.sync || { modo: "local" };
+    const target = new Date("2026-11-10T13:00:00-03:00").getTime();
+    const sec = Math.max(0, Math.floor((target - s.now) / 1000));
+    const pad = (n) => String(n).padStart(2, "0");
+    const t = ["10 de novembro", "13h às 17h", "Auditório ACISA", "Santa Helena · PR", "Inscrição gratuita", "Vagas limitadas", "Realização LAMIA · UTFPR"];
+
+    return {
+      canvasRef: (el) => { this._cv = el; },
+      titleRef: (el) => { this._title = el; },
+      ledeRef: (el) => { this._lede = el; },
+      touchRef: (el) => { this._touch = el; },
+      handIaRef: (el) => { this._ia = el; },
+      handHumanRef: (el) => { this._human = el; },
+      adminOpen: s.adminOpen,
+      adminLocked: s.adminOpen && !s.adminAuth,
+      adminUnlocked: s.adminOpen && s.adminAuth,
+      authUser: s.authUser,
+      authPass: s.authPass,
+      authErr: s.authErr,
+      openAdmin: () => { document.body.style.overflow = 'hidden'; this.setState({ adminOpen: true, authErr: '' }); },
+      closeAdmin: () => { document.body.style.overflow = ''; this.setState({ adminOpen: false, authPass: '', authErr: '' }); },
+      onAuthUser: (e) => this.setState({ authUser: e.target.value, authErr: '' }),
+      onAuthPass: (e) => this.setState({ authPass: e.target.value, authErr: '' }),
+      onAuthKey: (e) => { if (e.key === 'Enter') this.tryLogin(); },
+      doLogin: () => this.tryLogin(),
+      admStatus: s.status || "Edição local",
+      verConvidados: s.admTab === "convidados",
+      verProg: s.admTab === "programacao",
+      verApoio: s.admTab === "apoio",
+      verAcesso: s.admTab === "acesso",
+      verBackup: s.admTab === "backup",
+      tabStyleA: this.admTabBtn("convidados"),
+      tabStyleP: this.admTabBtn("programacao"),
+      tabStyleB: this.admTabBtn("apoio"),
+      tabStyleD: this.admTabBtn("acesso"),
+      tabStyleC: this.admTabBtn("backup"),
+      tabConvidados: () => this.setState({ admTab: "convidados" }),
+      tabProg: () => this.setState({ admTab: "programacao" }),
+      tabApoio: () => this.setState({ admTab: "apoio" }),
+      admProgramacao: (d.programacao || []).map((p, i) => Object.assign({}, p, {
+        onHorario: (e) => this.admPatch("programacao", i, "horario", e.target.value),
+        onTitulo: (e) => this.admPatch("programacao", i, "titulo", e.target.value),
+        onLegenda: (e) => this.admPatch("programacao", i, "legenda", e.target.value),
+        onNome: (e) => this.admPatch("programacao", i, "nome", e.target.value),
+        up: () => this.admMove("programacao", i, -1),
+        down: () => this.admMove("programacao", i, 1),
+        del: () => this.admRemove("programacao", i)
+      })),
+      addProg: () => {
+        const next = D().clone(d);
+        next.programacao.push({ id: D().uid(), horario: "", titulo: "Nova atividade", legenda: "", nome: "" });
+        this.admCommit(next, "Atividade adicionada");
+      },
+      tabAcesso: () => this.setState({ admTab: "acesso", acErro: "", acAtual: "", acNova: "", acRepete: "", acUsuario: (d.acesso && d.acesso.usuario) || "" }),
+      tabBackup: () => this.setState({ admTab: "backup" }),
+
+      acAtual: s.acAtual,
+      acUsuario: s.acUsuario,
+      acNova: s.acNova,
+      acRepete: s.acRepete,
+      acErro: s.acErro,
+      onAcAtual: (e) => this.setState({ acAtual: e.target.value, acErro: "" }),
+      onAcUsuario: (e) => this.setState({ acUsuario: e.target.value, acErro: "" }),
+      onAcNova: (e) => this.setState({ acNova: e.target.value, acErro: "" }),
+      onAcRepete: (e) => this.setState({ acRepete: e.target.value, acErro: "" }),
+      salvarAcesso: () => {
+        const atual = (d.acesso && d.acesso.senha) || "ideia2026";
+        const u = s.acUsuario.trim(), n = s.acNova, r = s.acRepete;
+        if (s.acAtual !== atual) { this.setState({ acErro: "A senha atual não confere." }); return; }
+        if (u.length < 3) { this.setState({ acErro: "O usuário precisa de ao menos 3 caracteres." }); return; }
+        if (n.length < 6) { this.setState({ acErro: "A nova senha precisa de ao menos 6 caracteres." }); return; }
+        if (n !== r) { this.setState({ acErro: "As duas senhas não são iguais." }); return; }
+        const next = D().clone(d);
+        next.acesso = { usuario: u, senha: n };
+        this.setState({ acAtual: "", acNova: "", acRepete: "", acErro: "" });
+        this.admCommit(next, "Credenciais atualizadas");
+      },
+
+      semConvidados: conv.length === 0,
+      vagas: d.vagasParceria == null ? 4 : d.vagasParceria,
+      onVagas: (e) => {
+        const n = Math.max(0, Math.min(12, parseInt(e.target.value, 10) || 0));
+        const next = D().clone(d);
+        next.vagasParceria = n;
+        this.admCommit(next, "Salvo");
+      },
+
+      admConvidados: conv.map((c, i) => Object.assign({}, c, {
+        temFoto: !!c.foto,
+        semFoto: !c.foto,
+        fotoStyle: { position: "absolute", inset: 0, backgroundImage: 'url("' + D().assetUrl(c.foto) + '")', backgroundSize: "cover", backgroundPosition: "center" },
+        onFormato: (e) => this.admPatch("convidados", i, "formato", e.target.value),
+        onNome: (e) => this.admPatch("convidados", i, "nome", e.target.value),
+        onCargo: (e) => this.admPatch("convidados", i, "cargo", e.target.value),
+        onFotoUrl: (e) => this.admPatch("convidados", i, "foto", e.target.value),
+        up: () => this.admMove("convidados", i, -1),
+        down: () => this.admMove("convidados", i, 1),
+        del: () => this.admRemove("convidados", i)
+      })),
+
+      admApoiadores: apo.map((a, i) => Object.assign({}, a, {
+        temLogo: !!a.logo,
+        semLogo: !a.logo,
+        logoStyle: { width: "100%", height: "100%", backgroundImage: 'url("' + D().assetUrl(a.logo) + '")', backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" },
+        link: a.link || "",
+        onNome: (e) => this.admPatch("apoiadores", i, "nome", e.target.value),
+        onCategoria: (e) => this.admPatch("apoiadores", i, "categoria", e.target.value),
+        onLink: (e) => this.admPatch("apoiadores", i, "link", e.target.value),
+        onLogoUrl: (e) => this.admPatch("apoiadores", i, "logo", e.target.value),
+        up: () => this.admMove("apoiadores", i, -1),
+        down: () => this.admMove("apoiadores", i, 1),
+        del: () => this.admRemove("apoiadores", i)
+      })),
+
+      addConvidado: () => {
+        const next = D().clone(d);
+        next.convidados.push({ id: D().uid(), formato: "Mesa redonda", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" });
+        this.admCommit(next, "Participante adicionado");
+      },
+      addApoiador: () => {
+        const next = D().clone(d);
+        next.apoiadores.push({ id: D().uid(), categoria: "Parceria", nome: "Nova organização", logo: "", link: "" });
+        this.admCommit(next, "Organização adicionada");
+      },
+
+      resumo: conv.length + " participante(s) · " +
+        apo.filter((a) => a.categoria !== "Parceria").length + " em realização · " +
+        apo.filter((a) => a.categoria === "Parceria").length + " em parceria",
+
+      exportar: () => {
+        const limpo = Object.assign({}, d);
+        delete limpo.acesso;
+        const blob = new Blob([JSON.stringify(limpo, null, 2)], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "conteudo.json";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        this.admFlash("Arquivo exportado");
+      },
+      importar: (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const fr = new FileReader();
+        fr.onload = () => {
+          try {
+            const parsed = JSON.parse(fr.result);
+            if (!parsed || !Array.isArray(parsed.convidados)) throw new Error("Arquivo fora do formato");
+            this.admCommit({
+              convidados: parsed.convidados,
+              programacao: Array.isArray(parsed.programacao) ? parsed.programacao : d.programacao,
+              apoiadores: Array.isArray(parsed.apoiadores) ? parsed.apoiadores : [],
+              vagasParceria: typeof parsed.vagasParceria === "number" ? parsed.vagasParceria : 4,
+              acesso: d.acesso || (parsed.acesso || D().DEFAULTS.acesso)
+            }, "Conteúdo importado");
+          } catch (err) { this.admFlash("Não foi possível importar: " + (err.message || err)); }
+        };
+        fr.readAsText(file);
+      },
+      restaurar: () => {
+        if (!window.confirm("Isso apaga o conteúdo atual e volta ao padrão. Continuar?")) return;
+        this.admCommit(D().clone(D().DEFAULTS), "Conteúdo padrão restaurado");
+      },
+      railRef: (el) => { this._rail = el; this.initRail(el); },
+      railPrev: () => this.nudgeRail(-1),
+      railNext: () => this.nudgeRail(1),
+      ticker: t.concat(t),
+      origens: ORIGENS,
+      countdown: [
+        { value: pad(Math.floor(sec / 86400)), label: "dias" },
+        { value: pad(Math.floor((sec % 86400) / 3600)), label: "horas" },
+        { value: pad(Math.floor((sec % 3600) / 60)), label: "min" },
+        { value: pad(sec % 60), label: "seg" }
+      ],
+      numeros: [
+        { v: "+11", k: "projetos de PD&I executados com sucesso", bg: "#23282F", fg: "#FFFFFF" },
+        { v: "+7", k: "propriedades intelectuais geradas com o mercado", bg: "#23282F", fg: "#FFFFFF" },
+        { v: "+R$17MI", k: "em contratos de PD&I com empresas", bg: "#1272EB", fg: "#FFFFFF" },
+        { v: "+150", k: "alunos, doutores e profissionais de tecnologia", bg: "#23282F", fg: "#FFFFFF" }
+      ],
+      objetivos: [
+        { n: "01", t: "Captar novos projetos", d: "Sair da tarde com demandas reais de empresas e órgãos públicos mapeadas e prontas para virar projeto de PD&I no LAMIA." },
+        { n: "02", t: "Mostrar o caminho do PD&I", d: "Deixar claro como uma empresa contrata pesquisa aplicada, como funciona a contrapartida e em quanto tempo um produto de IA fica de pé." },
+        { n: "03", t: "Fazer de Santa Helena um polo de IA", d: "Consolidar a cidade como referência nacional em Inteligência Artificial aplicada, com tecnologia nascida aqui e usada país afora." },
+        { n: "04", t: "Colocar a região no mapa do mundo", d: "Levar o que se produz no oeste do Paraná para a conversa global de IA, atraindo parceiros, investimento e talento para cá." }
+      ],
+      temConvidados: (s.dados.convidados || []).length > 0,
+      convidados: (s.dados.convidados || []).map((c) => Object.assign({}, c, { temFoto: !!c.foto, semFoto: !c.foto, fotoStyle: { position: "absolute", inset: 0, backgroundImage: 'url("' + D().assetUrl(c.foto) + '")', backgroundSize: "cover", backgroundPosition: "center" } })),
+      realizacao: (s.dados.apoiadores || []).filter((a) => a.categoria !== 'Parceria').map(logoVals),
+      parceria: (s.dados.apoiadores || []).filter((a) => a.categoria === 'Parceria').map(logoVals),
+      parceiroSlots: Array.from({ length: Math.max(0, (s.dados.vagasParceria == null ? 4 : s.dados.vagasParceria)) }, (_, i) => i + 1),
+      redes: (() => {
+        const svg = (children) => React.createElement("svg", { viewBox: "0 0 24 24", width: 18, height: 18, fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", style: { display: "block" } }, children);
+        const p = (d, i) => React.createElement("path", { d, key: "p" + i });
+        return [
+          { label: "@lamiautfpr", url: "https://www.instagram.com/lamiautfpr/", icon: svg([
+            React.createElement("rect", { x: 3, y: 3, width: 18, height: 18, rx: 5, key: "r" }),
+            React.createElement("circle", { cx: 12, cy: 12, r: 4, key: "c" }),
+            React.createElement("circle", { cx: 17.2, cy: 6.8, r: 1.1, fill: "currentColor", stroke: "none", key: "d" })
+          ]) },
+          { label: "WhatsApp", url: "https://wa.me/5545991018140", icon: svg([
+            p("M20.5 11.6a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.6-4.3A8.5 8.5 0 1 1 20.5 11.6Z", 1),
+            p("M9 9.4c0 3 2.6 5.6 5.6 5.6l.9-1.7-2-.7-.8.8a5.7 5.7 0 0 1-2.4-2.4l.8-.8-.7-2L9 9.4Z", 2)
+          ]) },
+          { label: "GitHub", url: "https://github.com/lamiautfpr", icon: svg([
+            p("M9.2 20.6c-3.6 1-3.6-2-5.1-2.5m10.3 5v-3.6a3 3 0 0 1 .8-2.4c2.9-.3 4.6-1.8 4.6-5.4a4.4 4.4 0 0 0-1.2-3 4 4 0 0 0-.1-3.1s-1.3-.4-4.1 1.5a10.4 10.4 0 0 0-5.2 0C6.4 6.2 5.1 6.6 5.1 6.6a4 4 0 0 0-.1 3.1 4.4 4.4 0 0 0-1.2 3c0 3.6 1.7 5.1 4.6 5.4a3 3 0 0 0-.8 2.3v3.7", 3)
+          ]) },
+          { label: "LinkedIn", url: "https://www.linkedin.com/in/lamiautfpr/", icon: svg([
+            React.createElement("rect", { x: 3, y: 3, width: 18, height: 18, rx: 2, key: "r" }),
+            p("M7 10.5V17M7 7.2v.1M11.5 17v-3.6a2.3 2.3 0 0 1 4.6 0V17", 4)
+          ]) }
+        ];
+      })(),
+      agenda: (d.programacao || []).map((p, i) => ({
+        n: String(i + 1).padStart(2, "0"),
+        time: p.horario,
+        title: p.titulo,
+        legenda: p.legenda,
+        temLegenda: !!p.legenda,
+        nome: p.nome,
+        temNome: !!p.nome
+      })),
+
+      modalOpen: s.modalOpen,
+      showForm: s.modalOpen && !s.success,
+      showSuccess: s.modalOpen && s.success,
+      modalTitle: s.success ? "Tudo pronto" : "Reserve sua vaga",
+      submitLabel: s.sending ? "Enviando…" : "Confirmar inscrição",
+      form: s.form,
+      err: s.err,
+      firstName: s.form.nome.trim().split(/\s+/)[0] || "",
+      openModal: () => this.setState({ modalOpen: true, success: false, modalManual: true }),
+      closeModal: () => this.setState({ modalOpen: false, modalManual: false }),
+      onNome: (e) => this.setField("nome", e.target.value),
+      onEmail: (e) => this.setField("email", e.target.value),
+      onTelefone: (e) => this.setField("telefone", this.mask(e.target.value)),
+      onInst: (e) => this.setField("instituicao", e.target.value),
+      onCidade: (e) => this.setField("cidade", e.target.value),
+      onOrigem: (e) => this.setField("origem", e.target.value),
+      onAcess: (e) => this.setField("acessibilidade", e.target.value),
+      onLgpd: (e) => this.setField("lgpd", e.target.checked),
+      submit: () => {
+        const f = s.form, err = {};
+        if (f.nome.trim().split(/\s+/).filter(Boolean).length < 2) err.nome = "Informe nome e sobrenome.";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.trim())) err.email = "E-mail inválido.";
+        if (f.telefone.replace(/\D/g, "").length < 10) err.telefone = "Telefone incompleto com DDD.";
+        if (!f.instituicao.trim()) err.instituicao = "Informe sua instituição, empresa ou órgão.";
+        if (!f.cidade.trim()) err.cidade = "Informe sua cidade.";
+        if (!f.lgpd) err.lgpd = "É necessário autorizar o uso dos dados.";
+        if (Object.keys(err).length) { this.setState({ err }); return; }
+        this.setState({ sending: true, err: {} });
+        const url = (this.props.sheetsEndpoint || ENDPOINT_PADRAO || "").trim();
+        if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(url)) {
+          setTimeout(() => this.setState({ sending: false, success: true }), 600);
+          return;
+        }
+        const payload = {
+          nome: f.nome.trim(), email: f.email.trim(), telefone: f.telefone.trim(),
+          instituicao: f.instituicao.trim(), cidade: f.cidade.trim(),
+          origem: f.origem === "Selecione" ? "" : f.origem,
+          acessibilidade: f.acessibilidade.trim(), lgpd: !!f.lgpd
+        };
+        fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          redirect: "follow",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        }).then(() => {
+          this.setState({ sending: false, success: true });
+        }).catch(() => {
+          this.setState({ sending: false, err: { lgpd: "Não conseguimos enviar agora. Tente novamente ou escreva para lamia@utfpr.edu.br." } });
+        });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

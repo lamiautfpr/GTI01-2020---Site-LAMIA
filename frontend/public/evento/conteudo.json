@@ -1,0 +1,138 @@
+{
+  "convidados": [
+    {
+      "id": "c1",
+      "ordem": 1,
+      "formato": "Fala de abertura",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    },
+    {
+      "id": "c2",
+      "ordem": 2,
+      "formato": "Mesa redonda",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    },
+    {
+      "id": "c3",
+      "ordem": 3,
+      "formato": "Mesa redonda",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    },
+    {
+      "id": "c4",
+      "ordem": 4,
+      "formato": "Mesa redonda",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    },
+    {
+      "id": "c5",
+      "ordem": 5,
+      "formato": "Mesa redonda",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    },
+    {
+      "id": "c6",
+      "ordem": 6,
+      "formato": "Do problema ao projeto",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    },
+    {
+      "id": "c7",
+      "ordem": 7,
+      "formato": "Do problema ao projeto",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    },
+    {
+      "id": "c8",
+      "ordem": 8,
+      "formato": "Café conexão",
+      "nome": "Nome a confirmar",
+      "cargo": "Cargo · instituição",
+      "foto": ""
+    }
+  ],
+  "programacao": [
+    {
+      "id": "p1",
+      "ordem": 1,
+      "horario": "13:00 às 13:30",
+      "titulo": "Credenciamento e boas-vindas",
+      "legenda": "",
+      "nome": ""
+    },
+    {
+      "id": "p2",
+      "ordem": 2,
+      "horario": "13:30 às 14:30",
+      "titulo": "Um motor de IA para o mundo",
+      "legenda": "",
+      "nome": "Thiago"
+    },
+    {
+      "id": "p3",
+      "ordem": 3,
+      "horario": "14:30 às 15:30",
+      "titulo": "Quando a IA entrou na operação",
+      "legenda": "",
+      "nome": "Geisy · Daisee · Cristofer · Jadson"
+    },
+    {
+      "id": "p4",
+      "ordem": 4,
+      "horario": "15:30 às 16:15",
+      "titulo": "Do problema ao projeto",
+      "legenda": "",
+      "nome": "Aquiles · Secretaria · DIREC"
+    },
+    {
+      "id": "p5",
+      "ordem": 5,
+      "horario": "16:15 às 17:00",
+      "titulo": "Café Conexão",
+      "legenda": "",
+      "nome": "Networking"
+    }
+  ],
+  "apoiadores": [
+    {
+      "id": "a1",
+      "ordem": 1,
+      "categoria": "Realização",
+      "nome": "LAMIA",
+      "logo": "/evento/assets/lamia-logo.png",
+      "link": "https://lamia.sh.utfpr.edu.br"
+    },
+    {
+      "id": "a2",
+      "ordem": 2,
+      "categoria": "Realização",
+      "nome": "UTFPR",
+      "logo": "/evento/assets/utfpr.png",
+      "link": "https://www.utfpr.edu.br/campus/santahelena"
+    },
+    {
+      "id": "a3",
+      "ordem": 3,
+      "categoria": "Parceria",
+      "nome": "ACISA Santa Helena",
+      "logo": "/evento/assets/acisa.webp",
+      "link": ""
+    }
+  ],
+  "vagasParceria": 4,
+  "revisao": 0
+}
