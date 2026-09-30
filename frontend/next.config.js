@@ -15,6 +15,8 @@ const nextConfig = {
     return [
       { source: '/evento', destination: '/evento/index.html' },
       { source: '/evento/', destination: '/evento/index.html' },
+      { source: '/patrocinio', destination: '/patrocinio/index.html' },
+      { source: '/patrocinio/', destination: '/patrocinio/index.html' },
     ]
   },
 }
