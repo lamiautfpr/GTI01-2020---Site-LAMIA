@@ -21,14 +21,8 @@
 
   var DEFAULTS = {
     convidados: [
-      { id: "c1", ordem: 1, formato: "Fala de abertura", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" },
-      { id: "c2", ordem: 2, formato: "Mesa redonda", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" },
-      { id: "c3", ordem: 3, formato: "Mesa redonda", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" },
-      { id: "c4", ordem: 4, formato: "Mesa redonda", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" },
-      { id: "c5", ordem: 5, formato: "Mesa redonda", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" },
-      { id: "c6", ordem: 6, formato: "Do problema ao projeto", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" },
-      { id: "c7", ordem: 7, formato: "Do problema ao projeto", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" },
-      { id: "c8", ordem: 8, formato: "Café conexão", nome: "Nome a confirmar", cargo: "Cargo · instituição", foto: "" }
+      { id: "c1", ordem: 1, formato: "Fala de abertura", nome: "Thiago Naves", cargo: "Coord. LAMIA", foto: "/evento/assets/thiago-naves.jpeg" },
+      { id: "c2", ordem: 2, formato: "Mesa redonda", nome: "Jadson Siqueira", cargo: "CTO & CMO · AlfaCon", foto: "/evento/assets/jadson-siqueira.jpg" }
     ],
     programacao: [
       { id: "p1", ordem: 1, horario: "13:00 às 13:30", titulo: "Credenciamento e boas-vindas", legenda: "", nome: "" },
