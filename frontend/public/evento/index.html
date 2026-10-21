@@ -16,7 +16,7 @@
      deixá-lo vazio é o que mantém o modo local ligado. */
   window.IDEIA_CONFIG = { tipo: "rest", endpoint: "" };
 </script>
-<title>Idei.a LAMIA 2026 · Opção B</title>
+<title>Idei.a LAMIA 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -216,6 +216,40 @@
             <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #1272EB;">{{ c.formato }}</span>
             <h3 style="margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15;">{{ c.nome }}</h3>
             <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.65; color: #3A424C; text-wrap: pretty;">{{ c.cargo }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ temOrganizacao }}" hint-placeholder-val="{{ true }}">
+  <section id="organizacao" style="padding: clamp(52px, 7vw, 88px) 0 clamp(60px, 8vw, 100px); background: #C9CFCE; border-top: 1px solid rgba(35,40,47,.14); border-bottom: 1px solid rgba(35,40,47,.14); overflow: hidden;">
+    <div style="max-width: 1340px; margin: 0 auto; padding: 0 30px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 34px;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #0B57B8; margin-bottom: 14px;">Quem faz acontecer</div>
+        <h2 style="margin: 0; font-size: clamp(30px, 5vw, 62px); font-weight: 900; letter-spacing: -.05em; text-transform: uppercase; line-height: .9;">Organização</h2>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .1em; color: #3A424C;">arraste para o lado</span>
+        <button type="button" onClick="{{ railOrgPrev }}" aria-label="Anterior" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #23282F; background: transparent; cursor: pointer; font-size: 17px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background .25s ease, color .25s ease;" style-hover="background: #23282F; color: #FDFDFD;">←</button>
+        <button type="button" onClick="{{ railOrgNext }}" aria-label="Próximo" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #23282F; background: transparent; cursor: pointer; font-size: 17px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background .25s ease, color .25s ease;" style-hover="background: #23282F; color: #FDFDFD;">→</button>
+      </div>
+    </div>
+    <div id="trilha-organizacao" ref="{{ railOrgRef }}" style="display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity; padding: 4px max(30px, calc((100vw - 1340px) / 2)) 10px; cursor: grab; scroll-behavior: smooth;">
+      <sc-for list="{{ organizacao }}" as="o" hint-placeholder-count="4">
+        <article style="flex: 0 0 clamp(226px, 24vw, 272px); scroll-snap-align: center; background: #FDFDFD; border: 1px solid rgba(35,40,47,.12); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="position: relative; aspect-ratio: 4 / 5; background: #E4E7E6; display: flex; align-items: center; justify-content: center;">
+            <sc-if value="{{ o.temFoto }}">
+              <div role="img" aria-label="{{ o.nome }}" style="{{ o.fotoStyle }}"></div>
+            </sc-if>
+            <sc-if value="{{ o.semFoto }}" hint-placeholder-val="{{ true }}">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8A9391;">foto</span>
+            </sc-if>
+          </div>
+          <div style="padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 8px;">
+            <h3 style="margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15;">{{ o.nome }}</h3>
+            <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.65; color: #3A424C; text-wrap: pretty;">{{ o.titulo }}</p>
           </div>
         </article>
       </sc-for>
@@ -670,8 +704,8 @@ class Component extends DCLogic {
     el.addEventListener("click", (ev) => { if (Math.abs(moved) > 6) { ev.preventDefault(); ev.stopPropagation(); } }, true);
   }
 
-  nudgeRail(dir) {
-    const el = this._rail;
+  nudgeRail(dir, rail) {
+    const el = rail || this._rail;
     if (!el) return;
     const card = el.firstElementChild;
     const step = card ? card.getBoundingClientRect().width + 14 : 280;
@@ -847,6 +881,7 @@ class Component extends DCLogic {
             if (!parsed || !Array.isArray(parsed.convidados)) throw new Error("Arquivo fora do formato");
             this.admCommit({
               convidados: parsed.convidados,
+              organizacao: Array.isArray(parsed.organizacao) ? parsed.organizacao : d.organizacao,
               programacao: Array.isArray(parsed.programacao) ? parsed.programacao : d.programacao,
               apoiadores: Array.isArray(parsed.apoiadores) ? parsed.apoiadores : [],
               vagasParceria: typeof parsed.vagasParceria === "number" ? parsed.vagasParceria : 4,
@@ -863,6 +898,9 @@ class Component extends DCLogic {
       railRef: (el) => { this._rail = el; this.initRail(el); },
       railPrev: () => this.nudgeRail(-1),
       railNext: () => this.nudgeRail(1),
+      railOrgRef: (el) => { this._railOrg = el; this.initRail(el); },
+      railOrgPrev: () => this.nudgeRail(-1, this._railOrg),
+      railOrgNext: () => this.nudgeRail(1, this._railOrg),
       ticker: t.concat(t),
       origens: ORIGENS,
       countdown: [
@@ -885,6 +923,8 @@ class Component extends DCLogic {
       ],
       temConvidados: (s.dados.convidados || []).length > 0,
       convidados: (s.dados.convidados || []).map((c) => Object.assign({}, c, { temFoto: !!c.foto, semFoto: !c.foto, fotoStyle: { position: "absolute", inset: 0, backgroundImage: 'url("' + D().assetUrl(c.foto) + '")', backgroundSize: "cover", backgroundPosition: "center" } })),
+      temOrganizacao: (s.dados.organizacao || []).length > 0,
+      organizacao: (s.dados.organizacao || []).map((o) => Object.assign({}, o, { temFoto: !!o.foto, semFoto: !o.foto, fotoStyle: { position: "absolute", inset: 0, backgroundImage: 'url("' + D().assetUrl(o.foto) + '")', backgroundSize: "cover", backgroundPosition: "center" } })),
       realizacao: (s.dados.apoiadores || []).filter((a) => a.categoria !== 'Parceria').map(logoVals),
       parceria: (s.dados.apoiadores || []).filter((a) => a.categoria === 'Parceria').map(logoVals),
       parceiroSlots: Array.from({ length: Math.max(0, (s.dados.vagasParceria == null ? 4 : s.dados.vagasParceria)) }, (_, i) => i + 1),

@@ -22,7 +22,13 @@
   var DEFAULTS = {
     convidados: [
       { id: "c1", ordem: 1, formato: "Fala de abertura", nome: "Thiago Naves", cargo: "Coord. LAMIA", foto: "/evento/assets/thiago-naves.jpeg" },
-      { id: "c2", ordem: 2, formato: "Mesa redonda", nome: "Jadson Siqueira", cargo: "CTO & CMO · AlfaCon", foto: "/evento/assets/jadson-siqueira.jpg" }
+      { id: "c2", ordem: 2, formato: "Mesa redonda", nome: "Jadson Siqueira", cargo: "CTO & CMO · AlfaCon", foto: "/evento/assets/jadson-siqueira.jpg" },
+      { id: "c3", ordem: 3, formato: "Mesa redonda", nome: "Geize Felipetto", cargo: "YGG Tecnologia", foto: "/evento/assets/geize-felipetto.jpg" }
+    ],
+    organizacao: [
+      { id: "o2", ordem: 1, nome: "Arlete Beuren", titulo: "Pesquisadora do LAMIA", foto: "/evento/assets/arlete-beuren.jpg" },
+      { id: "o1", ordem: 2, nome: "Ilzo F. Figueiredo", titulo: "Assessoria de comunicação", foto: "/evento/assets/comunicacao.jpg" },
+      { id: "o3", ordem: 3, nome: "Adriana Sangalletti", titulo: "Assessoria de eventos", foto: "/evento/assets/adriana.jpg" }
     ],
     programacao: [
       { id: "p1", ordem: 1, horario: "13:00 às 13:30", titulo: "Credenciamento e boas-vindas", legenda: "", nome: "" },
@@ -94,11 +100,18 @@
     var conv = Array.isArray(d.convidados) ? d.convidados : base.convidados;
     var prog = Array.isArray(d.programacao) ? d.programacao : base.programacao;
     var apo = Array.isArray(d.apoiadores) ? d.apoiadores : base.apoiadores;
+    var org = Array.isArray(d.organizacao) ? d.organizacao : base.organizacao;
     return {
       convidados: conv.map(function (c, i) {
         return {
           id: c.id || uid(), ordem: i + 1,
           formato: c.formato || "", nome: c.nome || "", cargo: c.cargo || "", foto: c.foto || ""
+        };
+      }),
+      organizacao: org.map(function (o, i) {
+        return {
+          id: o.id || uid(), ordem: i + 1,
+          nome: o.nome || "", titulo: o.titulo || "", foto: o.foto || ""
         };
       }),
       programacao: prog.map(function (p, i) {
@@ -244,7 +257,7 @@
     if (estado.enviando || !config().endpoint || !cache) return Promise.resolve({ ok: false });
     estado.enviando = true; estado.pendente = false; anuncia();
     var enviado = clone(cache);
-    var corpo = { conteudo: { convidados: enviado.convidados, programacao: enviado.programacao, apoiadores: enviado.apoiadores, vagasParceria: enviado.vagasParceria, revisao: enviado.revisao } };
+    var corpo = { conteudo: { convidados: enviado.convidados, organizacao: enviado.organizacao, programacao: enviado.programacao, apoiadores: enviado.apoiadores, vagasParceria: enviado.vagasParceria, revisao: enviado.revisao } };
     return chamada("salvarConteudo", corpo).then(function () {
       estado.enviando = false; estado.ultimoErro = ""; estado.ultimaSync = now(); anuncia();
       return { ok: true };

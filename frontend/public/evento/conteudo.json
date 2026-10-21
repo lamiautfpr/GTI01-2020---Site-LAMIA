@@ -15,6 +15,37 @@
       "nome": "Jadson Siqueira",
       "cargo": "CTO & CMO · AlfaCon",
       "foto": "/evento/assets/jadson-siqueira.jpg"
+    },
+    {
+      "id": "c3",
+      "ordem": 3,
+      "formato": "Mesa redonda",
+      "nome": "Geize Felipetto",
+      "cargo": "YGG Tecnologia",
+      "foto": "/evento/assets/geize-felipetto.jpg"
+    }
+  ],
+  "organizacao": [
+    {
+      "id": "o2",
+      "ordem": 1,
+      "nome": "Arlete Beuren",
+      "titulo": "Pesquisadora do LAMIA",
+      "foto": "/evento/assets/arlete-beuren.jpg"
+    },
+    {
+      "id": "o1",
+      "ordem": 2,
+      "nome": "Ilzo F. Figueiredo",
+      "titulo": "Assessoria de comunicação",
+      "foto": "/evento/assets/comunicacao.jpg"
+    },
+    {
+      "id": "o3",
+      "ordem": 3,
+      "nome": "Adriana Sangalletti",
+      "titulo": "Assessoria de eventos",
+      "foto": "/evento/assets/adriana.jpg"
     }
   ],
   "programacao": [
@@ -86,5 +117,5 @@
     }
   ],
   "vagasParceria": 4,
-  "revisao": 1
+  "revisao": 3
 }
