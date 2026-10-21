@@ -27,8 +27,8 @@
     ],
     organizacao: [
       { id: "o2", ordem: 1, nome: "Arlete Beuren", titulo: "Pesquisadora do LAMIA", foto: "/evento/assets/arlete-beuren.jpg" },
-      { id: "o1", ordem: 2, nome: "Ilzo F. Figueiredo", titulo: "Assessoria de comunicação", foto: "/evento/assets/comunicacao.jpg" },
-      { id: "o3", ordem: 3, nome: "Adriana Sangalletti", titulo: "Assessoria de eventos", foto: "/evento/assets/adriana.jpg" }
+      { id: "o1", ordem: 2, nome: "Ilzo F. Figueiredo", titulo: "Assessoria de Comunicação do LAMIA", foto: "/evento/assets/comunicacao.jpg" },
+      { id: "o3", ordem: 3, nome: "Adriana Sangalletti", titulo: "Assessoria de Eventos do LAMIA", foto: "/evento/assets/adriana.jpg" }
     ],
     programacao: [
       { id: "p1", ordem: 1, horario: "13:00 às 13:30", titulo: "Credenciamento e boas-vindas", legenda: "", nome: "" },
@@ -40,7 +40,7 @@
     apoiadores: [
       { id: "a1", ordem: 1, categoria: "Realização", nome: "LAMIA", logo: "/evento/assets/lamia-logo.png", link: "https://lamia.sh.utfpr.edu.br" },
       { id: "a2", ordem: 2, categoria: "Realização", nome: "UTFPR", logo: "/evento/assets/utfpr.png", link: "https://www.utfpr.edu.br/campus/santahelena" },
-      { id: "a3", ordem: 3, categoria: "Parceria", nome: "ACISA Santa Helena", logo: "/evento/assets/acisa.webp", link: "" }
+      { id: "a3", ordem: 3, categoria: "Realização", nome: "ACISA Santa Helena", logo: "/evento/assets/acisa.webp", link: "" }
     ],
     vagasParceria: 4,
     acesso: { usuario: "", senha: "" },

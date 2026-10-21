@@ -37,14 +37,14 @@
       "id": "o1",
       "ordem": 2,
       "nome": "Ilzo F. Figueiredo",
-      "titulo": "Assessoria de comunicação",
+      "titulo": "Assessoria de Comunicação do LAMIA",
       "foto": "/evento/assets/comunicacao.jpg"
     },
     {
       "id": "o3",
       "ordem": 3,
       "nome": "Adriana Sangalletti",
-      "titulo": "Assessoria de eventos",
+      "titulo": "Assessoria de Eventos do LAMIA",
       "foto": "/evento/assets/adriana.jpg"
     }
   ],
@@ -110,12 +110,12 @@
     {
       "id": "a3",
       "ordem": 3,
-      "categoria": "Parceria",
+      "categoria": "Realização",
       "nome": "ACISA Santa Helena",
       "logo": "/evento/assets/acisa.webp",
       "link": ""
     }
   ],
   "vagasParceria": 4,
-  "revisao": 3
+  "revisao": 4
 }
