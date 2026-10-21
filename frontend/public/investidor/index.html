@@ -104,7 +104,6 @@
         <div style="background: #2C323A; padding: 18px 20px; display: flex; gap: 12px; align-items: center; font-size: 16px; font-weight: 700;"><span style="width: 9px; height: 9px; background: #5BA6F7; flex: none;"></span>Logo no totem</div>
         <div style="background: #2C323A; padding: 18px 20px; display: flex; gap: 12px; align-items: center; font-size: 16px; font-weight: 700;"><span style="width: 9px; height: 9px; background: #5BA6F7; flex: none;"></span>Logo no telão</div>
         <div style="background: #2C323A; padding: 18px 20px; display: flex; gap: 12px; align-items: center; font-size: 16px; font-weight: 700;"><span style="width: 9px; height: 9px; background: #5BA6F7; flex: none;"></span>Agradecimento no evento</div>
-        <div style="background: #2C323A; padding: 18px 20px; display: flex; gap: 12px; align-items: center; font-size: 16px; font-weight: 700;"><span style="width: 9px; height: 9px; background: #5BA6F7; flex: none;"></span>Divulgação em panfleto</div>
         <div style="background: #2C323A; padding: 18px 20px; display: flex; gap: 12px; align-items: center; font-size: 16px; font-weight: 700;"><span style="width: 9px; height: 9px; background: #5BA6F7; flex: none;"></span>Divulgação em rádio</div>
       </div>
     </div>
@@ -303,29 +302,6 @@
         <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.6; color: #3A424C; text-wrap: pretty;">Sua empresa citada pelo nome no palco, durante a abertura ou o encerramento do evento.</p>
       </div>
 
-      <div style="background: #FDFDFD; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 14px; opacity: {{ o.panfleto }}; filter: grayscale({{ g.panfleto }}); transition: opacity .35s, filter .35s;">
-        <div style="aspect-ratio: 4 / 3; background: #E4E8E8; border-radius: 12px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-          <div style="position: absolute; height: 72%; aspect-ratio: 1 / 1.41; background: #F2F4F4; transform: translateX(22%) rotate(8deg); box-shadow: 0 1px 0 rgba(35,40,47,.12);"></div>
-          <div style="position: relative; height: 76%; aspect-ratio: 1 / 1.41; background: #fff; transform: translateX(-10%) rotate(-5deg); box-shadow: 0 2px 0 rgba(35,40,47,.14); display: flex; flex-direction: column; overflow: hidden;">
-            <div style="background: #23282F; padding: 8px; display: flex; flex-direction: column; gap: 3px;">
-              <div style="width: 26%; aspect-ratio: 1; background: #1272EB;"></div>
-              <div style="width: 70%; height: 5px; background: #fff; margin-top: 4px;"></div>
-            </div>
-            <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 4px;">
-              <div style="width: 90%; height: 3px; background: #D2D7D6;"></div>
-              <div style="width: 76%; height: 3px; background: #D2D7D6;"></div>
-              <div style="width: 84%; height: 3px; background: #D2D7D6;"></div>
-            </div>
-            <div style="margin: 0 8px 8px; height: 18px; background: #1272EB; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 6px; letter-spacing: .1em; display: flex; align-items: center; justify-content: center;">SUA MARCA</div>
-          </div>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-          <div style="font-size: 20px; font-weight: 900; letter-spacing: -.03em; text-transform: uppercase;">Panfleto</div>
-          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 5px 9px; border-radius: 6px; background: {{ tagBg.panfleto }}; color: {{ tagFg.panfleto }};">{{ tag.panfleto }}</span>
-        </div>
-        <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.6; color: #3A424C; text-wrap: pretty;">Logo impresso no panfleto distribuído na cidade e entregue aos participantes.</p>
-      </div>
-
       <div style="background: #FDFDFD; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 14px; opacity: {{ o.radio }}; filter: grayscale({{ g.radio }}); transition: opacity .35s, filter .35s;">
         <div style="aspect-ratio: 4 / 3; background: #23282F; border-radius: 12px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; gap: 14px;">
           <div style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .2em; color: #fff;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #E5484D;"></span>NO AR</div>
@@ -507,7 +483,7 @@
 </sc-if>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;sheetsEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://script.google.com/macros/s/AKfycbyvTsdeqgKrkVMqIi5PfOZCuD-Xq2_TzbBPks9H5zMsRsxVma3M-lB6YlUga-oqjoiUPA/exec&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
-const PONTOS = ["site", "midias", "totem", "telao", "agradecimento", "panfleto", "radio"];
+const PONTOS = ["site", "midias", "totem", "telao", "agradecimento", "radio"];
 const COTAS = [
   { id: "especial", nome: "Cota Especial", curto: "Especial", valor: "R$ 1.200,00", itens: PONTOS },
   { id: "c1", nome: "1ª Cota", curto: "1ª Cota", valor: "R$ 500,00", itens: ["site", "midias", "totem", "agradecimento"] },
