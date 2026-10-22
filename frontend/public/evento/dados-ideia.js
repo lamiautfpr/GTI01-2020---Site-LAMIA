@@ -23,7 +23,8 @@
     convidados: [
       { id: "c1", ordem: 1, formato: "Fala de abertura", nome: "Thiago Naves", cargo: "Coord. LAMIA", foto: "/evento/assets/thiago-naves.jpeg" },
       { id: "c2", ordem: 2, formato: "Mesa redonda", nome: "Jadson Siqueira", cargo: "CTO & CMO · AlfaCon", foto: "/evento/assets/jadson-siqueira.jpg" },
-      { id: "c3", ordem: 3, formato: "Mesa redonda", nome: "Geize Felipetto", cargo: "YGG Tecnologia", foto: "/evento/assets/geize-felipetto.jpg" }
+      { id: "c3", ordem: 3, formato: "Mesa redonda", nome: "Geize Felipetto", cargo: "YGG Tecnologia", foto: "/evento/assets/geize-felipetto.jpg" },
+      { id: "c4", ordem: 4, formato: "Mesa redonda", nome: "Marcelo Yukio Outa", cargo: "CEO FaturÁgil · Pres. IGUASSUTEC", foto: "/evento/assets/marcelo-yukio-outa.jpg" }
     ],
     organizacao: [
       { id: "o2", ordem: 1, nome: "Arlete Beuren", titulo: "Pesquisadora do LAMIA", foto: "/evento/assets/arlete-beuren.jpg" },
@@ -31,11 +32,10 @@
       { id: "o3", ordem: 3, nome: "Adriana Sangalletti", titulo: "Assessoria de Eventos do LAMIA", foto: "/evento/assets/adriana.jpg" }
     ],
     programacao: [
-      { id: "p1", ordem: 1, horario: "13:00 às 13:30", titulo: "Credenciamento e boas-vindas", legenda: "", nome: "" },
-      { id: "p2", ordem: 2, horario: "13:30 às 14:30", titulo: "Um motor de IA para o mundo", legenda: "", nome: "Thiago" },
-      { id: "p3", ordem: 3, horario: "14:30 às 15:30", titulo: "Quando a IA entrou na operação", legenda: "", nome: "Geisy · Daisee · Cristofer · Jadson" },
-      { id: "p4", ordem: 4, horario: "15:30 às 16:15", titulo: "Do problema ao projeto", legenda: "", nome: "Aquiles · Secretaria · DIREC" },
-      { id: "p5", ordem: 5, horario: "16:15 às 17:00", titulo: "Café Conexão", legenda: "", nome: "Networking" }
+      { id: "p1", ordem: 1, horario: "13:00", tipo: "Abertura", titulo: "IA em ação: o futuro da indústria e da gestão pública começa aqui", legenda: "Recepção e abertura", mediador: "", palestrantes: [] },
+      { id: "p2", ordem: 2, horario: "13:30", tipo: "Palestra", titulo: "IA para transformar empresas e serviços públicos", legenda: "", mediador: "", palestrantes: [{ nome: "Thiago Naves", foto: "/evento/assets/thiago-naves.jpeg", bio: "Thiago Naves é doutor, professor e pesquisador em Inteligência Artificial na Universidade Tecnológica Federal do Paraná (UTFPR). Atua em projetos que aproximam a pesquisa em IA das demandas da indústria e do setor produtivo da região." }] },
+      { id: "p3", ordem: 3, horario: "14:30", tipo: "Painel", tipo2: "Mesa Grade", titulo: "Da inovação aos resultados: como empresas e governos já aplicam IA", legenda: "", mediador: "Thiago Naves", palestrantes: [{ nome: "Jadson Siqueira", foto: "/evento/assets/jadson-siqueira.jpg", bio: "Jadson Siqueira é diretor de Inteligência para o Desenvolvimento da ACIC (Associação Comercial e Industrial de Cascavel) e ex-presidente do Iguassu Valley, ecossistema de inovação do Oeste do Paraná. Atua na articulação entre empresas, startups, universidades e poder público para o desenvolvimento regional." }, { nome: "Geize Felipetto", foto: "/evento/assets/geize-felipetto.jpg", bio: "Geize Felipetto é empresária, psicanalista e analista de comportamento. Idealizadora do YGG, conecta comportamento humano e inteligência artificial para transformar a forma como as empresas compreendem pessoas." }, { nome: "Marcelo Yukio Outa", foto: "/evento/assets/marcelo-yukio-outa.jpg", bio: "Marcelo Yukio Outa é engenheiro de software, CEO e cofundador da FaturÁgil, plataforma de gestão de cobrança recorrente e finanças empresariais, e presidente do IGUASSUTEC. Com mais de uma década de atuação no desenvolvimento de software, contribui para o fortalecimento das empresas de tecnologia e do ecossistema de inovação do Oeste do Paraná." }] },
+      { id: "p4", ordem: 4, horario: "16:00", tipo: "Networking", titulo: "Café Conexão: gestores públicos, indústria e startups criando soluções com IA", legenda: "", mediador: "", palestrantes: [] }
     ],
     apoiadores: [
       { id: "a1", ordem: 1, categoria: "Realização", nome: "LAMIA", logo: "/evento/assets/lamia-logo.png", link: "https://lamia.sh.utfpr.edu.br" },
@@ -117,7 +117,12 @@
       programacao: prog.map(function (p, i) {
         return {
           id: p.id || uid(), ordem: i + 1,
-          horario: p.horario || "", titulo: p.titulo || "", legenda: p.legenda || "", nome: p.nome || ""
+          horario: p.horario || "", tipo: p.tipo || "", tipo2: p.tipo2 || "", titulo: p.titulo || "",
+          legenda: p.legenda || "", mediador: p.mediador || "",
+          palestrantes: Array.isArray(p.palestrantes) ? p.palestrantes.map(function (s) {
+            return { nome: s.nome || "", bio: s.bio || "", foto: s.foto || "" };
+          }) : [],
+          nome: p.nome || ""
         };
       }),
       apoiadores: apo.map(function (a, i) {
