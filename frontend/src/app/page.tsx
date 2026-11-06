@@ -8,7 +8,7 @@ import partners from './api/partners.json';
 
 // Liga/desliga os links para a landing do evento (/evento) na home do LAMIA.
 // Deixe false enquanto a página do evento não tiver conteúdo; troque para true para exibir.
-const MOSTRAR_EVENTO = false;
+const MOSTRAR_EVENTO = true;
 
 const Cover = () => {
 	return (
