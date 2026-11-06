@@ -38,11 +38,19 @@
       { id: "p4", ordem: 4, horario: "16:00", tipo: "Networking", titulo: "Café Conexão: gestores públicos, indústria e startups criando soluções com IA", legenda: "", mediador: "", palestrantes: [] }
     ],
     apoiadores: [
-      { id: "a1", ordem: 1, categoria: "Realização", nome: "LAMIA", logo: "/evento/assets/lamia-logo.png", link: "https://lamia.sh.utfpr.edu.br" },
-      { id: "a2", ordem: 2, categoria: "Realização", nome: "UTFPR", logo: "/evento/assets/utfpr.png", link: "https://www.utfpr.edu.br/campus/santahelena" },
-      { id: "a3", ordem: 3, categoria: "Realização", nome: "ACISA Santa Helena", logo: "/evento/assets/acisa.webp", link: "" }
+      {"id": "a1", "ordem": 1, "categoria": "Realização", "nome": "LAMIA", "logo": "/evento/assets/lamia-logo.png", "link": "https://www.lamia-edu.com/"},
+      {"id": "a2", "ordem": 2, "categoria": "Realização", "nome": "UTFPR", "logo": "/evento/assets/utfpr.png", "link": "https://www.utfpr.edu.br/campus/santahelena"},
+      {"id": "a3", "ordem": 3, "categoria": "Realização", "nome": "ACISA Santa Helena", "logo": "/evento/assets/acisa.webp", "link": ""},
+      {"id": "a5", "ordem": 4, "categoria": "Parceria", "nome": "Minski", "logo": "/evento/assets/minski.jpeg", "link": ""},
+      {"id": "a8", "ordem": 5, "categoria": "Parceria", "nome": "Cilia", "logo": "/evento/assets/cilia.png", "link": ""},
+      {"id": "a7", "ordem": 6, "categoria": "Parceria", "nome": "Inside Sistemas", "logo": "/evento/assets/inside-sistemas.jpg", "link": ""},
+      {"id": "a10", "ordem": 7, "categoria": "Parceria", "nome": "Logito", "logo": "/evento/assets/logito.png", "link": ""},
+      {"id": "a4", "ordem": 8, "categoria": "Parceria", "nome": "Sicredi", "logo": "/evento/assets/sicredi.png", "link": ""},
+      {"id": "a11", "ordem": 9, "categoria": "Parceria", "nome": "EEmovel", "logo": "", "link": ""},
+      {"id": "a9", "ordem": 10, "categoria": "Parceria", "nome": "Havaí Cerâmica", "logo": "/evento/assets/havai-ceramica.jpeg", "link": ""},
+      {"id": "a6", "ordem": 11, "categoria": "Parceria", "nome": "Studium Personalizar", "logo": "/evento/assets/studium-personalizar.jpeg", "link": ""}
     ],
-    vagasParceria: 4,
+    vagasParceria: 0,
     acesso: { usuario: "", senha: "" },
     revisao: 0
   };

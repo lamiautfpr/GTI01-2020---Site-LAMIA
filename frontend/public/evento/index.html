@@ -308,7 +308,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 14px;">
           <sc-for list="{{ realizacao }}" as="a" hint-placeholder-count="2">
             <a href="{{ a.href }}" target="_blank" rel="noopener" style="border: 1px solid rgba(35,40,47,.26); border-radius: 14px; min-height: 116px; padding: 16px 18px; display: flex; align-items: center; justify-content: center; transition: border-color .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);" style-hover="border-color: rgba(18,114,235,.5); transform: translateY(-3px);">
-              <div role="img" aria-label="{{ a.nome }}" style="{{ a.logoStyle }}"></div>
+              <div role="img" aria-label="{{ a.nome }}" style="{{ a.logoStyle }}"><sc-if value="{{ a.semLogo }}"><span style="font-size: 22px; font-weight: 700;">{{ a.nome }}</span></sc-if></div>
             </a>
           </sc-for>
         </div>
@@ -321,7 +321,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 14px;">
           <sc-for list="{{ parceria }}" as="a" hint-placeholder-count="1">
             <a href="{{ a.href }}" target="_blank" rel="noopener" style="border: 1px solid rgba(35,40,47,.26); border-radius: 14px; min-height: 116px; padding: 16px 18px; display: flex; align-items: center; justify-content: center; transition: border-color .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);" style-hover="border-color: rgba(18,114,235,.5); transform: translateY(-3px);">
-              <div role="img" aria-label="{{ a.nome }}" style="{{ a.logoStyle }}"></div>
+              <div role="img" aria-label="{{ a.nome }}" style="{{ a.logoStyle }}"><sc-if value="{{ a.semLogo }}"><span style="font-size: 22px; font-weight: 700;">{{ a.nome }}</span></sc-if></div>
             </a>
           </sc-for>
           <sc-for list="{{ parceiroSlots }}" as="s" hint-placeholder-count="4">
@@ -362,13 +362,13 @@
             <div style="background: #FDFDFD; border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; justify-content: center; flex: 1 1 130px;">
               <img src="/evento/assets/lamia-logo.png" alt="LAMIA" style="width: 100%; max-width: 140px; height: auto; display: block;" />
             </div>
-            <a href="https://www.lamia.sh.utfpr.edu.br" target="_blank" rel="noreferrer" style="display: flex; align-items: center; background: #FDFDFD; border-radius: 14px; padding: 8px; flex: none; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 14px 30px rgba(18,114,235,.35);">
+            <a href="https://www.lamia-edu.com/" target="_blank" rel="noreferrer" style="display: flex; align-items: center; background: #FDFDFD; border-radius: 14px; padding: 8px; flex: none; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 14px 30px rgba(18,114,235,.35);">
               <img src="/evento/assets/qr-lamia.png" alt="QR code para o site do LAMIA" style="width: 92px; height: 92px; display: block;" />
             </a>
           </div>
           <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.7; color: #C3CCD6;">
             Aponte a câmera no QR ou acesse<br />
-            <a href="https://www.lamia.sh.utfpr.edu.br" target="_blank" rel="noreferrer" style="color: #fff;" style-hover="color: #5BA6F7;">lamia.sh.utfpr.edu.br</a>
+            <a href="https://www.lamia-edu.com/" target="_blank" rel="noreferrer" style="color: #fff;" style-hover="color: #5BA6F7;">www.lamia-edu.com</a>
           </div>
         </div>
 
@@ -506,7 +506,7 @@
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;sheetsEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://script.google.com/macros/s/AKfycbyTHIBTyepU6d61H7vz2WDBuiZYst1FEX1rS4LSVQnXywRLyuBzzRh3vq5mdiAKZPIU/exec&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Inscrições&quot;}}">
-const logoVals = (a) => Object.assign({}, a, { href: a.link || "#apoio", logoStyle: { width: "100%", height: "72px", backgroundImage: 'url("' + D().assetUrl(a.logo) + '")', backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" } });
+const logoVals = (a) => Object.assign({}, a, { href: a.link || "#apoio", semLogo: !a.logo, logoStyle: { width: "100%", height: "72px", backgroundImage: 'url("' + D().assetUrl(a.logo) + '")', backgroundSize: a.logo === "/evento/assets/studium-personalizar.jpeg" ? "auto 240%" : a.logo === "/evento/assets/sicredi.png" ? "auto 140%" : "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", display: "flex", alignItems: "center", justifyContent: "center" } });
 const D = () => window.IdeiaData;
 
 const ADMIN_USER = "lamia";
