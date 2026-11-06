@@ -46,9 +46,8 @@
       {"id": "a7", "ordem": 6, "categoria": "Parceria", "nome": "Inside Sistemas", "logo": "/evento/assets/inside-sistemas.jpg", "link": ""},
       {"id": "a10", "ordem": 7, "categoria": "Parceria", "nome": "Logito", "logo": "/evento/assets/logito.png", "link": ""},
       {"id": "a4", "ordem": 8, "categoria": "Parceria", "nome": "Sicredi", "logo": "/evento/assets/sicredi.png", "link": ""},
-      {"id": "a11", "ordem": 9, "categoria": "Parceria", "nome": "EEmovel", "logo": "", "link": ""},
-      {"id": "a9", "ordem": 10, "categoria": "Parceria", "nome": "Havaí Cerâmica", "logo": "/evento/assets/havai-ceramica.jpeg", "link": ""},
-      {"id": "a6", "ordem": 11, "categoria": "Parceria", "nome": "Studium Personalizar", "logo": "/evento/assets/studium-personalizar.jpeg", "link": ""}
+      {"id": "a9", "ordem": 9, "categoria": "Parceria", "nome": "Havaí Cerâmica", "logo": "/evento/assets/havai-ceramica.jpeg", "link": ""},
+      {"id": "a6", "ordem": 10, "categoria": "Parceria", "nome": "Studium Personalizar", "logo": "/evento/assets/studium-personalizar.jpeg", "link": ""}
     ],
     vagasParceria: 0,
     acesso: { usuario: "", senha: "" },

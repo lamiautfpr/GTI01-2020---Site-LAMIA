@@ -187,16 +187,8 @@
       "link": ""
     },
     {
-      "id": "a11",
-      "ordem": 9,
-      "categoria": "Parceria",
-      "nome": "EEmovel",
-      "logo": "",
-      "link": ""
-    },
-    {
       "id": "a9",
-      "ordem": 10,
+      "ordem": 9,
       "categoria": "Parceria",
       "nome": "Havaí Cerâmica",
       "logo": "/evento/assets/havai-ceramica.jpeg",
@@ -204,7 +196,7 @@
     },
     {
       "id": "a6",
-      "ordem": 11,
+      "ordem": 10,
       "categoria": "Parceria",
       "nome": "Studium Personalizar",
       "logo": "/evento/assets/studium-personalizar.jpeg",
@@ -212,5 +204,5 @@
     }
   ],
   "vagasParceria": 0,
-  "revisao": 6
+  "revisao": 7
 }
