@@ -8,7 +8,8 @@ import partners from './api/partners.json';
 
 // Liga/desliga os links para a landing do evento (/evento) na home do LAMIA.
 // Deixe false enquanto a página do evento não tiver conteúdo; troque para true para exibir.
-const MOSTRAR_EVENTO = true;
+// Evento Idei.a LAMIA 2026 já ocorreu (10/11/2026): item ocultado na home.
+const MOSTRAR_EVENTO = false;
 
 const Cover = () => {
 	return (
